@@ -15,14 +15,10 @@ function Home() {
       {/* 여기 */}
       {/* 1 */}
       <div className="hero">
-        <div className="container">
+        <div className="container hero-inner">
           <div className="row align-items-center">
-            <div className="col-lg-7">
+            <div className="col-lg-12">
               <div className="intro-wrap">
-                <h1 className="mb-5">
-                  <span className="d-block">Let's Enjoy Your</span> Trip In{" "}
-                  <span className="typed-words"></span>
-                </h1>
 
                 <div className="row">
                   <div className="col-12">
@@ -79,35 +75,6 @@ function Home() {
                     </form>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="col-lg-5">
-              <div className="slides">
-                <img
-                  src="images/hero-slider-1.jpg"
-                  alt="Image"
-                  className="img-fluid active"
-                />
-                <img
-                  src="images/hero-slider-2.jpg"
-                  alt="Image"
-                  className="img-fluid"
-                />
-                <img
-                  src="images/hero-slider-3.jpg"
-                  alt="Image"
-                  className="img-fluid"
-                />
-                <img
-                  src="images/hero-slider-4.jpg"
-                  alt="Image"
-                  className="img-fluid"
-                />
-                <img
-                  src="images/hero-slider-5.jpg"
-                  alt="Image"
-                  className="img-fluid"
-                />
               </div>
             </div>
           </div>
