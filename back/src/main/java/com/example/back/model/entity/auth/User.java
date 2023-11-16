@@ -1,10 +1,7 @@
 package com.example.back.model.entity.auth;
 
 import com.example.back.model.common.BaseTimeEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
@@ -35,9 +32,10 @@ import javax.persistence.Table;
 @Table(name="TB_USER")
 @DynamicInsert
 @DynamicUpdate
+@ToString
 // soft delete
-@Where(clause = "DELETE_YN = 'N'")
-@SQLDelete(sql = "UPDATE TB_USER SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE EMAIL = ?")
+//@Where(clause = "DELETE_YN = 'N'")
+//@SQLDelete(sql = "UPDATE TB_USER SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE EMAIL = ?")
 public class User extends BaseTimeEntity {
 //    email       varchar2(1000) not null constraint pk_user primary key, -- id (email)
 //    password    varchar2(1000),                                         -- 암호

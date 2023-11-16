@@ -1,14 +1,19 @@
 // pages/Home.tsx : rfce
-import React,{useEffect} from "react";
+import React,{useEffect, useState} from "react";
 import initScripts from "../assets/js/scripts";
 import initCustom from "../assets/js/custom";
 
 function Home() {
 
+  const [render, setRender] = useState(false);
+
   useEffect(()=>{
     initScripts();
     initCustom();
+    // setRender(true);
   },[])
+
+  // if (!render) return <></>
 
   return (
     <>

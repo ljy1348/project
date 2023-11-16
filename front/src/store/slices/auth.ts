@@ -40,6 +40,19 @@ export const login = createAsyncThunk(
     }
   }
 );
+
+export const kakaologin = createAsyncThunk(
+  "auth/kakaologin",                        // 함수명
+  async (code:string, thunkAPI) => {    // 비동기함수
+    try {
+      const data = await authService.kakaoLogin(code); // 벡엔드 login 요청
+      return { user: data }; // 벡엔드 결과
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue("login 시 에러가 발생했습니다.");
+    }
+  }
+);
+
 // todo: 로그아웃 공유함수(비동기함수)
 export const logout = createAsyncThunk(
   "auth/logout"
@@ -81,7 +94,17 @@ const authSlice = createSlice({
       })
     // login(로그인) 실패 -> (state.)isLoggedIn = false 저장
     // login(로그인) 실패 -> (state.)user = null 저장
-      .addCase(login.rejected, (state, action) => {
+      .addCase(login.rejected, (state) => {
+        state.isLoggedIn = false;
+        state.user = null;
+      })
+      .addCase(kakaologin.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
+        state.user = action.payload.user;
+      })
+    // login(로그인) 실패 -> (state.)isLoggedIn = false 저장
+    // login(로그인) 실패 -> (state.)user = null 저장
+      .addCase(kakaologin.rejected, (state) => {
         state.isLoggedIn = false;
         state.user = null;
       })

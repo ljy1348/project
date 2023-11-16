@@ -17,10 +17,21 @@ const logout = () => {
 // get -> 웹브라우저 주소창에 요청 변수 또는 주소값이 나타남
 // post -> 웹브라우저 주소창에 정보가 나타나지 않음
 const login = (user:IUser) => { 
-    console.log("여긴됨1");
     return http.post("/auth/signin", user) // 벡엔드 함수 실행
     .then((response: any)=>{
-        console.log("여긴됨2");
+        // 성공 : 벡엔드에서 웹토큰(accessToken) 발행해서 전송해줌
+        // 벡엔드 : 웹토큰 + 유저이름 + 유저권한 등
+        if(response.data.accessToken) {
+            // 로컬 스토리지에(객체 -> 문자열변환) 저장
+            localStorage.setItem("user", JSON.stringify(response.data));
+        }
+        return response.data; // 벡엔드 정보
+    });
+ }
+
+ const kakaoLogin = (code:string) => { 
+    return http.post("/oauth/kakao", code) // 벡엔드 함수 실행
+    .then((response: any)=>{
         // 성공 : 벡엔드에서 웹토큰(accessToken) 발행해서 전송해줌
         // 벡엔드 : 웹토큰 + 유저이름 + 유저권한 등
         if(response.data.accessToken) {
@@ -34,6 +45,7 @@ const login = (user:IUser) => {
  const AuthService = {
     register,
     login,
-    logout
+    logout,
+    kakaoLogin
  }
  export default AuthService;

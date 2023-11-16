@@ -72,7 +72,7 @@ function Login() {
     dispatch(login(data))
       .unwrap()    // 리덕스의 공유함수 에러처리를 실행하게 하는 함수
       .then(()=>{
-        alert("로그인 성공했습니다.");
+        // alert("로그인 성공했습니다.");
         // 강제 /home 페이지 이동
         navigate("/home");
         // js : 페이지 새로고침
@@ -187,7 +187,7 @@ function Login() {
                             Naver
                           </a>
                           <a
-                            href="/"
+                            href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI2}`}
                             className="btn btn-kakao btn-user w-100 mb-3"
                           >
                             <i className="fa-solid fa-k"></i>&nbsp;Login with
