@@ -14,12 +14,9 @@ import Services from './pages/Services';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Elements from './pages/Elements';
-import CustomerListPage from './pages/customer/CustomerListPage';
-import AddCustomerPage from './pages/customer/AddCustomerPage';
-import CustomerPage from './pages/customer/CustomerPage';
-import QnaListPage from './pages/qna/QnaListPage';
-import AddQnaPage from './pages/qna/AddQnaPage';
-import QnaPage from './pages/qna/QnaPage';
+import Register from './pages/auth/Register';
+import Login from './pages/auth/Login';
+
 
 function App() {
   return (
@@ -34,20 +31,14 @@ function App() {
         <Route path="/about" element={<About/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/elements" element={<Elements/>} />
+        <Route path="/register" element={<Register/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/*" element={<Home/>} />
 
-        {/* 고객 */}
-        <Route path="/customer" element={<CustomerListPage/>} />
-        <Route path="/add-customer" element={<AddCustomerPage/>} />
-        <Route path="/customer/:cid" element={<CustomerPage/>} />
-
-        {/* Q & A */}
-        <Route path="/qna" element={<QnaListPage/>} />
-        <Route path="/add-qna" element={<AddQnaPage/>} />
-        <Route path="/qna/:qno" element={<QnaPage/>} />
       </Routes>
       
       {/* 꼬리말 */}
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

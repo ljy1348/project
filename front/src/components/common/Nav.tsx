@@ -19,111 +19,94 @@ function Nav() {
 
       {/* <!-- 메뉴 시작 --> */}
       <nav className="site-nav">
-        <div className="container">
+        <div className="container bg-primary">
+          <table>
+
+          <th>
+            
           <div className="site-navigation">
+          <td style={{width:"150px"}}>
             <Link to="/" className="logo m-0">
-              Tour <span className="text-primary">.</span>
+              항공권 예매 <span className="text-primary"></span>
             </Link>
             {/* 메뉴들 시작 */}
-            <ul className="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
+          </td>
+          <td style={{width:"750px", textAlign:"center"}}>
+            <ul className="js-clone-nav d-none d-lg-inline-block site-menu">
+
               {/* home 메뉴 시작 */}
-              <li className="active">
-                <Link to="/">Home</Link>
+              <li className="has-children">
+                <a href="#" style={{fontSize:"25px", margin:"0 18px"}}>항공권</a>
+                <ul className="dropdown">
+                  <li>
+                    <a href="#" >예약</a>
+                  </li>
+                  <li>
+                    <a href="#">예약 조회</a>
+                  </li>
+                </ul>
+              </li>
+              {/* home 메뉴 끝 */}
+
+              {/* home 메뉴 시작 */}
+              <li className="">
+                <Link to="/" style={{fontSize:"25px", margin:"0 18px"}}>체크인</Link>
+              </li>
+              {/* home 메뉴 끝 */}
+
+              {/* home 메뉴 시작 */}
+              <li className="">
+                <Link to="/" style={{fontSize:"25px", margin:"0 18px"}}>마일리지</Link>
               </li>
               {/* home 메뉴 끝 */}
 
               {/* 드롭다운 메뉴 시작 */}
               <li className="has-children">
-                <a href="#">Dropdown</a>
+                <a href="#" style={{fontSize:"25px", margin:"0 18px"}}>고객센터</a>
                 <ul className="dropdown">
                   <li>
-                    <Link to="/elements">Elements</Link>
+                    <a href="#" >공지사항</a>
                   </li>
                   <li>
-                    <a href="#">Menu One</a>
-                  </li>
-                  <li className="has-children">
-                    <a href="#">Menu Two</a>
-                    <ul className="dropdown">
-                      <li>
-                        <a href="#">Sub Menu One</a>
-                      </li>
-                      <li>
-                        <a href="#">Sub Menu Two</a>
-                      </li>
-                      <li>
-                        <a href="#">Sub Menu Three</a>
-                      </li>
-                    </ul>
+                    <a href="#">자주 묻는 질문</a>
                   </li>
                   <li>
-                    <a href="#">Menu Three</a>
+                    <a href="#">1:1 문의</a>
                   </li>
                 </ul>
               </li>
               {/* 드롭다운 메뉴 끝 */}
-
-              {/* 고객 시작 */}
-              <li className="has-children">
-                <Link to="#">고객</Link>
-                <ul className="dropdown">
-                  {/* 1st 드롭 메뉴 */}
-                  <li>
-                    <Link to="/customer">고객 조회</Link>
-                  </li>
-                  {/* 2nd 드롭 메뉴 */}
-                  <li>
-                    <Link to="/add-customer">고객 추가</Link>
-                  </li>
-                </ul>
-              </li>
-              {/* 고객 끝 */}
-
-              {/* Q & A 시작 */}
-              <li className="has-children">
-                <Link to="#">Q & A</Link>
-                <ul className="dropdown">
-                  {/* 1st 드롭 메뉴 */}
-                  <li>
-                    <Link to="/qna">Q & A 조회</Link>
-                  </li>
-                  {/* 2nd 드롭 메뉴 */}
-                  <li>
-                    <Link to="/add-qna">Q & A 추가</Link>
-                  </li>
-                </ul>
-              </li>
-              {/* Q & A 끝 */}
-
-              {/* 서비스 메뉴 시작 */}
-              <li>
-                <Link to="/services">Services</Link>
-              </li>
-              {/* 서비스 메뉴 끝 */}
-
-              {/* 어바웃 메뉴 시작 */}
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              {/* 어바웃 메뉴 끝 */}
-
-              {/* 컨택트 메뉴 시작 */}
-              <li>
-                <Link to="/contact">Contact Us</Link>
-              </li>
-              {/* 컨택트 메뉴 끝 */}
             </ul>
+            
+
+            </td>
             {/* 메뉴들 끝 */}
+            <td style={{width:"250px", textAlign:"end"}}>
+              <ul className="js-clone-nav d-none d-lg-inline-block site-menu">
+
+              {/* home 메뉴 시작 */}
+                  <li>
+                    <Link to="/login" >로그인</Link>
+                  </li>
+                  <li>
+                    <Link to="/register">회원가입</Link>
+                  </li>
+              {/* home 메뉴 끝 */}
+              </ul>
+
+            </td>
 
             <a
               href="#"
               className="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light"
               data-toggle="collapse"
               data-target="#main-navbar"
-            >
+              >
               <span></span>
             </a>
           </div>
+              </th>
+          </table>
         </div>
       </nav>
       {/* <!-- 메뉴 끝 --> */}
