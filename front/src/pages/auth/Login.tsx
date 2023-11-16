@@ -89,7 +89,7 @@ function Login() {
     <div>
             <div className="hero hero-inner">
         <div className="container">
-          <div className="row align-items-center">
+          <div className=" align-items-center">
             <div className="col-lg-6 mx-auto text-center">
               <div className="intro-wrap">
                 <h1 className="mb-0">로그인</h1>
