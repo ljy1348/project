@@ -24,6 +24,7 @@ function SearchList() {
       return;
     }
 
+    console.log(searchKeyword)
     // 벡엔드 매개변수 전송 : + 현재페이지(page), 1페이지당개수(pageSize)
     ReservationService.getAll(searchSelect, searchKeyword) // 벡엔드 전체조회요청
       .then((response: any) => {
@@ -51,7 +52,7 @@ function SearchList() {
     <>
       <div className="searchRow">
         <div>
-          <form className="searchForm">
+          <div>
             <div>
               <div>
                 <select
@@ -95,7 +96,7 @@ function SearchList() {
                 />
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
 

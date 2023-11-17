@@ -54,7 +54,7 @@ public class SearchReservationController {
             }
 
             if(searchReservationList.isEmpty() == false) {
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(searchReservationList, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -85,7 +85,7 @@ public class SearchReservationController {
             }
 
             if(searchReservationList.isEmpty() == false) {
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(searchReservationList, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
