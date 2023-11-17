@@ -122,7 +122,7 @@ function Nav() {
                     <Link to="/#" >관리자</Link>
                   </li>}
                   {currentUser.codeName == "ROLE_USER"&&<li>
-                    <Link to="/#" >유저 정보</Link>
+                    <Link to="/user-info" >유저 정보</Link>
                   </li>}
                   <li>
                     <Link to="#" onClick={logOut}>로그아웃</Link>

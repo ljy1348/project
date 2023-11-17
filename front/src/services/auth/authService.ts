@@ -42,10 +42,38 @@ const login = (user:IUser) => {
     });
  }
 
+ const naverLogin = (code:string) => { 
+    return http.post("/oauth/naver/"+code) // 벡엔드 함수 실행
+    .then((response: any)=>{
+        // 성공 : 벡엔드에서 웹토큰(accessToken) 발행해서 전송해줌
+        // 벡엔드 : 웹토큰 + 유저이름 + 유저권한 등
+        if(response.data.accessToken) {
+            // 로컬 스토리지에(객체 -> 문자열변환) 저장
+            localStorage.setItem("user", JSON.stringify(response.data));
+        }
+        return response.data; // 벡엔드 정보
+    });
+ }
+
+ const googleLogin = (code:string) => { 
+    return http.post("/oauth/google/"+code) // 벡엔드 함수 실행
+    .then((response: any)=>{
+        // 성공 : 벡엔드에서 웹토큰(accessToken) 발행해서 전송해줌
+        // 벡엔드 : 웹토큰 + 유저이름 + 유저권한 등
+        if(response.data.accessToken) {
+            // 로컬 스토리지에(객체 -> 문자열변환) 저장
+            localStorage.setItem("user", JSON.stringify(response.data));
+        }
+        return response.data; // 벡엔드 정보
+    }).catch((e:Error)=>{console.log(e)});
+ }
+
  const AuthService = {
     register,
     login,
     logout,
-    kakaoLogin
+    kakaoLogin,
+    naverLogin,
+    googleLogin
  }
  export default AuthService;

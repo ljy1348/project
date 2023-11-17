@@ -20,6 +20,7 @@ import Oauth from './pages/auth/KakaoLogin';
 import KakaoLogin from './pages/auth/KakaoLogin';
 import initScripts from './assets/js/scripts';
 import initCustom from './assets/js/custom';
+import UserInfo from './pages/auth/user/UserInfo';
 
 
 function App() {
@@ -38,8 +39,9 @@ function App() {
         <Route path="/contact" element={<Contact/>} />
         <Route path="/elements" element={<Elements/>} />
         <Route path="/register" element={<Register/>} />
-        <Route path="/login/auth/kakao" element={<KakaoLogin/>} />
+        <Route path="/login/auth/:app" element={<KakaoLogin/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/user-info" element={<UserInfo/>} />
         <Route path="/*" element={<Home/>} />
 
       </Routes>

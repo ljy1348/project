@@ -173,14 +173,14 @@ function Login() {
                           </button>
                           <hr />
                           <a
-                            href="/"
+                            href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.REACT_APP_GOOGLE_REST_API_KEY}&redirect_uri=${"http://localhost:3000/login/auth/google"}&response_type=code&scope=email`}
                             className="btn btn-google btn-user w-100 mb-2"
                           >
                             <i className="fab fa-google fa-fw"></i>&nbsp;Login
                             with Google
                           </a>
                           <a
-                            href="/"
+                            href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_NAVER_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_NAVER_REDIRECT_URI}&state=${process.env.REACT_APP_STATE}`}
                             className="btn btn-naver btn-user w-100 mb-2"
                           >
                             <i className="fa-solid fa-n"></i>&nbsp;Login with

@@ -1,6 +1,8 @@
 package com.example.back.controller.auth;
 
+import com.example.back.model.dto.auth.oauth.google.GoogleTokenDto;
 import com.example.back.model.dto.auth.oauth.kakao.KakaoTokenDto;
+import com.example.back.model.dto.auth.oauth.naver.NaverTokenDto;
 import com.example.back.model.dto.auth.response.UserRes;
 import com.example.back.model.entity.auth.User;
 import com.example.back.security.jwt.JwtUtils;
@@ -73,6 +75,85 @@ public class OauthController {
         } catch (Exception e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
 
+        }
+
+    }
+
+    @PostMapping("/naver/{code}")
+    public ResponseEntity<?> naverLogin(@PathVariable String code) {
+        try {
+            log.info("네이버 로그인1");
+            NaverTokenDto naverTokenDto = oauthService.getNaverAccessToken(code);
+            if (naverTokenDto != null){
+            log.info("네이버 로그인2");
+                User user = oauthService.getNaverInfo(naverTokenDto.getAccess_token());
+                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getCodeName());
+                List<SimpleGrantedAuthority> codeNameList = new LinkedList<>();
+                codeNameList.add(codeName);
+                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getEmail());
+            log.info("네이버 로그인3");
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        userDetail,
+                        null,
+                        codeNameList
+                );
+                //            2) 인증된 객체들을 홀더에 저장해둠
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            log.info("네이버 로그인4");
+
+//            3) jwt 발행
+                String jwt = jwtUtils.generateJwtToken(authentication);
+
+//            4) 인증된 객체
+                UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+//            5) 리액트로 보낼 dto 생성
+                UserRes userRes = new UserRes(jwt,userDetails.getEmail(),userDetails.getUsername(),userDetails.getAuthority().toString());
+
+                return new ResponseEntity<>(userRes,HttpStatus.OK);
+            }
+            else return new ResponseEntity<>("토큰 정보 못받아왔어용",HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+
+        }
+
+    }
+
+    @PostMapping("/google/{a}/{code}")
+    public ResponseEntity<?> googleLogin(@PathVariable String code) {
+        try {
+            GoogleTokenDto googleTokenDto = oauthService.getGoogleAccessToken(code);
+            if (googleTokenDto != null){
+                User user = oauthService.getGoogleInfo(googleTokenDto.getAccess_token());
+                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getCodeName());
+                List<SimpleGrantedAuthority> codeNameList = new LinkedList<>();
+                codeNameList.add(codeName);
+                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getEmail());
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        userDetail,
+                        null,
+                        codeNameList
+                );
+                //            2) 인증된 객체들을 홀더에 저장해둠
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+
+//            3) jwt 발행
+                String jwt = jwtUtils.generateJwtToken(authentication);
+
+//            4) 인증된 객체
+                UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+//            5) 리액트로 보낼 dto 생성
+                UserRes userRes = new UserRes(jwt,userDetails.getEmail(),userDetails.getUsername(),userDetails.getAuthority().toString());
+
+                return new ResponseEntity<>(userRes,HttpStatus.OK);
+            }
+            else return new ResponseEntity<>("토큰 정보 못받아왔어용",HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
         }
 
     }

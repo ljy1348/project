@@ -53,6 +53,30 @@ export const kakaologin = createAsyncThunk(
   }
 );
 
+export const naverlogin = createAsyncThunk(
+  "auth/naverlogin",                        // 함수명
+  async (code:string, thunkAPI) => {    // 비동기함수
+    try {
+      const data = await authService.naverLogin(code); // 벡엔드 login 요청
+      return { user: data }; // 벡엔드 결과
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue("login 시 에러가 발생했습니다.");
+    }
+  }
+);
+
+export const googlelogin = createAsyncThunk(
+  "auth/googlelogin",                        // 함수명
+  async (code:string, thunkAPI) => {    // 비동기함수
+    try {
+      const data = await authService.googleLogin(code); // 벡엔드 login 요청
+      return { user: data }; // 벡엔드 결과
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue("login 시 에러가 발생했습니다.");
+    }
+  }
+);
+
 // todo: 로그아웃 공유함수(비동기함수)
 export const logout = createAsyncThunk(
   "auth/logout"
@@ -108,6 +132,30 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.user = null;
       })
+          // login(로그인) 성공 -> (state.)isLoggedIn = true 저장
+    // login(로그인) 성공 -> (state.)user = (action.payload.)user 객체 저장
+    .addCase(naverlogin.fulfilled, (state, action) => {
+      state.isLoggedIn = true;
+      state.user = action.payload.user;
+    })
+  // login(로그인) 실패 -> (state.)isLoggedIn = false 저장
+  // login(로그인) 실패 -> (state.)user = null 저장
+    .addCase(naverlogin.rejected, (state) => {
+      state.isLoggedIn = false;
+      state.user = null;
+    })
+        // login(로그인) 성공 -> (state.)isLoggedIn = true 저장
+    // login(로그인) 성공 -> (state.)user = (action.payload.)user 객체 저장
+    .addCase(googlelogin.fulfilled, (state, action) => {
+      state.isLoggedIn = true;
+      state.user = action.payload.user;
+    })
+  // login(로그인) 실패 -> (state.)isLoggedIn = false 저장
+  // login(로그인) 실패 -> (state.)user = null 저장
+    .addCase(googlelogin.rejected, (state) => {
+      state.isLoggedIn = false;
+      state.user = null;
+    })
     // logout(로그인) 성공 -> (state.)isLoggedIn = false 저장
     // logout(로그인) 성공 -> (state.)user = null 저장
       .addCase(logout.fulfilled, (state) => {
