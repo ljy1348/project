@@ -38,9 +38,7 @@ public class SearchReservationController {
             @RequestParam(defaultValue = "airlineReservationNumber") String searchSelect, // select 태그 (1) number, (2) id
             @RequestParam(defaultValue = "") String searchKeyword  // 검색어
     ) {
-        System.out.println(searchSelect+":"+searchKeyword);
         try {
-            log.info("Aa");
             List<SearchReservation> searchReservationList;
 
             if(searchSelect.equals("airlineReservationNumber")) {
@@ -50,37 +48,6 @@ public class SearchReservationController {
             } else {
                 //            questioner like 검색
                 searchReservationList = searchReservationService.findAllByUserIdContaining(searchKeyword);
-
-            }
-
-            if(searchReservationList.isEmpty() == false) {
-                return new ResponseEntity<>(searchReservationList, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    //    airlineReservationNumber like 검색
-    @GetMapping("/search-reservation2")
-    public ResponseEntity<Object> test(
-            @RequestParam(defaultValue = "airlineReservationNumber") String searchSelect, // select 태그 (1) number, (2) id
-            @RequestParam(defaultValue = "") String searchKeyword  // 검색어
-    ) {
-        System.out.println(searchSelect+":"+searchKeyword);
-        try {
-            log.info("Aa");
-            List<TestDto> searchReservationList;
-
-            if(searchSelect.equals("airlineReservationNumber")) {
-                //            question like 검색
-                searchReservationList = searchReservationService.test(searchKeyword);
-
-            } else {
-                //            questioner like 검색
-                searchReservationList = searchReservationService.test(searchKeyword);
 
             }
 

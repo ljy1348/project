@@ -143,17 +143,19 @@ function QnaList() {
           <tbody>
             {qna &&
               qna.map((data) => (
-                // 키값 추가 않하면 react 에서 경고를 추가 : 키는 내부적으로 리액트가 rerending 할때 체크하는 값임
+                // 키값 추가 안하면 react 에서 경고를 추가 : 키는 내부적으로 리액트가 rerending 할때 체크하는 값임
                 <tr key={data.question}>
                   <td>{data.question}</td>
                   <td>{data.questioner}</td>
                   <td>{data.answer}</td>
                   <td>{data.answerer}</td>
+                  {/* action 버튼 */}
                   <td>
                     <Link to={"/qna/" + data.qno}>
                       <span className="badge bg-success">Edit</span>
                     </Link>
                   </td>
+                  {/* action 버튼 */}
                 </tr>
               ))}
           </tbody>

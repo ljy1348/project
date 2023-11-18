@@ -1,8 +1,9 @@
-DROP TABLE TB_BS_USER_INFORMATION ;
+DROP TABLE TB_BS_USER_INFORMATION;
 DROP TABLE TB_BS_PRODUCT_INFORMATION;
-DROP TABLE TB_BS_CHECK_IN ;
-DROP TABLE TB_BS_BAGGAGE ;
-DROP TABLE TB_BS_CUSTOMER_SERVICE  ;
+DROP TABLE TB_BS_CHECK_IN;
+DROP TABLE TB_BS_BAGGAGE;
+DROP TABLE TB_BS_RESERVATION;
+DROP TABLE TB_BS_CUSTOMER_SERVICE;
 
 CREATE TABLE TB_BS_USER_INFORMATION (
                                         USER_ID	VARCHAR2(14)	NOT NULL,
@@ -52,6 +53,30 @@ CREATE TABLE TB_BS_BAGGAGE (
                                KG_PRICE	NUMBER(8)
 );
 
+CREATE TABLE TB_BS_RESERVATION (
+                                   AIRLINE_RESERVATION_NUMBER	VARCHAR2(255) NOT NULL PRIMARY KEY,   -- '예약 번호'
+                                   FLIGHT_NAME	VARCHAR2(255),                                        -- '항공편 명'
+                                   USER_ID	VARCHAR2(255),                                            -- '유저 ID'
+                                   ROUND_OR_ONE	VARCHAR2(255),                                    -- '왕복 여부'
+                                   EN_NAME	VARCHAR2(255),                                            -- '영문 이름'
+                                   DEPARTURE	VARCHAR2(255),                                        -- '출발 일자'
+                                   ARRIVAL	    VARCHAR2(255),                                        -- '도착 일자'
+                                   OPERATION_DAY	VARCHAR2(255),                                    -- '운항 요일'
+                                   AIRLINE	VARCHAR2(255),                                            -- '항공사'
+                                   SEAT_TYPE	VARCHAR2(255),                                        -- '좌석 등급'
+                                   ADULT_COUNT	NUMBER(14),                                          -- '성인 인수'
+                                   CHILD_COUNT	NUMBER(14),                                          -- '소아 인수'
+                                   MILE_USE_STATUS	VARCHAR2(255),                                    -- '마일리지 여부'
+                                   MEMBERSHIP_STATUS	VARCHAR2(255),                                -- '멤버쉽 여부'
+                                   DOMESTIC_INTERNATIONAL	VARCHAR2(255),                            -- '국내 - 국제 여부'
+                                   START_AIRPORT VARCHAR2(255),                                      -- '출발 공항'
+                                   FINAL_AIRPORT VARCHAR2(255),                                      -- '도착 공항'
+                                   DELETE_YN   VARCHAR2(1) DEFAULT 'N',
+                                   INSERT_TIME VARCHAR2(255),
+                                   UPDATE_TIME VARCHAR2(255),
+                                   DELETE_TIME VARCHAR2(255)
+);
+
 
 CREATE TABLE TB_BS_CUSTOMER_SERVICE (
                                         BULLETIN_ID	NUMBER(5)	NOT NULL PRIMARY KEY,
@@ -63,3 +88,4 @@ CREATE TABLE TB_BS_CUSTOMER_SERVICE (
                                         ANSWER_CHECK_STATUS	VARCHAR2(1),
                                         PARENT_BID	NUMBER(5)
 );
+

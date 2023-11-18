@@ -17,9 +17,9 @@ const getAll = (searchSelect:string, searchKeyword:string) => {
     return http.get<IReservation>(`/tour/search-reservation/${airlineReservationNumber}`);
   };
   
-  const CustomerService = {
+  const ReservationService = {
     getAll,
     get,
   };
   
-  export default CustomerService;
+  export default ReservationService;
