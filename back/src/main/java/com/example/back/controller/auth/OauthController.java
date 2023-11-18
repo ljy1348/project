@@ -47,10 +47,10 @@ public class OauthController {
             KakaoTokenDto kakaoTokenDto = oauthService.getKakaoAccessToken(code);
             if (kakaoTokenDto != null){
                 User user = oauthService.getKakaoInfo(kakaoTokenDto.getAccess_token());
-                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getCodeName());
+                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getRight().toString());
                 List<SimpleGrantedAuthority> codeNameList = new LinkedList<>();
                 codeNameList.add(codeName);
-                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getEmail());
+                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getUserId());
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetail,
                         null,
@@ -66,7 +66,7 @@ public class OauthController {
                 UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
 //            5) 리액트로 보낼 dto 생성
-                UserRes userRes = new UserRes(jwt,userDetails.getEmail(),userDetails.getUsername(),userDetails.getAuthority().toString());
+                UserRes userRes = new UserRes(jwt,userDetails.getUserId(),userDetails.getUsername(),userDetails.getAuthority().toString());
 
                 return new ResponseEntity<>(userRes,HttpStatus.OK);
             }
@@ -87,10 +87,10 @@ public class OauthController {
             if (naverTokenDto != null){
             log.info("네이버 로그인2");
                 User user = oauthService.getNaverInfo(naverTokenDto.getAccess_token());
-                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getCodeName());
+                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getRight().toString());
                 List<SimpleGrantedAuthority> codeNameList = new LinkedList<>();
                 codeNameList.add(codeName);
-                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getEmail());
+                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getUserId());
             log.info("네이버 로그인3");
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetail,
@@ -108,7 +108,7 @@ public class OauthController {
                 UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
 //            5) 리액트로 보낼 dto 생성
-                UserRes userRes = new UserRes(jwt,userDetails.getEmail(),userDetails.getUsername(),userDetails.getAuthority().toString());
+                UserRes userRes = new UserRes(jwt,userDetails.getUserId(),userDetails.getUsername(),userDetails.getAuthority().toString());
 
                 return new ResponseEntity<>(userRes,HttpStatus.OK);
             }
@@ -127,10 +127,10 @@ public class OauthController {
             GoogleTokenDto googleTokenDto = oauthService.getGoogleAccessToken(code);
             if (googleTokenDto != null){
                 User user = oauthService.getGoogleInfo(googleTokenDto.getAccess_token());
-                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getCodeName());
+                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getRight().toString());
                 List<SimpleGrantedAuthority> codeNameList = new LinkedList<>();
                 codeNameList.add(codeName);
-                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getEmail());
+                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getUserId());
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetail,
                         null,
@@ -146,7 +146,7 @@ public class OauthController {
                 UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
 //            5) 리액트로 보낼 dto 생성
-                UserRes userRes = new UserRes(jwt,userDetails.getEmail(),userDetails.getUsername(),userDetails.getAuthority().toString());
+                UserRes userRes = new UserRes(jwt,userDetails.getUserId(),userDetails.getUsername(),userDetails.getAuthority().toString());
 
                 return new ResponseEntity<>(userRes,HttpStatus.OK);
             }

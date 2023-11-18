@@ -1,5 +1,6 @@
 package com.example.back.repository.auth;
 
+import com.example.back.model.entity.auth.ERole;
 import com.example.back.model.entity.auth.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,5 +20,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 2023-11-14         GGG          최초 생성
  */
 public interface UserRepository extends JpaRepository<User, String> {
-    Page<User> findAllByUsernameContaining(String username, Pageable pageable);
+    Page<User> findAllByUserIdContaining(String userId, Pageable pageable);
+    Page<User> findAllByUserNameContaining(String userName, Pageable pageable);
+    Page<User> findAllByRight(ERole right, Pageable pageable);
+
+
+
 }

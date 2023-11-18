@@ -1,5 +1,6 @@
 package com.example.back.model.dto.auth.request;
 
+import com.example.back.model.entity.auth.ERole;
 import lombok.*;
 
 /**
@@ -22,13 +23,22 @@ import lombok.*;
 @AllArgsConstructor
 public class UserReq {
 
-  private String username;
+  private String userName;
 
-  private String email;
+  private String userId;
 
-  private String codeName; // 권한명
+  private ERole right; // 권한명
 
-  private String password;
+  private String userPassword;
+
+  private String enName;
+  private String userEmail;
+  private String userPhone;
+  private String userSex;
+  private String userAdd;
+  private String birthDate;
+  private String userNationality;
+
 
   private boolean changePwd; // 프론트에서 패스워드 수정 했다는것을 나타내는 옵션(true, false)
 }

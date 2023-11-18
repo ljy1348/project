@@ -5,7 +5,7 @@
 }
 
 .bg-register-image {
-    background: url("https://source.unsplash.com/Mv9hjnEUHR4/600x800");
+    background: url("https://cdn.pixabay.com/photo/2012/06/28/08/26/plane-50893_1280.jpg");
     background-position: center;
     background-size: cover;
 }
@@ -61,4 +61,16 @@
     color: #fff;
     background-color: #B8860B;
     border-color: #e6e6e6;
+}
+    .nav-link.active {
+    background-color: #1A374D !important;
+    color: white !important;
+}
+
+.form-control-select {
+    border-radius:10rem;
+}
+
+.nav-link {
+    cursor: pointer;
 }

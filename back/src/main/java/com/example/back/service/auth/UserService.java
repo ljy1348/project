@@ -37,7 +37,7 @@ public class UserService {
     //    dname like 조회 + 페이징
     public Page<User> findAllByUsernameContaining(String username, Pageable pageable) {
         Page<User> page
-                = userRepository.findAllByUsernameContaining(username, pageable);
+                = userRepository.findAllByUserIdContaining(username, pageable);
 
         return page;
     }

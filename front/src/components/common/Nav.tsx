@@ -20,7 +20,7 @@ function Nav() {
     <>
       {/* 여기 */}
       {/* <!-- 머리말 시작 --> */}
-      <div className="site-mobile-menu site-navbar-target">
+      <div className="site-mobile-menu site-navbar-target ">
         <div className="site-mobile-menu-header">
           <div className="site-mobile-menu-close">
             <span className="icofont-close js-menu-toggle"></span>
@@ -31,7 +31,7 @@ function Nav() {
       {/* <!-- 머리말 끝 --> */}
 
       {/* <!-- 메뉴 시작 --> */}
-      <nav className="site-nav">
+      <nav className="site-nav col-12 bg-primary">
         <div className="container bg-primary">
           <table>
 
@@ -40,7 +40,7 @@ function Nav() {
           <div className="site-navigation">
           <td style={{width:"150px"}}>
             <Link to="/" className="logo m-0">
-              항공권 예매 <span className="text-primary"></span>
+              GREEN AIR <span className="text-primary"></span>
             </Link>
             {/* 메뉴들 시작 */}
           </td>
@@ -118,10 +118,10 @@ function Nav() {
               <ul className="js-clone-nav d-none d-lg-inline-block site-menu">
 
               {/* home 메뉴 시작 */}
-                  {currentUser.codeName == "ROLE_ADMIN"&&<li>
+                  {currentUser.right == "ROLE_ADMIN"&&<li>
                     <Link to="/#" >관리자</Link>
                   </li>}
-                  {currentUser.codeName == "ROLE_USER"&&<li>
+                  {currentUser.right === "ROLE_USER"&&<li>
                     <Link to="/user-info" >유저 정보</Link>
                   </li>}
                   <li>

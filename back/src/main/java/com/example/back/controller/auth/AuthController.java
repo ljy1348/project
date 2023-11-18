@@ -61,7 +61,7 @@ public class AuthController {
 //            authentication : 인증을 통과한 객체(id/pwd,유저명,인증여부=true)
             Authentication authentication = authenticationManager.authenticate(
                     // 아이디와 패스워드로, Security 가 알아 볼 수 있는 token 객체로 생성해서 인증처리
-                    new UsernamePasswordAuthenticationToken(userReq.getEmail(), userReq.getPassword()));
+                    new UsernamePasswordAuthenticationToken(userReq.getUserId(), userReq.getUserPassword()));
             
 //            2) 인증된 객체들을 홀더에 저장해둠
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -73,7 +73,7 @@ public class AuthController {
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
 //            5) 리액트로 보낼 dto 생성
-            UserRes userRes = new UserRes(jwt,userDetails.getEmail(),userDetails.getUsername(),userDetails.getAuthority().toString());
+            UserRes userRes = new UserRes(jwt,userDetails.getUserId(),userDetails.getUsername(),userDetails.getAuthority().toString());
 
             return new ResponseEntity<>(userRes,HttpStatus.OK);
         } catch (Exception e) {
@@ -87,24 +87,28 @@ public class AuthController {
     public ResponseEntity<Object> createUser(@RequestBody UserReq userReq) {
         try {
 //            1) 요청된 유저객체가 DB 에 id(email) 있는 지 확인
-            if (userService.existsById(userReq.getEmail())) {
+            if (userService.existsById(userReq.getUserId())) {
                 return ResponseEntity
                         .badRequest()
-                        .body("에러 : 이메일이 이미 있습니다.");
+                        .body("에러 : 아이디가 이미 있습니다.");
             }
 
 //            2) 신규 유저 생성 : 권한 없이 생성
             User user = new User(
-                    userReq.getEmail(),   // id(이메일)
+                    userReq.getUserId(),   // id(이메일)
 //               todo: encoder.encode(패스워드) -> 암호화된 패스워드
-                    passwordEncoder.encode(userReq.getPassword()), // 패스워드(암호화)
-                    userReq.getUsername()  // 유저명
+                    passwordEncoder.encode(userReq.getUserPassword()), // 패스워드(암호화)
+                    userReq.getUserName(),
+                    userReq.getRight(),
+                    userReq.getUserEmail(),
+                    userReq.getUserAdd(),
+                    userReq.getUserPhone(),
+                    userReq.getUserSex(),
+                    userReq.getUserNationality(),
+                    userReq.getBirthDate(),
+                    userReq.getEnName()
             );
 
-//            3) 일단 리액트에서 요청한 권한 있는지 조사
-            String codeName = userReq.getCodeName(); // 요청권한 가져오기
-
-            user.setCodeName(ERole.ROLE_USER.name()); // 권한 수정
 
             userService.save(user); // 신규유저를 DB 에 저장
 

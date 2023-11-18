@@ -7,9 +7,11 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * packageName : com.example.simpledms.repository.auth
@@ -29,32 +31,54 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="TB_USER")
+@Table(name="BS_USER_INFORMATION")
 @DynamicInsert
 @DynamicUpdate
 @ToString
 // soft delete
-//@Where(clause = "DELETE_YN = 'N'")
-//@SQLDelete(sql = "UPDATE TB_USER SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE EMAIL = ?")
+@Where(clause = "DELETE_YN = 'N'")
+@SQLDelete(sql = "UPDATE BS_USER_INFORMATION SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE USER_ID = ?")
 public class User extends BaseTimeEntity {
-//    email       varchar2(1000) not null constraint pk_user primary key, -- id (email)
-//    password    varchar2(1000),                                         -- 암호
-//    username    varchar2(1000),                                         -- 유저명
-//    codeName   varchar2(1000),                                         -- 권한코드명(role_user, role_admin)
-//    deleteYn   varchar2(1) default 'n',
-//    insertTime varchar2(255),
-//    updateTime varchar2(255),
-//    deleteTime VARCHAR2(255)
 
     @Id
-    private String email;
-    private String password;
-    private String username;
-    private String codeName;
+    private String userId;
+    @Column(unique = true)
+    private String userPassword;
+    private String userName;
+    private String enName;
+    private String userEmail;
+    private String userPhone;
+    private String userSex;
+    private String userAdd;
+    private ERole right;
+    private String birthDate;
+    private String userNationality;
+    private String milePoint;
 
-    public User(String email, String password, String username) {
-        this.email = email;
-        this.password = password;
-        this.username = username;
+    public User(String userId, String userPassword, String userName) {
+        this.userId = userId;
+        this.userPassword = userPassword;
+        this.userName = userName;
+    }
+
+    public User(String userId, String userPassword, String userName, ERole right) {
+        this.userId = userId;
+        this.userPassword = userPassword;
+        this.userName = userName;
+        this.right = right;
+    }
+
+    public User(String userId, String userPassword, String userName, ERole right, String userEmail, String userAdd, String userPhone, String userSex, String userNationality, String birthDate, String enName) {
+        this.userId = userId;
+        this.userPassword = userPassword;
+        this.userName = userName;
+        this.right = right;
+        this.birthDate = birthDate;
+        this.enName = enName;
+        this.userAdd = userAdd;
+        this.userPhone = userPhone;
+        this.userSex = userSex;
+        this.userNationality = userNationality;
+        this.userEmail = userEmail;
     }
 }
