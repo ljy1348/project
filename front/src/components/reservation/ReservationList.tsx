@@ -1,6 +1,5 @@
 // 예약 조회 페이지
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import ReservationService from "../../services/reservation/ReservationService";
 import IReservation from "../../types/tour/IReservation";
 
@@ -9,22 +8,22 @@ function ReservationList() {
   // reservation 배열 변수
   const [reservation, setReservation] = useState<Array<IReservation>>([]);
   // select 태그에 선택된 값을 저장할 변수 : 기본 (airlineReservationNumber)
-  const [searchSelect, setSearchSelect] = useState<string>("airlineReservationNumber");
+  const [searchSelect, setSearchSelect] = useState<string>(
+    "airlineReservationNumber"
+  );
   // 검색어(input) 변수
   const [searchKeyword, setSearchKeyword] = useState<string>("");
 
   // 전체조회
-  const retrieveReservation = (event:any) => {
-
-    if(searchKeyword === "") {
-      event?.preventDefault(); // 다른곳으로 이동하는것 막기
-      alert("예약번호 또는 회원ID를 입력해 주세요.");
+  const retrieveReservation = () => {
+    if (searchKeyword === "") {
+      alert("예약번호 전체 또는 회원ID를 입력해 주세요.");
       return;
     }
     // 벡엔드 매개변수 전송 : + 현재페이지(page), 1페이지당개수(pageSize)
     ReservationService.getAll(searchSelect, searchKeyword) // 벡엔드 전체조회요청
       .then((response: any) => {
-        setReservation(reservation);
+        setReservation(response.data);
         // 로그 출력
         console.log("response", response.data);
       })
@@ -95,30 +94,35 @@ function ReservationList() {
       </div>
 
       {/* table start(본문) */}
-      <table className="table">
-        <thead>
-          <tr className="tableText">
-            <th scope="col">예약 번호</th>
-            <th scope="col">회원 ID</th>
-            <th scope="col">항공사</th>
-            <th scope="col">출발 일자</th>
-            <th scope="col">도착 일자</th>
-          </tr>
-        </thead>
-        <tbody>
-          {reservation &&
-            reservation.map((data) => (
-              // 키값 추가 안하면 react 에서 경고를 추가 : 키는 내부적으로 리액트가 rerending 할때 체크하는 값임
-              <tr key={data.userId}>
-                <td>{data.airlineReservationNumber}</td>
-                <td>{data.userId}</td>
-                <td>{data.airline}</td>
-                <td>{data.departure}</td>
-                <td>{data.arrival}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+        <table className="table">
+          <thead>
+            <tr className="tableText">
+              <th scope="col">예약 번호</th>
+              <th scope="col">회원 ID</th>
+              <th scope="col">항공사</th>
+              <th scope="col">출발 일자</th>
+              <th scope="col">도착 일자</th>
+              <th scope="col">상세 조회</th>
+            </tr>
+          </thead>
+          <tbody className="tabText">
+            {reservation &&
+              reservation.map((data) => (
+                <tr key={data.userId}>
+                  <td>{data.airlineReservationNumber}</td>
+                  <td>{data.userId}</td>
+                  <td>{data.airline}</td>
+                  <td>{data.departure}</td>
+                  <td>{data.arrival}</td>
+                  <td>
+                    <a href={"/search-reservation/" + data.airlineReservationNumber}>
+                      <a className="badge bg-success">자세히</a>
+                    </a>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       {/* table end */}
       {/* select + table 끝 */}
     </>

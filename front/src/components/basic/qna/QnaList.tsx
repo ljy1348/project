@@ -1,8 +1,7 @@
 // QnaList.tsx : rfce
 import { Pagination } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import TitleCom from "../../../components/common/TitleCom";
 import IQna from "../../../types/basic/IQna";
 import QnaService from "../../../services/basic/QnaService";
 

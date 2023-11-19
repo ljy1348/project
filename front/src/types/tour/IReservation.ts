@@ -10,9 +10,11 @@ export default interface IReservation {
     operationDay: string,                  // 운항 요일
     airline: string,                       // 항공사
     seatType: string,                      // 좌석 등급
-    adultCount: string,                    // 성인 인수
-    childCount: string,                    // 소아 인수
+    adultCount?: number,                    // 성인 인수
+    childCount?: number,                    // 소아 인수
     mileUseStatus: string,                 // 마일리지 사용여부
     membershipStatus: string,              // 회원 여부
     domesticInternational: string,         // 국내 - 국제 여부
+    startAirport: string,                  // 출발 공항
+    finalAirport: string,                  // 도착 공항
 }

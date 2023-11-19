@@ -1,27 +1,25 @@
-import { useEffect } from 'react'
-import initScripts from '../assets/js/scripts';
-import initCustom from '../assets/js/custom';
-import ReservationList from '../components/reservation/ReservationList';
+// QnaPage.tsx : rfce
+import React, { useEffect } from "react";
+import initScripts from "../../assets/js/scripts";
+import initCustom from "../../assets/js/custom";
+import SeeReservation from "../../components/reservation/SeeReservation";
 
-function ReservationListPage() {
-
-    useEffect(()=>{
-        initScripts();
-        initCustom();
-    },[])
-
+function SearchReservationPage() {
+  useEffect(() => {
+    initScripts();
+    initCustom();
+  }, []);
   return (
     <>
-      {/* 테마 디자인 적용 : 컨택트 소스 */}
       {/* 테마 제목 시작 */}
       <div className="hero hero-inner">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6 mx-auto text-center">
               <div className="intro-wrap">
-                <h1 className="mb-0">예약 조회</h1>
+                <h1 className="mb-0">예약 정보 상세 조회</h1>
                 <p className="text-white">
-                  여기에서 예약 정보를 확인하실 수 있습니다.
+                  여기에서 예약 정보 상세 조회를 확인하실 수 있습니다.
                 </p>
               </div>
             </div>
@@ -35,13 +33,13 @@ function ReservationListPage() {
         <div className="container">
           <div className="row">
             {/* 여기 */}
-            <ReservationList />
+            <SeeReservation />
           </div>
         </div>
       </div>
       {/* 본문 끝 */}
     </>
-  )
+  );
 }
 
-export default ReservationListPage;
+export default SearchReservationPage;

@@ -1953,6 +1953,10 @@ ul,li {list-style:none;}
   text-align: center;
 }
 
-#menu_bar {
-  align-items: center;
+.tabText{
+  text-align: center;
+}
+
+.blankBox2 {
+  margin-bottom: 15px;
 }

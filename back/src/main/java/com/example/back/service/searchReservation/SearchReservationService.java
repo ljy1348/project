@@ -1,6 +1,5 @@
 package com.example.back.service.searchReservation;
 
-import com.example.back.model.dto.TestDto;
 import com.example.back.model.searchReservation.SearchReservation;
 import com.example.back.repository.searchReservation.SearchReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +34,6 @@ public class SearchReservationService {
         return list;
     }
 
-    public List<TestDto> test(String airlineReservationNumber) {
-        List<TestDto> list = searchReservationRepository.findAll(airlineReservationNumber);
-
-        return list;
-    }
-
     //    회원 ID(userId) like 검색
     public List<SearchReservation> findAllByUserIdContaining(String userId) {
         List<SearchReservation> list = searchReservationRepository.findAllByUserIdContaining(userId);
@@ -49,7 +42,7 @@ public class SearchReservationService {
     }
 
     //    상세 조회
-    public Optional<SearchReservation> findByAirlineReservationNumber(String airlineReservationNumber) {
+    public Optional<SearchReservation> findById(String airlineReservationNumber) {
         Optional<SearchReservation> optionalSearchReservation = searchReservationRepository.findById(airlineReservationNumber);
 
         return optionalSearchReservation;

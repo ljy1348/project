@@ -1,6 +1,5 @@
 package com.example.back.controller.searchReservation;
 
-import com.example.back.model.dto.TestDto;
 import com.example.back.model.searchReservation.SearchReservation;
 import com.example.back.service.searchReservation.SearchReservationService;
 import lombok.extern.slf4j.Slf4j;
@@ -42,11 +41,11 @@ public class SearchReservationController {
             List<SearchReservation> searchReservationList;
 
             if(searchSelect.equals("airlineReservationNumber")) {
-                //            question like 검색
+                //            airlineReservationNumber like 검색
                 searchReservationList = searchReservationService.findAllByAirlineReservationNumberContaining(searchKeyword);
 
             } else {
-                //            questioner like 검색
+                //            userId like 검색
                 searchReservationList = searchReservationService.findAllByUserIdContaining(searchKeyword);
 
             }
@@ -62,30 +61,13 @@ public class SearchReservationController {
     }
 
 
-////    userId like 검색
-//    @GetMapping("/search-reservation")
-//    public ResponseEntity<Object> getUserId(
-//            @RequestParam(defaultValue = "") String userId
-//    ) {
-//        try {
-//            List<SearchReservation> list = searchReservationService.findAllByUserIdContaining(userId);
-//            if(list.isEmpty() == false) {
-//                return new ResponseEntity<>(HttpStatus.OK);
-//            } else {
-//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//            }
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
 //    1건 상세 조회
     @GetMapping("/search-reservation/{airlineReservationNumber}")
-    public ResponseEntity<Object> getReservationNumber(
+    public ResponseEntity<Object> findById(
             @PathVariable String airlineReservationNumber){
         try {
 //            상세 조회
-            Optional<SearchReservation> optionalSearchReservation = searchReservationService.findByAirlineReservationNumber(airlineReservationNumber);
+            Optional<SearchReservation> optionalSearchReservation = searchReservationService.findById(airlineReservationNumber);
 
             if (optionalSearchReservation.isEmpty() == false) {
 //                성공

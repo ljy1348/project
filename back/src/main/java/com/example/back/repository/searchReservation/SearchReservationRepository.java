@@ -1,10 +1,7 @@
 package com.example.back.repository.searchReservation;
 
-import com.example.back.model.dto.TestDto;
 import com.example.back.model.searchReservation.SearchReservation;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,15 +26,5 @@ public interface SearchReservationRepository extends JpaRepository<SearchReserva
 //    회원 ID(userId) like 검색
     List<SearchReservation> findAllByUserIdContaining(String userId);
 
-    @Query(value = "    select *\n" +
-            "    from\n" +
-            "        tb_bs_reservation\n" +
-            "    where\n" +
-            "        (\n" +
-            "            DELETE_YN = 'N'\n" +
-            "        ) \n" +
-            "        and (\n" +
-            "            airline_reservation_number like '%'|| :number ||'%'\n" +
-            "        )", nativeQuery = true)
-    List<TestDto> findAll(@Param("number") String number);
+
 }
