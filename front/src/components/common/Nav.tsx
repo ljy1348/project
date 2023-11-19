@@ -20,7 +20,7 @@ function Nav() {
     <>
       {/* 여기 */}
       {/* <!-- 머리말 시작 --> */}
-      <div className="site-mobile-menu site-navbar-target ">
+      <div className="site-mobile-menu site-navbar-target">
         <div className="site-mobile-menu-header">
           <div className="site-mobile-menu-close">
             <span className="icofont-close js-menu-toggle"></span>
@@ -31,20 +31,24 @@ function Nav() {
       {/* <!-- 머리말 끝 --> */}
 
       {/* <!-- 메뉴 시작 --> */}
-      <nav className="site-nav col-12 bg-primary">
-        <div className="container bg-primary">
-          <table>
+
+      <div className="nav-hero hero-inner">
+        <div className="container">
+          <div className=" align-items-center">
+      <nav className="site-nav bg-primary container">
+        <div className="container bg-primary align-items-center">
+          <table className="">
 
           <th>
             
           <div className="site-navigation">
-          <td style={{width:"150px"}}>
+          <td style={{width:"200px"}}>
             <Link to="/" className="logo m-0">
-              GREEN AIR <span className="text-primary"></span>
+              GR AIR <span className="text-primary"></span>
             </Link>
             {/* 메뉴들 시작 */}
           </td>
-          <td style={{width:"750px", textAlign:"center"}}>
+          <td style={{width:"750px", textAlign:"center", maxWidth:"750px"}}>
             <ul className="js-clone-nav d-none d-lg-inline-block site-menu">
 
               {/* home 메뉴 시작 */}
@@ -147,6 +151,9 @@ function Nav() {
           </table>
         </div>
       </nav>
+      </div>
+      </div>
+      </div>
       {/* <!-- 메뉴 끝 --> */}
     </>
   );

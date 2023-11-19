@@ -51,7 +51,7 @@ function Register() {
       // 유효성 조건을 개발자 직접 작성하는 함수
       .test(
         "len",
-        "username 은 3 ~ 20사이에 글자만 입력됩니다.",
+        "이름은 2 ~ 20사이에 글자만 입력됩니다.",
         // 유효성 체크 조건
         (val) => {
           if (
@@ -65,7 +65,21 @@ function Register() {
         }
       )
       .required("필수 입력입니다."), // username 필수 입력
-    userId: Yup.string().required("필수 입력입니다."), // email 필수 입력
+    userId: Yup.string().test(
+      "len",
+      "id는 4 ~ 20사이에 글자만 입력됩니다.",
+      // 유효성 체크 조건
+      (val) => {
+        if (
+          val &&
+          val.toString().length >= 4 &&
+          val.toString().length <= 20
+        ) {
+          return true;
+        }
+        return false;
+      }
+    ).required("필수 입력입니다."), // email 필수 입력
     userPassword: Yup.string()
       // 개발자가 직접 유효성 체크 기능을 추가하는 방법
       .test(
@@ -392,7 +406,7 @@ function Register() {
                             </div>
                             <div className="col-sm-6">
                               <DatePicker
-                                showIcon
+                                // showIcon
                                 dateFormat="yyyy-MM-dd" // 날짜 형태
                                 shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
                                 minDate={new Date("2000-01-01")} // minDate 이전 날짜 선택 불가

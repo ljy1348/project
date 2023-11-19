@@ -13,6 +13,10 @@ const logout = () => {
     localStorage.removeItem("user");
  }
 
+ const getUserInfo = (userId:string) => {
+    return http.get("/auth/info/"+userId);
+ }
+
 // todo: 로그인 함수(login, signin) : 조회(post) why? 보안
 // get -> 웹브라우저 주소창에 요청 변수 또는 주소값이 나타남
 // post -> 웹브라우저 주소창에 정보가 나타나지 않음
@@ -74,6 +78,7 @@ const login = (user:IUser) => {
     logout,
     kakaoLogin,
     naverLogin,
-    googleLogin
+    googleLogin,
+    getUserInfo
  }
  export default AuthService;

@@ -12,6 +12,8 @@ import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import DatePicker from "react-datepicker";
 import { Button, Modal } from "react-bootstrap";
+import Airport from "../../components/airport/Airport";
+import Isotope from "isotope-layout";
 
 // 1) 로그인 로직
 // 2) 유효성 체크 lib 사용 : Yup & Formik 
@@ -21,6 +23,8 @@ function Login() {
     initScripts();
     initCustom();
   },[])
+
+
 
   // todo: 변수 정의
   // 강제 페이지 이동 함수
@@ -36,10 +40,20 @@ function Login() {
   const [arrivalAirPort, setArrivalAirPort] = useState("");
   const [isModal, setIsModal] = useState(false);
   const [isAirPort, setIsAirPort] = useState("");
+  const [selectAirport, setSelectAirport] = useState({cname:"", abbr:""})
 
   const tagSelect = (data:string) => {
     if (data==="login") setTag("login");
     if (data==="non-member") setTag("non-member");
+  }
+
+  const setAirport = (data:any) => {
+    if (isAirPort==="departure")
+    setDepartureAirPort(data);
+  if (isAirPort==="arrival")
+    setArrivalAirPort(data);
+  setIsModal(false);
+
   }
 
 
@@ -84,9 +98,9 @@ function Login() {
   const validationSchema = Yup.object().shape({
     // email 유효성 규칙 : required(에러메세지) => 필수필드
     // string() : 자료형이 문자열인가? 체크
-    userId: Yup.string().required("email 은 필수 입력입니다."),
+    userId: Yup.string().required("필수 입력입니다."),
     // password 유효성 규칙 : required(에러메세지) => 필수필드
-    userPassword: Yup.string().required("password 도 필수 입력입니다."),
+    userPassword: Yup.string().required("필수 입력입니다."),
   });
 
   const validationSchemaNonMember = Yup.object().shape({
@@ -153,8 +167,6 @@ function Login() {
    const handleNonMember = (formValue: any) => { console.log(formValue) }
 
    const onChangeDate = (data:Date) => { setSelectedDate(data) }
-
-   const onClickModal = () => {setIsModal(true); setIsAirPort("data"); console.log("a")}
 
    const innerHtml = () => {
     if (tag==="login") {
@@ -311,6 +323,7 @@ function Login() {
               onClick={()=>{setIsModal(true); setIsAirPort("departure");}}
               id="departureAirPort"
               placeholder="출발 공항"
+              value={departureAirPort}
             />
           </div>
           <div className="form-group col-4">
@@ -325,23 +338,7 @@ function Login() {
               placeholder="도착 공항"
               value={arrivalAirPort}
             />
-            <Modal
-            show={isModal}
-            onHide={() => setIsModal(false)}
-            >
-            <Modal.Body>
-              {isAirPort === "arrival" && <>도착 공항 선택</>}
-              {isAirPort === "departure" && <>출발 공항 선택</>}
-            </Modal.Body>
-                              <Modal.Footer>
-                                <Button
-                                  className="btn"
-                                  onClick={() => setIsModal(false)}
-                                >
-                                  Close
-                                </Button>
-                              </Modal.Footer>
-            </Modal>
+
           </div>
           </div>
           {/* 패스워드 필드 시작 */}
@@ -395,6 +392,7 @@ function Login() {
     }
    }
 
+
   return (
     
     // 여기
@@ -420,10 +418,10 @@ function Login() {
                   <div>
                   <ul className="nav nav-tabs">
   <li className="nav-item col-6">
-    <a className={"nav-link " + (tag==="login"?"active":"")} ><h3 className="container text-center" onClick={()=>{tagSelect("login")}}>로그인</h3></a>
+    <a className={"nav-link " + (tag==="login"?"active":"")} onClick={()=>{tagSelect("login")}} ><h3 className="container text-center" >로그인</h3></a>
   </li>
   <li className="nav-item col-6">
-    <a className={"nav-link " + (tag==="non-member"?"active":"")} ><h3 className="container text-center" onClick={()=>{tagSelect("non-member")}}>비회원 조회</h3></a>
+    <a className={"nav-link " + (tag==="non-member"?"active":"")} onClick={()=>{tagSelect("non-member")}}><h3 className="container text-center" >비회원 조회</h3></a>
   </li>
 </ul>
                   </div>
@@ -437,6 +435,29 @@ function Login() {
           </div>
         </div>
       </div>
+      <div>
+            <Modal
+            size="lg"
+            show={isModal}
+            onHide={() => setIsModal(false)}
+            >
+              <Modal.Header>
+              <h3 className="tit">공항 선택</h3>
+              </Modal.Header>
+            <Modal.Body>
+              {isAirPort === "arrival" && <><Airport setAirport={setAirport}></Airport></>}
+              {isAirPort === "departure" && <><Airport setAirport={setAirport}></Airport></>}
+            </Modal.Body>
+                              <Modal.Footer>
+                                <Button
+                                  className="btn"
+                                  onClick={() => setIsModal(false)}
+                                >
+                                  Close
+                                </Button>
+                              </Modal.Footer>
+            </Modal>
+            </div>
     </div>    
   );
 }

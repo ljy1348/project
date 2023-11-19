@@ -53,7 +53,7 @@ public class User extends BaseTimeEntity {
     private ERole right;
     private String birthDate;
     private String userNationality;
-    private String milePoint;
+    private int milePoint;
 
     public User(String userId, String userPassword, String userName) {
         this.userId = userId;
@@ -68,7 +68,7 @@ public class User extends BaseTimeEntity {
         this.right = right;
     }
 
-    public User(String userId, String userPassword, String userName, ERole right, String userEmail, String userAdd, String userPhone, String userSex, String userNationality, String birthDate, String enName) {
+    public User(String userId, String userPassword, String userName, String userEmail, String userAdd, String userPhone, String userSex, String userNationality, String birthDate, String enName) {
         this.userId = userId;
         this.userPassword = userPassword;
         this.userName = userName;
@@ -80,5 +80,6 @@ public class User extends BaseTimeEntity {
         this.userSex = userSex;
         this.userNationality = userNationality;
         this.userEmail = userEmail;
+        this.milePoint = 0;
     }
 }

@@ -16,10 +16,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 /**
  * packageName : com.example.simpledms.controller.auth
@@ -71,9 +70,9 @@ public class AuthController {
 
 //            4) 인증된 객체
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
+                log.info("aaaa : "+userDetails.getUserId());
 //            5) 리액트로 보낼 dto 생성
-            UserRes userRes = new UserRes(jwt,userDetails.getUserId(),userDetails.getUsername(),userDetails.getAuthority().toString());
+            UserRes userRes = new UserRes(jwt,userDetails.getUserId(),userDetails.getUsername(), userDetails.getAuthority().toString());
 
             return new ResponseEntity<>(userRes,HttpStatus.OK);
         } catch (Exception e) {
@@ -99,7 +98,6 @@ public class AuthController {
 //               todo: encoder.encode(패스워드) -> 암호화된 패스워드
                     passwordEncoder.encode(userReq.getUserPassword()), // 패스워드(암호화)
                     userReq.getUserName(),
-                    userReq.getRight(),
                     userReq.getUserEmail(),
                     userReq.getUserAdd(),
                     userReq.getUserPhone(),
@@ -109,6 +107,7 @@ public class AuthController {
                     userReq.getEnName()
             );
 
+            user.setRight(ERole.ROLE_USER);
 
             userService.save(user); // 신규유저를 DB 에 저장
 
@@ -116,6 +115,21 @@ public class AuthController {
 
         } catch (Exception e) {
             log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/info/{userId}")
+    public ResponseEntity<User> findById(@PathVariable String userId) {
+        try {
+
+        Optional<User> optionalUser = userService.findById(userId);
+        if (optionalUser.isPresent()) {
+            return new ResponseEntity<>(optionalUser.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

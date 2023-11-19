@@ -21,10 +21,16 @@ import KakaoLogin from './pages/auth/KakaoLogin';
 import initScripts from './assets/js/scripts';
 import initCustom from './assets/js/custom';
 import UserInfo from './pages/auth/user/UserInfo';
+import Airport from './components/airport/Airport';
 
 
 function App() {
 
+  useEffect(()=>{
+    initScripts();
+    initCustom();
+    // setRender(true);
+  },[])
 
   return (
     <div className="App">

@@ -11,5 +11,5 @@ export default interface IUser {
     right: string,       
     birthDate: Date | null,       
     userNationality: string,       
-    milePoint: number,       
+    milePoint: number, 
 }

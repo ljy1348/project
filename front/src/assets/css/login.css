@@ -74,3 +74,58 @@
 .nav-link {
     cursor: pointer;
 }
+
+.user-info-nav {
+    font-size: 20px;
+}
+
+.user-info-hero {
+    padding: 7rem 0 10rem 0;
+    background: #6998AB;
+    margin-bottom: 100px;
+  }
+  
+  .user-info-hero-inner {
+    position: relative;
+    padding: 5rem 0 5rem 0;
+    margin-bottom: auto;
+    background-image: url("https://cdn.pixabay.com/photo/2022/04/26/13/04/sky-7158340_1280.jpg");
+    background-size: cover;
+    color: white;
+  }
+  
+  .hero-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: hsla(206, 50%, 20%, 0.616); /* 흰색 불투명도 50% */
+    z-index: 1;
+  }
+
+  .intro-wrap {
+    position: relative;
+    z-index: 2; /* 오버레이보다 높은 z-index */
+  }
+
+  .intro-wrap > li {
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 20px;
+  }
+
+  .hero-mile {
+    font-size: 18px;
+  }
+
+  .hero-count {
+    font-size: 18px;
+  }
+
+  .user-info ul {
+    padding: 0 !important;
+  }

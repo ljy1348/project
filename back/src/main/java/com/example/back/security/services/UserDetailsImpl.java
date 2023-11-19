@@ -31,7 +31,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public UserDetailsImpl( String email, String password, String username,
                            GrantedAuthority authority) {
-        this.userId = userId;
+        this.userId = email;
         this.password = password;
         this.username = username;
         this.authority = authority;
