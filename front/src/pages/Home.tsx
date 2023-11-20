@@ -1,14 +1,30 @@
 // pages/Home.tsx : rfce
-import React,{useEffect} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import initScripts from "../assets/js/scripts";
 import initCustom from "../assets/js/custom";
+import { Button } from "react-bootstrap";
+import ForiareaModal from "./modal/ForiareaModal";
+// react-bootstrap import
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
+/* eslint-disable */
 function Home() {
+  // todo: overlay(===popover)
+  // 팝오버 메세지 보이기 함수
+  const renderTooltip = (props: any) => (
+    <Tooltip id="button-tooltip" {...props}>
+      {/* 팝오버(tooltip) 메세지 보이기 */}
+      여기 간단 메세지입니다.
+    </Tooltip>
+  );
 
-  useEffect(()=>{
+  useEffect(() => {
     initScripts();
     initCustom();
-  },[])
+  }, []);
+
+  const [foriModalShow, foriSetModalShow] = useState(false);
 
   return (
     <>
@@ -17,24 +33,32 @@ function Home() {
       <div className="hero">
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-lg-7">
+            {/* 서브 메뉴 */}
+            <ul id="sub_menu">
+              <li className="sub_menu_select">
+                <a href="#" className="sub_menu_select">
+                  <form className="form" id="submenu">
+                    항공권 예약
+                  </form>
+                </a>
+              </li>
+            </ul>
+            {/* 예약바 너비 조절 */}
+            <div className="col-md-12">
               <div className="intro-wrap">
-                <h1 className="mb-5">
-                  <span className="d-block">Let's Enjoy Your</span> Trip In{" "}
-                  <span className="typed-words"></span>
-                </h1>
-
                 <div className="row">
                   <div className="col-12">
                     <form className="form">
-                      <div className="row mb-2">
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
+                      {/* 예약바 높이 조절 */}
+                      <div className="row mb-4">
+                        {/* 출발지 */}
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
                           <select
                             name=""
                             id=""
                             className="form-control custom-select"
                           >
-                            <option value="">Destination</option>
+                            <option value="">출발지</option>
                             <option value="">Peru</option>
                             <option value="">Japan</option>
                             <option value="">Thailand</option>
@@ -45,29 +69,55 @@ function Home() {
                             <option value="">Russia</option>
                           </select>
                         </div>
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-5">
+                        {/* 도착지 */}
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
+                          <select
+                            name=""
+                            id=""
+                            className="form-control custom-select"
+                          >
+                            <option value="">도착지</option>
+                            <option value="">Peru</option>
+                            <option value="">Japan</option>
+                            <option value="">Thailand</option>
+                            <option value="">Brazil</option>
+                            <option value="">United States</option>
+                            <option value="">Israel</option>
+                            <option value="">China</option>
+                            <option value="">Russia</option>
+                          </select>
+                        </div>
+
+                        {/* 달력 */}
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
                           <input
                             type="text"
                             className="form-control"
                             name="daterange"
                           />
                         </div>
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-3">
+
+                        {/* 탑승객 */}
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="# of People"
+                            placeholder="탑승객"
+                            onClick={() => foriSetModalShow(true)}
+                          />
+                        </div>
+
+                        {/* test */}
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="테스트용"
+                            onClick={() => foriSetModalShow(true)}
                           />
                         </div>
                       </div>
                       <div className="row align-items-center">
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-                          <input
-                            type="submit"
-                            className="btn btn-primary btn-block"
-                            value="Search"
-                          />
-                        </div>
                         <div className="col-lg-8">
                           <label className="control control--checkbox mt-3">
                             <span className="caption">Save this search</span>
@@ -81,51 +131,16 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-5">
-              <div className="slides">
-                <img
-                  src="images/hero-slider-1.jpg"
-                  alt="Image"
-                  className="img-fluid active"
-                />
-                <img
-                  src="images/hero-slider-2.jpg"
-                  alt="Image"
-                  className="img-fluid"
-                />
-                <img
-                  src="images/hero-slider-3.jpg"
-                  alt="Image"
-                  className="img-fluid"
-                />
-                <img
-                  src="images/hero-slider-4.jpg"
-                  alt="Image"
-                  className="img-fluid"
-                />
-                <img
-                  src="images/hero-slider-5.jpg"
-                  alt="Image"
-                  className="img-fluid"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* <!-- 2 --> */}
+      {/* 부가서비스 */}
       <div className="untree_co-section">
         <div className="container">
           <div className="row mb-5 justify-content-center">
             <div className="col-lg-6 text-center">
-              <h2 className="section-title text-center mb-3">Our Services</h2>
-              <p>
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there live the blind texts. Separated
-                they live in Bookmarksgrove right at the coast of the Semantics,
-                a large language ocean.
-              </p>
+              <h2 className="text-center mb-3">부가 서비스</h2>
             </div>
           </div>
           <div className="row align-items-stretch">
@@ -135,7 +150,7 @@ function Home() {
                   <div
                     className="feature-img-bg h-100"
                     style={{
-                      backgroundImage: "url('images/hero-slider-1.jpg')",
+                      backgroundImage: "url('images/부가서비스.jpg')",
                     }}
                   ></div>
                 </div>
@@ -145,19 +160,19 @@ function Home() {
             <div className="col-6 col-sm-6 col-lg-4 feature-1-wrap d-md-flex flex-md-column order-lg-1">
               <div className="feature-1 d-md-flex">
                 <div className="align-self-center">
-                  <span className="flaticon-house display-4 text-primary"></span>
-                  <h3>Beautiful Condo</h3>
-                  <p className="mb-0">
-                    Even the all-powerful Pointing has no control about the
-                    blind texts.
-                  </p>
+                  <img
+                    src="../images/돋보기.png"
+                    className="sub_service_img"
+                    alt=""
+                  />
+                  <h3>예약조회</h3>
                 </div>
               </div>
 
               <div className="feature-1 ">
                 <div className="align-self-center">
                   <span className="flaticon-restaurant display-4 text-primary"></span>
-                  <h3>Restaurants & Cafe</h3>
+                  <h3>수화물</h3>
                   <p className="mb-0">
                     Even the all-powerful Pointing has no control about the
                     blind texts.
@@ -170,7 +185,7 @@ function Home() {
               <div className="feature-1 d-md-flex">
                 <div className="align-self-center">
                   <span className="flaticon-mail display-4 text-primary"></span>
-                  <h3>Easy to Connect</h3>
+                  <h3>체크인</h3>
                   <p className="mb-0">
                     Even the all-powerful Pointing has no control about the
                     blind texts.
@@ -181,7 +196,7 @@ function Home() {
               <div className="feature-1 d-md-flex">
                 <div className="align-self-center">
                   <span className="flaticon-phone-call display-4 text-primary"></span>
-                  <h3>24/7 Support</h3>
+                  <h3>마일리지</h3>
                   <p className="mb-0">
                     Even the all-powerful Pointing has no control about the
                     blind texts.
@@ -193,60 +208,12 @@ function Home() {
         </div>
       </div>
 
-      {/* <!-- 3 --> */}
-      <div className="untree_co-section count-numbers py-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-6 col-sm-6 col-md-6 col-lg-3">
-              <div className="counter-wrap">
-                <div className="counter">
-                  <span className="" data-number="9313">
-                    0
-                  </span>
-                </div>
-                <span className="caption">No. of Travels</span>
-              </div>
-            </div>
-            <div className="col-6 col-sm-6 col-md-6 col-lg-3">
-              <div className="counter-wrap">
-                <div className="counter">
-                  <span className="" data-number="8492">
-                    0
-                  </span>
-                </div>
-                <span className="caption">No. of Clients</span>
-              </div>
-            </div>
-            <div className="col-6 col-sm-6 col-md-6 col-lg-3">
-              <div className="counter-wrap">
-                <div className="counter">
-                  <span className="" data-number="100">
-                    0
-                  </span>
-                </div>
-                <span className="caption">No. of Employees</span>
-              </div>
-            </div>
-            <div className="col-6 col-sm-6 col-md-6 col-lg-3">
-              <div className="counter-wrap">
-                <div className="counter">
-                  <span className="" data-number="120">
-                    0
-                  </span>
-                </div>
-                <span className="caption">No. of Countries</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <!-- 4 --> */}
+      {/* 최저가 서비스 */}
       <div className="untree_co-section">
         <div className="container">
           <div className="row text-center justify-content-center mb-5">
             <div className="col-lg-7">
-              <h2 className="section-title text-center">Popular Destination</h2>
+              <h2 className="section-title text-center">최적가 여행</h2>
             </div>
           </div>
 
@@ -267,6 +234,22 @@ function Home() {
                   className="img-fluid"
                 />
               </a>
+              <div>
+                <span className="d-flex align-items-center loc mb-2">
+                  <span className="icon-room mr-3"></span>
+                  <span>Italy</span>
+                </span>
+                <div className="d-flex align-items-center">
+                  <div>
+                    <h3>
+                      <a href="#">Rialto Mountains</a>
+                    </h3>
+                    <div className="price ml-auto">
+                      <span>KRW 100,000</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="item">
@@ -285,6 +268,22 @@ function Home() {
                   className="img-fluid"
                 />
               </a>
+              <div>
+                <span className="d-flex align-items-center loc mb-2">
+                  <span className="icon-room mr-3"></span>
+                  <span>Italy</span>
+                </span>
+                <div className="d-flex align-items-center">
+                  <div>
+                    <h3>
+                      <a href="#">Rialto Mountains</a>
+                    </h3>
+                    <div className="price ml-auto">
+                      <span>KRW 100,000</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="item">
@@ -303,6 +302,22 @@ function Home() {
                   className="img-fluid"
                 />
               </a>
+              <div>
+                <span className="d-flex align-items-center loc mb-2">
+                  <span className="icon-room mr-3"></span>
+                  <span>Italy</span>
+                </span>
+                <div className="d-flex align-items-center">
+                  <div>
+                    <h3>
+                      <a href="#">Rialto Mountains</a>
+                    </h3>
+                    <div className="price ml-auto">
+                      <span>KRW 100,000</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="item">
@@ -321,6 +336,22 @@ function Home() {
                   className="img-fluid"
                 />
               </a>
+              <div>
+                <span className="d-flex align-items-center loc mb-2">
+                  <span className="icon-room mr-3"></span>
+                  <span>Italy</span>
+                </span>
+                <div className="d-flex align-items-center">
+                  <div>
+                    <h3>
+                      <a href="#">Rialto Mountains</a>
+                    </h3>
+                    <div className="price ml-auto">
+                      <span>KRW 100,000</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="item">
@@ -339,6 +370,22 @@ function Home() {
                   className="img-fluid"
                 />
               </a>
+              <div>
+                <span className="d-flex align-items-center loc mb-2">
+                  <span className="icon-room mr-3"></span>
+                  <span>Italy</span>
+                </span>
+                <div className="d-flex align-items-center">
+                  <div>
+                    <h3>
+                      <a href="#">Rialto Mountains</a>
+                    </h3>
+                    <div className="price ml-auto">
+                      <span>KRW 100,000</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="item">
@@ -357,73 +404,23 @@ function Home() {
                   className="img-fluid"
                 />
               </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <!-- 5 --> */}
-      <div className="untree_co-section testimonial-section mt-5">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-7 text-center">
-              <h2 className="section-title text-center mb-5">Testimonials</h2>
-
-              <div className="owl-single owl-carousel no-nav">
-                <div className="testimonial mx-auto">
-                  <figure className="img-wrap">
-                    <img
-                      src="images/person_2.jpg"
-                      alt="Image"
-                      className="img-fluid"
-                    />
-                  </figure>
-                  <h3 className="name">Adam Aderson</h3>
-                  <blockquote>
-                    <p>
-                      &ldquo;There live the blind texts. Separated they live in
-                      Bookmarksgrove right at the coast of the Semantics, a
-                      large language ocean.&rdquo;
-                    </p>
-                  </blockquote>
-                </div>
-
-                <div className="testimonial mx-auto">
-                  <figure className="img-wrap">
-                    <img
-                      src="images/person_3.jpg"
-                      alt="Image"
-                      className="img-fluid"
-                    />
-                  </figure>
-                  <h3 className="name">Lukas Devlin</h3>
-                  <blockquote>
-                    <p>
-                      &ldquo;There live the blind texts. Separated they live in
-                      Bookmarksgrove right at the coast of the Semantics, a
-                      large language ocean.&rdquo;
-                    </p>
-                  </blockquote>
-                </div>
-
-                <div className="testimonial mx-auto">
-                  <figure className="img-wrap">
-                    <img
-                      src="images/person_4.jpg"
-                      alt="Image"
-                      className="img-fluid"
-                    />
-                  </figure>
-                  <h3 className="name">Kayla Bryant</h3>
-                  <blockquote>
-                    <p>
-                      &ldquo;There live the blind texts. Separated they live in
-                      Bookmarksgrove right at the coast of the Semantics, a
-                      large language ocean.&rdquo;
-                    </p>
-                  </blockquote>
+              <div>
+                <span className="d-flex align-items-center loc mb-2">
+                  <span className="icon-room mr-3"></span>
+                  <span>Italy</span>
+                </span>
+                <div className="d-flex align-items-center">
+                  <div>
+                    <h3>
+                      <a href="#">Rialto Mountains</a>
+                    </h3>
+                    <div className="price ml-auto">
+                      <span>KRW 100,000</span>
+                    </div>
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -550,93 +547,19 @@ function Home() {
             </div>
           </div>
         </div>
-      </div>
+        {/* overlay(===popover) */}
+        <OverlayTrigger
+          placement="right"                // placement="right" : 오른쪽 보이기
+          delay={{ show: 250, hide: 400 }} // show: 지속시간, hide: 숨김시간
+          overlay={renderTooltip}          // renderTooltip : 팝오버 메세지 함수 설정
+        >
+          <Button variant="success">Hover me to see</Button>
+        </OverlayTrigger>
 
-      {/* <!-- 7 --> */}
-      <div className="untree_co-section">
-        <div className="container">
-          <div className="row justify-content-between align-items-center">
-            <div className="col-lg-6">
-              <figure className="img-play-video">
-                <a
-                  id="play-video"
-                  className="video-play-button"
-                  href="https://www.youtube.com/watch?v=mwtbEGNABWU"
-                  data-fancybox
-                >
-                  <span></span>
-                </a>
-                <img
-                  src="images/hero-slider-2.jpg"
-                  alt="Image"
-                  className="img-fluid rounded-20"
-                />
-              </figure>
-            </div>
-
-            <div className="col-lg-5">
-              <h2 className="section-title text-left mb-4">
-                Take a look at Tour Video
-              </h2>
-              <p>
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there live the blind texts. Separated
-                they live in Bookmarksgrove right at the coast of the Semantics,
-                a large language ocean.
-              </p>
-
-              <p className="mb-4">
-                A small river named Duden flows by their place and supplies it
-                with the necessary regelialia. It is a paradisematic country, in
-                which roasted parts of sentences fly into your mouth.
-              </p>
-
-              <ul className="list-unstyled two-col clearfix">
-                <li>Outdoor recreation activities</li>
-                <li>Airlines</li>
-                <li>Car Rentals</li>
-                <li>Cruise Lines</li>
-                <li>Hotels</li>
-                <li>Railways</li>
-                <li>Travel Insurance</li>
-                <li>Package Tours</li>
-                <li>Insurance</li>
-                <li>Guide Books</li>
-              </ul>
-
-              <p>
-                <a href="#" className="btn btn-primary">
-                  Get Started
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <!-- 8 --> */}
-      <div className="py-5 cta-section">
-        <div className="container">
-          <div className="row text-center">
-            <div className="col-md-12">
-              <h2 className="mb-2 text-white">
-                Lets you Explore the Best. Contact Us Now
-              </h2>
-              <p className="mb-4 lead text-white text-white-opacity">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Excepturi, fugit?
-              </p>
-              <p className="mb-0">
-                <a
-                  href="booking.html"
-                  className="btn btn-outline-white text-white btn-md font-weight-bold"
-                >
-                  Get in touch
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
+        <ForiareaModal
+          show={foriModalShow}
+          onHide={() => foriSetModalShow(false)}
+        />
       </div>
     </>
   );

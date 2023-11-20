@@ -21,59 +21,57 @@ function Nav() {
       <nav className="site-nav">
         <div className="container">
           <div className="site-navigation">
-            <Link to="/" className="logo m-0">
-              Tour <span className="text-primary">.</span>
+
+            <Link to="/" className="logo m-2">
+              GreanAirline <span className="text-primary"></span>
             </Link>
             {/* 메뉴들 시작 */}
-            <ul className="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
+            <ul
+              className="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right"
+              id="menu_bar"
+            >
               {/* home 메뉴 시작 */}
-              <li className="active">
-                <Link to="/">Home</Link>
+              <li>
+                <a >예약</a>
               </li>
               {/* home 메뉴 끝 */}
 
               {/* 드롭다운 메뉴 시작 */}
               <li className="has-children">
-                <a href="#">Dropdown</a>
+
+                <a href="#">예약조회</a>
                 <ul className="dropdown">
                   <li>
-                    <Link to="/elements">Elements</Link>
+                    <Link to="/elements">One</Link>
                   </li>
                   <li>
-                    <a href="#">Menu One</a>
+                    <a href="#">Two</a>
                   </li>
                   <li className="has-children">
-                    <a href="#">Menu Two</a>
-                    <ul className="dropdown">
-                      <li>
-                      <Link to="/icon">Icon</Link>
-                      </li>
-                      <li>
-                        <a href="#">Sub Menu Two</a>
-                      </li>
-                      <li>
-                        <a href="#">Sub Menu Three</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="#">Menu Three</a>
+                    <a href="#">Three</a>
                   </li>
                 </ul>
               </li>
               {/* 드롭다운 메뉴 끝 */}
 
+
+               {/* 체크인 메뉴 시작 */}
+               <li>
+                <Link to="/checkin">체크인</Link>
+              </li>
+              {/* 체크인 메뉴 끝 */}
+
               {/* 고객 시작 */}
               <li className="has-children">
-                <Link to="#">고객</Link>
+                <Link to="#">체크인</Link>
                 <ul className="dropdown">
                   {/* 1st 드롭 메뉴 */}
                   <li>
-                    <Link to="/customer">고객 조회</Link>
+                    <Link to="/customer">One</Link>
                   </li>
                   {/* 2nd 드롭 메뉴 */}
                   <li>
-                    <Link to="/add-customer">고객 추가</Link>
+                    <Link to="/add-customer">Two</Link>
                   </li>
                 </ul>
               </li>
@@ -81,38 +79,43 @@ function Nav() {
 
               {/* Q & A 시작 */}
               <li className="has-children">
-                <Link to="#">Q & A</Link>
+                <Link to="#">마일리지</Link>
                 <ul className="dropdown">
                   {/* 1st 드롭 메뉴 */}
                   <li>
-                    <Link to="/qna">Q & A 조회</Link>
+                    <Link to="/qna">One</Link>
                   </li>
                   {/* 2nd 드롭 메뉴 */}
                   <li>
-                    <Link to="/add-qna">Q & A 추가</Link>
+                    <Link to="/add-qna">Two</Link>
                   </li>
                 </ul>
               </li>
               {/* Q & A 끝 */}
 
-              {/* 서비스 메뉴 시작 */}
-              <li>
-                <Link to="/services">Services</Link>
-              </li>
-              {/* 서비스 메뉴 끝 */}
 
-              {/* 어바웃 메뉴 시작 */}
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              {/* 어바웃 메뉴 끝 */}
+              
 
-              {/* 컨택트 메뉴 시작 */}
-              <li>
-                <Link to="/contact">Contact Us</Link>
-              </li>
-              {/* 컨택트 메뉴 끝 */}
+              <ul className="js-clone-nav d-none d-lg-inline-block site-menu">
+                {/* home 메뉴 시작 */}
+
+                <ul className="login_menubar">
+                <li>
+                  <Link to="/login">로그인</Link>
+                </li>
+                <li>
+                  <Link to="/register">
+                    <p>마이페이지</p></Link>
+                </li>
+                <li>
+                  <Link to="/register">
+                    <p>고객센터</p></Link>
+                </li>
+                {/* home 메뉴 끝 */}
+              </ul>
+              </ul>
             </ul>
+
             {/* 메뉴들 끝 */}
 
             <a
@@ -130,5 +133,6 @@ function Nav() {
     </>
   );
 }
+
 
 export default Nav;

@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 // 메뉴 lib
 import { BrowserRouter } from "react-router-dom";
 
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

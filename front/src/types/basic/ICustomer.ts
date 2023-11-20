@@ -1,7 +1,9 @@
-// ICustomer.ts
-export default interface ICustomer {
-    cid?: any | null,
-    fullName: string, // question
-    email: string,    // answer
-    phone: string     // questioner
+import React from 'react'
+
+function ICustomer() {
+  return (
+    <div>ICustomer</div>
+  )
 }
+
+export default ICustomer
