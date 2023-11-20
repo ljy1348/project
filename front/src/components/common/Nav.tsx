@@ -63,6 +63,12 @@ function Nav() {
               </li>
               {/* 드롭다운 메뉴 끝 */}
 
+               {/* 체크인 메뉴 시작 */}
+               <li>
+                <Link to="/checkin">체크인</Link>
+              </li>
+              {/* 체크인 메뉴 끝 */}
+
               {/* 고객 시작 */}
               <li className="has-children">
                 <Link to="#">고객</Link>

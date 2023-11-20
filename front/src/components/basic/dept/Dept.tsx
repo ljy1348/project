@@ -6,28 +6,26 @@ import DeptService from "../../../services/basic/DeptService";
 
 function Dept() {
 
-  // todo: 변수 정의
-  // 전체조회 페이지에서 전송한 기본키(dno)
+  // 전체 조회 페이지에서 전송한 기본키 (dno)
   const { dno } = useParams();
-  // 강제페이지 이동 함수
+  // 강제페이지 이동 함수 
   let navigate = useNavigate();
 
-  // 객체 초기화(상세조회 : 기본키 있음)
+  // 객체 초기화(상세 조회 : 기본키 있음 )
   const initialDept = {
     dno: "",
     dname: "",
     loc: "",
   };
-
-  // 수정될객체
+  
+// 수정될 객체 
   const [dept, setDept] = useState<IDept>(initialDept);
-  // 화면에 수정 성공에 메세지 찍기 변수
+  // 화면에 수정 성공에 메세지 찍기 변수 
   const [message, setMessage] = useState<string>("");
 
-  // todo: 함수 정의
-  // 상세조회 함수
+  // 상세 조회 함수 
   const getDept = (dno: string) => {
-    DeptService.get(dno)         // 벡엔드로 상세조회 요청
+    DeptService.get(dno)       // 백엔드로 상세조회 요청 
       .then((response: any) => {
         setDept(response.data);
         console.log(response.data);
@@ -37,20 +35,20 @@ function Dept() {
       });
   };
 
-  // 화면이 뜰때 실행되는 이벤트 + dno 값이 바뀌면 실행
+  // 화면이 뜰 때 실행되는 이벤트 + dno 값이 바뀌면 실행 
   useEffect(() => {
     if (dno) getDept(dno);
   }, [dno]);
 
-  // input 태그 수동 바인딩
+// input 태그 수동 바인딩 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setDept({ ...dept, [name]: value });
   };
 
-  // 수정 함수
+  // 수정 함수 
   const updateDept = () => {
-    DeptService.update(dept.dno, dept) // 벡엔드로 수정요청
+    DeptService.update(dept.dno, dept) // 백엔드로 수정요청 
       .then((response: any) => {
         console.log(response.data);
         setMessage("The dept was updated successfully!");
@@ -60,9 +58,9 @@ function Dept() {
       });
   };
 
-  // 삭제함수
+// 삭제 함수 
   const deleteDept = () => {
-    DeptService.remove(dept.dno) // 벡엔드로 삭제요청
+    DeptService.remove(dept.dno) // 백엔드로 삭제요청 
       .then((response: any) => {
         console.log(response.data);
         // 페이지 이동
