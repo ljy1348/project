@@ -77,6 +77,7 @@ function CustomerList() {
 
       {/* fullName start(다양한 검색어 부분) */}
       {/* 여기 */}
+      {/* customer start */}
       <div className="col-md-8 offset-2">
         <div className="col-12 input-group mb-3">
           <select
@@ -111,9 +112,11 @@ function CustomerList() {
           </div>
         </div>
       </div>
+      {/* customer end */}
       {/* fullName end */}
 
       {/* select + table 시작 */}
+
       <div className="col-md-12">
         {/* page control start(페이징 html) */}
         <div className="mt-3">
@@ -157,7 +160,7 @@ function CustomerList() {
         </table>
         {/* table end */}
       </div>
-      {/* select + table 끝 */}
+      {/* select + table 시작 */}
 
       {/* 페이지네이션 시작 */}
       <div className="col-md-4 offset-5">

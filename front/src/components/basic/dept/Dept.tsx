@@ -23,6 +23,7 @@ function Dept() {
   // 화면에 수정 성공에 메세지 찍기 변수 
   const [message, setMessage] = useState<string>("");
 
+
   // 상세 조회 함수 
   const getDept = (dno: string) => {
     DeptService.get(dno)       // 백엔드로 상세조회 요청 

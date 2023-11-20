@@ -4,6 +4,12 @@ import React from 'react';
 import "aos/dist/aos.css";
 // 개발자가 직접 만든 css 
 import "./assets/css/style.css";
+
+
+
+// todo: 리액트 import
+
+
 import Nav from './components/common/Nav';
 import Home from './pages/Home';
 import Footer from './components/common/Footer';

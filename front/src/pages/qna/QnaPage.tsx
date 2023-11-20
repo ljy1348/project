@@ -1,4 +1,5 @@
 // QnaPage.tsx : rfce
+
 import React from 'react'
 import Qna from '../../components/basic/qna/Qna'
 
@@ -31,6 +32,7 @@ function QnaPage() {
          <Qna />
         </div>
       </div>
+
     </div>
      {/* 본문 끝 */}
   </>
@@ -38,3 +40,4 @@ function QnaPage() {
 }
 
 export default QnaPage
+

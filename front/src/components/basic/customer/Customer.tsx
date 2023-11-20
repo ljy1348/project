@@ -25,6 +25,7 @@ function Customer() {
   // 화면에 수정 성공에 메세지 찍기 변수
   const [message, setMessage] = useState<string>("");
 
+
   // todo: 함수 정의
   // 상세조회 함수
   const getCustomer = (cid: string) => {
@@ -60,6 +61,7 @@ function Customer() {
         console.log(e);
       });
   };
+
 
   // 삭제함수
   const deleteCustomer = () => {
@@ -188,4 +190,4 @@ function Customer() {
   )
 }
 
-export default Customer
+export default Customer;

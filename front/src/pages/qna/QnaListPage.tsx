@@ -1,4 +1,5 @@
 // QnaListPage.tsx : rfce
+
 import React from 'react'
 import Qna from '../../components/basic/qna/Qna'
 import QnaList from '../../components/basic/qna/QnaList'
@@ -32,6 +33,7 @@ function QnaListPage() {
          <QnaList />
         </div>
       </div>
+
     </div>
      {/* 본문 끝 */}
   </>
