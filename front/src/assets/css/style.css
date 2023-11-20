@@ -85,11 +85,14 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
 .form-control, .custom-select {
   border: 2px solid #e9ecef;
   font-size: 16px;
-  height: 45px; }
+  height: 45px; 
+  /* margin-top: 30px; */
+}
   .form-control:active, .form-control:focus, .custom-select:active, .custom-select:focus {
     border-color: #1A374D;
     -webkit-box-shadow: none;
-    box-shadow: none; }
+    box-shadow: none; 
+  }
 
 .gutter-v1 {
   margin-right: -20px;
@@ -1384,3 +1387,32 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
       content: "\f095"; }
     .site-footer ul.quick-info li.address:before {
       content: "\e8b4"; }
+
+
+      .table-blue{
+        background-color: #1A374D;
+        color: white;
+      }
+      .modal-title{
+       color: white;
+      }
+      .modal-header{
+        background-color: #1f425c;
+      }
+     .foriareaButton{
+        padding-right: 100px;
+     }
+   .form{
+    padding-left: 100px;
+    padding-right: 100px;
+    ;
+   }
+   .checkInButton{
+    padding-left: 10px;
+    
+   }
+   
+   .recordlocator{
+    padding-right: 30px;
+    padding-left: 30px;
+   }

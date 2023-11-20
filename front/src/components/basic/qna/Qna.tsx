@@ -6,7 +6,7 @@ import IQna from "../../../types/basic/IQna";
 import QnaService from "../../../services/basic/QnaService";
 
 function Qna() {
-  // todo: 변수 정의
+  // 변수 정의
   // 전체조회 페이지에서 전송한 기본키(qno)
   const { qno } = useParams();
   // 강제페이지 이동 함수
@@ -79,7 +79,7 @@ function Qna() {
     // 여기
     <>
       {/* 제목 start */}
-      {/* <TitleCom title="Qna Detail" /> */}
+      <TitleCom title="Qna Detail" />
       {/* 제목 end */}
 
       <>

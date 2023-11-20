@@ -1,20 +1,87 @@
-// Services.tsx : rfce
+// Services.tsx
 import React from "react";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import initScripts from "../assets/js/scripts";
 import initCustom from "../assets/js/custom";
 
 function Services() {
-
-    useEffect(()=>{
-        initScripts();
-        initCustom();
-    },[])
-
+  useEffect(() => {
+    initScripts();
+    initCustom();
+  }, []);
   return (
     <>
-      {/* 여기 */}
-      {/* 1 */}
+      <div className="site-mobile-menu site-navbar-target">
+        <div className="site-mobile-menu-header">
+          <div className="site-mobile-menu-close">
+            <span className="icofont-close js-menu-toggle"></span>
+          </div>
+        </div>
+        <div className="site-mobile-menu-body"></div>
+      </div>
+
+      <nav className="site-nav">
+        <div className="container">
+          <div className="site-navigation">
+            <a href="index.html" className="logo m-0">
+              Tour <span className="text-primary">.</span>
+            </a>
+
+            <ul className="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
+              <li>
+                <a href="index.html">Home</a>
+              </li>
+              <li className="has-children">
+                <a href="#">Dropdown</a>
+                <ul className="dropdown">
+                  <li>
+                    <a href="elements.html">Elements</a>
+                  </li>
+                  <li>
+                    <a href="#">Menu One</a>
+                  </li>
+                  <li className="has-children">
+                    <a href="#">Menu Two</a>
+                    <ul className="dropdown">
+                      <li>
+                        <a href="#">Sub Menu One</a>
+                      </li>
+                      <li>
+                        <a href="#">Sub Menu Two</a>
+                      </li>
+                      <li>
+                        <a href="#">Sub Menu Three</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#">Menu Three</a>
+                  </li>
+                </ul>
+              </li>
+              <li className="active">
+                <a href="services.html">Services</a>
+              </li>
+              <li>
+                <a href="about.html">About</a>
+              </li>
+              <li>
+                <a href="contact.html">Contact Us</a>
+              </li>
+            </ul>
+
+            <a
+              href="#"
+              className="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light"
+              data-toggle="collapse"
+              data-target="#main-navbar"
+            >
+              <span></span>
+            </a>
+          </div>
+        </div>
+      </nav>
+
       <div className="hero hero-inner">
         <div className="container">
           <div className="row align-items-center">
@@ -31,7 +98,6 @@ function Services() {
         </div>
       </div>
 
-      {/* <!-- 2 --> */}
       <div className="untree_co-section">
         <div className="container">
           <div className="row">
@@ -131,7 +197,6 @@ function Services() {
         </div>
       </div>
 
-      {/* <!-- 3 --> */}
       <div className="untree_co-section">
         <div className="container">
           <div className="row">
@@ -179,7 +244,6 @@ function Services() {
         </div>
       </div>
 
-      {/* <!-- 4 --> */}
       <div className="untree_co-section">
         <div className="container">
           <div className="row mb-5 justify-content-center">
@@ -258,7 +322,6 @@ function Services() {
         </div>
       </div>
 
-      {/* <!-- 5 --> */}
       <div className="py-5 cta-section">
         <div className="container">
           <div className="row text-center">
@@ -282,6 +345,10 @@ function Services() {
           </div>
         </div>
       </div>
+
+            
+            
+
     </>
   );
 }

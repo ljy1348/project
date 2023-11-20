@@ -1,15 +1,8 @@
 // CustomerListPage.tsx
-import React, { useEffect } from "react";
+import React from "react";
 import CustomerList from "../../components/basic/customer/CustomerList";
-import initScripts from "../../assets/js/scripts";
-import initCustom from "../../assets/js/custom";
 
 function CustomerListPage() {
-  useEffect(() => {
-    initScripts();
-    initCustom();
-  }, []);
-
   return (
     <>
       {/* 테마 디자인 적용 : 컨택트 소스 */}
@@ -30,16 +23,16 @@ function CustomerListPage() {
       </div>
       {/* 테마 제목 끝 */}
 
-      {/* 본문 시작 */}
+       {/* 본문 시작 */}
       <div className="untree_co-section">
         <div className="container">
           <div className="row">
-            {/* 여기 */}
-            <CustomerList />
+           {/* 조회 */}
+           <CustomerList />
           </div>
         </div>
       </div>
-      {/* 본문 끝 */}
+       {/* 본문 끝 */}
     </>
   );
 }
