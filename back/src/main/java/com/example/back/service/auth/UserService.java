@@ -54,7 +54,6 @@ public class UserService {
     public Optional<User> findById(String email) {
         Optional<User> optionalUser
                 = userRepository.findById(email);
-
         return optionalUser;
     }
 

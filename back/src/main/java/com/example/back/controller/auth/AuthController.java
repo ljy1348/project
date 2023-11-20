@@ -18,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 /**
@@ -132,6 +133,35 @@ public class AuthController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @Transactional
+    @PutMapping("/info")
+    public ResponseEntity<String> findById(@RequestBody User user) {
+        log.info("a1 : "+user.getUserId());
+        try {
+        log.info("a2");
+        Optional<User> optionalUser = userService.findById(user.getUserId());
+        log.info("a5");
+        if (optionalUser.isPresent()) {
+            User user1 = optionalUser.get();
+        log.info("a6");
+            user1.setEnName(user.getEnName());
+            user1.setUserName(user.getUserName());
+            user1.setUserAdd(user.getUserAdd());
+            user1.setUserEmail(user.getUserEmail());
+            user1.setBirthDate(user.getBirthDate());
+            user1.setUserPhone(user.getUserPhone());
+            user1.setUserSex(user.getUserSex());
+        return new ResponseEntity<>("수정되었습니다.",HttpStatus.OK);
+        } else
+        log.info("a4");
+        return new ResponseEntity<>("수정에 실패하였습니다.",HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+        log.info("a3");
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
 }

@@ -2,6 +2,7 @@
 // http 헤더에 웹토큰 넣어 벡엔드로 조회요청 해야함(인증 성공이 뜸)
 import IUser from "../../types/auth/IUser"
 import http from "../../utils/http-common"
+import authHeader from "./authHeader";
 
 // 회원가입(register, signup) 함수(insert)
 const register = (user: IUser) => { 
@@ -72,6 +73,10 @@ const login = (user:IUser) => {
     }).catch((e:Error)=>{console.log(e)});
  }
 
+ const editUser = (user:IUser) => {
+    return http.put("/auth/info",user, {headers : authHeader()});
+ }
+
  const AuthService = {
     register,
     login,
@@ -79,6 +84,7 @@ const login = (user:IUser) => {
     kakaoLogin,
     naverLogin,
     googleLogin,
-    getUserInfo
+    getUserInfo,
+    editUser
  }
  export default AuthService;

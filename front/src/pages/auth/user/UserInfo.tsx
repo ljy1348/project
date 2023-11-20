@@ -21,18 +21,20 @@ function UserInfo() {
   const { user: currentUser } = useSelector((state:RootState)=> state.auth);
   const [user, setUser] = useState<IUser>();
   const [selectedTab, setSelectedTab] = useState(""); 
+  const [message, setMessage] = useState("");
 
   const viewTab = () => { 
     
     if (selectedTab === "reservation") return <><ReservationList></ReservationList></>
     else if (selectedTab === "mile") return <><MileList/></>
-    else if (selectedTab ==="userInfo") return <><UserInfoList user={user!}/></>
+    else if (selectedTab ==="userInfo") return <><UserInfoList user={user!} setMessage={setMessage}/></>
     else return <></>
    }
 
   useEffect(() => {
     initScripts();
     initCustom();
+    if (!currentUser) window.location.href = "/";
   }, []);
 
   
@@ -47,7 +49,7 @@ function UserInfo() {
   setSelectedTab("userInfo")
 })
   .catch((e:Error)=>{console.log(e)})
-  },[])
+  },[message])
 
   return (
     <div className='user-info'>
@@ -98,6 +100,9 @@ function UserInfo() {
       </Nav.Item>
     </Nav>
     {viewTab()}
+  </div>
+  <div className='container text-center text-success'>
+    {message}
   </div>
   </div>
   )

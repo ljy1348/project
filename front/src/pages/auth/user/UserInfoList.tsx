@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import IUser from '../../../types/auth/IUser'
 import { Button, Modal } from 'react-bootstrap';
 import DaumPostcode from "react-daum-postcode";
+import AuthService from '../../../services/auth/authService';
 
-function UserInfoList({user}:{user:IUser}) {
+function UserInfoList({user, setMessage}:{user:IUser, setMessage:any}) {
 
     const [selectedDate, setSelectedDate] = useState("");
     const [getUser, setGetUser] = useState<IUser>(user);
@@ -11,6 +12,8 @@ function UserInfoList({user}:{user:IUser}) {
 
     const onchangeInput = (e:any) => {
         const {name, value} = e.target;
+        if (name==="birthDate") setSelectedDate(value);
+
         console.log(name)
         setGetUser({...getUser, [name]:value});
     }
@@ -20,26 +23,41 @@ function UserInfoList({user}:{user:IUser}) {
         setIsModal(false);
     }
 
-    useEffect (()=>{
-        if (!user.birthDate) {
-            setGetUser({...getUser, birthDate:new Date()})
-        }
+    const onSubmit = () => {
+      setMessage("");
+      console.log(getUser);
+      AuthService.editUser(getUser)
+      .then((response:any)=>{console.log(response);
+        setMessage(response.data);
+      })
+      .catch((error:Error)=>{console.log(error)})
+    }
 
-        if (getUser?.birthDate){
-            const date = new Date(getUser.birthDate);
-            setSelectedDate(date.toISOString().split('T')[0]);
+    useEffect (()=>{
+      setMessage("");
+      if (user) {
+
+        if (!user.birthDate) {
+          setGetUser({...getUser, birthDate:new Date()})
         }
-    },[getUser.birthDate])
+        
+        if (getUser?.birthDate){
+          const date = new Date(getUser.birthDate);
+          setSelectedDate(date.toISOString().split('T')[0]);
+        }
+      }
+    },[])
 
     
 
   return (
     <div>
-        <form className='col-6 container mt-4'>
+        <form className='col-6 container mt-4' onSubmit={onSubmit}>
         <input type='text' className='form-control form-control-user mb-3' placeholder='Full Name' value={getUser?.userName} name="userName" onChange={onchangeInput}></input>
         <input type='text' className='form-control form-control-user mb-3' placeholder='English Name' value={getUser?.enName} name="enName" onChange={onchangeInput}></input>
         <input type='text' className='form-control form-control-user mb-3' placeholder='Address' value={getUser?.userAdd} name="userAdd" onChange={onchangeInput} onClick={()=>setIsModal(true)}></input>
         <input type='text' className='form-control form-control-user mb-3' placeholder='Phone Number' value={getUser?.userPhone} name="userPhone" onChange={onchangeInput}></input>
+        <input type='text' className='form-control form-control-user mb-3' placeholder='Email' value={getUser?.userEmail} name="userEmail" onChange={onchangeInput}></input>
         <div className='form-group row'>
             <div className='col-sm-6 mb-3 mb-sm-0'>
         <select className='form-control form-control-select mb-3 ' placeholder='Sex' value={getUser?.userSex} name="userSex" onChange={onchangeInput}>
@@ -55,10 +73,10 @@ function UserInfoList({user}:{user:IUser}) {
         <div className='container'>
 
         <div className='row mx-auto'>
-        <button className='btn btn-primary btn-user mx-auto'>정보 수정</button>
         </div>
         </div>
         </form>
+        <button className='btn btn-primary btn-user mx-auto' onClick={onSubmit}>정보 수정</button>
         <Modal
                               show={isModal}
                               onHide={() => setIsModal(false)}
