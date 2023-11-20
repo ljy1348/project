@@ -21,6 +21,7 @@ function Nav() {
       <nav className="site-nav">
         <div className="container">
           <div className="site-navigation">
+
             <Link to="/" className="logo m-2">
               GreanAirline <span className="text-primary"></span>
             </Link>
@@ -37,6 +38,7 @@ function Nav() {
 
               {/* 드롭다운 메뉴 시작 */}
               <li className="has-children">
+
                 <a href="#">예약조회</a>
                 <ul className="dropdown">
                   <li>
@@ -51,6 +53,7 @@ function Nav() {
                 </ul>
               </li>
               {/* 드롭다운 메뉴 끝 */}
+
 
                {/* 체크인 메뉴 시작 */}
                <li>
@@ -89,6 +92,7 @@ function Nav() {
                 </ul>
               </li>
               {/* Q & A 끝 */}
+
 
               
 
@@ -129,5 +133,6 @@ function Nav() {
     </>
   );
 }
+
 
 export default Nav;

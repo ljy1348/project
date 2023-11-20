@@ -6,6 +6,7 @@ export default function initScripts() {
   // 여기
   $(function () {
 
+
     // typed-words(css 클래스) 있을 때만 typed 생성자 함수 ㅂ실행
   if(document.querySelector(".typed-words")){
 
