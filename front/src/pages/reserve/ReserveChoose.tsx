@@ -4,6 +4,7 @@ import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import MyareaModal from "../modal/MyareaModal";
 import ForiareaModal from "../modal/ForiareaModal";
+import { Link } from "react-router-dom";
 
 function ReserveChoose() {
   const initiaReservaionl = {
@@ -169,6 +170,7 @@ function ReserveChoose() {
                   {/* 날짜 */}
                   <td>{data.Departure} + 월</td>
                   <td>{data.AirportFee}</td>
+                  
                 </tr>
               ))}
             <table className="sangmin_choose_datepicker text-center">
@@ -227,8 +229,7 @@ function ReserveChoose() {
           </tr>
         </table>
 
-
-          {/* 왕복일 경우만 표시 */}
+        {/* 왕복일 경우만 표시 */}
         {/* subTitle */}
         <div className="container">
           <h3 className="sangmin_reserve_choose_subTitle d-flex justify-content-center mt-5">
@@ -318,7 +319,31 @@ function ReserveChoose() {
           </tr>
         </table>
 
+        {/* 유의 상황 */}
+        <div className="sangmin_choose_notice mt-5">
+          <h5> 유의사항</h5>
+          <ul>
+            <li className="mt-4 mb-3">
+              국제선 항공권 온라인 예약은 조회일로부터 최대 361일, 최소 항공편
+              출발 2시간 전까지 예약이 가능합니다.
+            </li>
+            <li>
+              항공편 스케줄 및 기종은 부득이한 사유로 예고없이 변경될 수
+              있습니다.
+            </li>
+          </ul>
+        </div>
+
         
+
+        <div className="d-flex justify-content-end mt-5 mb-5 no-gutters">
+          <button className="sangmin_choose_btn">
+            <Link to="/reserve-payment">비회원 결제</Link>
+          </button>
+          <button className="sangmin_choose_btn">
+            <Link to="/reserve-payment">회원 결제</Link>
+          </button>
+        </div>
       </div>
       {/* 모달 불러오기 */}
       <MyareaModal show={modalShow} onHide={() => setModalShow(false)} />

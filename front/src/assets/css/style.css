@@ -1811,7 +1811,7 @@ h4,
 
 /* sangmin css start */
 
-/* 예약페이지 */
+/* 버튼 */
 .sangmin_reserve_btn {
   box-sizing: border-box;
   appearance: none;
@@ -1831,18 +1831,41 @@ h4,
   text-transform: uppercase;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  /* weight: 220px; */
 
-  /* transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out; */
   &:hover {
     box-shadow: 0 0 40px 40px red inset;
     color: #fff;
   }
-  /* &:focus {
-    color: #fff;
-    outline: 0;
-  } */
 }
+.sangmin_choose_btn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #d60815;
+  border-radius: 0.6em;
+  color: #d60815;
+  cursor: pointer;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  margin-left: 20px;
+
+  width: 200px;
+  &:hover {
+    box-shadow: 0 0 40px 40px red inset;
+    /* color: white; */
+    color: #fff;
+  }
+}
+
+/* 예약페이지 */
 .sangmin_step_bedge span {
   font-size: 15px;
   margin: 20px;
@@ -2019,7 +2042,7 @@ h4,
   background-color: #f3f3f3;
   vertical-align: top;
   margin-top: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   margin-right: 1%;
 }
 .sangmin_choose_top_itineary_select input {
@@ -2149,10 +2172,63 @@ h4,
 }
 .sangmin_choose_time li {
   list-style-type: none;
-  
 }
-.sang_min_arrow_icon{
-  color:#6d6e70 ;
+.sang_min_arrow_icon {
+  color: #6d6e70;
+}
+.sangmin_choose_notice {
+  background-color: #f7f7f7;
+  padding: 30px;
+}
+
+/* 결제 페이지 */
+.sangmin_reserve_payment_subtitle {
+  margin: 60px 0 50px 0;
+  font-size: 40px;
+  color: #000;
+  text-align: center;
+  font-weight: normal;
+  line-height: 1;
+  font-family: "Noto Sans KR", "notofont", "AppeGothic", "Malgun Gothic",
+    "맑은 고딕", "돋음", "Dotum", "Apple SD Gothic Neo", Arial, Helvetica,
+    sans-serif;
+}
+
+.sangmin_payment_reserve_info {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+
+  padding: 40px 0;
+}
+.sangmin_payment_reserve_two_info {
+  border-bottom: 1px solid #ddd;
+  padding: 40px 0;
+  /* align-items: center; */
+}
+.sangmin_payment_reserve_info div {
+  align-items: center;
+}
+.sangmin_payment_reserve_two_info div{
+  align-items: center;
+}
+.sangmin_payment_reserve_info_first {
+  font-size: 20px;
+  font-weight: 500;
+  color: #ab7d55;
+}
+
+.sangmin_payment_loca {
+  font-size: 20px;
+  color: #222;
+  margin-right: 100px;
+}
+.sangmin_payment_reserve_info_last span {
+  font-family: "Noto Sans KR", "notofont", "AppeGothic", "Malgun Gothic",
+    "맑은 고딕", "돋음", "Dotum", "Apple SD Gothic Neo", Arial, Helvetica,
+    sans-serif;
+  color: #737373;
+  font-size: 16px;
+  margin-right: 8px;
 }
 /* .sangmin_reserve_itineary div:nth-child(2) {ss
   margin-right: 0.5%;

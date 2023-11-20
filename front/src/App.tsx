@@ -24,6 +24,7 @@ import Reserve from './pages/reserve/Reserve';
 // import { Icon } from '@mui/material';
 import Sangmin from './pages/sangmin/Sangmin';
 import ReserveChoose from './pages/reserve/ReserveChoose';
+import ReservePayment from './pages/reserve/ReservePayment';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
 
         {/* 예약 */}
         <Route path="/reserve-choose" element={<ReserveChoose/>} />
+        <Route path="/reserve-payment" element={<ReservePayment/>} />
 
       </Routes>
       
