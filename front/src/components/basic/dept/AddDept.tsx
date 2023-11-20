@@ -4,7 +4,6 @@ import TitleCom from "../../../components/common/TitleCom";
 import DeptService from "../../../services/basic/DeptService";
 
 function AddDept() {
-
   // 객체 초기화
   const initialDept = {
     dno: null,
@@ -12,7 +11,7 @@ function AddDept() {
     loc: "",
   };
 
-  // 부서객체
+  // 부서 객체
   const [dept, setDept] = useState<IDept>(initialDept);
   // 저장버튼 클릭후 submitted = true 변경됨
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -20,10 +19,10 @@ function AddDept() {
   // input 태그에 수동 바인딩
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target; // 화면값
-    setDept({ ...dept, [name]: value });  // 변수저장
+    setDept({ ...dept, [name]: value });  // 변수 저장
   };
 
-  // 저장 함수
+    // 저장 함수
   const saveDept = () => {
     // 임시 부서 객체
     var data = {
@@ -31,7 +30,7 @@ function AddDept() {
       loc: dept.loc,
     };
 
-    DeptService.create(data)    // 저장 요청
+    DeptService.create(data)
       .then((response: any) => {
         setSubmitted(true);
         console.log(response.data);
@@ -105,7 +104,10 @@ function AddDept() {
             </div>
 
             <div className="row g-3 mt-3 mb-3">
-              <button onClick={saveDept} className="btn btn-outline-primary ms-2 col">
+              <button
+                onClick={saveDept}
+                className="btn btn-outline-primary ms-2 col"
+              >
                 Submit
               </button>
             </div>

@@ -1,14 +1,9 @@
 // AddCustomerPage.tsx
-import React, { useEffect } from "react";
+import React from "react";
 import AddCustomer from "../../components/basic/customer/AddCustomer";
-import initScripts from "../../assets/js/scripts";
-import initCustom from "../../assets/js/custom";
 
 function AddCustomerPage() {
-  useEffect(()=>{
-    initScripts();
-    initCustom();
-},[])
+
   return (
     <div>
       {/* 테마 디자인 적용 :  */}
