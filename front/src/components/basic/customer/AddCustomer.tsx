@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import TitleCom from '../../../components/common/TitleCom'
 import ICustomer from '../../../types/basic/ICustomer';
@@ -9,6 +10,7 @@ function AddCustomer() {
     cid: null,
     fullName: "",
     email: "",
+
     phone: ""
   };
 
@@ -25,6 +27,7 @@ function AddCustomer() {
 
   // 저장 함수
   const saveCustomer = () => {
+
     // 임시 qna 객체
     var data = {
         fullName: customer.fullName,
