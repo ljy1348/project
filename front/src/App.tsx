@@ -22,15 +22,11 @@ import initScripts from './assets/js/scripts';
 import initCustom from './assets/js/custom';
 import UserInfo from './pages/auth/user/UserInfo';
 import Airport from './components/airport/Airport';
+import ErrorBoundary from './components/ErrorBoundary';
 
 
 function App() {
 
-  useEffect(()=>{
-    initScripts();
-    initCustom();
-    // setRender(true);
-  },[])
 
   return (
     <div className="App">
@@ -39,13 +35,13 @@ function App() {
 
       {/* 본문 */}
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<ErrorBoundary><Home/></ErrorBoundary>} />
         <Route path="/services" element={<Services/>} />
         <Route path="/about" element={<About/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/elements" element={<Elements/>} />
         <Route path="/register" element={<Register/>} />
-        <Route path="/login/auth/:app" element={<KakaoLogin/>} />
+        <Route path="/login/auth/:app" element={<ErrorBoundary><KakaoLogin/></ErrorBoundary>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/user-info" element={<UserInfo/>} />
         <Route path="/*" element={<Home/>} />

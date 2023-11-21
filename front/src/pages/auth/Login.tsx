@@ -248,7 +248,7 @@ function Login() {
             Naver
           </a>
           <a
-            href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI2}`}
+            href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}`}
             className="btn btn-kakao btn-user w-100 mb-3"
           >
             <i className="fa-solid fa-k"></i>&nbsp;Login with

@@ -10,7 +10,7 @@ function Home() {
   useEffect(()=>{
     initScripts();
     initCustom();
-    // setRender(true);
+    setRender(true);
   },[])
 
   // if (!render) return <></>
