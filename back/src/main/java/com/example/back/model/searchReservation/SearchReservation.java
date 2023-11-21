@@ -77,10 +77,10 @@ public class SearchReservation extends BaseTimeEntity {
     private String seatType;
 
     @Column
-    private String adultCount;
+    private Integer adultCount;
 
     @Column
-    private String childCount;
+    private Integer childCount;
 
     @Column
     private String mileUseStatus;
