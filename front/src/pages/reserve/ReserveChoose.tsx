@@ -4,40 +4,20 @@ import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import MyareaModal from "../modal/MyareaModal";
 import ForiareaModal from "../modal/ForiareaModal";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-function ReserveChoose() {
-  const initiaReservaionl = {
-    AirlineReservaitonNumber: null,
-    FlightName: "",
-    UserId: "",
-    RoundOrOne: "",
-    EnName: "",
-    Departure: "",
-    Arrival: "",
-    OperationDay: "",
-    Airline: "",
-    SeatType: "",
-    AdultCount: 0,
-    ChildCount: 0,
-    InfantCount: 0,
-    MileUseStatus: "",
-    MembershipStatus: "",
-    DomesticInternational: "",
-    KorCity: "",
-    ForiCountry: "",
-    ForiCity: "",
-    AirportFee: "",
-  };
-  //   add 함수
-  const [reservation, setReservation] =
-    useState<IReservation>(initiaReservaionl);
+function ReserveChoose(props:any) {
   //   조회 함수
+  const { selectedAbbr } = useParams();
+  
   const [reservationList, setReservationList] = useState<Array<IReservation>>(
     []
   );
   const [departure, setDeparture] = useState<Date>();
 
+  // 출도착 설정
+  const [selectedAbbrd, setSelectedAbbr] = useState(selectedAbbr);
+  const [selectedFori, setSelectedFori] = useState("");
   // modalcontrol
   const [modalShow, setModalShow] = useState(false);
   const [foriModalShow, foriSetModalShow] = useState(false);
@@ -46,6 +26,16 @@ function ReserveChoose() {
     initScripts();
     initCustom();
   }, []);
+
+  const handleAbbrSelection = (selectedAbbrd: any) => {
+    setSelectedAbbr(selectedAbbrd);
+    setModalShow(false);
+  };
+  const handleForiAbbrSelection = (selectedFori: any) => {
+    setSelectedFori(selectedFori);
+    foriSetModalShow(false);
+  };
+
   // const myMo
 
   return (
@@ -70,8 +60,9 @@ function ReserveChoose() {
               type="text"
               title="출발지"
               className="sangmin_choose_top_myArea"
-              value="출발지"
+              value={selectedAbbrd}
               onClick={() => setModalShow(true)}
+              placeholder={selectedAbbr}
             />
           </div>
           {/* 도착지 */}
@@ -80,8 +71,9 @@ function ReserveChoose() {
               type="text"
               title="도착지"
               className="sangmin_choose_top_arriveArea"
-              value="도착지"
+              value={selectedFori}
               onClick={() => foriSetModalShow(true)}
+              placeholder={props.selectedFori}
             />
           </div>
           {/* 탑승일 */}
@@ -170,7 +162,6 @@ function ReserveChoose() {
                   {/* 날짜 */}
                   <td>{data.Departure} + 월</td>
                   <td>{data.AirportFee}</td>
-                  
                 </tr>
               ))}
             <table className="sangmin_choose_datepicker text-center">
@@ -334,8 +325,6 @@ function ReserveChoose() {
           </ul>
         </div>
 
-        
-
         <div className="d-flex justify-content-end mt-5 mb-5 no-gutters">
           <button className="sangmin_choose_btn">
             <Link to="/reserve-payment">비회원 결제</Link>
@@ -346,10 +335,16 @@ function ReserveChoose() {
         </div>
       </div>
       {/* 모달 불러오기 */}
-      <MyareaModal show={modalShow} onHide={() => setModalShow(false)} />
+      <MyareaModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        onAbbrSelect={handleAbbrSelection}
+      />
+
       <ForiareaModal
         show={foriModalShow}
         onHide={() => foriSetModalShow(false)}
+        onForiAbbrSelect={handleForiAbbrSelection}
       />
     </>
   );
