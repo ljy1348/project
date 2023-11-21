@@ -35,25 +35,25 @@ function Nav() {
       <div className="nav-hero hero-inner">
         <div className="container">
           <div className=" align-items-center">
-      <nav className="site-nav bg-primary container">
-        <div className="container bg-primary align-items-center">
+      <nav className="site-nav container">
+        <div className="container align-items-center">
           <table className="">
 
           <th>
             
           <div className="site-navigation">
-          <td style={{width:"200px"}}>
+          <td>
             <Link to="/" className="logo m-0">
-              GR AIR <span className="text-primary"></span>
+              GR AIR
             </Link>
             {/* 메뉴들 시작 */}
           </td>
-          <td style={{width:"750px", textAlign:"center", maxWidth:"750px"}}>
+          <td>
             <ul className="js-clone-nav d-none d-lg-inline-block site-menu">
 
               {/* home 메뉴 시작 */}
               <li className="has-children">
-                <a href="#" style={{fontSize:"25px", margin:"0 18px"}}>항공권</a>
+                <a href="#">항공권</a>
                 <ul className="dropdown">
                   <li>
                     <a href="#" >예약</a>
@@ -67,19 +67,19 @@ function Nav() {
 
               {/* home 메뉴 시작 */}
               <li className="">
-                <Link to="/" style={{fontSize:"25px", margin:"0 18px"}}>체크인</Link>
+                <Link to="/">체크인</Link>
               </li>
               {/* home 메뉴 끝 */}
 
               {/* home 메뉴 시작 */}
               <li className="">
-                <Link to="/" style={{fontSize:"25px", margin:"0 18px"}}>마일리지</Link>
+                <Link to="/">마일리지</Link>
               </li>
               {/* home 메뉴 끝 */}
 
               {/* 드롭다운 메뉴 시작 */}
               <li className="has-children">
-                <a href="#" style={{fontSize:"25px", margin:"0 18px"}}>고객센터</a>
+                <a href="#">고객센터</a>
                 <ul className="dropdown">
                   <li>
                     <a href="#" >공지사항</a>
@@ -100,7 +100,7 @@ function Nav() {
             {/* 메뉴들 끝 */}
             {!currentUser &&
             <>
-            <td style={{width:"250px", textAlign:"end"}}>
+            <td>
               <ul className="js-clone-nav d-none d-lg-inline-block site-menu">
 
               {/* home 메뉴 시작 */}
@@ -118,12 +118,12 @@ function Nav() {
             }
             {currentUser &&
             <>
-            <td style={{width:"250px", textAlign:"end"}}>
+            <td >
               <ul className="js-clone-nav d-none d-lg-inline-block site-menu">
 
               {/* home 메뉴 시작 */}
                   {currentUser.right == "ROLE_ADMIN"&&<li>
-                    <Link to="/#" >관리자</Link>
+                    <Link to="/admin" >관리자</Link>
                   </li>}
                   {currentUser.right === "ROLE_USER"&&<li>
                     <Link to="/user-info" >유저 정보</Link>
