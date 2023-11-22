@@ -2107,10 +2107,11 @@ line-height: 1.6; }
 .sangmin_reserve_area {
   display: inline-block;
   position: relative;
-  width: 33.3%;
+  width: 50%;
   height: 99px;
   /* background-color: #f3f3f3; */
   vertical-align: top;
+  text-align: left;
 }
 .sangmin_reserve_area h5 span {
   font-size: 18px;
@@ -2294,6 +2295,8 @@ line-height: 1.6; }
 .sangmin_choose_datepicker {
   background-color: #e6e2df;
   /* border-bottom: 1px solid #222; */
+  /* margin: 20px; */
+  height: 75px;
 }
 .sangmin_choose_datepicker tr td {
   border-right: 30px solid white;

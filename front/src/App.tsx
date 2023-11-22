@@ -50,7 +50,7 @@ function App() {
 
 
           <Route path="/reserve" element={<Reserve/>} />
-          <Route path="/reserve-choose/:selectedAbbr/:selectedFori" element={<ReserveChoose/>} />
+          <Route path="/reserve-choose/:selectedAbbr/:selectedFori/:adultCount/:childCount/:seatClass/:startDate/:endDate" element={<ReserveChoose/>} />
         <Route path="/reserve-payment" element={<ReservePayment/>} />
        </Routes> 
        

@@ -5,26 +5,29 @@ import { Button, Overlay } from "react-bootstrap";
 import MyareaModal from "../modal/MyareaModal";
 import ForiareaModal from "../modal/ForiareaModal";
 import IReservation from "../../types/reserve/IReservation";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Airport from "../Airport/Airport";
 import ReserveChoose from "./ReserveChoose";
+import { Value } from "sass";
 // import Airport from './../Airport/Airport';
 
 function Reserve(props: any) {
-
-  
   // 출도착 설정
   const [selectedAbbr, setSelectedAbbr] = useState("");
   const [selectedFori, setSelectedFori] = useState("");
-// 인원체크
+  // 인원체크
   const [adultCount, setAdultCount] = useState(0);
   const [childCount, setChildCount] = useState(0);
-  const [infantCount, setInfantCount] = useState(0);
-// 라디오 박스 여행 타입, 좌석 
-  const [tripType, setTripType] = useState("round-trip"); // 기본값 설정
-  const [seatClass, setSeatClass] = useState("economi"); // 기본값 설정
 
-// 출발날짜
+  // const [infantCount, setInfantCount] = useState(0);
+  // 라디오 박스 여행 타입, 좌석
+  const [tripType, setTripType] = useState("round-trip"); // 기본값 설정
+  const [seatClass, setSeatClass] = useState("이코노미"); // 기본값 설정
+
+  // 출발날짜
+  const daterange = useRef<HTMLInputElement>(null);
+
+
 
   // 모달 창
   const [modalShow, setModalShow] = useState(false);
@@ -33,6 +36,9 @@ function Reserve(props: any) {
   useEffect(() => {
     initScripts();
     initCustom();
+
+
+
   }, []);
 
   // 인원수 증가 감소 설정
@@ -43,9 +49,6 @@ function Reserve(props: any) {
         break;
       case "child":
         setChildCount(childCount - 1);
-        break;
-      case "infant":
-        setInfantCount(infantCount - 1);
         break;
       default:
         break;
@@ -59,9 +62,6 @@ function Reserve(props: any) {
         break;
       case "child":
         setChildCount(childCount + 1);
-        break;
-      case "infant":
-        setInfantCount(infantCount + 1);
         break;
       default:
         break;
@@ -79,16 +79,39 @@ function Reserve(props: any) {
     foriSetModalShow(false);
   };
   // 왕복 편도 설정
-  const handleTripTypeChange = (event:any) => {
+  const handleTripTypeChange = (event: any) => {
     setTripType(event.target.value);
     // 여기서 다른 작업 수행 가능
   };
 
   // 좌석
-  const handleSeatClassChange = (event:any) => {
+  const handleSeatClassChange = (event: any) => {
     setSeatClass(event.target.value);
     // 여기서 다른 작업 수행 가능
   };
+
+
+  const navi = useNavigate();
+
+  const onclickpage = () => { 
+  let value = null;
+  value = daterange.current?.value;
+    const a = value?.split(" - ");
+    let startDate;
+    let endDate;
+    if (a) {
+        if (a[0])startDate = a[0];
+
+    }
+    if (a) {
+        if (a[1])endDate = a[1];
+
+    }
+
+
+
+    navi(`/reserve-choose/${selectedAbbr}/${selectedFori}/${adultCount}/${childCount}/${seatClass}/${startDate}/${endDate}`)
+   }
 
   return (
     <>
@@ -207,11 +230,7 @@ function Reserve(props: any) {
                 onClick={() => setModalShow(true)}
                 placeholder="출발지"
               />
-              {/* <a
-                className="sangmin_modal_click"
-              ></a> */}
             </div>
-            {/* <i className="sangmin_map_icon bi bi-geo-alt-fill"></i> */}
 
             <div className="sangmin_reserve_itineary_select">
               <input
@@ -222,10 +241,6 @@ function Reserve(props: any) {
                 onClick={() => foriSetModalShow(true)}
                 placeholder="도착지"
               ></input>
-              {/* <a
-                className="sangmin_modal_click"
-                onClick={() => foriSetModalShow(true)}
-              ></a> */}
             </div>
 
             <div className="sangmin_reserve_itineary_select">
@@ -233,9 +248,10 @@ function Reserve(props: any) {
                 type="text"
                 title="탑승일"
                 className="sangmin_reserve_date"
-                value="탑승일"
-                // className="form-control"
                 name="daterange"
+                placeholder="탑승일"
+                ref={daterange}  
+
               />
             </div>
           </div>
@@ -247,7 +263,7 @@ function Reserve(props: any) {
           {/* 인원 입력 */}
           <div className="sangmin_reserve_passanger_count ">
             <div className="sangmin_reserve_area" id="sangmin_reserve_adult">
-              <h5>
+              <h5 className="text-lg-start">
                 성인
                 <span id="sangmin_reserve_adultAge">(만 12세 이상)</span>
               </h5>
@@ -278,9 +294,9 @@ function Reserve(props: any) {
             </div>
 
             <div className="sangmin_reserve_area" id="sangmin_reserve_child">
-              <h5>
-                유아
-                <span id="sangmin_reserve_childAge">(만 2세 ~ 12세 미만)</span>
+              <h5 className="ksm_left_word">
+                소아
+                <span id="sangmin_reserve_childAge">(12세 미만)</span>
               </h5>
 
               <div className="sangmin_reserve_button_numbox  d-flex justify-content-left">
@@ -294,7 +310,7 @@ function Reserve(props: any) {
                 </button>
                 <input
                   type="text"
-                  title="유아"
+                  title="소아"
                   className="sangmin_reserve_adult_count"
                   value={childCount}
                 />
@@ -308,37 +324,7 @@ function Reserve(props: any) {
               </div>
             </div>
 
-            <div className="sangmin_reserve_area" id="sangmin_reserve_infant">
-              <h5>
-                소아
-                <span id="sangmin_reserve_infantAge">(만 2세 미만)</span>
-              </h5>
-
-              <div className="sangmin_reserve_button_numbox  d-flex justify-content-left">
-                <button
-                  className="sangmin_btn_number minus"
-                  name="sangmin_btn_number"
-                  disabled={infantCount === 0}
-                  onClick={() => handleDecrement("infant")}
-                >
-                  <span className="hidden">-</span>
-                </button>
-                <input
-                  type="text"
-                  title="소아"
-                  className="sangmin_reserve_adult_count"
-                  value={infantCount}
-                />
-                <button
-                  className="sangmin_btn_number plus"
-                  name="sangmin_btn_number"
-                  disabled={infantCount === adultCount}
-                  onClick={() => handleIncrement("infant")}
-                >
-                  <span className="hidden">+</span>
-                </button>
-              </div>
-            </div>
+         
           </div>
 
           {/* 좌석 등급 선택 타이틀*/}
@@ -358,8 +344,8 @@ function Reserve(props: any) {
                 name="class_btnradio"
                 id="class_btnradio2"
                 autoComplete="off"
-                value="economi"
-                checked={seatClass === "economi"} // 현재 선택된 값에 따라 checked 속성 설정
+                value="이코노미"
+                checked={seatClass === "이코노미"} // 현재 선택된 값에 따라 checked 속성 설정
                 onChange={handleSeatClassChange} //
               />
               <label
@@ -375,8 +361,8 @@ function Reserve(props: any) {
                 name="class_btnradio"
                 id="class_btnradio3"
                 autoComplete="off"
-                value="business"
-                checked={seatClass === "business"} // 현재 선택된 값에 따라 checked 속성 설정
+                value="비지니스"
+                checked={seatClass === "비지니스"} // 현재 선택된 값에 따라 checked 속성 설정
                 onChange={handleSeatClassChange} //
               />
               <label
@@ -392,8 +378,8 @@ function Reserve(props: any) {
                 name="class_btnradio"
                 id="class_btnradio4"
                 autoComplete="off"
-                value="first"
-                checked={seatClass === "first"} // 현재 선택된 값에 따라 checked 속성 설정
+                value="퍼스트"
+                checked={seatClass === "퍼스트"} // 현재 선택된 값에 따라 checked 속성 설정
                 onChange={handleSeatClassChange} //
               />
               <label
@@ -406,7 +392,12 @@ function Reserve(props: any) {
           </div>
 
           <div className="d-flex justify-content-end mt-5 no-gutters">
-              <Link to={`/reserve-choose/${selectedAbbr}/${selectedFori}`} className="sangmin_reserve_btn">항공권 조회</Link>
+            <button
+              className="sangmin_reserve_btn"
+              onClick={onclickpage}
+            >
+              항공권 조회
+            </button>
           </div>
 
           <MyareaModal
@@ -421,20 +412,10 @@ function Reserve(props: any) {
             onForiAbbrSelect={handleForiAbbrSelection}
           />
 
-          {/* <ReserveChoose
-          selectedAbbr={selectedAbbr}
-          selectedFori={selectedFori}
-          adultCount={adultCount}
-          childCount={childCount}
-          infantCount={infantCount}
-          tripType={tripType}
-          seatClass={seatClass}
-          /> */}
+ 
         </div>
       </div>
-      {/* </div>
-        </div>
-      </div> */}
+
     </>
   );
 }
