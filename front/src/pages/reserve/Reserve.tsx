@@ -406,7 +406,7 @@ function Reserve(props: any) {
           </div>
 
           <div className="d-flex justify-content-end mt-5 no-gutters">
-              <Link to={`/reserve-choose/${selectedAbbr}`} className="sangmin_reserve_btn">항공권 조회</Link>
+              <Link to={`/reserve-choose/${selectedAbbr}/${selectedFori}`} className="sangmin_reserve_btn">항공권 조회</Link>
           </div>
 
           <MyareaModal

@@ -8,7 +8,7 @@ import { Link, useParams } from "react-router-dom";
 
 function ReserveChoose(props:any) {
   //   조회 함수
-  const { selectedAbbr } = useParams();
+  const { selectedAbbr,selectedFori } = useParams();
   
   const [reservationList, setReservationList] = useState<Array<IReservation>>(
     []
@@ -16,8 +16,8 @@ function ReserveChoose(props:any) {
   const [departure, setDeparture] = useState<Date>();
 
   // 출도착 설정
-  const [selectedAbbrd, setSelectedAbbr] = useState(selectedAbbr);
-  const [selectedFori, setSelectedFori] = useState("");
+  const [selectedAbbr2, setSelectedAbbr] = useState(selectedAbbr);
+  const [selectedFori2, setSelectedFori] = useState(selectedFori);
   // modalcontrol
   const [modalShow, setModalShow] = useState(false);
   const [foriModalShow, foriSetModalShow] = useState(false);
@@ -27,12 +27,12 @@ function ReserveChoose(props:any) {
     initCustom();
   }, []);
 
-  const handleAbbrSelection = (selectedAbbrd: any) => {
-    setSelectedAbbr(selectedAbbrd);
+  const handleAbbrSelection = (selectedAbbr2: any) => {
+    setSelectedAbbr(selectedAbbr2);
     setModalShow(false);
   };
-  const handleForiAbbrSelection = (selectedFori: any) => {
-    setSelectedFori(selectedFori);
+  const handleForiAbbrSelection = (selectedFori2: any) => {
+    setSelectedFori(selectedFori2);
     foriSetModalShow(false);
   };
 
@@ -60,7 +60,7 @@ function ReserveChoose(props:any) {
               type="text"
               title="출발지"
               className="sangmin_choose_top_myArea"
-              value={selectedAbbrd}
+              value={selectedAbbr2}
               onClick={() => setModalShow(true)}
               placeholder={selectedAbbr}
             />
@@ -71,9 +71,9 @@ function ReserveChoose(props:any) {
               type="text"
               title="도착지"
               className="sangmin_choose_top_arriveArea"
-              value={selectedFori}
+              value={selectedFori2}
               onClick={() => foriSetModalShow(true)}
-              placeholder={props.selectedFori}
+              placeholder={selectedFori}
             />
           </div>
           {/* 탑승일 */}
