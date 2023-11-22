@@ -1,10 +1,11 @@
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+// import Button from "react-bootstrap/Button";
+// import Modal from "react-bootstrap/Modal";
 import IReservation from "../../types/reserve/IReservation";
 import React, { useRef, useState } from "react";
 // import AirportList from "./AirportList";
 import "../../assets/css/Airport.css";
 import AirportList from "../../utils/AirportList";
+import { Modal } from "react-bootstrap";
 // import AirportList from './../AirportList/AirportList';
 function ForiareaModal(props: any) {
   const initAirport = {

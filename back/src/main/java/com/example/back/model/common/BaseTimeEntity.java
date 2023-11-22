@@ -9,7 +9,9 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * packageName : com.example.jpaexam.model
@@ -34,26 +36,25 @@ import java.time.format.DateTimeFormatter;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseTimeEntity {
 
-    private String insertTime;
+    private Date insertTime;
 
-    private String updateTime;
+    private Date updateTime;
 
     private String deleteYn;  // 소프트 삭제
 
-    private String deleteTime; // 소프트 삭제
+    private Date deleteTime; // 소프트 삭제
 
     @PrePersist
         //해당 엔티티 저장하기 전
     void onPrePersist(){
-        this.insertTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.insertTime = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
         this.deleteYn = "N";
     }
 
     @PreUpdate
         //해당 엔티티 수정 하기 전
     void onPreUpdate(){
-        this.updateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        this.insertTime = this.updateTime;
+        this.updateTime = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
         this.deleteYn = "N";
     }
 }

@@ -137,14 +137,13 @@ function Footer() {
           </div>
         </div>
       </div>
-
+{/* 
       <div id="overlayer"></div>
-      {/* <!-- 스피너 시작 --> */}
       <div className="loader">
         <div className="spinner-border" role="status">
           <span className="sr-only">Loading...</span>
         </div>
-      </div>
+      </div> */}
 
     </>
   );
