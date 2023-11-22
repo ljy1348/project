@@ -122,10 +122,10 @@ function Nav() {
               <ul className="js-clone-nav d-none d-lg-inline-block site-menu">
 
               {/* home 메뉴 시작 */}
-                  {currentUser.right == "ROLE_ADMIN"&&<li>
+                  {currentUser.memberAuth == "ROLE_ADMIN"&&<li>
                     <Link to="/admin" >관리자</Link>
                   </li>}
-                  {currentUser.right === "ROLE_USER"&&<li>
+                  {currentUser.memberAuth === "ROLE_USER"&&<li>
                     <Link to="/user-info" >유저 정보</Link>
                   </li>}
                   <li>

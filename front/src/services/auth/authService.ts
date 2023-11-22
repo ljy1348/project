@@ -1,6 +1,6 @@
 // authService.ts : axios 벡엔드 통신 공통 함수(register, login ,logout)
 // http 헤더에 웹토큰 넣어 벡엔드로 조회요청 해야함(인증 성공이 뜸)
-import IUser from "../../types/auth/IUser"
+import IUser from "../../types/auth/IMember"
 import http from "../../utils/http-common"
 import authHeader from "./authHeader";
 

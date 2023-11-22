@@ -1,6 +1,6 @@
 package com.example.back.security.services;
 
-import com.example.back.model.entity.auth.User;
+import com.example.back.model.entity.auth.Member;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,15 +37,15 @@ public class UserDetailsImpl implements UserDetails {
         this.authority = authority;
     }
 
-    public static UserDetailsImpl build(User user) {
+    public static UserDetailsImpl build(Member user) {
 //    role.getName().name() : 롤 정보 ( ROLE_USER 등 )
 //    권한 생성은 : new SimpleGrantedAuthority(권한문자열) 생성자를 호출 해서 생성
-        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRight().toString());
+        GrantedAuthority authority = new SimpleGrantedAuthority(user.getMemberAuth().toString());
 
         return new UserDetailsImpl(
-                user.getUserId(),
-                user.getUserPassword(),
-                user.getUserName(),
+                user.getMemberId(),
+                user.getMemberPw(),
+                user.getMemberName(),
                 authority);
     }
 

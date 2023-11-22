@@ -21,23 +21,23 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserReq {
+public class MemberReq {
 
-  private String userName;
+  private String memberName;
 
-  private String userId;
+  private String memberId;
 
-  private ERole right; // 권한명
+  private ERole memberAuth; // 권한명
 
-  private String userPassword;
+  private String memberPw;
 
-  private String enName;
-  private String userEmail;
-  private String userPhone;
-  private String userSex;
-  private String userAdd;
-  private String birthDate;
-  private String userNationality;
+  private String memberEname;
+  private String memberEmail;
+  private String memberPhone;
+  private String memberSex;
+  private String memberAdd;
+  private String memberDate;
+  private String memberCountry;
 
 
   private boolean changePwd; // 프론트에서 패스워드 수정 했다는것을 나타내는 옵션(true, false)

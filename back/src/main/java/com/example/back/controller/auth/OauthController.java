@@ -3,8 +3,8 @@ package com.example.back.controller.auth;
 import com.example.back.model.dto.auth.oauth.google.GoogleTokenDto;
 import com.example.back.model.dto.auth.oauth.kakao.KakaoTokenDto;
 import com.example.back.model.dto.auth.oauth.naver.NaverTokenDto;
-import com.example.back.model.dto.auth.response.UserRes;
-import com.example.back.model.entity.auth.User;
+import com.example.back.model.dto.auth.response.MemberRes;
+import com.example.back.model.entity.auth.Member;
 import com.example.back.security.jwt.JwtUtils;
 import com.example.back.security.services.UserDetailsImpl;
 import com.example.back.security.services.UserDetailsServiceImpl;
@@ -46,11 +46,11 @@ public class OauthController {
         try {
             KakaoTokenDto kakaoTokenDto = oauthService.getKakaoAccessToken(code);
             if (kakaoTokenDto != null){
-                User user = oauthService.getKakaoInfo(kakaoTokenDto.getAccess_token());
-                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getRight().toString());
+                Member user = oauthService.getKakaoInfo(kakaoTokenDto.getAccess_token());
+                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getMemberAuth().toString());
                 List<SimpleGrantedAuthority> codeNameList = new LinkedList<>();
                 codeNameList.add(codeName);
-                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getUserId());
+                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getMemberId());
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetail,
                         null,
@@ -66,9 +66,9 @@ public class OauthController {
                 UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
 //            5) 리액트로 보낼 dto 생성
-                UserRes userRes = new UserRes(jwt,userDetails.getUserId(),userDetails.getUsername(),userDetails.getAuthority().toString());
+                MemberRes memberRes = new MemberRes(jwt,userDetails.getUserId(),userDetails.getUsername(),userDetails.getAuthority().toString());
 
-                return new ResponseEntity<>(userRes,HttpStatus.OK);
+                return new ResponseEntity<>(memberRes,HttpStatus.OK);
             }
             else return new ResponseEntity<>("토큰 정보 못받아왔어용",HttpStatus.OK);
 
@@ -86,11 +86,11 @@ public class OauthController {
             NaverTokenDto naverTokenDto = oauthService.getNaverAccessToken(code);
             if (naverTokenDto != null){
             log.info("네이버 로그인2");
-                User user = oauthService.getNaverInfo(naverTokenDto.getAccess_token());
-                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getRight().toString());
+                Member user = oauthService.getNaverInfo(naverTokenDto.getAccess_token());
+                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getMemberAuth().toString());
                 List<SimpleGrantedAuthority> codeNameList = new LinkedList<>();
                 codeNameList.add(codeName);
-                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getUserId());
+                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getMemberId());
             log.info("네이버 로그인3");
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetail,
@@ -108,9 +108,9 @@ public class OauthController {
                 UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
 //            5) 리액트로 보낼 dto 생성
-                UserRes userRes = new UserRes(jwt,userDetails.getUserId(),userDetails.getUsername(),userDetails.getAuthority().toString());
+                MemberRes memberRes = new MemberRes(jwt,userDetails.getUserId(),userDetails.getUsername(),userDetails.getAuthority().toString());
 
-                return new ResponseEntity<>(userRes,HttpStatus.OK);
+                return new ResponseEntity<>(memberRes,HttpStatus.OK);
             }
             else return new ResponseEntity<>("토큰 정보 못받아왔어용",HttpStatus.OK);
 
@@ -126,11 +126,11 @@ public class OauthController {
         try {
             GoogleTokenDto googleTokenDto = oauthService.getGoogleAccessToken(code);
             if (googleTokenDto != null){
-                User user = oauthService.getGoogleInfo(googleTokenDto.getAccess_token());
-                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getRight().toString());
+                Member user = oauthService.getGoogleInfo(googleTokenDto.getAccess_token());
+                SimpleGrantedAuthority codeName = new SimpleGrantedAuthority(user.getMemberAuth().toString());
                 List<SimpleGrantedAuthority> codeNameList = new LinkedList<>();
                 codeNameList.add(codeName);
-                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getUserId());
+                UserDetails userDetail = userDetailsService.loadUserByUsername(user.getMemberId());
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetail,
                         null,
@@ -146,9 +146,9 @@ public class OauthController {
                 UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
 //            5) 리액트로 보낼 dto 생성
-                UserRes userRes = new UserRes(jwt,userDetails.getUserId(),userDetails.getUsername(),userDetails.getAuthority().toString());
+                MemberRes memberRes = new MemberRes(jwt,userDetails.getUserId(),userDetails.getUsername(),userDetails.getAuthority().toString());
 
-                return new ResponseEntity<>(userRes,HttpStatus.OK);
+                return new ResponseEntity<>(memberRes,HttpStatus.OK);
             }
             else return new ResponseEntity<>("토큰 정보 못받아왔어용",HttpStatus.OK);
 

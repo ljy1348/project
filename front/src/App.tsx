@@ -24,6 +24,7 @@ import UserInfo from './pages/auth/user/UserInfo';
 import Airport from './components/airport/Airport';
 import ErrorBoundary from './components/ErrorBoundary';
 import AdminPage from './pages/auth/user/AdminPage';
+import AdminMemberList from './pages/auth/admin/AdminMemberList';
 
 
 function App() {
@@ -47,6 +48,8 @@ function App() {
         <Route path="/user-info" element={<UserInfo/>} />
         <Route path="/admin" element={<AdminPage/>} />
         <Route path="/*" element={<Home/>} />
+        
+        {/* <Route path="/test" element={</>} /> */}
 
       </Routes>
       

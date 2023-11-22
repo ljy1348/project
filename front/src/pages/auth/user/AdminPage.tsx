@@ -1,7 +1,25 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Nav } from 'react-bootstrap'
+import AdminMemberList from '../admin/AdminMemberList';
+import AdminMember from '../admin/AdminMember';
 
 function AdminPage() {
+
+  const [selectTab, setSelectTab] = useState("");
+  const [dataId, setDataId] = useState("");
+
+  useEffect(()=>{
+  },[])
+
+  const tabView = () => {
+    if (selectTab==="항공") return <>항공</>
+    else if (selectTab==="체크인") return <>체크인</>
+    else if (selectTab==="수화물") return <>수화물</>
+    else if (selectTab==="회원") return <AdminMemberList setSelectTab={setSelectTab} setDataId={setDataId}/>
+    else if (selectTab==="회원상세") return <AdminMember setSelectTab={setSelectTab} dataId={dataId}/>
+    else return <>예약</>
+  }
+
   return (
     <div>
        <div className="hero hero-inner">
@@ -20,31 +38,32 @@ function AdminPage() {
       <Nav fill variant="tabs" defaultActiveKey="link-0">
       <Nav.Item>
 
-        <Nav.Link eventKey="link-0">예약 관리</Nav.Link>
+        <Nav.Link eventKey="link-0" onClick={()=>{setSelectTab("예약")}}>예약 관리</Nav.Link>
 
       </Nav.Item>
       <Nav.Item>
 
-        <Nav.Link eventKey="link-1">항공기 관리</Nav.Link>
+        <Nav.Link eventKey="link-1" onClick={()=>{setSelectTab("항공")}}>항공기 관리</Nav.Link>
 
       </Nav.Item>
       <Nav.Item>
 
-        <Nav.Link eventKey="link-2">체크인 관리</Nav.Link>
+        <Nav.Link eventKey="link-2" onClick={()=>{setSelectTab("체크인")}}>체크인 관리</Nav.Link>
 
       </Nav.Item>
       <Nav.Item>
 
-        <Nav.Link eventKey="link-3">
+        <Nav.Link eventKey="link-3" onClick={()=>{setSelectTab("수화물")}}>
           수화물 관리
         </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-        <Nav.Link eventKey="link-4">
+        <Nav.Link eventKey="link-4" onClick={()=>{setSelectTab("회원")}}>
           회원 관리
         </Nav.Link>
       </Nav.Item>
     </Nav>
+      {tabView()}
       </div>
     </div>
   )

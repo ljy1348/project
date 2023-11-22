@@ -1,6 +1,5 @@
 package com.example.back.model.dto.auth.response;
 
-import com.example.back.model.entity.auth.ERole;
 import lombok.*;
 
 
@@ -22,22 +21,22 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRes {
+public class MemberRes {
 
   private String accessToken;
 
   private String tokenType = "Bearer";
 
-  private String userId;
+  private String memberId;
 
-  private String userName;
+  private String memberName;
 
-  private String right;  // 권한명
+  private String memberAuth;  // 권한명
 
-  public UserRes(String accessToken, String email, String username, String codeName) {
+  public MemberRes(String accessToken, String email, String username, String codeName) {
     this.accessToken = accessToken;
-    this.userId = email;
-    this.userName = username;
-    this.right = codeName;
+    this.memberId = email;
+    this.memberName = username;
+    this.memberAuth = codeName;
   }
 }

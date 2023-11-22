@@ -4,7 +4,7 @@ import "../../assets/css/login.css";
 import { Form, ErrorMessage, Field, Formik } from "formik";
 import * as Yup from "yup";
 import { useAppDispatch } from "../../store/store";
-import IUser from "../../types/auth/IUser";
+import IUser from "../../types/auth/IMember";
 import { register } from "../../store/slices/auth";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -28,18 +28,18 @@ function Register() {
 
   // 객체 초기화 : 속성(Formik) 체크
   const initialValues = {
-    userId: "",
-    userPassword: "",
-    userName: "",
-    enName: "",
-    userEmail: "",
-    userPhone: "",
-    userSex: "male",
-    userAdd: "",
-    right: "ROLE_USER",
-    birthDate: "",
-    userNationality: "kor",
-    milePoint: 0,
+    memberId: "",
+    memberPw: "",
+    memberName: "",
+    memberEname: "",
+    memberEmail: "",
+    memberPhone: "",
+    memberSex: "male",
+    memberAdd: "",
+    memberAuth: "ROLE_USER",
+    memberDate: "",
+    memberCountry: "kor",
+    memberMile: 0,
     repassword: "",
   };
 
@@ -47,7 +47,7 @@ function Register() {
   // 유효성 체크 함수 : validationSchema(Formik & Yup 함수)
   // 에러에 대한 정의를 함수
   const validationSchema = Yup.object().shape({
-    userName: Yup.string()
+    memberName: Yup.string()
       // 유효성 조건을 개발자 직접 작성하는 함수
       .test(
         "len",
@@ -65,7 +65,7 @@ function Register() {
         }
       )
       .required("필수 입력입니다."), // username 필수 입력
-    userId: Yup.string().test(
+    memberId: Yup.string().test(
       "len",
       "id는 4 ~ 20사이에 글자만 입력됩니다.",
       // 유효성 체크 조건
@@ -80,7 +80,7 @@ function Register() {
         return false;
       }
     ).required("필수 입력입니다."), // email 필수 입력
-    userPassword: Yup.string()
+    memberPw: Yup.string()
       // 개발자가 직접 유효성 체크 기능을 추가하는 방법
       .test(
         "len",
@@ -100,11 +100,11 @@ function Register() {
       .required("필수 입력입니다."), // password 필수 입력
     repassword: Yup.string().oneOf(
       // repassword != password
-      [Yup.ref("userPassword")],
+      [Yup.ref("memberPw")],
       "패스워드가 일치하지 않습니다."
     ),
-    userEmail: Yup.string().email("Invalid email address"),
-    userPhone: Yup.number().test(
+    memberEmail: Yup.string().email("Invalid email address"),
+    memberPhone: Yup.number().test(
       "phone",
       "휴대폰 번호는 10~13자리 입니다.",
       (val) => {
@@ -121,33 +121,33 @@ function Register() {
   const handleRegister = (formValue: any) => {
     // 임시 객체
     const {
-      userId,
-      userPassword,
-      userName,
-      enName,
-      userEmail,
-      userPhone,
-      userSex,
-      userAdd,
-      birthDate,
-      userNationality,
+      memberId,
+      memberPw,
+      memberName,
+      memberEname,
+      memberEmail,
+      memberPhone,
+      memberSex,
+      memberAdd,
+      memberDate,
+      memberCountry,
     } = formValue;
 
     // 임시 객체
     const data: IUser = {
       // 예) email:email => email (간략 표기 가능)
-      userId,
-      userPassword,
-      userName,
-      enName,
-      userEmail,
-      userPhone,
-      userSex,
-      userAdd: address,
-      right: "ROLE_USER",
-      birthDate: selectedDate,
-      userNationality,
-      milePoint: 0,
+      memberId,
+      memberPw,
+      memberName,
+      memberEname,
+      memberEmail,
+      memberPhone,
+      memberSex,
+      memberAdd: address,
+      memberAuth: "ROLE_USER",
+      memberDate: selectedDate,
+      memberCountry: "kor",
+      memberMile: 0,
     };
 
     console.log(data);
@@ -167,40 +167,6 @@ function Register() {
       });
   };
 
-  const test = (formValue: any) => {
-    // 임시 객체
-    const {
-      userId,
-      userPassword,
-      userName,
-      enName,
-      userEmail,
-      userPhone,
-      userSex,
-      userAdd,
-      birthDate,
-      userNationality,
-    } = formValue;
-
-    // 임시 객체
-    const data: IUser = {
-      // 예) email:email => email (간략 표기 가능)
-      userId,
-      userPassword,
-      userName,
-      enName,
-      userEmail,
-      userPhone,
-      userSex,
-      userAdd: address,
-      right: "ROLE_USER",
-      birthDate: selectedDate,
-      userNationality,
-      milePoint: 0,
-    };
-
-    console.log(data);
-  };
 
   const onChangeDate = (data: any) => {
     setSelectedDate(data);
@@ -257,10 +223,10 @@ function Register() {
                           <div className="form-group">
                             <Field
                               type="text"
-                              name="userId"
+                              name="memberId"
                               className={
                                 "form-control form-control-user mb-3" +
-                                (errors.userId && touched.userId
+                                (errors.memberId && touched.memberId
                                   ? " is-invalid"
                                   : "")
                               }
@@ -268,7 +234,7 @@ function Register() {
                               placeholder="ID(필수)"
                             />
                             <ErrorMessage
-                              name="userId"
+                              name="memberId"
                               component="div"
                               className="invalid-feedback"
                             />
@@ -278,10 +244,10 @@ function Register() {
                             <div className="col-sm-6 mb-3 mb-sm-0">
                               <Field
                                 type="password"
-                                name="userPassword"
+                                name="memberPw"
                                 className={
                                   "form-control form-control-user mb-3" +
-                                  (errors.userPassword && touched.userPassword
+                                  (errors.memberPw && touched.memberPw
                                     ? " is-invalid"
                                     : "")
                                 }
@@ -289,7 +255,7 @@ function Register() {
                                 placeholder="Password(필수)"
                               />
                               <ErrorMessage
-                                name="userPassword"
+                                name="memberPw"
                                 component="div"
                                 className="invalid-feedback"
                               />
@@ -319,10 +285,10 @@ function Register() {
                           <div className="form-group">
                             <Field
                               type="text"
-                              name="userName"
+                              name="memberName"
                               className={
                                 "form-control form-control-user mb-3" +
-                                (errors.userName && touched.userName
+                                (errors.memberName && touched.memberName
                                   ? " is-invalid"
                                   : "")
                               }
@@ -330,7 +296,7 @@ function Register() {
                               placeholder="Full Name(필수)"
                             />
                             <ErrorMessage
-                              name="userName"
+                              name="memberName"
                               component="div"
                               className="invalid-feedback"
                             />
@@ -340,10 +306,10 @@ function Register() {
                           <div className="form-group">
                             <Field
                               type="text"
-                              name="enName"
+                              name="memberEname"
                               className={
                                 "form-control form-control-user mb-3" +
-                                (errors.enName && touched.enName
+                                (errors.memberEname && touched.memberEname
                                   ? " is-invalid"
                                   : "")
                               }
@@ -351,7 +317,7 @@ function Register() {
                               placeholder="English Name"
                             />
                             <ErrorMessage
-                              name="enName"
+                              name="memberEname"
                               component="div"
                               className="invalid-feedback"
                             />
@@ -361,10 +327,10 @@ function Register() {
                           <div className="form-group">
                             <Field
                               type="email"
-                              name="userEmail"
+                              name="memberEmail"
                               className={
                                 "form-control form-control-user mb-3" +
-                                (errors.userEmail && touched.userEmail
+                                (errors.memberEmail && touched.memberEmail
                                   ? " is-invalid"
                                   : "")
                               }
@@ -372,7 +338,7 @@ function Register() {
                               placeholder="Email"
                             />
                             <ErrorMessage
-                              name="userEmail"
+                              name="memberEmail"
                               component="div"
                               className="invalid-feedback"
                             />
@@ -383,10 +349,10 @@ function Register() {
                             <div className="col-sm-6 mb-3 mb-sm-0">
                               <Field
                                 as="select"
-                                name="userSex"
+                                name="memberSex"
                                 className={
                                   "form-control form-control-select mb-3" +
-                                  (errors.userSex && touched.userSex
+                                  (errors.memberSex && touched.memberSex
                                     ? " is-invalid"
                                     : "")
                                 }
@@ -399,7 +365,7 @@ function Register() {
                                 <option value="female">여자</option>
                               </Field>
                               <ErrorMessage
-                                name="userName"
+                                name="memberName"
                                 component="div"
                                 className="invalid-feedback"
                               />
@@ -426,7 +392,7 @@ function Register() {
                             <div>
                               <input
                                 type="text"
-                                name="userAdd"
+                                name="memberAdd"
                                 className={
                                   "form-control form-control-user mb-3"
                                 }
@@ -469,10 +435,10 @@ function Register() {
                           <div className="form-group">
                             <Field
                               type="text"
-                              name="userPhone"
+                              name="memberPhone"
                               className={
                                 "form-control form-control-user mb-3" +
-                                (errors.userPhone && touched.userPhone
+                                (errors.memberPhone && touched.memberPhone
                                   ? " is-invalid"
                                   : "")
                               }
@@ -480,7 +446,7 @@ function Register() {
                               placeholder="Phone Number"
                             />
                             <ErrorMessage
-                              name="userPhone"
+                              name="memberPhone"
                               component="div"
                               className="invalid-feedback"
                             />

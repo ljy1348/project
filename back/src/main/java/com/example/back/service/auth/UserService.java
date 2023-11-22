@@ -1,7 +1,7 @@
 package com.example.back.service.auth;
 
-import com.example.back.model.entity.auth.User;
-import com.example.back.repository.auth.UserRepository;
+import com.example.back.model.entity.auth.Member;
+import com.example.back.repository.auth.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,42 +25,47 @@ import java.util.Optional;
 @Service
 public class UserService {
     @Autowired
-    UserRepository userRepository;
+    MemberRepository memberRepository;
 
     //    전체 조회 + 페이징
-    public Page<User> findAll(Pageable pageable) {
-        Page<User> page = userRepository.findAll(pageable);
+    public Page<Member> findAll(String search, String select, Pageable pageable) {
+        Page<Member> page;
+        if (select.equals("email")) page = memberRepository.findAllByMemberEmailContaining(search, pageable);
+        else if (select.equals("id")) page = memberRepository.findAllByMemberIdContainingOrderByMemberId(search, pageable);
+        else if (select.equals("name")) page = memberRepository.findAllByMemberNameContaining(search, pageable);
+        else if (select.equals("ename")) page = memberRepository.findAllByMemberEnameContaining(search, pageable);
+        else page = memberRepository.findAll(pageable);
 
         return page;
     }
 
     //    dname like 조회 + 페이징
-    public Page<User> findAllByUsernameContaining(String username, Pageable pageable) {
-        Page<User> page
-                = userRepository.findAllByUserIdContaining(username, pageable);
+    public Page<Member> findAllByUsernameContaining(String username, Pageable pageable) {
+        Page<Member> page
+                = memberRepository.findAllByMemberNameContaining(username, pageable);
 
         return page;
     }
 
     //    저장함수(수정함수)
-    public User save(User user) {
+    public Member save(Member user) {
 
-        User user1 = userRepository.save(user);
+        Member user1 = memberRepository.save(user);
 
         return user1;
     }
 
     //    상세조회(1건조회)
-    public Optional<User> findById(String email) {
-        Optional<User> optionalUser
-                = userRepository.findById(email);
+    public Optional<Member> findById(String email) {
+        Optional<Member> optionalUser
+                = memberRepository.findById(email);
         return optionalUser;
     }
 
     //    삭제함수
     public boolean removeById(String email) {
-        if(userRepository.existsById(email)) { // dno 있는지 확인
-            userRepository.deleteById(email); // 삭제 진행
+        if(memberRepository.existsById(email)) { // dno 있는지 확인
+            memberRepository.deleteById(email); // 삭제 진행
             return true;
         }
         return false;
@@ -68,7 +73,7 @@ public class UserService {
 
     // 이메일이 있는지 확인하는 함수
     public boolean existsById(String email) {
-        boolean bResult = userRepository.existsById(email);
+        boolean bResult = memberRepository.existsById(email);
         return bResult;
     }
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import initCustom from '../../../assets/js/custom'
 import { Button, Form, Modal, Nav } from 'react-bootstrap';
 import '../../../assets/css/login.css';
-import IUser from '../../../types/auth/IUser';
+import IUser from '../../../types/auth/IMember';
 import AuthService from '../../../services/auth/authService';
 import { RootState, useAppDispatch } from '../../../store/store';
 import { useSelector } from 'react-redux';
@@ -42,8 +42,8 @@ function UserInfo() {
 
   useEffect(()=>{
     console.log(currentUser)
-    if (currentUser?.userId)
-    AuthService.getUserInfo(currentUser.userId)
+    if (currentUser?.memberId)
+    AuthService.getUserInfo(currentUser.memberId)
   .then((response:any)=>{console.log(response);
   setUser(response.data)
   setSelectedTab("userInfo")
@@ -62,15 +62,15 @@ function UserInfo() {
             <li className='hero-user-info col-3'><span className='hero-title'>내 정보</span>
             <br/>
             <ul style={{marginTop:"10px"}}>
-              <li>name : {user&&user.userName}</li>
-              <li>phone : {user&&user.userPhone}</li>
-              <li>email : {user&&user.userEmail}</li>
+              <li>name : {user&&user.memberName}</li>
+              <li>phone : {user&&user.memberPhone}</li>
+              <li>email : {user&&user.memberEmail}</li>
             </ul>
             </li>
             <li className='hero-mile col-6'><span className='hero-title'>잔여 마일리지</span>
             <br/><br/>
             <ul>
-              <li> {user&&user.milePoint}</li>
+              <li> {user&&user.memberMile}</li>
             </ul>
             </li>
             <li className='hero-count col-3'><span className='hero-title'>예약 횟수</span>

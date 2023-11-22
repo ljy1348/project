@@ -110,7 +110,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                 csrf().disable() // csrf(해킹공격 - 쿠키취약점 공격) 보안 비활성화
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and() // 인증 예외처리는 AuthEntryPointJwt
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()// 세션안쓰고(stateful) JWT 사용 예정
-                .authorizeRequests().antMatchers("/api/auth/info").hasRole("USER") // 이 url 은 모든 사용자 접근 허용
+                .authorizeRequests().antMatchers("/api/auth/info").hasAnyRole("USER", "ADMIN") // 이 url 은 모든 사용자 접근 허용
                 .antMatchers("/api/admin/**").hasRole("ADMIN") // admin 메뉴는 ROLE_ADMIN 만 가능
                 .antMatchers("/api/**").permitAll() // 이 url 은 모든 사용자 접근 허용
                 .anyRequest().permitAll(); // 그외 url은 모든 사용자, 모든 접속에 대해서 인증이 필요하다는 걸 의미

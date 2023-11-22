@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import IUser from '../../../types/auth/IUser'
+import IUser from '../../../types/auth/IMember'
 import { Button, Modal } from 'react-bootstrap';
 import DaumPostcode from "react-daum-postcode";
 import AuthService from '../../../services/auth/authService';
@@ -12,14 +12,14 @@ function UserInfoList({user, setMessage}:{user:IUser, setMessage:any}) {
 
     const onchangeInput = (e:any) => {
         const {name, value} = e.target;
-        if (name==="birthDate") setSelectedDate(value);
+        if (name==="memberDate") setSelectedDate(value);
 
         console.log(name)
         setGetUser({...getUser, [name]:value});
     }
 
     const onCompleteAdd = (data:any) => {
-        setGetUser({...getUser, userAdd:data.address});
+        setGetUser({...getUser, memberAdd:data.address});
         setIsModal(false);
     }
 
@@ -37,12 +37,12 @@ function UserInfoList({user, setMessage}:{user:IUser, setMessage:any}) {
       setMessage("");
       if (user) {
 
-        if (!user.birthDate) {
-          setGetUser({...getUser, birthDate:new Date()})
+        if (!user.memberDate) {
+          setGetUser({...getUser, memberDate:new Date()})
         }
         
-        if (getUser?.birthDate){
-          const date = new Date(getUser.birthDate);
+        if (getUser?.memberDate){
+          const date = new Date(getUser.memberDate);
           setSelectedDate(date.toISOString().split('T')[0]);
         }
       }
@@ -53,20 +53,20 @@ function UserInfoList({user, setMessage}:{user:IUser, setMessage:any}) {
   return (
     <div>
         <form className='col-6 container mt-4' onSubmit={onSubmit}>
-        <input type='text' className='form-control form-control-user mb-3' placeholder='Full Name' value={getUser?.userName} name="userName" onChange={onchangeInput}></input>
-        <input type='text' className='form-control form-control-user mb-3' placeholder='English Name' value={getUser?.enName} name="enName" onChange={onchangeInput}></input>
-        <input type='text' className='form-control form-control-user mb-3' placeholder='Address' value={getUser?.userAdd} name="userAdd" onChange={onchangeInput} onClick={()=>setIsModal(true)}></input>
-        <input type='text' className='form-control form-control-user mb-3' placeholder='Phone Number' value={getUser?.userPhone} name="userPhone" onChange={onchangeInput}></input>
-        <input type='text' className='form-control form-control-user mb-3' placeholder='Email' value={getUser?.userEmail} name="userEmail" onChange={onchangeInput}></input>
+        <input type='text' className='form-control form-control-user mb-3' placeholder='Full Name' value={getUser?.memberName} name="memberName" onChange={onchangeInput}></input>
+        <input type='text' className='form-control form-control-user mb-3' placeholder='English Name' value={getUser?.memberEname} name="memberEname" onChange={onchangeInput}></input>
+        <input type='text' className='form-control form-control-user mb-3' placeholder='Address' value={getUser?.memberAdd} name="memberAdd" onChange={onchangeInput} onClick={()=>setIsModal(true)}></input>
+        <input type='text' className='form-control form-control-user mb-3' placeholder='Phone Number' value={getUser?.memberPhone} name="memberPhone" onChange={onchangeInput}></input>
+        <input type='text' className='form-control form-control-user mb-3' placeholder='Email' value={getUser?.memberEmail} name="memberEmail" onChange={onchangeInput}></input>
         <div className='form-group row'>
             <div className='col-sm-6 mb-3 mb-sm-0'>
-        <select className='form-control form-control-select mb-3 ' placeholder='Sex' value={getUser?.userSex} name="userSex" onChange={onchangeInput}>
+        <select className='form-control form-control-select mb-3 ' placeholder='Sex' value={getUser?.memberSex} name="memberSex" onChange={onchangeInput}>
             <option value={"male"}>남자</option>
             <option value={"female"}>여자</option>
         </select>
             </div>
             <div className='col-sm-6 mb-3 mb-sm-0'>
-        <input type='date' className='form-control form-control-select mb-3' placeholder='BirthDate' value={selectedDate} onChange={onchangeInput} name="birthDate"></input>
+        <input type='date' className='form-control form-control-select mb-3' placeholder='BirthDate' value={selectedDate} onChange={onchangeInput} name="memberDate"></input>
 
             </div>
         </div>

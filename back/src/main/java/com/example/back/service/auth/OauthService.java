@@ -7,11 +7,10 @@ import com.example.back.model.dto.auth.oauth.kakao.KakaoTokenDto;
 import com.example.back.model.dto.auth.oauth.naver.NaverInfoDto;
 import com.example.back.model.dto.auth.oauth.naver.NaverTokenDto;
 import com.example.back.model.entity.auth.ERole;
-import com.example.back.model.entity.auth.User;
+import com.example.back.model.entity.auth.Member;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.JsonSerializable;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
@@ -28,11 +27,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -102,7 +96,7 @@ public class OauthService {
     }
 
 //    액세스 토큰으로 유저 정보 가져오기
-    public User getKakaoInfo(String kakaoAccessToken) {
+    public Member getKakaoInfo(String kakaoAccessToken) {
         RestTemplate rt = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -132,12 +126,12 @@ public class OauthService {
         // 회원가입 처리하기
         String kakaoId = kakaoIdDto.getId();
         kakaoId = kakaoId+"@kakao.oauth";
-        Optional<User> optionalUser = userService.findById(kakaoId);
+        Optional<Member> optionalUser = userService.findById(kakaoId);
         if (optionalUser.isPresent()) {
             return optionalUser.get();
         } else {
 
-            User user = new User(kakaoId, passwordEncoder.encode(UUID.randomUUID().toString()), kakaoIdDto.getProperties().getNickname(), ERole.ROLE_USER);
+            Member user = new Member(kakaoId, passwordEncoder.encode(UUID.randomUUID().toString()), kakaoIdDto.getProperties().getNickname(), ERole.ROLE_USER);
             return userService.save(user);
         }
     }
@@ -183,7 +177,7 @@ public class OauthService {
     }
 
     //    액세스 토큰으로 유저 정보 가져오기
-    public User getNaverInfo(String naverAccessToken) {
+    public Member getNaverInfo(String naverAccessToken) {
         RestTemplate rt = new RestTemplate();
         log.info("네이버 정보 가져오기1 : "+naverAccessToken);
         HttpHeaders headers = new HttpHeaders();
@@ -216,12 +210,12 @@ public class OauthService {
         // 회원가입 처리하기
         String kakaoId = naverInfoDto.getResponse().getId();
         kakaoId = kakaoId+"@naver.oauth";
-        Optional<User> optionalUser = userService.findById(kakaoId);
+        Optional<Member> optionalUser = userService.findById(kakaoId);
         if (optionalUser.isPresent()) {
             return optionalUser.get();
         } else {
 
-            User user = new User(kakaoId, passwordEncoder.encode(UUID.randomUUID().toString()), naverInfoDto.getResponse().getNickname(), ERole.ROLE_USER);
+            Member user = new Member(kakaoId, passwordEncoder.encode(UUID.randomUUID().toString()), naverInfoDto.getResponse().getNickname(), ERole.ROLE_USER);
             return userService.save(user);
         }
     }
@@ -267,7 +261,7 @@ public class OauthService {
     }
 
     //    액세스 토큰으로 유저 정보 가져오기
-    public User getGoogleInfo(String googleAccessToken) {
+    public Member getGoogleInfo(String googleAccessToken) {
         RestTemplate rt = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -306,12 +300,12 @@ public class OauthService {
         // 회원가입 처리하기
         String kakaoId = googleIdDto.getEmail();
         kakaoId = kakaoId+"@goole.oauth";
-        Optional<User> optionalUser = userService.findById(kakaoId);
+        Optional<Member> optionalUser = userService.findById(kakaoId);
         if (optionalUser.isPresent()) {
             return optionalUser.get();
         } else {
 
-            User user = new User(kakaoId, passwordEncoder.encode(UUID.randomUUID().toString()), "", ERole.ROLE_USER);
+            Member user = new Member(kakaoId, passwordEncoder.encode(UUID.randomUUID().toString()), "", ERole.ROLE_USER);
             return userService.save(user);
         }
     }

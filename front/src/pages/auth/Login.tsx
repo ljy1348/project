@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store/store";
-import IUser from "../../types/auth/IUser";
+import IUser from "../../types/auth/IMember";
 import { login } from "../../store/slices/auth";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
@@ -68,24 +68,24 @@ function Login() {
   // todo: Formik 객체 초기화(initialValues) : html 태그에서 사용함
   // todo: 체크 대상 (email, password : input태그(==Field태그))
   const initialValues = {
-    userId:"",
-    userPassword:"",
-    userName:"",
-    enName:"",       
-    userEmail:"",       
-    userPhone:"",      
-    userSex:"",       
-    userAdd:"",       
-    right:"ROLE_USER",       
-    birthDate:"",       
-    userNationality:"",       
-    milePoint:0,
+    memberId:"",
+    memberPw:"",
+    memberName:"",
+    memberEname:"",       
+    memberEmail:"",       
+    memberPhone:"",      
+    memberSex:"",       
+    memberAdd:"",       
+    memberAuth:"ROLE_USER",       
+    memberDate:"",       
+    memberCountry:"",       
+    memberMile:0,
   }
 
   const initNonMember = {
       domesticInternational:"국내",
       airlineReservationNumber:"",
-      enName:"",
+      memberEname:"",
       departure: selectedDate,       
       departureAirPort:"",       
       arrivalAirPort:"",      
@@ -98,9 +98,9 @@ function Login() {
   const validationSchema = Yup.object().shape({
     // email 유효성 규칙 : required(에러메세지) => 필수필드
     // string() : 자료형이 문자열인가? 체크
-    userId: Yup.string().required("필수 입력입니다."),
+    memberId: Yup.string().required("필수 입력입니다."),
     // password 유효성 규칙 : required(에러메세지) => 필수필드
-    userPassword: Yup.string().required("필수 입력입니다."),
+    memberPw: Yup.string().required("필수 입력입니다."),
   });
 
   const validationSchemaNonMember = Yup.object().shape({
@@ -108,7 +108,7 @@ function Login() {
     // string() : 자료형이 문자열인가? 체크
     airlineReservationNumber: Yup.string().required("필수 입력입니다."),
     // password 유효성 규칙 : required(에러메세지) => 필수필드
-    enName: Yup.string().required("필수 입력입니다.")
+    memberEname: Yup.string().required("필수 입력입니다.")
   });
 
   // isLoggedIn = true (로그인 상태변수(true/false))
@@ -121,32 +121,32 @@ function Login() {
   // Formit lib 에서 자동으로 email, password 값을 넘겨줌
   const handleLogin = (formValue: any) => { 
     // Formit 넘겨준 email, password 값 저장
-      const { userId,
-        userPassword,
-        userName,
-        enName,       
-        userEmail,       
-        userPhone,      
-        userSex,       
-        userAdd,
-        birthDate,       
-        userNationality,  } = formValue;
+      const { memberId,
+        memberPw,
+        memberName,
+        memberEname,       
+        memberEmail,       
+        memberPhone,      
+        memberSex,       
+        memberAdd,
+        memberDate,       
+        memberCountry,  } = formValue;
 
     // 임시 객체 
     const data: IUser = {
       // 예) email:email => email (간략 표기 가능)
-      userId,
-      userPassword,
-      userName,
-      enName,       
-      userEmail,       
-      userPhone,      
-      userSex,       
-      userAdd,       
-      right:"ROLE_USER",       
-      birthDate,       
-      userNationality,       
-      milePoint:0,     
+      memberId,
+      memberPw,
+      memberName,
+      memberEname,       
+      memberEmail,       
+      memberPhone,      
+      memberSex,       
+      memberAdd,       
+      memberAuth:"ROLE_USER",       
+      memberDate,       
+      memberCountry,       
+      memberMile:0,     
     }
 
     // todo: 벡엔드 로그인 함수(공유 로그인 함수) 호출
@@ -186,11 +186,11 @@ function Login() {
           <div className="form-group">
             <Field
               type="text"
-              name="userId"
+              name="memberId"
               className={
                 "form-control form-control-user mb-3" +
                 // email 필드에 클릭되고 동시에 에러가 있으면 화면에 빨간색을 표시
-                (errors.userId && touched.userId
+                (errors.memberId && touched.memberId
                   ? " is-invalid"
                   : "")
               }
@@ -198,7 +198,7 @@ function Login() {
             />
             {/* ErrorMessage : 화면에 email에 대한 에러메세지를 표시함 */}
             <ErrorMessage
-              name="userId"
+              name="memberId"
               component="div"
               className="invalid-feedback"
             />
@@ -207,11 +207,11 @@ function Login() {
           <div className="form-group">
             <Field
               type="password"
-              name="userPassword"
+              name="memberPw"
               className={
                 "form-control form-control-user mb-3" +
                 // password 필드에 클릭되고 동시에 에러가 있으면 화면에 빨간색을 표시
-                (errors.userPassword && touched.userPassword
+                (errors.memberPw && touched.memberPw
                   ? " is-invalid"
                   : "")
               }
@@ -220,7 +220,7 @@ function Login() {
             />
             {/* ErrorMessage : 화면에 password 대한 에러메세지를 표시함 */}
             <ErrorMessage
-              name="userPassword"
+              name="memberPw"
               component="div"
               className="invalid-feedback"
             />
@@ -366,15 +366,15 @@ function Login() {
           <div className="form-group col-9">
             <Field
               type="text"
-              name="enName"
+              name="memberEname"
               className={
                 "form-control form-control-user mb-3" +
                 // password 필드에 클릭되고 동시에 에러가 있으면 화면에 빨간색을 표시
-                (errors.enName && touched.enName
+                (errors.memberEname && touched.memberEname
                   ? " is-invalid"
                   : "")
               }
-              id="enName"
+              id="memberEname"
               placeholder="예약시 입력한 영문 이름"
             />
           </div>

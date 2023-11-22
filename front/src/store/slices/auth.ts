@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import IUser from "../../types/auth/IUser";
+import IUser from "../../types/auth/IMember";
 import authService from "../../services/auth/authService";
 import IAuth from "../../types/auth/IAuth";
 // todo: 공유저장소 정의하는 파일 : 공유함수, 공유변수

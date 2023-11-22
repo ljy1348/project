@@ -1,9 +1,9 @@
 package com.example.back.controller.auth;
 
-import com.example.back.model.dto.auth.request.UserReq;
-import com.example.back.model.dto.auth.response.UserRes;
+import com.example.back.model.dto.auth.request.MemberReq;
+import com.example.back.model.dto.auth.response.MemberRes;
 import com.example.back.model.entity.auth.ERole;
-import com.example.back.model.entity.auth.User;
+import com.example.back.model.entity.auth.Member;
 import com.example.back.security.jwt.JwtUtils;
 import com.example.back.security.services.UserDetailsImpl;
 import com.example.back.service.auth.UserService;
@@ -15,10 +15,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -55,13 +59,13 @@ public class AuthController {
     UserService userService;
 
     @PostMapping("/signin")
-    public ResponseEntity<Object> login(@RequestBody UserReq userReq) {
+    public ResponseEntity<Object> login(@RequestBody MemberReq memberReq) {
         try {
 //            1) 인증 관리자가 인증 시작 : id/pwd 로 db에 있는지 조사
 //            authentication : 인증을 통과한 객체(id/pwd,유저명,인증여부=true)
             Authentication authentication = authenticationManager.authenticate(
                     // 아이디와 패스워드로, Security 가 알아 볼 수 있는 token 객체로 생성해서 인증처리
-                    new UsernamePasswordAuthenticationToken(userReq.getUserId(), userReq.getUserPassword()));
+                    new UsernamePasswordAuthenticationToken(memberReq.getMemberId(), memberReq.getMemberPw()));
             
 //            2) 인증된 객체들을 홀더에 저장해둠
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -73,9 +77,9 @@ public class AuthController {
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
                 log.info("aaaa : "+userDetails.getUserId());
 //            5) 리액트로 보낼 dto 생성
-            UserRes userRes = new UserRes(jwt,userDetails.getUserId(),userDetails.getUsername(), userDetails.getAuthority().toString());
+            MemberRes memberRes = new MemberRes(jwt,userDetails.getUserId(),userDetails.getUsername(), userDetails.getAuthority().toString());
 
-            return new ResponseEntity<>(userRes,HttpStatus.OK);
+            return new ResponseEntity<>(memberRes,HttpStatus.OK);
         } catch (Exception e) {
             log.debug(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -84,31 +88,37 @@ public class AuthController {
 
     //    신규 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<Object> createUser(@RequestBody UserReq userReq) {
+    public ResponseEntity<Object> createUser(@RequestBody MemberReq memberReq) {
         try {
 //            1) 요청된 유저객체가 DB 에 id(email) 있는 지 확인
-            if (userService.existsById(userReq.getUserId())) {
+            if (userService.existsById(memberReq.getMemberId())) {
                 return ResponseEntity
                         .badRequest()
                         .body("에러 : 아이디가 이미 있습니다.");
             }
 
+            // ISO 8601 형식의 문자열을 파싱합니다
+            ZonedDateTime zonedDateTime = ZonedDateTime.parse(memberReq.getMemberDate());
+
+// ZonedDateTime을 java.util.Date로 변환합니다
+            Date date = Date.from(zonedDateTime.toInstant());
+
 //            2) 신규 유저 생성 : 권한 없이 생성
-            User user = new User(
-                    userReq.getUserId(),   // id(이메일)
+            Member user = new Member(
+                    memberReq.getMemberId(),
 //               todo: encoder.encode(패스워드) -> 암호화된 패스워드
-                    passwordEncoder.encode(userReq.getUserPassword()), // 패스워드(암호화)
-                    userReq.getUserName(),
-                    userReq.getUserEmail(),
-                    userReq.getUserAdd(),
-                    userReq.getUserPhone(),
-                    userReq.getUserSex(),
-                    userReq.getUserNationality(),
-                    userReq.getBirthDate(),
-                    userReq.getEnName()
+                    passwordEncoder.encode(memberReq.getMemberPw()), // 패스워드(암호화)
+                    memberReq.getMemberName(),
+                    memberReq.getMemberEmail(),
+                    memberReq.getMemberAdd(),
+                    memberReq.getMemberPhone(),
+                    memberReq.getMemberSex(),
+                    memberReq.getMemberCountry(),
+                    date,
+                    memberReq.getMemberEname()
             );
 
-            user.setRight(ERole.ROLE_USER);
+            user.setMemberAuth(ERole.ROLE_USER);
 
             userService.save(user); // 신규유저를 DB 에 저장
 
@@ -121,10 +131,10 @@ public class AuthController {
     }
 
     @GetMapping("/info/{userId}")
-    public ResponseEntity<User> findById(@PathVariable String userId) {
+    public ResponseEntity<Member> findById(@PathVariable String userId) {
         try {
 
-        Optional<User> optionalUser = userService.findById(userId);
+        Optional<Member> optionalUser = userService.findById(userId);
         if (optionalUser.isPresent()) {
             return new ResponseEntity<>(optionalUser.get(), HttpStatus.OK);
         } else {
@@ -137,31 +147,40 @@ public class AuthController {
 
     @Transactional
     @PutMapping("/info")
-    public ResponseEntity<String> findById(@RequestBody User user) {
-        log.info("a1 : "+user.getUserId());
+    public ResponseEntity<String> findById(@RequestBody Member user) {
         try {
-        log.info("a2");
-        Optional<User> optionalUser = userService.findById(user.getUserId());
-        log.info("a5");
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+            UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+
+            String userId = userDetails.getUserId();
+        log.info(userDetails.getAuthority().toString()+":"+userId);
+        ERole eRole = ERole.ROLE_ADMIN;
+        log.info("aaaaaaaaaa : "+eRole.toString());
+
+            if (userDetails.getAuthority().toString().equals(eRole.toString()))
+            {userId = user.getMemberId();}
+
+
+        Optional<Member> optionalUser = userService.findById(userId);
         if (optionalUser.isPresent()) {
-            User user1 = optionalUser.get();
-        log.info("a6");
-            user1.setEnName(user.getEnName());
-            user1.setUserName(user.getUserName());
-            user1.setUserAdd(user.getUserAdd());
-            user1.setUserEmail(user.getUserEmail());
-            user1.setBirthDate(user.getBirthDate());
-            user1.setUserPhone(user.getUserPhone());
-            user1.setUserSex(user.getUserSex());
+            Member user1 = optionalUser.get();
+            user1.setMemberEname(user.getMemberEname());
+            user1.setMemberName(user.getMemberName());
+            user1.setMemberAdd(user.getMemberAdd());
+            user1.setMemberEmail(user.getMemberEmail());
+            user1.setMemberDate(user.getMemberDate());
+            user1.setMemberPhone(user.getMemberPhone());
+            user1.setMemberSex(user.getMemberSex());
         return new ResponseEntity<>("수정되었습니다.",HttpStatus.OK);
-        } else
-        log.info("a4");
+        }
+        else
         return new ResponseEntity<>("수정에 실패하였습니다.",HttpStatus.NOT_FOUND);
         } catch (Exception e) {
-        log.info("a3");
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
+
 
 }
