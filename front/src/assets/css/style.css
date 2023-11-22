@@ -2070,6 +2070,8 @@ line-height: 1.6; }
   color: #737373;
   box-sizing: border-box;
   outline: none;
+  cursor: pointer;
+
   /* position: relative; top:0%; */
 }
 .sangmin_reserve_myArea {
@@ -2151,9 +2153,7 @@ line-height: 1.6; }
 .sangmin_reserve_class div {
   width: 100%;
 }
-.sangmin_reserve_class div {
-  width: 100%;
-}
+
 
 /* 모달 공통*/
 .modal-header {
@@ -2399,6 +2399,12 @@ line-height: 1.6; }
   font-size: 16px;
   margin-right: 8px;
 }
+
+.sangmin_gender label,input{
+  margin-right: 10px;
+}
+
+/* sangmin css end */
 /* .sangmin_reserve_itineary div:nth-child(2) {ss
   margin-right: 0.5%;
   margin-left: 0.5%;

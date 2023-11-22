@@ -1,10 +1,41 @@
-import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import IReservation from "../../types/reserve/IReservation";
-
+import React, { useRef, useState } from "react";
+// import AirportList from "./AirportList";
+import "../../assets/css/Airport.css";
+import AirportList from "../../utils/AirportList";
+// import AirportList from './../AirportList/AirportList';
 function ForiareaModal(props: any) {
-  const [reservation, setReservation] = useState<Array<IReservation>>([]);
+  const initAirport = {
+    abbr: "",
+  };
+  const [airport, setAirport] = useState(initAirport);
+  const [selectNational, setSelectNational] = useState("korea");
+  const [airportList, setAirportList] = useState(AirportList.korea);
+  const [koreaAirportList, setKoreaAirportList] = useState(AirportList.korea);
+  const listBox = useRef<HTMLDivElement>(null);
 
+  const onClickNationalList = (data: string) => {
+    setSelectNational(data);
+    if (data === "korea") setAirportList(AirportList.korea);
+    if (data === "NortheastAsia") setAirportList(AirportList.NortheastAsia);
+    if (data === "SoutheastAsia") setAirportList(AirportList.SoutheastAsia);
+    if (data === "Americas") setAirportList(AirportList.Americas);
+    if (data === "Europe") setAirportList(AirportList.Europe);
+    if (data === "Oceanstate") setAirportList(AirportList.Oceanstate);
+    if (data === "CentralAsia") setAirportList(AirportList.CentralAsia);
+
+    if (listBox.current) {
+      listBox.current.scrollTop = 0;
+    }
+  };
+
+  const selectedAirport = (data: string) => {
+    setAirport((airport) => ({ ...airport, abbr: data }));
+    props.onForiAbbrSelect(data);
+    console.log(data);
+  };
   return (
     <Modal
       {...props}
@@ -21,73 +52,132 @@ function ForiareaModal(props: any) {
       </Modal.Header>
       <Modal.Body>
         <div className="modal-body">
+          <h5>국내선</h5>
+
+          <div className="flights_list domestic mb-5">
+            <ul className="city_list">
+              {koreaAirportList &&
+                koreaAirportList.map((val, idx) => {
+                  return (
+                    <li
+                      key={idx}
+                      onClick={() => {
+                        selectedAirport(val.abbr);
+                      }}
+                    >
+                      <span className="cname">{val.cname}</span>
+                      <span className="abbr">{val.abbr}</span>
+                    </li>
+                  );
+                })}
+            </ul>
+          </div>
+
           <h5 className="mt-2">국제선</h5>
 
-          <div className="row mx-0">
-            <div className="sangmin_reserve_modal_fori_country">
-              {/* 해외 나라 */}
-              <table className="table">
-                {reservation &&
-                  reservation.map((data) => (
-                    // 키값 추가 않하면 react 에서 경고를 추가 : 키는 내부적으로 리액트가 rerending 할때 체크하는 값임
-                    <tr key={data.AirlineReservaitonNumber}>
-                      <td>{data.ForiCountry}</td>
-                    </tr>
-                  ))}
-
-                <tr>
-                  <td scope="col">1 번국</td>
-                </tr>
-                <tr>
-                  <td scope="col">2 번국</td>
-                </tr>
-                <tr>
-                  <td scope="col">3 번국</td>
-                </tr>
-                <tr>
-                  <td scope="col">4 번국</td>
-                </tr>
-              </table>
+          <div className="flights_list national row no-gutters">
+            <div className="list_nation col">
+              <ul>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "korea" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("korea");
+                  }}
+                >
+                  한국
+                </li>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "NortheastAsia" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("NortheastAsia");
+                  }}
+                >
+                  동북아시아
+                </li>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "SoutheastAsia" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("SoutheastAsia");
+                  }}
+                >
+                  동남아시아/서남아시아
+                </li>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "Americas" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("Americas");
+                  }}
+                >
+                  미주 (미국/캐나다/중남미)
+                </li>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "Europe" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("Europe");
+                  }}
+                >
+                  유럽
+                </li>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "Oceanstate" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("Oceanstate");
+                  }}
+                >
+                  대양주/괌/사이판/팔라우
+                </li>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "CentralAsia" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("CentralAsia");
+                  }}
+                >
+                  몽골/중앙아시아
+                </li>
+              </ul>
+              <div></div>
             </div>
-            <div className="sangmin_modal_body_fori_city">
-              <h6 className="mt-3">공항</h6>
-              {/* 해외 공항 */}
-              <table className="sangmin_modal_table table">
-                {reservation &&
-                  //   해외 공항
-                  reservation.map((data) => (
-                    // 키값 추가 않하면 react 에서 경고를 추가 : 키는 내부적으로 리액트가 rerending 할때 체크하는 값임
-                    <tr key={data.AirlineReservaitonNumber}>
-                      <td>{data.ForiCity}</td>
-                    </tr>
-                  ))}
-
-                <tr>
-                  <td scope="col">1 번 지역</td>
-                </tr>
-                <tr>
-                  <td scope="col">2 번 지역</td>
-                </tr>
-                <tr>
-                  <td scope="col">3 번 지역</td>
-                </tr>
-                <tr>
-                  <td scope="col">4 번 지역</td>
-                </tr>
-                <tr>
-                  <td scope="col">5 번 지역</td>
-                </tr>
-                <tr>
-                  <td scope="col">6 번 지역</td>
-                </tr>
-              </table>
+            <div className="list_airport col">
+              <div className="international_listbox" ref={listBox}>
+                <ul className="city_list mx-auto">
+                  {airportList.map((val, idx) => {
+                    return (
+                      <li key={idx} onClick={() => selectedAirport(val.abbr)}>
+                        <span className="cname">{val.cname}</span>
+                        <span className="abbr">{val.abbr}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </Modal.Body>
       {/* <Modal.Footer>
-      <Button onClick={props.onHide}>Close</Button>
-    </Modal.Footer> */}
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer> */}
     </Modal>
   );
 }

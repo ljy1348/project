@@ -13,6 +13,25 @@ AOS.init({
 	once: true
 });
 
+// sangmin
+$(document).ready(
+    function () {
+        for (var i = 2021; i > 1920; i--) {
+            $('#birth-year').append('<option value="' + i + '">' + i + '</option>');
+        }
+        for (var i = 1; i < 13; i++) {
+            $('#birth-month').append('<option value="' + i + '">' + i + '</option>');
+        }
+        for (var i = 1; i < 32; i++) {
+            $('#birth-day').append('<option value="' + i + '">' + i + '</option>');
+        }
+    }
+);
+출처: https://interestingjinjin.tistory.com/7 [흥미진진한 개발:티스토리]
+
+// sangmin
+
+
 $(function(){
 
 	'use strict';

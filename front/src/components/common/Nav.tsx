@@ -32,7 +32,7 @@ function Nav() {
             >
               {/* home 메뉴 시작 */}
               <li>
-                <a >예약</a>
+                <Link to="/reserve">예약</Link>
               </li>
               {/* home 메뉴 끝 */}
 

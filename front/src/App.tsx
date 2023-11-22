@@ -42,13 +42,15 @@ function App() {
           {/* 체크인 */}
           <Route path="/checkin" element={<CheckIn/>} />   
           <Route path="/passport" element={<Passport/>} />   
-          <Route path="/foriareamodal" element={<ForiareaModal/>} />  
+          <Route path="/foriareamodal" element={<ForiareaModal/>} /> 
+
           
 
 
 
 
-          <Route path="/reserve-choose" element={<ReserveChoose/>} />
+          <Route path="/reserve" element={<Reserve/>} />
+          <Route path="/reserve-choose/:selectedAbbr/:selectedFori" element={<ReserveChoose/>} />
         <Route path="/reserve-payment" element={<ReservePayment/>} />
        </Routes> 
        
