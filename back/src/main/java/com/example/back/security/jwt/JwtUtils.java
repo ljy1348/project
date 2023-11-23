@@ -31,7 +31,7 @@ public class JwtUtils {
 //    서명 : Jwts.builder().signWith(암호화알고리즘, 비밀키값)
 //    생성 : Jwts.builder().compact()
     return Jwts.builder()
-        .setSubject((userPrincipal.getEmail()))
+        .setSubject((userPrincipal.getUserId()))
         .setIssuedAt(new Date())
 //            만료일자 적용
         .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))

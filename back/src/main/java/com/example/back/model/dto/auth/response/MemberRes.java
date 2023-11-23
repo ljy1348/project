@@ -21,22 +21,22 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRes {
+public class MemberRes {
 
   private String accessToken;
 
   private String tokenType = "Bearer";
 
-  private String email;
+  private String memberId;
 
-  private String username;
+  private String memberName;
 
-  private String codeName;  // 권한명
+  private String memberAuth;  // 권한명
 
-  public UserRes(String accessToken, String email, String username, String codeName) {
+  public MemberRes(String accessToken, String email, String username, String codeName) {
     this.accessToken = accessToken;
-    this.email = email;
-    this.username = username;
-    this.codeName = codeName;
+    this.memberId = email;
+    this.memberName = username;
+    this.memberAuth = codeName;
   }
 }

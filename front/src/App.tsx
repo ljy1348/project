@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // todo: 외부 lib import
 // aos css import(npm 설치)
 import "aos/dist/aos.css";
@@ -9,12 +9,19 @@ import "./assets/css/style.css";
 import Nav from './components/common/Nav';
 import Home from './pages/Home';
 import Footer from './components/common/Footer';
-import { Routes, Route } from 'react-router-dom';
-
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Services from './pages/Services';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Elements from './pages/Elements';
+import Register from './pages/auth/Register';
+import Login from './pages/auth/Login';
+import Oauth from './pages/auth/KakaoLogin';
+import KakaoLogin from './pages/auth/KakaoLogin';
+import UserInfo from './pages/auth/user/UserInfo';
+import ErrorBoundary from './components/ErrorBoundary';
+import AdminPage from './pages/auth/user/AdminPage';
+import AdminMemberList from './pages/auth/admin/AdminMemberList';
 
 // import CustomerPage from './pages/customer/CustomerPage';
 import CheckIn from './pages/checkIn/CheckIn';
@@ -26,6 +33,9 @@ import ReservePayment from './pages/reserve/ReservePayment';
 // todo: 리액트 import
 
 function App() {
+
+
+
   return (
     <div className="App">
 
@@ -33,6 +43,7 @@ function App() {
       <Nav/>
       {/* 본문 */}
       <Routes>
+
           <Route path="/" element={<Home/>}></Route>
           <Route path="/services" element={<Services/>} />
           <Route path="/about" element={<About/>} />
@@ -43,6 +54,12 @@ function App() {
           <Route path="/checkin" element={<CheckIn/>} />   
           <Route path="/passport" element={<Passport/>} />   
           <Route path="/foriareamodal" element={<ForiareaModal/>} /> 
+
+          <Route path="/register" element={<Register/>} />
+        <Route path="/login/auth/:app" element={<ErrorBoundary><KakaoLogin/></ErrorBoundary>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/user-info" element={<UserInfo/>} />
+        <Route path="/admin" element={<AdminPage/>} />
 
           
 

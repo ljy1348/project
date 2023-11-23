@@ -1,7 +1,6 @@
 package com.example.back.service.reserve;
 
 import com.example.back.model.entity.reserve.OperationInfo;
-import com.example.back.repository.auth.UserRepository;
 import com.example.back.repository.reserve.OperationInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
