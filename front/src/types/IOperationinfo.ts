@@ -1,16 +1,16 @@
 export default interface IOperationinfo {
-    OperationId?: any | null,
-    Airline: string,
-    FlightName: string,
-    StartAirport: string,
-    FinalAirport: string,
-    StartTime: string,
-    FinalTime: string,
-    OperationDate: string,
-    StartDate: Date,
-    FinalDate: Date,
-    DomesticInternational:string,
-    Price:number,    
+    operationId?: any | null,
+    airline: string,
+    flightName: string,
+    startAirport: string,
+    finalAirport: string,
+    startTime: string,
+    finalTime: string,
+    operationDate: string,
+    startDate: Date | string,
+    finalDate: Date | string,
+    domesticInternational:string,
+    price:string,    
 
     
 }
