@@ -8,8 +8,16 @@ import { Link, useParams } from "react-router-dom";
 import IOperationinfo from "../../types/IOperationinfo";
 import ReserveService from "../../services/OperationService";
 import OperationService from "../../services/OperationService";
+import { Pagination } from "@mui/material";
 
 function ReserveChoose(props: any) {
+  // todo: 공통 페이징 변수 4개
+  // todo: 공통 변수 : page(현재페이지번호), count(총페이지건수), pageSize(3,6,9 배열)
+  const [page, setPage] = useState<number>(1);
+  const [count, setCount] = useState<number>(1);
+  // todo: 공통 변수 : page(현재페이지번호), count(총페이지건수), pageSize(3,6,9 배열)
+  const [page2, setPage2] = useState<number>(1);
+  const [count2, setCount2] = useState<number>(1);
   //   조회 함수
   const {
     selectedAbbr,
@@ -21,41 +29,50 @@ function ReserveChoose(props: any) {
     endDate,
   } = useParams();
 
+  // operationinfo 배열 변수 정의
   const [operationinfo, setOperationinfo] = useState<Array<IOperationinfo>>([]);
-
+  const [operationinfo2, setOperationinfo2] = useState<Array<IOperationinfo>>(
+    []
+  );
 
   const daterange = useRef<HTMLInputElement>(null);
+  console.log("operationinfo", operationinfo);
+  // 출도착 공항 설정
+  const [selectedAbbr2, setSelectedAbbr] = useState<string>(selectedAbbr || "");
+  const [selectedFori2, setSelectedFori] = useState<string>(selectedFori || "");
 
-  
-  // 출도착 설정
-  const [selectedAbbr2, setSelectedAbbr] = useState(selectedAbbr);
-  const [selectedFori2, setSelectedFori] = useState(selectedFori);
-
-  // 날자
+  // 출발 날짜
   const [startDate2, setStartDate] = useState(startDate);
   const [endDate2, setEndDate] = useState(endDate);
 
   // 요일을 나타내는 배열
-  const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+  const days = ["일", "월", "화", "수", "목", "금", "토"];
   // startDate2와 endDate2를 Date 객체로 변환
-const startDateObj = new Date(startDate2 ?? new Date());
-const endDateObj = new Date(endDate2 ?? new Date());
+  const startDateObj = new Date(startDate2 ?? new Date());
+  const endDateObj = new Date(endDate2 ?? new Date());
 
-// getDay() 메서드로 요일 인덱스를 얻음
-const startDayIndex = startDateObj.getDay();
-const endDayIndex = endDateObj.getDay();
+  // getDay() 메서드로 요일 인덱스를 얻음
+  const startDayIndex = startDateObj.getDay();
+  const endDayIndex = endDateObj.getDay();
 
-// days 배열에서 요일 이름을 얻음
-const startDayName = days[startDayIndex];
-const endDayName = days[endDayIndex];
+  // days 배열에서 요일 이름을 얻음
+  const startDayName = days[startDayIndex];
+  const endDayName = days[endDayIndex];
 
-// 콘솔에 출력 (또는 다른 방식으로 사용)
-console.log("시작 날짜의 요일: " + startDayName);
-console.log("종료 날짜의 요일: " + endDayName);
- 
+  // 콘솔에 출력 (또는 다른 방식으로 사용)
+  console.log("시작 날짜의 요일: " + startDayName);
+  console.log("종료 날짜의 요일: " + endDayName);
+
   // modalcontrol
   const [modalShow, setModalShow] = useState(false);
   const [foriModalShow, foriSetModalShow] = useState(false);
+  const [render, setRender] = useState<boolean>(false);
+
+  // 선택 항공편 코드
+  const [fisrtId, setFirstId] = useState<number>(0);
+  const [secoundId, setSecoundId] = useState<number>(0);
+  const [selectedRow, setSelectedRow] = useState<number | null>(null);
+  const [selectedRow2, setSelectedRow2] = useState<number | null>(null);
 
   useEffect(() => {
     initScripts();
@@ -101,10 +118,69 @@ console.log("종료 날짜의 요일: " + endDayName);
       );
     }
   }, []);
+  useEffect(() => {
+    retrieveOperationinfo();
+    retrieveOperationinfo2();
+  }, [selectedAbbr2,selectedFori2, startDate2, startDayName, endDate2, page, page2]);
 
-  // const retrieveOperationInfo = () => { 
-  //   OperationService.getAll(selectedAbbr2,selectedFori2,startDate2)
-  //  }
+  // 가는 날
+  const retrieveOperationinfo = () => {
+    const startDateParam = startDate2 || "defaultStartDate";
+    console.log("selectedAbbr2", selectedAbbr2);
+    console.log("selectedFori2", selectedFori2);
+    console.log("startDateParam", startDateParam);
+    console.log("startDayName", startDayName);
+    OperationService.getAll(
+      selectedFori2,
+      selectedAbbr2,
+      startDateParam,
+      startDayName,
+      page - 1,
+      4
+    )
+
+      .then((response: any) => {
+        const { operation, totalPages } = response.data;
+        setOperationinfo(operation);
+        setCount(totalPages);
+        // 로그 출력
+        console.log("response", response.data);
+        console.log("true 실행");
+        setRender(true);
+        console.log(render, "래넏랜더");
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
+
+  // 오는 날
+  const retrieveOperationinfo2 = () => {
+    const endDateParam = endDate2 || "defaultEndDate";
+    console.log("selectedAbbr2", selectedAbbr2);
+    console.log("selectedFori2", selectedFori2);
+    console.log("endDateParam", endDateParam);
+    console.log("startDayName", startDayName);
+    OperationService.getAll(
+      selectedAbbr2,
+      selectedFori2,
+      endDateParam,
+      startDayName,
+      page2 - 1,
+      4
+    )
+
+      .then((response: any) => {
+        const { operation, totalPages } = response.data;
+        setOperationinfo2(operation);
+        setCount2(totalPages);
+        // 로그 출력
+        console.log("response2", response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
 
   const handleAbbrSelection = (selectedAbbr2: any) => {
     setSelectedAbbr(selectedAbbr2);
@@ -114,6 +190,8 @@ console.log("종료 날짜의 요일: " + endDayName);
     setSelectedFori(selectedFori2);
     foriSetModalShow(false);
   };
+
+  //  달력 함수 받아오기
   const onclickdate = () => {
     let value = null;
     value = daterange.current?.value;
@@ -136,7 +214,31 @@ console.log("종료 날짜의 요일: " + endDayName);
   }, [daterange.current?.value]);
 
   // const myMo
+  //  todo: Pagination 수동 바인딩(공통)
+  //  페이지 번호를 누르면 => page 변수에 값 저장
+  const handlePageChange = (event: any, value: any) => {
+    // value == 화면의 페이지번호
+    setPage(value);
+  };
 
+  //  todo: Pagination 수동 바인딩(공통)
+  //  페이지 번호를 누르면 => page 변수에 값 저장
+  const handlePageChange2 = (event: any, value: any) => {
+    // value == 화면의 페이지번호
+    setPage2(value);
+  };
+
+  const handleSelectFlight = (operationId: number) => {
+    setFirstId(operationId);
+    setSelectedRow(operationId);
+    console.log("firstID" + fisrtId + "SecoundID" + secoundId);
+  };
+
+  const handleSelectFlight2 = (operationId: number) => {
+    setSecoundId(operationId);
+    setSelectedRow2(operationId);
+    console.log("firstID" + fisrtId + "SecoundID" + secoundId);
+  };
   return (
     <>
       <div className="hero hero-inner">
@@ -151,6 +253,7 @@ console.log("종료 날짜의 요일: " + endDayName);
         </div>
       </div>
       {/* 상단 바 */}
+
       <div className="sangmin_choose_top">
         <div className="container">
           {/* 출발지 */}
@@ -258,29 +361,35 @@ console.log("종료 날짜의 요일: " + endDayName);
         <div className="sangmin_choose_airport_pee_date mt-5">
           <div className="sangmin_bottom_solid">
             <table className="sangmin_choose_datepicker text-center">
-              {operationinfo &&
-                operationinfo.map((data) => (
-                  // 키값 추가 않하면 react 에서 경고를 추가 : 키는 내부적으로 리액트가 rerending 할때 체크하는 값임
-                  <tr key={data.OperationId}>
-                    {/* 날짜 */}
-                    <td>{data.StartDate.getDate() - 3}</td>
-                    <td>{data.StartDate.getDate() - 2}</td>
-                    <td>{data.StartDate.getDate() - 1}</td>
-                    <td>{data.StartDate.toLocaleDateString()}</td>
-                    <td>{data.StartDate.getDate() + 1}</td>
-                    <td>{data.StartDate.getDate() + 2}</td>
-                    <td>{data.StartDate.getDate() + 3}</td>
-                  </tr>
-                ))}
-
               <tr>
-                <td>11.27 (월)</td>
-                <td>11.27 (화)</td>
-                <td>{startDate2}(수)</td>
-                <td>{startDate2} (목)</td>
-                <td>11.27 (금)</td>
-                <td>11.27 (토)</td>
-                <td>11.27 (일)</td>
+                <td>
+                  <div>{startDate2}</div>
+                  {days[(startDayIndex - 3 + 7) % 7]}
+                </td>
+                <td>
+                  <div>{startDate2}</div>
+                  {days[(startDayIndex - 2 + 7) % 7]}
+                </td>
+                <td>
+                  <div>{startDate2}</div>
+                  {days[(startDayIndex - 1 + 7) % 7]}
+                </td>
+                <td>
+                  <div>{startDate2}</div>
+                  {days[startDayIndex]}
+                </td>
+                <td>
+                  <div>{startDate2}</div>
+                  {days[(startDayIndex + 1) % 7]}
+                </td>
+                <td>
+                  <div>{startDate2}</div>
+                  {days[(startDayIndex + 2) % 7]}
+                </td>
+                <td>
+                  <div>{startDate2}</div>
+                  {days[(startDayIndex + 3) % 7]}
+                </td>
               </tr>
             </table>
             {/* <p className="sangmin_choose_airport_data">11.27 (월)</p>
@@ -305,44 +414,48 @@ console.log("종료 날짜의 요일: " + endDayName);
           {operationinfo &&
             operationinfo.map((data) => (
               // 키값 추가 않하면 react 에서 경고를 추가 : 키는 내부적으로 리액트가 rerending 할때 체크하는 값임
-
               <tr
                 className="sangmin_choose_table_content"
-                key={data.OperationId}
+                id={data.operationId}
+                key={data.operationId}
+                onClick={() => handleSelectFlight(data.operationId)}
+                style={{
+                  cursor: "pointer",
+                  backgroundColor:
+                    selectedRow === data.operationId ? "lightblue" : "white",
+                }}
               >
                 {/* 날짜 */}
                 <td>
-                  <ul className="sangmin_choose_time d-flex justify-content-between  mt-3">
-                    <li>{data.StartTime}</li>
+                  <ul className="sangmin_choose_time d-flex justify-content-between  mt-2">
+                    <li>{data.startTime}</li>
 
                     <li className="sang_min_arrow_icon">
                       <i className="sang_min_arrow_icon bi bi-arrow-right"></i>
                     </li>
-                    <li>{data.FinalTime}</li>
+                    <li>{data.finalTime}</li>
                   </ul>
                 </td>
-                <td>{data.FlightName}</td>
-                <td>{data.Price}</td>
-                <td>{(data.Price)*3}</td>
-                <td>{(data.Price)*3*3}</td>
+                <td className="ksm_airline_flightname">
+                  <div>항공사: {data.airline}</div>{" "}
+                  <div>기종: {data.flightName}</div>
+                </td>
+                <td>{data.price.toLocaleString()} 원</td>
+                <td>{(Number(data.price)*3).toLocaleString()} 원</td>
+                <td>{(Number(data.price)*9).toLocaleString()} 원</td>
               </tr>
             ))}
-          <tr className="sangmin_choose_table_content">
-            <td>
-              <ul className="sangmin_choose_time d-flex justify-content-between  mt-3">
-                <li>20:50</li>
-
-                <li className="sang_min_arrow_icon">
-                  <i className="sang_min_arrow_icon bi bi-arrow-right"></i>
-                </li>
-                <li>23:40</li>
-              </ul>
-            </td>
-            <td>비행기 코드</td>
-            <td>237,000</td>
-            <td>637,000</td>
-            <td>2,130,000</td>
-          </tr>
+          <Pagination
+            className="btn-main"
+            color="standard"
+            count={count}
+            page={page}
+            siblingCount={1}
+            boundaryCount={1}
+            variant="outlined"
+            shape="rounded"
+            onChange={handlePageChange}
+          />
         </table>
 
         {/* 왕복일 경우만 표시 */}
@@ -372,29 +485,35 @@ console.log("종료 날짜의 요일: " + endDayName);
         <div className="sangmin_choose_airport_pee_date mt-5">
           <div className="sangmin_bottom_solid">
             <table className="sangmin_choose_datepicker text-center">
-            {operationinfo &&
-                operationinfo.map((data) => (
-                  // 키값 추가 않하면 react 에서 경고를 추가 : 키는 내부적으로 리액트가 rerending 할때 체크하는 값임
-                  <tr key={data.OperationId}>
-                    {/* 날짜 */}
-                    <td>{data.StartDate.getDate() - 3}</td>
-                    <td>{data.StartDate.getDate() - 2}</td>
-                    <td>{data.StartDate.getDate() - 1}</td>
-                    <td>{data.StartDate.toLocaleDateString()}</td>
-                    <td>{data.StartDate.getDate() + 1}</td>
-                    <td>{data.StartDate.getDate() + 2}</td>
-                    <td>{data.StartDate.getDate() + 3}</td>
-                  </tr>
-                ))}
-             
               <tr>
-                <td>11.27 (월)</td>
-                <td>11.27 (화)</td>
-                <td>11.27 (수)</td>
-                <td>11.27 (목)</td>
-                <td>11.27 (금)</td>
-                <td>11.27 (토)</td>
-                <td>11.27 (일)</td>
+                <td>
+                  <div>{endDate2}</div>
+                  {days[(endDayIndex - 3 + 7) % 7]}
+                </td>
+                <td>
+                  <div>{endDate2}</div>
+                  {days[(endDayIndex - 2 + 7) % 7]}
+                </td>
+                <td>
+                  <div>{endDate2}</div>
+                  {days[(endDayIndex - 1 + 7) % 7]}
+                </td>
+                <td>
+                  <div>{endDate2}</div>
+                  {days[endDayIndex]}
+                </td>
+                <td>
+                  <div>{endDate2}</div>
+                  {days[(endDayIndex + 1) % 7]}
+                </td>
+                <td>
+                  <div>{endDate2}</div>
+                  {days[(endDayIndex + 2) % 7]}
+                </td>
+                <td>
+                  <div>{endDate2}</div>
+                  {days[(endDayIndex + 3) % 7]}
+                </td>
               </tr>
             </table>
             {/* <p className="sangmin_choose_airport_data">11.27 (월)</p>
@@ -404,6 +523,7 @@ console.log("종료 날짜의 요일: " + endDayName);
           </p> */}
           </div>
         </div>
+
         {/* 조회 page */}
         <table className="table text-center mt-5">
           <tr className="sangmin_choose_table_head">
@@ -414,48 +534,54 @@ console.log("종료 날짜의 요일: " + endDayName);
             <th className="sangmin_business_bg">비즈니스</th>
             <th className="sangmin_first_bg">퍼스트</th>
           </tr>
-
-          {operationinfo &&
-            operationinfo.map((data) => (
+          {operationinfo2 &&
+            render &&
+            operationinfo2.map((data) => (
               // 키값 추가 않하면 react 에서 경고를 추가 : 키는 내부적으로 리액트가 rerending 할때 체크하는 값임
 
               <tr
                 className="sangmin_choose_table_content"
-                key={data.OperationId}
+                id={data.operationId}
+                key={data.operationId}
+                onClick={() => handleSelectFlight2(data.operationId)}
+                style={{
+                  cursor: "pointer",
+                  backgroundColor:
+                    selectedRow2 === data.operationId ? "lightblue" : "white",
+                }}
               >
                 {/* 날짜 */}
                 <td>
-                  <ul className="sangmin_choose_time d-flex justify-content-between  mt-3">
-                    <li>{data.StartTime}</li>
+                  <ul className="sangmin_choose_time d-flex justify-content-between  mt-2">
+                    <li>{data.startTime}</li>
 
                     <li className="sang_min_arrow_icon">
                       <i className="sang_min_arrow_icon bi bi-arrow-right"></i>
                     </li>
-                    <li>{data.FinalTime}</li>
+                    <li>{data.finalTime}</li>
                   </ul>
                 </td>
-                <td>{data.FlightName}</td>
-                <td>{data.Price}</td>
-                <td>{(data.Price)*3}</td>
-                <td>{(data.Price)*3*3}</td>
+                <td className="ksm_airline_flightname">
+                  <div>항공사: {data.airline}</div>{" "}
+                  <div>기종: {data.flightName}</div>
+                </td>
+
+                <td>{data.price.toLocaleString()} 원</td>
+                <td>{(Number(data.price)*3).toLocaleString()} 원</td>
+                <td>{(Number(data.price)*9).toLocaleString()} 원</td>
               </tr>
             ))}
-          <tr className="sangmin_choose_table_content">
-            <td>
-              <ul className="sangmin_choose_time d-flex justify-content-between  mt-3">
-                <li>20:50</li>
-
-                <li className="sang_min_arrow_icon">
-                  <i className="sang_min_arrow_icon bi bi-arrow-right"></i>
-                </li>
-                <li>23:40</li>
-              </ul>
-            </td>
-            <td>비행기 코드</td>
-            <td>237,000</td>
-            <td>637,000</td>
-            <td>2,130,000</td>
-          </tr>
+          <Pagination
+            className="btn-main"
+            color="standard"
+            count={count2}
+            page={page2}
+            siblingCount={1}
+            boundaryCount={1}
+            variant="outlined"
+            shape="rounded"
+            onChange={handlePageChange2}
+          />
         </table>
 
         {/* 유의 상황 */}
@@ -477,9 +603,9 @@ console.log("종료 날짜의 요일: " + endDayName);
           <button className="sangmin_choose_btn">
             <Link to="/reserve-payment">비회원 결제</Link>
           </button>
-          <button className="sangmin_choose_btn">
-            <Link to="/reserve-payment">회원 결제</Link>
-          </button>
+          <Link className="sangmin_choose_btn" to={`/reserve-payment/${fisrtId}/${secoundId}`}>
+            회원 결제
+          </Link>
         </div>
       </div>
       {/* 모달 불러오기 */}

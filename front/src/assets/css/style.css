@@ -2321,23 +2321,23 @@ line-height: 1.6; }
 }
 .sangmin_gray_bg {
   background-color: #6d6e70;
-  width: 42.8%;
+  width: 32.8%;
 }
 .sangmin_unleftline {
   background-color: #6d6e70;
-  width: 14.2%;
+  width: 18.2%;
 }
 .sangmin_economy_bg {
   background-color: #c50251;
-  width: 14.2%;
+  width: 15.2%;
 }
 .sangmin_business_bg {
   background-color: #283890;
-  width: 14.2%;
+  width: 15.2%;
 }
 .sangmin_first_bg {
   background-color: black;
-  width: 14.2%;
+  width: 15.2%;
 }
 .sangmin_choose_table_head {
   height: 100px;
@@ -2352,7 +2352,13 @@ line-height: 1.6; }
   background-color: #f7f7f7;
   padding: 30px;
 }
-
+.ksm_airline_flightname{
+  text-align: left;
+}
+.ksm_airline_flightname{
+  padding: 0;
+  margin: 0;
+}
 /* 결제 페이지 */
 .sangmin_reserve_payment_subtitle {
   margin: 60px 0 50px 0;

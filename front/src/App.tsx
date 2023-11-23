@@ -51,7 +51,7 @@ function App() {
 
           <Route path="/reserve" element={<Reserve/>} />
           <Route path="/reserve-choose/:selectedAbbr/:selectedFori/:adultCount/:childCount/:seatClass/:startDate/:endDate" element={<ReserveChoose/>} />
-        <Route path="/reserve-payment" element={<ReservePayment/>} />
+        <Route path="/reserve-payment/:firstId/:secoundId" element={<ReservePayment/>} />
        </Routes> 
        
       {/* 꼬리말 */}
