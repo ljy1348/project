@@ -27,8 +27,4 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     Page<Member> findAllByMemberEmailContaining(String memberEmail, Pageable pageable);
     Page<Member> findAllByMemberEnameContaining(String memberEname, Pageable pageable);
 
-
-
-
-
 }

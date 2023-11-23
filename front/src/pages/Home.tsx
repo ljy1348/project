@@ -2,170 +2,90 @@
 import React, { useEffect, useRef, useState } from "react";
 import initScripts from "../assets/js/scripts";
 import initCustom from "../assets/js/custom";
-import {Overlay } from "react-bootstrap";
-
-import Airport from "../components/airport/Airport";
+import { Button } from "react-bootstrap";
+import ForiareaModal from "./modal/ForiareaModal";
+// react-bootstrap import
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 /* eslint-disable */
 function Home() {
   // todo: overlay(===popover)
   // 팝오버 메세지 보이기 함수
-  // const renderTooltip = (props: any) => (
-  //   <Tooltip id="button-tooltip" {...props}>
-  //     {/* 메세지 넣기 */}
-  //   </Tooltip>
-  // );
-
-  const [adultCount, setAdultCount] = useState(0);
-  const [childCount, setChildCount] = useState(0);
-  const [infantCount, setInfantCount] = useState(0);
-  const [arrivalAirport, setArrivalAirport] = useState("출발지");
-
-  const setAirport = (data:string) => { 
-    setArrivalAirport(data);
-   }
-
-  const handleIncrement = (category: any) => {
-    switch (category) {
-      case "adult":
-        setAdultCount(adultCount + 1);
-        break;
-      case "child":
-        setChildCount(childCount + 1);
-        break;
-      case "infant":
-        setInfantCount(infantCount + 1);
-        break;
-      default:
-        break;
-    }
-  };
-  const handleDecrement = (category: any) => {
-    switch (category) {
-      case "adult":
-        setAdultCount(adultCount > 0 ? adultCount - 1 : 0);
-        break;
-      case "child":
-        setChildCount(childCount > 0 ? childCount - 1 : 0);
-        break;
-      case "infant":
-        setInfantCount(infantCount > 0 ? infantCount - 1 : 0);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(false);
-  const [show3, setShow3] = useState(false);
-  const [show4, setShow4] = useState(false);
-  const target = useRef(null);
-  const target2 = useRef(null);
-  const target3 = useRef(null);
-  const target4 = useRef(null);
+  const renderTooltip = (props: any) => (
+    <Tooltip id="button-tooltip" {...props}>
+      {/* 팝오버(tooltip) 메세지 보이기 */}
+      여기 간단 메세지입니다.
+    </Tooltip>
+  );
 
   useEffect(() => {
     initScripts();
     initCustom();
   }, []);
 
-  const controllShow = (data:string) => { 
-    if (data==="" && (show || show2 || show3 || show4)) {setShow(false); setShow2(false); setShow3(false); setShow4(false)}
-    if (data==="1") {setShow(true); setShow2(false); setShow3(false); setShow4(false);}
-   }
-
-  // const [foriModalShow, foriSetModalShow] = useState(false);
+  const [foriModalShow, foriSetModalShow] = useState(false);
 
   return (
     <>
       {/* 여기 */}
       {/* 1 */}
-      <div className="hero" >
-        <div className="container" >
-          <div className="row align-items-center" >
+      <div className="hero">
+        <div className="container">
+          <div className="row align-items-center">
             {/* 서브 메뉴 */}
             <ul id="sub_menu">
               <li className="sub_menu_select">
-                <a href="#" className="hnn_none_deco_a" >
-                  <form className="form" id="submenu" >
+                <a href="#" className="sub_menu_select">
+                  <form className="form" id="submenu">
                     항공권 예약
                   </form>
                 </a>
               </li>
             </ul>
             {/* 예약바 너비 조절 */}
-
-            {/* <div className="row align-items-center">
-            </div> */}
-            <div className="col-md-12" style={{zIndex:100}}>
+            <div className="col-md-12">
               <div className="intro-wrap">
                 <div className="row">
                   <div className="col-12">
                     <form className="form">
                       {/* 예약바 높이 조절 */}
                       <div className="row mb-4">
-                        <div>
-                          <div
-                            className="btn-group"
-                            role="group"
-                            aria-label="Basic radio toggle button group"
-                          >
-                            <input
-                              type="radio"
-                              className="btn-check"
-                              name="btnradio"
-                              id="oneWay"
-                              autoComplete="off"
-                            />
-                            <label
-                              className="btn btn-outline-primary rounded-0"
-                              htmlFor="oneWay"
-                            >
-                              편도
-                            </label>
-
-                            <input
-                              type="radio"
-                              className="btn-check"
-                              name="btnradio"
-                              id="goBack"
-                              autoComplete="off"
-                            />
-                            <label
-                              className="btn btn-outline-primary rounded-0"
-                              htmlFor="goBack"
-                            >
-                              왕복
-                            </label>
-                          </div>
-
-                          {/* 검색 버튼 */}
-                          <button type="button" className="btn-fligh-search">
-                            검색
-                          </button>
-                        </div>
                         {/* 출발지 */}
-
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2" style={{ position: "relative", zIndex: 100}}>
-                          <input
-                            type="text"
-                            className="form-control"
-                            ref={target}
-                            onClick={() => setShow(!show)}
-                            value={arrivalAirport}
-                          ></input>
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
+                          <select
+                            name=""
+                            id=""
+                            className="form-control custom-select"
+                          >
+                            <option value="">출발지</option>
+                            <option value="">Peru</option>
+                            <option value="">Japan</option>
+                            <option value="">Thailand</option>
+                            <option value="">Brazil</option>
+                            <option value="">United States</option>
+                            <option value="">Israel</option>
+                            <option value="">China</option>
+                            <option value="">Russia</option>
+                          </select>
                         </div>
-
                         {/* 도착지 */}
                         <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
-                          <input
-                            type="text"
-                            className="form-control"
-                            ref={target2}
-                            onClick={() => setShow2(!show2)}
-                            value={"도착지"}
-                          ></input>
+                          <select
+                            name=""
+                            id=""
+                            className="form-control custom-select"
+                          >
+                            <option value="">도착지</option>
+                            <option value="">Peru</option>
+                            <option value="">Japan</option>
+                            <option value="">Thailand</option>
+                            <option value="">Brazil</option>
+                            <option value="">United States</option>
+                            <option value="">Israel</option>
+                            <option value="">China</option>
+                            <option value="">Russia</option>
+                          </select>
                         </div>
 
                         {/* 달력 */}
@@ -177,229 +97,33 @@ function Home() {
                           />
                         </div>
 
-                        {/* 인원 */}
+                        {/* 탑승객 */}
                         <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
                           <input
                             type="text"
                             className="form-control"
-                            ref={target3}
-                            onClick={() => setShow3(!show3)}
-                            value={"인원"}
-                          ></input>
+                            placeholder="탑승객"
+                            onClick={() => foriSetModalShow(true)}
+                          />
                         </div>
 
-                        {/* 좌석등급 */}
+                        {/* test */}
                         <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
                           <input
                             type="text"
                             className="form-control"
-                            ref={target4}
-                            onClick={() => setShow4(!show4)}
-                            value={"좌석등급"}
-                          ></input>
+                            placeholder="테스트용"
+                            onClick={() => foriSetModalShow(true)}
+                          />
                         </div>
-
-                        <Overlay
-                          target={target.current}
-                          show={show}
-                          placement="bottom"
-                        >
-                          {({
-                            placement: _placement,
-                            arrowProps: _arrowProps,
-                            show: _show,
-                            popper: _popper,
-                            hasDoneInitialMeasure: _hasDoneInitialMeasure,
-                            ...props
-                          }) => (
-                            <div
-                              className="boader_passenger"
-                              {...props}
-                              style={{
-                                position: "absolute",
-                                // backgroundColor: "white",
-                                width: "530px",
-                                // 길이 지정
-                                margin: "20px 0px 0px 30px",
-                                padding: "20px 0px 0px 0px",
-                                color: "black",
-                                borderRadius: 3,
-                                ...props.style,
-                                zIndex: 100
-                              }}
-                              
-                            >
-                              <Airport setAirport={setAirport}/>
-                            </div>
-                          )}
-                        </Overlay>
-
-                        <Overlay
-                          target={target2.current}
-                          show={show2}
-                          placement="bottom"
-                        >
-                          {({
-                            placement: _placement,
-                            arrowProps: _arrowProps,
-                            show: _show,
-                            popper: _popper,
-                            hasDoneInitialMeasure: _hasDoneInitialMeasure,
-                            ...props
-                          }) => (
-                            <div
-                              className="boader_passenger"
-                              {...props}
-                              style={{
-                                position: "absolute",
-                                // backgroundColor: "white",
-                                width: "530px",
-                                // 길이 지정
-                                margin: "20px 0px 0px 30px",
-                                padding: "20px 0px 0px 0px",
-                                color: "black",
-                                borderRadius: 3,
-                                ...props.style,
-                              }}
-                            >
-                              <Airport setAirport={setAirport}  />
-                            </div>
-                          )}
-                        </Overlay>
-
-                        {/* 인원 */}
-                        <Overlay
-                          target={target3.current}
-                          show={show3}
-                          placement="bottom"
-                        >
-                          {({
-                            placement: _placement,
-                            arrowProps: _arrowProps,
-                            show: _show,
-                            popper: _popper,
-                            hasDoneInitialMeasure: _hasDoneInitialMeasure,
-                            ...props
-                          }) => (
-                            <div
-                              className="boader_passenger"
-                              {...props}
-                              style={{
-                                position: "absolute",
-                                // backgroundColor: "white",
-                                width: "200px",
-                                // 길이 지정
-                                margin: "20px 0px 0px 0px",
-                                padding: "20px 0px 10px 40px",
-                                color: "black",
-                                borderRadius: 3,
-                                ...props.style,
-                              }}
-                            >
-                              <div>
-                                <div className="style-personel">
-                                  <button
-                                    className="style-personel-button"
-                                    onClick={() => handleDecrement("adult")}
-                                  >
-                                    -
-                                  </button>
-                                  <span> 성인: {adultCount} </span>
-                                  <button
-                                    className="style-personel-button"
-                                    onClick={() => handleIncrement("adult")}
-                                  >
-                                    +
-                                  </button>
-                                </div>
-                                <div className="style-personel">
-                                  <button
-                                    className="style-personel-button"
-                                    onClick={() => handleDecrement("child")}
-                                  >
-                                    -
-                                  </button>
-                                  <span> 유아: {childCount} </span>
-                                  <button
-                                    className="style-personel-button"
-                                    onClick={() => handleIncrement("child")}
-                                  >
-                                    +
-                                  </button>
-                                </div>
-
-                                <div className="style-personel">
-                                  <button
-                                    className="style-personel-button"
-                                    onClick={() => handleDecrement("infant")}
-                                  >
-                                    -
-                                  </button>
-                                  <span> 소아: {infantCount} </span>
-                                  <button
-                                    className="style-personel-button"
-                                    onClick={() => handleIncrement("infant")}
-                                  >
-                                    +
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                        </Overlay>
-
-                        {/* 좌석등급 */}
-                        <Overlay
-                          target={target4.current}
-                          show={show4}
-                          placement="bottom"
-                        >
-                          {({
-                            placement: _placement,
-                            arrowProps: _arrowProps,
-                            show: _show,
-                            popper: _popper,
-                            hasDoneInitialMeasure: _hasDoneInitialMeasure,
-                            ...props
-                          }) => (
-                            <div
-                              className="boader_passenger"
-                              {...props}
-                              style={{
-                                position: "absolute",
-                                // backgroundColor: "white",
-                                width: "250px",
-                                // 길이 지정
-                                margin: "20px 0px 0px 0px",
-                                padding: "30px 0px 30px 50px",
-                                color: "black",
-                                borderRadius: 3,
-                                ...props.style,
-                              }}
-                            >
-                              {/* 여기 */}
-                              <div className="d-grid gap-3">
-                                <button className="seat-rating" type="button">
-                                  이코노미
-                                </button>
-                                <button className="seat-rating" type="button">
-                                  비지니스
-                                </button>
-                                <button className="seat-rating" type="button">
-                                  퍼스트
-                                </button>
-                              </div>
-                            </div>
-                          )}
-                        </Overlay>
                       </div>
                       <div className="row align-items-center">
                         <div className="col-lg-8">
-                          {/* <label className="control control--checkbox mt-3"> */}
-                          {/* <span className="caption">Save this search</span>
+                          <label className="control control--checkbox mt-3">
+                            <span className="caption">Save this search</span>
                             <input type="checkbox" checked={true} />
-                            <div className="control__indicator"></div> */}
-                          {/* </label> */}
+                            <div className="control__indicator"></div>
+                          </label>
                         </div>
                       </div>
                     </form>
@@ -411,15 +135,85 @@ function Home() {
         </div>
       </div>
 
-      {/* 오류 방지 왜 에러 발생 하는지 모름*/}
-      <div></div>
+      {/* 부가서비스 */}
+      <div className="untree_co-section">
+        <div className="container">
+          <div className="row mb-5 justify-content-center">
+            <div className="col-lg-6 text-center">
+              <h2 className="text-center mb-3">부가 서비스</h2>
+            </div>
+          </div>
+          <div className="row align-items-stretch">
+            <div className="col-lg-4 order-lg-1">
+              <div className="h-100">
+                <div className="frame h-100">
+                  <div
+                    className="feature-img-bg h-100"
+                    style={{
+                      backgroundImage: "url('images/부가서비스.jpg')",
+                    }}
+                  ></div>
+                </div>
+              </div>
+            </div>
 
-      {/* 최저가 서비스 */ }
-      <div className="untree_co-section" onClick={()=>{controllShow("")}}>
+            <div className="col-6 col-sm-6 col-lg-4 feature-1-wrap d-md-flex flex-md-column order-lg-1">
+              <div className="feature-1 d-md-flex">
+                <div className="align-self-center">
+                  <img
+                    src="../images/돋보기.png"
+                    className="sub_service_img"
+                    alt=""
+                  />
+                  <h3>예약조회</h3>
+                </div>
+              </div>
+
+              <div className="feature-1 ">
+                <div className="align-self-center">
+                  <span className="flaticon-restaurant display-4 text-primary"></span>
+                  <h3>수화물</h3>
+                  <p className="mb-0">
+                    Even the all-powerful Pointing has no control about the
+                    blind texts.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-6 col-sm-6 col-lg-4 feature-1-wrap d-md-flex flex-md-column order-lg-3">
+              <div className="feature-1 d-md-flex">
+                <div className="align-self-center">
+                  <span className="flaticon-mail display-4 text-primary"></span>
+                  <h3>체크인</h3>
+                  <p className="mb-0">
+                    Even the all-powerful Pointing has no control about the
+                    blind texts.
+                  </p>
+                </div>
+              </div>
+
+              <div className="feature-1 d-md-flex">
+                <div className="align-self-center">
+                  <span className="flaticon-phone-call display-4 text-primary"></span>
+                  <h3>마일리지</h3>
+                  <p className="mb-0">
+                    Even the all-powerful Pointing has no control about the
+                    blind texts.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 최저가 서비스 */}
+      <div className="untree_co-section">
         <div className="container">
           <div className="row text-center justify-content-center mb-5">
             <div className="col-lg-7">
-              <h2 className="section-title text-center">최저가 여행</h2>
+              <h2 className="section-title text-center">최적가 여행</h2>
             </div>
           </div>
 
@@ -448,9 +242,7 @@ function Home() {
                 <div className="d-flex align-items-center">
                   <div>
                     <h3>
-                      <a className="hnn_none_deco_a" href="#">
-                        Rialto Mountains
-                      </a>
+                      <a href="#">Rialto Mountains</a>
                     </h3>
                     <div className="price ml-auto">
                       <span>KRW 100,000</span>
@@ -628,6 +420,7 @@ function Home() {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -755,53 +548,18 @@ function Home() {
           </div>
         </div>
         {/* overlay(===popover) */}
-        {/* <OverlayTrigger
-          placement="right" // placement="right" : 오른쪽 보이기
+        <OverlayTrigger
+          placement="right"                // placement="right" : 오른쪽 보이기
           delay={{ show: 250, hide: 400 }} // show: 지속시간, hide: 숨김시간
-          overlay={renderTooltip} // renderTooltip : 팝오버 메세지 함수 설정
+          overlay={renderTooltip}          // renderTooltip : 팝오버 메세지 함수 설정
         >
           <Button variant="success">Hover me to see</Button>
-        </OverlayTrigger> */}
+        </OverlayTrigger>
 
-        {/* ************************************************************* */}
-        {/* ************************************************************* */}
-        {/* ************************************************************* */}
-        {/* 테스트 */}
-        {/* <input ref={target} onClick={() => setShow(!show)}></input>
-
-          <Overlay target={target.current} show={show} placement="bottom">
-          {({
-            placement: _placement,
-            arrowProps: _arrowProps,
-            show: _show,
-            popper: _popper,
-            hasDoneInitialMeasure: _hasDoneInitialMeasure,
-            ...props
-          }) => (
-            <div
-              {...props}
-              style={{
-                position: "absolute",
-                backgroundColor: "green",
-                width: "1000px",
-                margin: "20px 0px 0px 0px",
-
-                padding: "20px 100px 0px ",
-                color: "black",
-                borderRadius: 3,
-                ...props.style,
-              }}
-            >
-              <Airport />
-            </div>
-          )}
-        </Overlay>   */}
-
-        {/* 형 소스 테스트 */}
-        {/* <ForiareaModal
+        <ForiareaModal
           show={foriModalShow}
           onHide={() => foriSetModalShow(false)}
-        /> */}
+        />
       </div>
     </>
   );

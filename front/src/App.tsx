@@ -18,14 +18,19 @@ import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
 import Oauth from './pages/auth/KakaoLogin';
 import KakaoLogin from './pages/auth/KakaoLogin';
-import initScripts from './assets/js/scripts';
-import initCustom from './assets/js/custom';
 import UserInfo from './pages/auth/user/UserInfo';
-import Airport from './components/airport/Airport';
 import ErrorBoundary from './components/ErrorBoundary';
 import AdminPage from './pages/auth/user/AdminPage';
 import AdminMemberList from './pages/auth/admin/AdminMemberList';
 
+// import CustomerPage from './pages/customer/CustomerPage';
+import CheckIn from './pages/checkIn/CheckIn';
+import Reserve from './pages/reserve/Reserve';
+import ForiareaModal from './pages/modal/ForiareaModal';
+import Passport from './pages/checkIn/Passport';
+import ReserveChoose from './pages/reserve/ReserveChoose';
+import ReservePayment from './pages/reserve/ReservePayment';
+// todo: 리액트 import
 
 function App() {
 
@@ -33,27 +38,39 @@ function App() {
 
   return (
     <div className="App">
-      {/* 머리말 */}
-      <Nav/>
 
+      {/* 머리말 */}                 
+      <Nav/>
       {/* 본문 */}
       <Routes>
-        <Route path="/" element={<ErrorBoundary><Home/></ErrorBoundary>} />
-        <Route path="/services" element={<Services/>} />
-        <Route path="/about" element={<About/>} />
-        <Route path="/contact" element={<Contact/>} />
-        <Route path="/elements" element={<Elements/>} />
-        <Route path="/register" element={<Register/>} />
+
+          <Route path="/" element={<Home/>}></Route>
+          <Route path="/services" element={<Services/>} />
+          <Route path="/about" element={<About/>} />
+          <Route path="/contact" element={<Contact/>} />
+          <Route path="/elements" element={<Elements/>} />  
+
+          {/* 체크인 */}
+          <Route path="/checkin" element={<CheckIn/>} />   
+          <Route path="/passport" element={<Passport/>} />   
+          <Route path="/foriareamodal" element={<ForiareaModal/>} /> 
+
+          <Route path="/register" element={<Register/>} />
         <Route path="/login/auth/:app" element={<ErrorBoundary><KakaoLogin/></ErrorBoundary>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/user-info" element={<UserInfo/>} />
         <Route path="/admin" element={<AdminPage/>} />
-        <Route path="/*" element={<Home/>} />
-        
-        {/* <Route path="/test" element={</>} /> */}
 
-      </Routes>
-      
+          
+
+
+
+
+          <Route path="/reserve" element={<Reserve/>} />
+          <Route path="/reserve-choose/:selectedAbbr/:selectedFori/:adultCount/:childCount/:seatClass/:startDate/:endDate" element={<ReserveChoose/>} />
+        <Route path="/reserve-payment" element={<ReservePayment/>} />
+       </Routes> 
+       
       {/* 꼬리말 */}
       <Footer/>
     </div>
