@@ -6,15 +6,11 @@ import com.example.back.model.searchReservation.SearchReservation;
 import com.example.back.service.searchReservation.SearchReservationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -40,11 +36,12 @@ public class SearchReservationController {
     
 //    전체 조회 + like 검색
     @GetMapping("/search-reservation")
-    public ResponseEntity<Object> getDeptAll(
-            @RequestParam(defaultValue = "0") int airlineReservationNumber){
+    public ResponseEntity<Object> getSearchReservation(
+            @RequestParam(defaultValue = "0") int airlineReservationNumber
+    ){
         try {
 //            전체 조회 + like 검색
-            List<SearchReservation> list = searchReservationService.findAllByAirlineReservationNumberContaining(airlineReservationNumber);
+            List<SearchReservation> list = searchReservationService.findAllByAirlineReservationNumber(airlineReservationNumber);
 
             if (list.isEmpty() == false) {
 //                성공
@@ -55,6 +52,7 @@ public class SearchReservationController {
             }
 
         } catch (Exception e) {
+            log.debug(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -62,15 +60,15 @@ public class SearchReservationController {
 
 
 //    상세 조회
-    @GetMapping("/search-reservation/{airlineReservationNumber}")
+    @GetMapping("/search-reservation/seeReservation/{airlineReservationNumber}")
     public ResponseEntity<Object> getAirlineReservationNumber(
             @PathVariable int airlineReservationNumber
     ) {
         try {
-            List<OprResDto> list = searchReservationService.searchReservation(airlineReservationNumber);
+            Optional<OprResDto> optionalOprResDto = searchReservationService.searchReservation(airlineReservationNumber);
 
-            if(list.isEmpty() == false) {
-                return new ResponseEntity<>(list, HttpStatus.OK);
+            if(optionalOprResDto.isEmpty() == false) {
+                return new ResponseEntity<>(optionalOprResDto.get(), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }

@@ -9,16 +9,16 @@ function ReservationList() {
   const [reservation, setReservation] = useState<Array<IReservation>>([]);
 
   // 검색어(input) 변수
-  const [searchKeyword, setSearchKeyword] = useState<string>("");
+  const [airlineReservationNumber, setAirlineReservationNumber] = useState<any>("");
 
   // 전체조회
   const retrieveReservation = () => {
-    if (searchKeyword === "") {
-      alert("예약번호 전체 또는 회원ID를 입력해 주세요.");
+    if (airlineReservationNumber <= 99999 || airlineReservationNumber >= 200000) {
+      alert("예약번호 6 자리를 입력해 주세요.");
       return;
     }
-    // 벡엔드 매개변수 전송 : + 현재페이지(page), 1페이지당개수(pageSize)
-    ReservationService.getAll( searchKeyword) // 벡엔드 전체조회요청
+    // 벡엔드 매개변수 전송
+    ReservationService.getAll(airlineReservationNumber) // 벡엔드 전체조회요청
       .then((response: any) => {
         setReservation(response.data);
         // 로그 출력
@@ -31,25 +31,23 @@ function ReservationList() {
 
   //   input 태그 수동바인딩
   const onChangeSearchKeyword = (e: any) => {
-    setSearchKeyword(e.target.value); // 화면값 -> 변수저장
+    setAirlineReservationNumber(e.target.value); // 화면값 -> 변수저장
   };
 
   return (
     <>
       <div className="searchRow">
-        <div>
-          <div>
-            <div>
-              <div>
+        <div className="col-md-8 offset-2">
+              <div className="col-12 input-group mb-3">
               <div>
                 <p className="input-group-text">예약 번호</p>
               </div>
-              <div className="blankBox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+              {/* <div className="blankBox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div> */}
                 <input
                   type="text"
                   className="searchNumber"
                   placeholder="예약번호 6자리"
-                  value={searchKeyword}
+                  value={airlineReservationNumber}
                   onChange={onChangeSearchKeyword}
                 />
               </div>
@@ -64,8 +62,6 @@ function ReservationList() {
                   onClick={retrieveReservation}
                 />
               </div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -91,7 +87,7 @@ function ReservationList() {
                   <td>{data.memberYn}</td>
                   <td>{data.mileUseYn}</td>
                   <td>
-                    <a href={"/search-reservation/" + data.airlineReservationNumber}>
+                    <a href={"/search-reservation/seeReservation/" + data.airlineReservationNumber}>
                       <a className="badge bg-success">자세히</a>
                     </a>
                   </td>

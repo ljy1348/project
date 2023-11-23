@@ -32,17 +32,17 @@ public class SearchReservationService {
     SearchReservationRepository searchReservationRepository; // DI
     
 //    전체 조회 + like 검색
-    public List<SearchReservation> findAllByAirlineReservationNumberContaining(int airlineReservationNumber) {
-        List<SearchReservation> list = searchReservationRepository.findAllByAirlineReservationNumberContaining(airlineReservationNumber);
+    public List<SearchReservation> findAllByAirlineReservationNumber(int airlineReservationNumber) {
+        List<SearchReservation> list = searchReservationRepository.findAllByAirlineReservationNumber(airlineReservationNumber);
 
         return list;
     }
 
 //    상세 조회
-    public List<OprResDto> searchReservation(int airlineReservationNumber) {
-        List<OprResDto> list = searchReservationRepository.searchReservation(airlineReservationNumber);
+    public Optional<OprResDto> searchReservation(int airlineReservationNumber) {
+        Optional<OprResDto> optionalOprResDto = searchReservationRepository.searchReservation(airlineReservationNumber);
 
-        return list;
+        return optionalOprResDto;
     }
 
 

@@ -1880,16 +1880,15 @@ ul,li {list-style:none;}
 
 .searchRow {
   display: inline-block;
-  margin: auto auto;
-  width: 50%;
-  margin-bottom: 50px;
+  width: 100%;
+  margin-top: 30px;
 }
 
 .input-group-text {
   width: 100px;
+  height: 45px;
   color: white;
   background-color: #1a374d;
-  float: left;
 }
 
 .blankBox {
@@ -1901,13 +1900,11 @@ ul,li {list-style:none;}
   border: 2px solid #e9ecef;
   font-size: 16px;
   height: 45px;
-  width: 64%;
+  width: 70%;
   border-radius: 6px;
-  margin: 0 auto;
+  margin-left: 10px;
   margin-bottom: 10px;
   justify-content: center;
-  display: flex;
-  float: right;
 }
 
 .searchNumber:active,
@@ -1919,8 +1916,8 @@ ul,li {list-style:none;}
 
 .searchButton {
   margin: 0 auto;
-  margin-bottom: 10px;
-  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-top: 30px;
   width: 300px;
   justify-content: center;
 }
@@ -1937,3 +1934,12 @@ ul,li {list-style:none;}
   margin-bottom: 15px;
 }
 
+.form-ex {
+  height: auto;
+  width: 100%;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding-top: 50px;
+  padding-left: 60px;
+  padding-bottom: 30px;
+}

@@ -32,7 +32,7 @@ function App() {
         <Route path="/" element={<Home />} />
         {/* 예약 조회 */}
         <Route path="/search-reservation" element={<ReservationListPage />} />
-        <Route path="/search-reservation/:airlineReservationNumber" element={<SearchReservationPage />} />
+        <Route path="/search-reservation/seeReservation/:airlineReservationNumber" element={<SearchReservationPage />} />
 
 
         <Route path="/about" element={<About />} />

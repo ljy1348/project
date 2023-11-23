@@ -7,19 +7,18 @@ import http from "../../utils/http-common";
 // 셀렉트박스 : (email) 입력창      : 이메일 like 검색
 //   변수 : searchSelect (fullName, email)
 //   변수 : searchKeyword : 검색어
-const getAll = (searchKeyword:string) => {
-    return http.get<Array<IReservation>>(`/tour/search-reservation`);
-    // return http.get<Array<IReservation>>(`/tour/search-reservation`);
-  };
+const getAll = (airlineReservationNumber: any) => {
+  return http.get<Array<IReservation>>(`/tour/search-reservation?airlineReservationNumber=${airlineReservationNumber}`);
+};
+
+// 상세 조회
+const get = (airlineReservationNumber: any) => {
+  return http.get<IReservation>(`/tour/search-reservation/seeReservation/${airlineReservationNumber}`);
+};
   
-  // 상세 조회
-  const get = (airlineReservationNumber:any) => {
-    return http.get<IReservation>(`/tour/search-reservation/${airlineReservationNumber}`);
-  };
+const ReservationService = {
+  getAll,
+  get,
+};
   
-  const ReservationService = {
-    getAll,
-    get,
-  };
-  
-  export default ReservationService;
+export default ReservationService;

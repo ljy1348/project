@@ -2,15 +2,13 @@ package com.example.back.repository.searchReservation;
 
 import com.example.back.model.dto.OprResDto;
 import com.example.back.model.searchReservation.SearchReservation;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * packageName : com.example.back.repository.SearchReservation
@@ -28,8 +26,8 @@ import java.util.List;
 @Repository
 public interface SearchReservationRepository extends JpaRepository<SearchReservation, Integer> {
 
-//    전체 조회 + like 검색
-    List<SearchReservation> findAllByAirlineReservationNumberContaining(int airlineReservationNumber);
+//    전체 조회 + = 검색
+    List<SearchReservation> findAllByAirlineReservationNumber(int airlineReservationNumber);
 
 //    상세 조회
     @Query(value = "SELECT RES.AIRLINE_RESERVATION_NUMBER as airlineReservationNumber " +
@@ -58,7 +56,7 @@ public interface SearchReservationRepository extends JpaRepository<SearchReserva
             "FROM TB_RESERVATION RES, TB_OPERATION_INFO OPR, TB_MEMBERS_INFO MEM " +
             "WHERE RES.OPERATION_ID = OPR.OPERATION_ID AND RES.MEMBER_ID = MEM.MEMBER_ID " +
             "AND RES.AIRLINE_RESERVATION_NUMBER LIKE '%' || :airlineReservationNumber || '%' ", nativeQuery = true)
-    List<OprResDto> searchReservation(@Param("airlineReservationNumber") int airlineReservationNumber);
+    Optional<OprResDto> searchReservation(@Param("airlineReservationNumber") int airlineReservationNumber);
 
 
 }
