@@ -1,14 +1,20 @@
 package com.example.back.controller.searchReservation;
 
+import com.example.back.model.dto.OprResDto;
 import com.example.back.model.searchReservation.SearchReservation;
+
 import com.example.back.service.searchReservation.SearchReservationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -28,50 +34,21 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/tour")
 public class SearchReservationController {
+
     @Autowired
     SearchReservationService searchReservationService; // DI
-
-//    airlineReservationNumber like 검색
+    
+//    전체 조회 + like 검색
     @GetMapping("/search-reservation")
-    public ResponseEntity<Object> getAirlineReservationNumber(
-            @RequestParam(defaultValue = "airlineReservationNumber") String searchSelect, // select 태그 (1) number, (2) id
-            @RequestParam(defaultValue = "") String searchKeyword  // 검색어
-    ) {
+    public ResponseEntity<Object> getDeptAll(
+            @RequestParam(defaultValue = "0") int airlineReservationNumber){
         try {
-            List<SearchReservation> searchReservationList;
+//            전체 조회 + like 검색
+            List<SearchReservation> list = searchReservationService.findAllByAirlineReservationNumberContaining(airlineReservationNumber);
 
-            if(searchSelect.equals("airlineReservationNumber")) {
-                //            airlineReservationNumber like 검색
-                searchReservationList = searchReservationService.findAllByAirlineReservationNumberContaining(searchKeyword);
-
-            } else {
-                //            userId like 검색
-                searchReservationList = searchReservationService.findAllByUserIdContaining(searchKeyword);
-
-            }
-
-            if(searchReservationList.isEmpty() == false) {
-                return new ResponseEntity<>(searchReservationList, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-
-//    1건 상세 조회
-    @GetMapping("/search-reservation/{airlineReservationNumber}")
-    public ResponseEntity<Object> findById(
-            @PathVariable String airlineReservationNumber){
-        try {
-//            상세 조회
-            Optional<SearchReservation> optionalSearchReservation = searchReservationService.findById(airlineReservationNumber);
-
-            if (optionalSearchReservation.isEmpty() == false) {
+            if (list.isEmpty() == false) {
 //                성공
-                return new ResponseEntity<>(optionalSearchReservation.get(), HttpStatus.OK);
+                return new ResponseEntity<>(list, HttpStatus.OK);
             } else {
 //                데이터 없음
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -81,4 +58,25 @@ public class SearchReservationController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+
+//    상세 조회
+    @GetMapping("/search-reservation/{airlineReservationNumber}")
+    public ResponseEntity<Object> getAirlineReservationNumber(
+            @PathVariable int airlineReservationNumber
+    ) {
+        try {
+            List<OprResDto> list = searchReservationService.searchReservation(airlineReservationNumber);
+
+            if(list.isEmpty() == false) {
+                return new ResponseEntity<>(list, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

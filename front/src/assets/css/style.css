@@ -1877,43 +1877,19 @@ ul,li {list-style:none;}
 }
 
 /* 예약 조회 */
+
 .searchRow {
   display: inline-block;
   margin: auto auto;
-  width: 75%;
+  width: 50%;
   margin-bottom: 50px;
 }
 
-.searchForm {
-  position: relative;
-  -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.3);
-  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  z-index: 9;
-  padding: 30px;
-  background: #ffffff;
-  padding-bottom: 2%;
-  justify-content: center;
-}
-
-.searchSelect {
+.input-group-text {
+  width: 100px;
+  color: white;
+  background-color: #1a374d;
   float: left;
-  border: 2px solid #e9ecef;
-  font-size: 16px;
-  height: 45px;
-  width: 33%;
-  border-radius: 6px;
-  margin: 0 auto;
-  margin-bottom: 10px;
-  justify-content: center;
-  display: flex;
-}
-
-.searchSelect:active,
-.searchSelect:focus {
-  border-color: #1a374d;
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 
 .blankBox {
@@ -1931,7 +1907,7 @@ ul,li {list-style:none;}
   margin-bottom: 10px;
   justify-content: center;
   display: flex;
-  float: left;
+  float: right;
 }
 
 .searchNumber:active,
@@ -1960,3 +1936,4 @@ ul,li {list-style:none;}
 .blankBox2 {
   margin-bottom: 15px;
 }
+

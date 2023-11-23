@@ -7,10 +7,7 @@ function ReservationList() {
   // 변수 정의
   // reservation 배열 변수
   const [reservation, setReservation] = useState<Array<IReservation>>([]);
-  // select 태그에 선택된 값을 저장할 변수 : 기본 (airlineReservationNumber)
-  const [searchSelect, setSearchSelect] = useState<string>(
-    "airlineReservationNumber"
-  );
+
   // 검색어(input) 변수
   const [searchKeyword, setSearchKeyword] = useState<string>("");
 
@@ -21,7 +18,7 @@ function ReservationList() {
       return;
     }
     // 벡엔드 매개변수 전송 : + 현재페이지(page), 1페이지당개수(pageSize)
-    ReservationService.getAll(searchSelect, searchKeyword) // 벡엔드 전체조회요청
+    ReservationService.getAll( searchKeyword) // 벡엔드 전체조회요청
       .then((response: any) => {
         setReservation(response.data);
         // 로그 출력
@@ -30,11 +27,6 @@ function ReservationList() {
       .catch((e: Error) => {
         console.log(e);
       });
-  };
-
-  //   select 태그 수동바인딩
-  const onChangeSearchSelect = (e: any) => {
-    setSearchSelect(e.target.value); // 화면값 -> 변수저장
   };
 
   //   input 태그 수동바인딩
@@ -49,30 +41,14 @@ function ReservationList() {
           <div>
             <div>
               <div>
-                <select
-                  className="searchSelect"
-                  onChange={onChangeSearchSelect}
-                  value={searchSelect}
-                >
-                  <option
-                    key="airlineReservationNumber"
-                    value="airlineReservationNumber"
-                  >
-                    예약 번호
-                  </option>
-                  <option key="userId" value="userId">
-                    회원 ID
-                  </option>
-                </select>
-              </div>
-
-              <div className="blankBox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-
               <div>
+                <p className="input-group-text">예약 번호</p>
+              </div>
+              <div className="blankBox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                 <input
                   type="text"
                   className="searchNumber"
-                  placeholder="예약번호 또는 회원ID"
+                  placeholder="예약번호 6자리"
                   value={searchKeyword}
                   onChange={onChangeSearchKeyword}
                 />
@@ -98,22 +74,22 @@ function ReservationList() {
           <thead>
             <tr className="tableText">
               <th scope="col">예약 번호</th>
-              <th scope="col">회원 ID</th>
-              <th scope="col">항공사</th>
-              <th scope="col">출발 일자</th>
-              <th scope="col">도착 일자</th>
+              <th scope="col">성인</th>
+              <th scope="col">소아</th>
+              <th scope="col">회원 여부</th>
+              <th scope="col">마일리지 사용여부</th>
               <th scope="col">상세 조회</th>
             </tr>
           </thead>
           <tbody className="tabText">
             {reservation &&
               reservation.map((data) => (
-                <tr key={data.userId}>
+                <tr key={data.airlineReservationNumber}>
                   <td>{data.airlineReservationNumber}</td>
-                  <td>{data.userId}</td>
-                  <td>{data.airline}</td>
-                  <td>{data.departure}</td>
-                  <td>{data.arrival}</td>
+                  <td>{data.adultCount}</td>
+                  <td>{data.childCount}</td>
+                  <td>{data.memberYn}</td>
+                  <td>{data.mileUseYn}</td>
                   <td>
                     <a href={"/search-reservation/" + data.airlineReservationNumber}>
                       <a className="badge bg-success">자세히</a>

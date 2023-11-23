@@ -23,10 +23,10 @@ import javax.persistence.*;
  * 2023-11-17         GGG          최초 생성
  */
 @Entity
-@Table(name = "TB_BS_RESERVATION")
+@Table(name = "TB_RESERVATION")
 @SequenceGenerator(
-        name = "SQ_BS_RESERVATION_GENERATOR"
-        , sequenceName = "SQ_BS_RESERVATION"
+        name = "SQ_RESERVATION_GENERATOR"
+        , sequenceName = "SQ_RESERVATION"
         , initialValue = 1
         , allocationSize = 1
 )
@@ -40,60 +40,46 @@ import javax.persistence.*;
 @DynamicUpdate
 // soft delete
 @Where(clause = "DELETE_YN = 'N'")
-@SQLDelete(sql = "UPDATE TB_BS_RESERVATION SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE AIRLINE_RESERVATION_NUMBER = ? ")
+@SQLDelete(sql = "UPDATE TB_RESERVATION SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE AIRLINE_RESERVATION_NUMBER = ? ")
 public class SearchReservation extends BaseTimeEntity {
+    
+//    기본키 : 예약 번호
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE
-            , generator = "SQ_BS_RESERVATION_GENERATOR"
+            , generator = "SQ_RESERVATION_GENERATOR"
     )
     @Column
-    private String airlineReservationNumber;
-
+    private Integer airlineReservationNumber;
+    
+//    성인 인수
     @Column
-    private String flightName;
+    private String adultCount;
 
+//    소아 인수
     @Column
-    private String userId;
+    private String childCount;
 
+//    마일리지 사용 여부
     @Column
-    private String roundOrOne;
+    private String mileUseYn;
 
-    @Column
-    private String enName;
-
-    @Column
-    private String departure;
-
-    @Column
-    private String arrival;
-
-    @Column
-    private String operationDay;
-
-    @Column
-    private String airline;
-
+//    좌석 등급
     @Column
     private String seatType;
 
+//    회원 여부
     @Column
-    private Integer adultCount;
+    private String memberYn;
 
+//    회원 ID
     @Column
-    private Integer childCount;
+    private String memberId;
 
+//    비회원 번호
     @Column
-    private String mileUseStatus;
+    private Integer userNumber;
 
+//    운항 번호
     @Column
-    private String membershipStatus;
-
-    @Column
-    private String domesticInternational;
-
-    @Column
-    private String startAirport;
-
-    @Column
-    private String finalAirport;
+    private Integer operationId;
 }

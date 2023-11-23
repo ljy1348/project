@@ -1,0 +1,17 @@
+수화물 번호 - NUMBER : 10000000 부터 시작
+
+체크인 ID - STRING : C10000000 부터 시작
+
+여권번호 - STRING : M10000000 부터 시작
+
+결제 ID - NUMBER : 1부터 시작
+
+예약번호 - NUMBER : 100000 부터 시작
+
+운항ID - NUMBER : 1부터 시작
+
+비회원번호 - NUMBER : 1부터 시작
+
+회원ID - STRING : 직접 생성
+
+고객센터 게시글 ID - NUMBER : 1부터 시작

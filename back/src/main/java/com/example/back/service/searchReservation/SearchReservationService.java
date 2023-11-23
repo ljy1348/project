@@ -1,10 +1,14 @@
 package com.example.back.service.searchReservation;
 
+import com.example.back.model.dto.OprResDto;
 import com.example.back.model.searchReservation.SearchReservation;
 import com.example.back.repository.searchReservation.SearchReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,25 +30,20 @@ public class SearchReservationService {
 
     @Autowired
     SearchReservationRepository searchReservationRepository; // DI
-
-    //    예약 번호(airlineReservationNumber) like 검색
-    public List<SearchReservation> findAllByAirlineReservationNumberContaining(String airlineReservationNumber) {
+    
+//    전체 조회 + like 검색
+    public List<SearchReservation> findAllByAirlineReservationNumberContaining(int airlineReservationNumber) {
         List<SearchReservation> list = searchReservationRepository.findAllByAirlineReservationNumberContaining(airlineReservationNumber);
 
         return list;
     }
 
-    //    회원 ID(userId) like 검색
-    public List<SearchReservation> findAllByUserIdContaining(String userId) {
-        List<SearchReservation> list = searchReservationRepository.findAllByUserIdContaining(userId);
+//    상세 조회
+    public List<OprResDto> searchReservation(int airlineReservationNumber) {
+        List<OprResDto> list = searchReservationRepository.searchReservation(airlineReservationNumber);
 
         return list;
     }
 
-    //    상세 조회
-    public Optional<SearchReservation> findById(String airlineReservationNumber) {
-        Optional<SearchReservation> optionalSearchReservation = searchReservationRepository.findById(airlineReservationNumber);
 
-        return optionalSearchReservation;
-    }
 }
