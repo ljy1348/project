@@ -1976,7 +1976,6 @@ line-height: 1.6; }
   padding-right: 30px;
   padding-left: 30px;
  }
-
 .jy-user-info-ul {
     /* display: block;
     list-style-type: disc;
@@ -2004,3 +2003,442 @@ line-height: 1.6; }
     .site-menu a:hover {
       color: black !important;
     }
+
+/* sangmin css start */
+
+/* 버튼 */
+.sangmin_reserve_btn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #d60815;
+  border-radius: 0.6em;
+  color: #d60815;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+
+  &:hover {
+    box-shadow: 0 0 40px 40px red inset;
+    color: #fff;
+  }
+}
+.sangmin_choose_btn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #d60815;
+  border-radius: 0.6em;
+  color: #d60815;
+  cursor: pointer;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  margin-left: 20px;
+
+  width: 200px;
+  &:hover {
+    box-shadow: 0 0 40px 40px red inset;
+    /* color: white; */
+    color: #fff;
+  }
+}
+
+/* 예약페이지 */
+.sangmin_step_bedge span {
+  font-size: 15px;
+  margin: 20px;
+  padding: 20px;
+}
+.sangmin_reserve_notice ul {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+
+  padding: 30px;
+}
+.sangmin_reserve_sub_title h4 {
+  font-weight: bolder;
+  /* font-weight: 300; */
+}
+
+/* 예약선택(출발,도착,날짜) */
+.sangmin_reserve_itineary_select {
+  display: inline-block;
+  position: relative;
+  width: 33%;
+  height: 100px;
+  background-color: #f3f3f3;
+  vertical-align: top;
+}
+.sangmin_reserve_itineary_select input {
+  /* display: block; */
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  margin: 0px;
+  border: 1px solid #f3f3f3;
+  color: #737373;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+
+  /* position: relative; top:0%; */
+}
+.sangmin_reserve_myArea {
+  background: #f3f3f3 url(../images/icon_point.png) no-repeat;
+  background-size: 30px;
+  background-position: right 15px bottom 15px;
+  font-size: 28px;
+}
+.sangmin_reserve_arriveArea {
+  background: #f3f3f3 url(../images/icon_point.png) no-repeat;
+  background-size: 30px;
+  background-position: right 15px bottom 15px;
+  font-size: 28px;
+}
+
+.sangmin_reserve_date {
+  background: #f3f3f3 url(../images/calendar.png) no-repeat;
+  background-size: 30px;
+  background-position: right 15px bottom 15px;
+  font-size: 20px;
+}
+
+.sangmin_reserve_itineary div:nth-child(2) {
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+
+/* 승객 카운트 박스 */
+.sangmin_reserve_passanger_count {
+  display: block;
+  position: relative;
+}
+.sangmin_reserve_area {
+  display: inline-block;
+  position: relative;
+  width: 50%;
+  height: 99px;
+  /* background-color: #f3f3f3; */
+  vertical-align: top;
+  text-align: left;
+}
+.sangmin_reserve_area h5 span {
+  font-size: 18px;
+  color: #666;
+}
+.sangmin_reserve_button_numbox {
+  /* margin-right: 10px; */
+  /* color: #666; */
+  padding: 5px;
+  margin: 5px;
+  background-color: #f3f3f3;
+}
+/* margin: auto 0 0 auto; */
+.sangmin_map_icon {
+  bottom: 8px;
+  right: 5px;
+  height: 40px;
+}
+
+.sangmin_reserve_button_numbox input {
+  /* margin-top: 20px; */
+  width: 90%;
+  background-color: #f3f3f3;
+  border: 1px solid #f3f3f3;
+  font-size: 24px;
+  text-align: center;
+  /* z-index: 1; */
+}
+
+.sangmin_reserve_button_numbox button {
+  width: 46px;
+  height: 46px;
+}
+.sangmin_btn_number {
+  background-color: white;
+  border: 1px solid #f3f3f3;
+}
+
+/* 좌석 선택 */
+.sangmin_reserve_class div {
+  width: 100%;
+}
+
+
+/* 모달 공통*/
+.modal-header {
+  background-color: #6d6e71;
+  color: #fff;
+}
+.reserve_modal_header {
+  /* background-color: #6d6e71; */
+  border: #6d6e71;
+}
+
+.sangmin_modal_table td {
+  border: 5px solid white;
+
+  background-color: #f3f3f3;
+}
+.sangmin_modal_click {
+  bottom: 8px;
+  right: 5px;
+  height: 50px;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  width: 50px;
+  z-index: 200;
+  cursor: pointer;
+}
+
+/* 모달 국제선 */
+.sangmin_modal_body_fori_city {
+  width: 75%;
+  border: 1px solid #ddd;
+}
+.sangmin_reserve_modal_fori_country {
+  border-left: 5px solid white;
+  /* border-bottom: 3px solid white; */
+  width: 25%;
+  background-color: #f3f3f3;
+  /* border: 1px solid white; */
+}
+.table tr td {
+  border: 1px solid #f3f3f3;
+}
+
+/* 항공권 선택 */
+.sangmin_choose_top {
+  background: #6d6e71;
+}
+
+.sangmin_choose_top_itineary_select {
+  display: inline-block;
+  position: relative;
+  width: 19%;
+  height: 40px;
+  background-color: #f3f3f3;
+  vertical-align: top;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-right: 1%;
+}
+.sangmin_choose_top_itineary_select input {
+  /* display: block; */
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  margin: 0px;
+  border: 1px solid #f3f3f3;
+  color: #737373;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+  /* position: relative; top:0%; */
+}
+.sangmin_choose_top_myArea {
+  background: #f3f3f3 url(../images/icon_point.png) no-repeat;
+  background-size: 14px;
+  background-position: right 12px bottom 12px;
+  font-size: 14px;
+}
+.sangmin_choose_top_arriveArea {
+  background: #f3f3f3 url(../images/icon_point.png) no-repeat;
+  background-size: 14px;
+  background-position: right 12px bottom 12px;
+  font-size: 14px;
+}
+
+.sangmin_choose_top_date {
+  background: #f3f3f3 url(../images/calendar.png) no-repeat;
+  background-size: 14px;
+  background-position: right 12px bottom 12px;
+  font-size: 14px;
+}
+
+.sangmin_choose_top_passanger_count {
+  background: #f3f3f3 url(../images/passenger2.png) no-repeat;
+  background-size: 14px;
+  background-position: right 12px bottom 12px;
+  font-size: 14px;
+}
+
+.sangmin_choose_top_class {
+  background: #f3f3f3 url(../images/class.png) no-repeat;
+  background-size: 14px;
+  background-position: right 12px bottom 12px;
+  font-size: 14px;
+}
+.sangmin_reserve_choose_subTitle {
+  display: block;
+  position: relative;
+  margin-bottom: 30px;
+  line-height: 20px;
+  color: #d60815;
+  font-size: 18px;
+  font-family: "Noto Sans KR", "notofont", "AppeGothic", "Malgun Gothic",
+    "맑은 고딕", "돋음", "Dotum", "Apple SD Gothic Neo", Arial, Helvetica,
+    sans-serif;
+  font-weight: bolder;
+}
+.air_icon {
+  margin-top: 3px;
+  margin-right: 5px;
+}
+.sangmin_choose_airport span {
+  font-family: "latofont";
+  margin-right: 10px;
+  text-align: center;
+  line-height: 1;
+  color: #000;
+  font-size: 40px;
+}
+.sangmin_choose_airport_pee_date {
+  width: 100%;
+}
+.sangmin_choose_airport_pee_date tr td {
+  width: 200px;
+}
+
+.sangmin_choose_datepicker {
+  background-color: #e6e2df;
+  /* border-bottom: 1px solid #222; */
+  /* margin: 20px; */
+  height: 75px;
+}
+.sangmin_choose_datepicker tr td {
+  border-right: 30px solid white;
+  border-left: 30px solid white;
+}
+.sangmin_choose_table_head {
+  color: #fff;
+  /* justify-content : center; */
+}
+.sangmin_choose_table_head th {
+  vertical-align: middle;
+}
+
+.sangmin_choose_table_content td {
+  vertical-align: middle;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: "latofont";
+}
+.sangmin_bottom_solid {
+  border-bottom: 1px solid #222;
+}
+.sangmin_gray_bg {
+  background-color: #6d6e70;
+  width: 42.8%;
+}
+.sangmin_unleftline {
+  background-color: #6d6e70;
+  width: 14.2%;
+}
+.sangmin_economy_bg {
+  background-color: #c50251;
+  width: 14.2%;
+}
+.sangmin_business_bg {
+  background-color: #283890;
+  width: 14.2%;
+}
+.sangmin_first_bg {
+  background-color: black;
+  width: 14.2%;
+}
+.sangmin_choose_table_head {
+  height: 100px;
+}
+.sangmin_choose_time li {
+  list-style-type: none;
+}
+.sang_min_arrow_icon {
+  color: #6d6e70;
+}
+.sangmin_choose_notice {
+  background-color: #f7f7f7;
+  padding: 30px;
+}
+
+/* 결제 페이지 */
+.sangmin_reserve_payment_subtitle {
+  margin: 60px 0 50px 0;
+  font-size: 40px;
+  color: #000;
+  text-align: center;
+  font-weight: normal;
+  line-height: 1;
+  font-family: "Noto Sans KR", "notofont", "AppeGothic", "Malgun Gothic",
+    "맑은 고딕", "돋음", "Dotum", "Apple SD Gothic Neo", Arial, Helvetica,
+    sans-serif;
+}
+
+.sangmin_payment_reserve_info {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+
+  padding: 40px 0;
+}
+.sangmin_payment_reserve_two_info {
+  border-bottom: 1px solid #ddd;
+  padding: 40px 0;
+  /* align-items: center; */
+}
+.sangmin_payment_reserve_info div {
+  align-items: center;
+}
+.sangmin_payment_reserve_two_info div{
+  align-items: center;
+}
+.sangmin_payment_reserve_info_first {
+  font-size: 20px;
+  font-weight: 500;
+  color: #ab7d55;
+}
+
+.sangmin_payment_loca {
+  font-size: 20px;
+  color: #222;
+  margin-right: 100px;
+}
+.sangmin_payment_reserve_info_last span {
+  font-family: "Noto Sans KR", "notofont", "AppeGothic", "Malgun Gothic",
+    "맑은 고딕", "돋음", "Dotum", "Apple SD Gothic Neo", Arial, Helvetica,
+    sans-serif;
+  color: #737373;
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.sangmin_gender label,input{
+  margin-right: 10px;
+}
+
+/* sangmin css end */
+/* .sangmin_reserve_itineary div:nth-child(2) {ss
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+} */
+
+
+ 
+
