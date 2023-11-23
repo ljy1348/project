@@ -19,6 +19,9 @@ export default interface IReservation {
     ForiCountry:string
     ForiCity:string
     AirportFee:string
+    Email:string
+    PhoneNum:string
+    PassWord:number | string
     
 
     

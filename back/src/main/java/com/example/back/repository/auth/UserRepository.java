@@ -19,5 +19,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 2023-11-14         GGG          최초 생성
  */
 public interface UserRepository extends JpaRepository<User, String> {
+
+
     Page<User> findAllByUsernameContaining(String username, Pageable pageable);
 }
