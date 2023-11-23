@@ -1,5 +1,5 @@
 // components/common/Nav.tsx : rfce
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RootState, useAppDispatch } from "../../store/store";
@@ -15,6 +15,8 @@ function Nav() {
   const logOut = useCallback(() => { 
     dispatch(logout());
    },[dispatch]);
+
+
 
   return (
     <>

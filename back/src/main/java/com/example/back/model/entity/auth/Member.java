@@ -34,7 +34,7 @@ import java.util.Date;
 @ToString
 // soft delete
 @Where(clause = "DELETE_YN = 'N'")
-@SQLDelete(sql = "UPDATE BS_USER_INFORMATION SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE MEMBER_ID = ?")
+@SQLDelete(sql = "UPDATE TB_MEMBERS_INFO SET DELETE_YN = 'Y', DELETE_TIME=TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), 'YYYY-MM-DD HH24:MI:SS') WHERE MEMBER_ID = ?")
 public class Member extends BaseTimeEntity {
 
     @Id

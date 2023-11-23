@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import '../../assets/css/jy/Airport.css'
 import Isotope from "isotope-layout";
 import AirportList from "../../utils/AirportList";
@@ -40,16 +40,19 @@ function Airport({setAirport}:{setAirport:any}) {
   }
 
   const selectedAirport = (data:string) => {
+    
     setAirport(data);
     console.log(data);
 
   }
 
+  useEffect(()=>{console.log("a")},[])
+
   return (
     <div
       className="layer_pop select_airport"
       tabIndex={0}
-      style={{ top: "383.1px" }}
+      style={{ top: "383.1px" , zIndex:100}}
     >
       <div className="scroll_cont" tabIndex={0}>
         <div className="pop_cont">

@@ -299,12 +299,11 @@ public class OauthService {
 
         // 회원가입 처리하기
         String kakaoId = googleIdDto.getEmail();
-        kakaoId = kakaoId+"@goole.oauth";
+        kakaoId = kakaoId+"@google.oauth";
         Optional<Member> optionalUser = userService.findById(kakaoId);
         if (optionalUser.isPresent()) {
             return optionalUser.get();
         } else {
-
             Member user = new Member(kakaoId, passwordEncoder.encode(UUID.randomUUID().toString()), "", ERole.ROLE_USER);
             return userService.save(user);
         }

@@ -29,7 +29,7 @@ function AdminMemberList({setSelectTab, setDataId}:{setSelectTab:any, setDataId:
   //   전체조회 함수
   const retrieveDept = () => {
     // 벡엔드 매개변수 전송 : + 현재페이지(page), 1페이지당개수(pageSize)
-    AdminService.getAll(search,select,page-1,pageSize)
+    AdminService.getMemberAll(search,select,page-1,pageSize)
     .then((response:any)=>{
       console.log(response);
       const {totalPages, member} = response.data;

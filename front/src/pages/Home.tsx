@@ -19,6 +19,11 @@ function Home() {
   const [adultCount, setAdultCount] = useState(0);
   const [childCount, setChildCount] = useState(0);
   const [infantCount, setInfantCount] = useState(0);
+  const [arrivalAirport, setArrivalAirport] = useState("출발지");
+
+  const setAirport = (data:string) => { 
+    setArrivalAirport(data);
+   }
 
   const handleIncrement = (category: any) => {
     switch (category) {
@@ -76,14 +81,14 @@ function Home() {
     <>
       {/* 여기 */}
       {/* 1 */}
-      <div className="hero" onClick={()=>{controllShow("")}}>
-        <div className="container">
-          <div className="row align-items-center">
+      <div className="hero" >
+        <div className="container" >
+          <div className="row align-items-center" >
             {/* 서브 메뉴 */}
             <ul id="sub_menu">
               <li className="sub_menu_select">
-                <a href="#" className="hnn_none_deco_a">
-                  <form className="form" id="submenu">
+                <a href="#" className="hnn_none_deco_a" >
+                  <form className="form" id="submenu" >
                     항공권 예약
                   </form>
                 </a>
@@ -93,7 +98,7 @@ function Home() {
 
             {/* <div className="row align-items-center">
             </div> */}
-            <div className="col-md-12" onClick={()=>{controllShow("")}}>
+            <div className="col-md-12" style={{zIndex:100}}>
               <div className="intro-wrap">
                 <div className="row">
                   <div className="col-12">
@@ -148,7 +153,7 @@ function Home() {
                             className="form-control"
                             ref={target}
                             onClick={() => setShow(!show)}
-                            value={"출발지"}
+                            value={arrivalAirport}
                           ></input>
                         </div>
 
@@ -220,9 +225,11 @@ function Home() {
                                 color: "black",
                                 borderRadius: 3,
                                 ...props.style,
+                                zIndex: 100
                               }}
+                              
                             >
-                              <Airport setAirport={undefined} />
+                              <Airport setAirport={setAirport}/>
                             </div>
                           )}
                         </Overlay>
@@ -255,7 +262,7 @@ function Home() {
                                 ...props.style,
                               }}
                             >
-                              <Airport setAirport={undefined}  />
+                              <Airport setAirport={setAirport}  />
                             </div>
                           )}
                         </Overlay>
