@@ -5,8 +5,43 @@ import IReservation from "../../types/reserve/IReservation";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import PaymentModal from "../modal/PaymentModal";
+import { useParams } from "react-router-dom";
+import IOperationinfo from "../../types/IOperationinfo";
+import OperationService from "../../services/OperationService";
 
 function ReservePayment() {
+  const { firstId, secoundId } = useParams();
+
+  // operationinfo 배열 변수 정의
+
+  const initialOperationinfo = {
+    operationId: null,
+    airline: "",
+    flightName: "",
+    startAirport: "",
+    finalAirport: "",
+    startTime: "",
+    finalTime: "",
+    operationDate: "",
+    startDate: "",
+    finalDate: "",
+    domesticInternational:"",
+    price:"",    
+  };
+  const initialOperationinfo2 = {
+    operationId: "",
+    airline: "",
+    flightName: "",
+    startAirport: "",
+    finalAirport: "",
+    startTime: "",
+    finalTime: "",
+    operationDate: "",
+    startDate: "",
+    finalDate: "",
+    domesticInternational:"",
+    price:"",    
+  };
   const initiaReservaionl = {
     AirlineReservaitonNumber: null,
     FlightName: "",
@@ -28,11 +63,26 @@ function ReservePayment() {
     ForiCountry: "",
     ForiCity: "",
     AirportFee: "",
-    Email:"",
-    PhoneNum:"",
-    PassWord:""
+    Email: "",
+    PhoneNum: "",
+    PassWord: "",
   };
+  // operationinfo 배열 변수 정의
 
+  const [operationinfo, setOperationinfo] = useState<IOperationinfo>(initialOperationinfo);
+  const [operationinfo2, setOperationinfo2] = useState<IOperationinfo>(initialOperationinfo2);
+
+  // 상세조회 함수
+  const getCustomer = (operationId: string) => {
+    OperationService.get(operationId) // 벡엔드로 상세조회 요청
+      .then((response: any) => {
+        setOperationinfo(response.data);
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
   // type 선언
   const [reservation, setReservation] =
     useState<IReservation>(initiaReservaionl);
@@ -65,59 +115,6 @@ function ReservePayment() {
         </div>
       </div>
       {/* 상단바 */}
-      <div className="sangmin_choose_top">
-        <div className="container">
-          {/* 출발지 */}
-          <div className="sangmin_choose_top_itineary_select text-start">
-            <input
-              type="text"
-              title="출발지"
-              className="sangmin_choose_top_myArea"
-              value="출발지"
-              onClick={() => setModalShow(true)}
-            />
-          </div>
-          {/* 도착지 */}
-          <div className="sangmin_choose_top_itineary_select">
-            <input
-              type="text"
-              title="도착지"
-              className="sangmin_choose_top_arriveArea"
-              value="도착지"
-              onClick={() => foriSetModalShow(true)}
-            />
-          </div>
-          {/* 탑승일 */}
-          <div className="sangmin_choose_top_itineary_select">
-            <input
-              type="text"
-              title="탑승일"
-              className="sangmin_choose_top_date"
-              value="탑승일"
-              // className="form-control"
-              name="daterange"
-            />
-          </div>
-          {/* 탑승 인원 */}
-          <div className="sangmin_choose_top_itineary_select">
-            <input
-              type="text"
-              title="탑승인원"
-              className="sangmin_choose_top_passanger_count"
-              value="탑승인원"
-            />
-          </div>
-          {/* 좌석등급 */}
-          <div className="sangmin_choose_top_itineary_select">
-            <input
-              type="text"
-              title="좌석등급"
-              className="sangmin_choose_top_class"
-              value="좌석등급"
-            />
-          </div>
-        </div>
-      </div>
 
       {/* 본문 */}
       <div className="container">
