@@ -156,7 +156,7 @@ function Login() {
       .then(()=>{
         // alert("로그인 성공했습니다.");
         // 강제 /home 페이지 이동
-        navigate("/home");
+        navigate("/");
         // js : 페이지 새로고침
         window.location.reload();
       })

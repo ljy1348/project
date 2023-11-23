@@ -4,6 +4,7 @@ import ForiareaModal from "../modal/ForiareaModal";
 import IReservation from "../../types/reserve/IReservation";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
+import PaymentModal from "../modal/PaymentModal";
 
 function ReservePayment() {
   const initiaReservaionl = {
@@ -434,15 +435,12 @@ function ReservePayment() {
               </div>
             </div>
           </div>
+            <button onClick={()=>setModalShow(true)}>a</button>
         </div>
       </div>
 
       {/* 모달 불러오기 */}
-      <MyareaModal show={modalShow} onHide={() => setModalShow(false)} />
-      <ForiareaModal
-        show={foriModalShow}
-        onHide={() => foriSetModalShow(false)}
-      />
+      <PaymentModal show={modalShow} onHide={() => setModalShow(false)}/>
     </>
   );
 }
