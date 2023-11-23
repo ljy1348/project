@@ -14,6 +14,7 @@ import DatePicker from "react-datepicker";
 import { Button, Modal } from "react-bootstrap";
 import Airport from "../../components/airport/Airport";
 import Isotope from "isotope-layout";
+import MyareaModal from "../modal/MyareaModal";
 
 // 1) 로그인 로직
 // 2) 유효성 체크 lib 사용 : Yup & Formik 
@@ -164,7 +165,12 @@ function Login() {
       });
    }
 
-   const handleNonMember = (formValue: any) => { console.log(formValue) }
+   const handleNonMember = (formValue: any) => { 
+    formValue.arrivalAirPort = arrivalAirPort
+    formValue.departureAirPort = departureAirPort
+    console.log(formValue) 
+
+  }
 
    const onChangeDate = (data:Date) => { setSelectedDate(data) }
 
@@ -436,7 +442,7 @@ function Login() {
         </div>
       </div>
       <div>
-            <Modal
+            {/* <Modal
             size="lg"
             show={isModal}
             onHide={() => setIsModal(false)}
@@ -456,7 +462,13 @@ function Login() {
                                   Close
                                 </Button>
                               </Modal.Footer>
-            </Modal>
+            </Modal> */}
+
+<MyareaModal
+            show={isModal}
+            onHide={() => setIsModal(false)}
+            onAbbrSelect={setAirport}
+          />
             </div>
     </div>    
   );
