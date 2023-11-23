@@ -30,6 +30,8 @@ import ForiareaModal from './pages/modal/ForiareaModal';
 import Passport from './pages/checkIn/Passport';
 import ReserveChoose from './pages/reserve/ReserveChoose';
 import ReservePayment from './pages/reserve/ReservePayment';
+import PaymentResult from './pages/payment/PaymentResult';
+import PaymentSuccess from './pages/payment/PaymentSuccess';
 // todo: 리액트 import
 
 function App() {
@@ -40,7 +42,7 @@ function App() {
     <div className="App">
 
       {/* 머리말 */}                 
-      <Nav/>
+      {/* <Nav/> */}
       {/* 본문 */}
       <Routes>
 
@@ -55,11 +57,16 @@ function App() {
           <Route path="/passport" element={<Passport/>} />   
           <Route path="/foriareamodal" element={<ForiareaModal/>} /> 
 
+          {/* 회원 */}
           <Route path="/register" element={<Register/>} />
         <Route path="/login/auth/:app" element={<ErrorBoundary><KakaoLogin/></ErrorBoundary>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/user-info" element={<UserInfo/>} />
         <Route path="/admin" element={<AdminPage/>} />
+
+        {/* 결제 */}
+        <Route path="/payment/success" element={<PaymentSuccess/>} />
+
 
           
 

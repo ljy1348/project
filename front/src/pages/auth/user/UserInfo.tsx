@@ -76,7 +76,7 @@ function UserInfo() {
             <li className='hero-count col-3'><span className='hero-title'>예약 횟수</span>
             <br/><br/>
             <ul>
-              <li> 1000000</li>
+              <li> 0</li>
             </ul>
             </li>
           </ul>
@@ -95,7 +95,7 @@ function UserInfo() {
       </Nav.Item>
       <Nav.Item>
         <Nav.Link eventKey="link-2" className='user-info-nav' onClick={()=>setSelectedTab("mile")}>
-          마일리지 내역
+          비밀번호 변경
         </Nav.Link>
       </Nav.Item>
     </Nav>
