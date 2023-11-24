@@ -39,10 +39,6 @@ function Nav() {
             <Link to="/" className="logo m-2">
               GreanAirline <span className="text-primary"></span>
             </Link>
-            <table style={{width:"1200px", overflow:"scroll"}}>
-
-            <tr>
-              <td>
 
               
             {/* 메뉴들 시작 */}
@@ -156,9 +152,6 @@ function Nav() {
             </ul>
 
             {/* 메뉴들 끝 */}
-            </td>
-            </tr>
-            </table>
             <a
               href="#"
               className="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light"

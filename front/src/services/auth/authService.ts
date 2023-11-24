@@ -77,6 +77,10 @@ const login = (user:IUser) => {
     return http.put("/auth/info",user, {headers : authHeader()});
  }
 
+ const changePw = (data:any) => {
+    return http.put("/auth/pchange", data, {headers : authHeader()});
+ }
+
  const AuthService = {
     register,
     login,
@@ -85,6 +89,7 @@ const login = (user:IUser) => {
     naverLogin,
     googleLogin,
     getUserInfo,
-    editUser
+    editUser,
+    changePw
  }
  export default AuthService;

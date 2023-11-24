@@ -239,6 +239,8 @@ function ReserveChoose(props: any) {
     setSelectedRow2(operationId);
     console.log("firstID" + fisrtId + "SecoundID" + secoundId);
   };
+
+  
   return (
     <>
       <div className="hero hero-inner">

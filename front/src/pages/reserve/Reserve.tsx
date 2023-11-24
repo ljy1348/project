@@ -13,8 +13,8 @@ import { Value } from "sass";
 
 function Reserve(props: any) {
   // 출도착 설정
-  const [selectedAbbr, setSelectedAbbr] = useState("");
-  const [selectedFori, setSelectedFori] = useState("");
+  const [selectedAbbr, setSelectedAbbr] = useState(undefined);
+  const [selectedFori, setSelectedFori] = useState(undefined);
   // 인원체크
   const [adultCount, setAdultCount] = useState(0);
   const [childCount, setChildCount] = useState(0);

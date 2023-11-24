@@ -2,16 +2,12 @@ package com.example.back.model.common;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 /**
  * packageName : com.example.jpaexam.model
@@ -36,25 +32,26 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseTimeEntity {
 
-    private Date insertTime;
+    private String insertTime;
 
-    private Date updateTime;
+    private String updateTime;
 
-    private String deleteYn;  // 소프트 삭제
+    private String deleteYn;
 
-    private Date deleteTime; // 소프트 삭제
+    private String deleteTime;
 
     @PrePersist
         //해당 엔티티 저장하기 전
     void onPrePersist(){
-        this.insertTime = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        this.insertTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         this.deleteYn = "N";
     }
 
     @PreUpdate
         //해당 엔티티 수정 하기 전
     void onPreUpdate(){
-        this.updateTime = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        this.updateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.insertTime = this.updateTime;
         this.deleteYn = "N";
     }
 }
