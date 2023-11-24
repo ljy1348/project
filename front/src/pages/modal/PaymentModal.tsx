@@ -97,7 +97,7 @@ function PaymentModal(props: any) {
 
           try {
             await paymentWidget?.requestPayment({
-              orderId: `dfoeijfioiejoijf`,
+              orderId: `fwefwefsdf21fwef22222`,
               orderName: "토스 티셔츠 외 2건",
               customerName: "김토스",
               customerEmail: "customer123@gmail.com",

@@ -2,7 +2,7 @@ import React from 'react'
 
 function PaymentResult() {
   return (
-    <div>PaymentResult</div>
+    <div>결제 성공!</div>
   )
 }
 

@@ -91,11 +91,17 @@ function UserInfo() {
         <Nav.Link eventKey="link-0" className='user-info-nav' onClick={()=>setSelectedTab("userInfo")}>회원 정보</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="link-1" className='user-info-nav' onClick={()=>setSelectedTab("reservation")}>예약 내역</Nav.Link>
+        <Nav.Link eventKey="link-2" className='user-info-nav' onClick={()=>setSelectedTab("password")}>
+          비밀번호 변경
+        </Nav.Link>
       </Nav.Item>
       <Nav.Item>
+        <Nav.Link eventKey="link-1" className='user-info-nav' onClick={()=>setSelectedTab("reservation")}>예약 내역</Nav.Link>
+      </Nav.Item>
+      
+      <Nav.Item>
         <Nav.Link eventKey="link-2" className='user-info-nav' onClick={()=>setSelectedTab("mile")}>
-          비밀번호 변경
+          마일리지 내역
         </Nav.Link>
       </Nav.Item>
     </Nav>
