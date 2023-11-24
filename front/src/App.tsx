@@ -24,22 +24,24 @@ import AdminPage from "./pages/auth/user/AdminPage";
 import AdminMemberList from "./pages/auth/admin/AdminMemberList";
 
 // import CustomerPage from './pages/customer/CustomerPage';
-import CheckIn from "./pages/checkIn/CheckIn";
-import Reserve from "./pages/reserve/Reserve";
-import ForiareaModal from "./pages/modal/ForiareaModal";
-import Passport from "./pages/checkIn/Passport";
-import ReserveChoose from "./pages/reserve/ReserveChoose";
-import ReservePayment from "./pages/reserve/ReservePayment";
-import PaymentResult from "./pages/payment/PaymentResult";
-import PaymentSuccess from "./pages/payment/PaymentSuccess";
 // import Test from "./pages/reserve/Test";
+import CheckIn from './pages/checkIn/CheckIn';
+import Reserve from './pages/reserve/Reserve';
+import ForiareaModal from './pages/modal/ForiareaModal';
+import Passport from './pages/checkIn/Passport';
+import ReserveChoose from './pages/reserve/ReserveChoose';
+import ReservePayment from './pages/reserve/ReservePayment';
+import PaymentResult from './pages/payment/PaymentResult';
+import PaymentSuccess from './pages/payment/PaymentSuccess';
+import PaymentFail from './pages/payment/PaymentFail';
 // todo: 리액트 import
 
 function App() {
   return (
     <div className="App">
-      {/* 머리말 */}
-      {/* <Nav/> */}
+
+      {/* 머리말 */}                 
+      <Nav/>
       {/* 본문 */}
       <Routes>
         <Route path="/" element={<Home />}></Route>
@@ -68,7 +70,8 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
 
         {/* 결제 */}
-        <Route path="/payment/success" element={<PaymentSuccess />} />
+        <Route path="/payment/success" element={<PaymentSuccess/>} />
+        <Route path="/aa/fail" element={<PaymentFail/>} />
 
         <Route path="/reserve" element={<Reserve />} />
         <Route

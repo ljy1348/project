@@ -148,6 +148,7 @@ function Register() {
       memberDate: selectedDate,
       memberCountry: "kor",
       memberMile: 0,
+      changePw:""
     };
 
     console.log(data);

@@ -2,8 +2,10 @@ package com.example.back.controller.auth;
 
 import com.example.back.model.entity.auth.ERole;
 import com.example.back.model.entity.auth.Member;
+import com.example.back.model.entity.reserve.OperationInfo;
 import com.example.back.security.services.UserDetailsImpl;
 import com.example.back.service.auth.UserService;
+import com.example.back.service.reserve.OperationInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,6 +43,11 @@ public class AdminController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    OperationInfoService operationInfoService;
+
+
+//    회원 관리
     @GetMapping("/member")
     public ResponseEntity<?> findAll(@RequestParam String search, @RequestParam String select, Pageable pageable) {
         Page<Member> page = userService.findAll(search, select, pageable);
@@ -97,5 +104,24 @@ public class AdminController {
         }
 
     }
+
+//    항공기 관리
+    @GetMapping("/operation")
+    public ResponseEntity<?> findOperation(@RequestParam(defaultValue = "0") String search, @RequestParam String select, Pageable pageable) {
+    Page<OperationInfo> page = operationInfoService.findOperation(search, select, pageable);
+
+
+
+    Map<String, Object> map = new HashMap<>();
+    map.put("data", page.getContent());
+    map.put("totalPages", page.getTotalPages());
+
+    return new ResponseEntity<>(map, HttpStatus.OK);
+//    } catch(Exception e) {
+//    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+}
+
+
 
 }

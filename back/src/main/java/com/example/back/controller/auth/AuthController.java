@@ -182,5 +182,36 @@ public class AuthController {
 
     }
 
+    @Transactional
+    @PutMapping("/pchange")
+    public ResponseEntity<?> passChange(@RequestBody MemberReq memberReq) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl)authentication.getPrincipal();
+        String originPw = userDetails.getPassword();
+
+        if (passwordEncoder.matches(memberReq.getMemberPw(), originPw)) {
+            try {
+
+                Optional<Member> member = userService.findById(memberReq.getMemberId());
+                if (member.isPresent()) {
+                    Member member1 = member.get();
+                    String newPw = passwordEncoder.encode(memberReq.getChangePw());
+                    member1.setMemberPw(newPw);
+                    return new ResponseEntity<>(HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                }
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    }
+
 
 }
