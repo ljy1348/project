@@ -29,6 +29,8 @@ public interface SearchReservationRepository extends JpaRepository<SearchReserva
 //    전체 조회 + = 검색
     List<SearchReservation> findAllByAirlineReservationNumber(int airlineReservationNumber);
 
+    List<SearchReservation> findAllByAirlineReservationNumberAndMemberId(int airlineReservationNumber, String memberId);
+
 //    상세 조회
     @Query(value = "SELECT RES.AIRLINE_RESERVATION_NUMBER as airlineReservationNumber " +
             "     , RES.ADULT_COUNT as adultCount " +
@@ -40,7 +42,7 @@ public interface SearchReservationRepository extends JpaRepository<SearchReserva
             "     , RES.USER_NUMBER as userNumber " +
             "     , RES.OPERATION_ID as operationId " +
             "     , OPR.AIRLINE as airline " +
-            "     , OPR.FLIGHT_NAME as fligtName " +
+            "     , OPR.FLIGHT_NAME as flightName " +
             "     , OPR.START_AIRPORT as startAirport " +
             "     , OPR.FINAL_AIRPORT as finalAirport " +
             "     , OPR.START_TIME as startTime " +

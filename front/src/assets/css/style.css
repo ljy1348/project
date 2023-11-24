@@ -1943,3 +1943,18 @@ ul,li {list-style:none;}
   padding-left: 60px;
   padding-bottom: 30px;
 }
+
+.test1{
+  padding-top: 10px;
+  margin-left: 50px;
+}
+
+.test2{
+  padding-top: 10px;
+  margin-left: 110px;
+}
+
+.btn1 {
+  width: 365px;
+  margin-left: 250px;
+}

@@ -6,6 +6,7 @@ import com.example.back.model.searchReservation.SearchReservation;
 import com.example.back.service.searchReservation.SearchReservationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,11 +38,13 @@ public class SearchReservationController {
 //    전체 조회 + like 검색
     @GetMapping("/search-reservation")
     public ResponseEntity<Object> getSearchReservation(
-            @RequestParam(defaultValue = "0") int airlineReservationNumber
+            @RequestParam(defaultValue = "0") int airlineReservationNumber,
+            @RequestParam(defaultValue = "") String memberId
     ){
+        log.info("aaaaaaaaaaaaa : "+memberId);
         try {
 //            전체 조회 + like 검색
-            List<SearchReservation> list = searchReservationService.findAllByAirlineReservationNumber(airlineReservationNumber);
+            List<SearchReservation> list = searchReservationService.findAllByAirlineReservationNumber(airlineReservationNumber, memberId);
 
             if (list.isEmpty() == false) {
 //                성공
