@@ -1,6 +1,6 @@
 package com.example.back.security.services;
 
-import com.example.back.model.entity.auth.User;
+import com.example.back.model.entity.auth.Member;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,7 +20,7 @@ public class UserDetailsImpl implements UserDetails {
 
     private String username; // Spring Security
 
-    private String email; // 개발자 추가 속성
+    private String userId; // 개발자 추가 속성
 
     // json 역직렬화 시 대상 속성 무시
     @JsonIgnore
@@ -31,21 +31,21 @@ public class UserDetailsImpl implements UserDetails {
 
     public UserDetailsImpl( String email, String password, String username,
                            GrantedAuthority authority) {
-        this.email = email;
+        this.userId = email;
         this.password = password;
         this.username = username;
         this.authority = authority;
     }
 
-    public static UserDetailsImpl build(User user) {
+    public static UserDetailsImpl build(Member user) {
 //    role.getName().name() : 롤 정보 ( ROLE_USER 등 )
 //    권한 생성은 : new SimpleGrantedAuthority(권한문자열) 생성자를 호출 해서 생성
-        GrantedAuthority authority = new SimpleGrantedAuthority(user.getCodeName());
+        GrantedAuthority authority = new SimpleGrantedAuthority(user.getMemberAuth().toString());
 
         return new UserDetailsImpl(
-                user.getEmail(),
-                user.getPassword(),
-                user.getUsername(),
+                user.getMemberId(),
+                user.getMemberPw(),
+                user.getMemberName(),
                 authority);
     }
 
@@ -65,8 +65,8 @@ public class UserDetailsImpl implements UserDetails {
         return authority;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserId() {
+        return userId;
     }
 
     @Override
@@ -113,6 +113,6 @@ public class UserDetailsImpl implements UserDetails {
         if (o == null || getClass() != o.getClass())
             return false;
         UserDetailsImpl userDto = (UserDetailsImpl) o;
-        return Objects.equals(email, userDto.email);
+        return Objects.equals(userId, userDto.userId);
     }
 }

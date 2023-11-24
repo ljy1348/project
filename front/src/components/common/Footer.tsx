@@ -2,6 +2,7 @@
 import React from "react";
 
 function Footer() {
+
   return (
     <>
 
@@ -137,14 +138,13 @@ function Footer() {
           </div>
         </div>
       </div>
-{/* 
-      <div id="overlayer"></div>
+      {/* <!-- 꼬리말 끝 --> */}
+      {/* <div id="overlayer"></div>
       <div className="loader">
         <div className="spinner-border" role="status">
           <span className="sr-only">Loading...</span>
         </div>
       </div> */}
-
     </>
   );
 }

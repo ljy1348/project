@@ -1977,6 +1977,33 @@ line-height: 1.6; }
   padding-left: 30px;
  }
 
+.jy-user-info-ul {
+    /* display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px; */
+    width: 880px;
+    font-size: 10px;
+    background: #834b4b;
+}
+
+.nav-hero {
+  padding: 7rem 0 10rem 0;
+  margin-bottom: 100px; }
+  .nav-hero.hero-inner {
+    padding: 8rem 0 0rem 0;
+    margin-bottom: auto;
+    background-color: white; }
+
+    .logo:hover{
+      color: #000;
+    }
+    .site-menu a:hover {
+      color: black !important;
+    }
 
 /* sangmin css start */
 
