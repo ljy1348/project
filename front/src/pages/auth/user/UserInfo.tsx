@@ -15,6 +15,7 @@ import DatePicker from "react-datepicker";
 import initScripts from '../../../assets/js/scripts';
 import { register } from '../../../store/slices/auth';
 import * as Yup from "yup";
+import PasswordChage from './PasswordChage';
 
 function UserInfo() {
 
@@ -28,6 +29,7 @@ function UserInfo() {
     if (selectedTab === "reservation") return <><ReservationList></ReservationList></>
     else if (selectedTab === "mile") return <><MileList/></>
     else if (selectedTab ==="userInfo") return <><UserInfoList user={user!} setMessage={setMessage}/></>
+    else if (selectedTab ==="password") return <><PasswordChage/></>
     else return <></>
    }
 
@@ -91,11 +93,17 @@ function UserInfo() {
         <Nav.Link eventKey="link-0" className='user-info-nav' onClick={()=>setSelectedTab("userInfo")}>회원 정보</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="link-1" className='user-info-nav' onClick={()=>setSelectedTab("reservation")}>예약 내역</Nav.Link>
+        <Nav.Link eventKey="link-1" className='user-info-nav' onClick={()=>setSelectedTab("password")}>
+          비밀번호 변경
+        </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="link-2" className='user-info-nav' onClick={()=>setSelectedTab("mile")}>
-          비밀번호 변경
+        <Nav.Link eventKey="link-2" className='user-info-nav' onClick={()=>setSelectedTab("reservation")}>예약 내역</Nav.Link>
+      </Nav.Item>
+      
+      <Nav.Item>
+        <Nav.Link eventKey="link-3" className='user-info-nav' onClick={()=>setSelectedTab("mile")}>
+          마일리지 내역
         </Nav.Link>
       </Nav.Item>
     </Nav>

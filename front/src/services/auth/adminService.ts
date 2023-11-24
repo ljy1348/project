@@ -14,11 +14,16 @@ const editUser = (user:IUser) => {
     return http.put("/admin/member",user, {headers : authHeader()});
  }
 
+ const getOperationAll = (search:string, select:string, page:number, size:number) => {
+    return http.get(`/admin/operation?search=${search}&select=${select}&page=${page}&size=${size}`, {headers : authHeader()});
+ }
+
 
 const AdminService = {
     getMemberAll,
     deleteMember,
-    editUser
+    editUser,
+    getOperationAll
 }
 
 export default AdminService;

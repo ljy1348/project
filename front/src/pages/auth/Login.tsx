@@ -147,7 +147,8 @@ function Login() {
       memberAuth:"ROLE_USER",       
       memberDate,       
       memberCountry,       
-      memberMile:0,     
+      memberMile:0,  
+      changePw:""   
     }
 
     // todo: 벡엔드 로그인 함수(공유 로그인 함수) 호출
