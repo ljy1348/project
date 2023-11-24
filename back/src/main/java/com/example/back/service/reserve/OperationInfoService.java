@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 
+import java.util.List;
+import java.util.Optional;
+
+
 /**
  * packageName : com.example.back.service.reserve
  * fileName : OperationInfoService
@@ -37,6 +41,14 @@ public class OperationInfoService {
         Page<OperationInfo> operationInfoList = operationInfoRepository.selectOperationInfo(operationDate,finalAirport,startAirport,sysdate,pageable);
 
         return operationInfoList;
+    }
+
+
+    //    상세 조회(1건조회)
+    public Optional<OperationInfo> findById(int OperationId) {
+        Optional<OperationInfo> optionalOperationInfo = operationInfoRepository.findById(OperationId);
+
+        return optionalOperationInfo;
     }
 
     public Page<OperationInfo> findOperation(String search, String select, Pageable pageable) {

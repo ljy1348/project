@@ -11,16 +11,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.ZonedDateTime;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * packageName : com.example.back.controller.reserve
@@ -81,4 +75,28 @@ public class ReserveController {
 
 
     }
+
+
+    // 상세조회
+    @GetMapping("/reserve/{OperationId}")
+    public ResponseEntity<Object> findById(@PathVariable int OperationId) {
+
+        try {
+//            상세조회 실행
+            Optional<OperationInfo> optionalCustomer = operationInfoService.findById(OperationId);
+
+            if (optionalCustomer.isPresent()) {
+//                성공
+                return new ResponseEntity<>(optionalCustomer.get(), HttpStatus.OK);
+            } else {
+//                데이터 없음
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+//            서버 에러
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }

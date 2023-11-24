@@ -27,7 +27,7 @@ import java.util.Date;
 @Table(name="OPERATION_INFO")
 @SequenceGenerator(
         name = "SQ_OPERATION_INFO_GENERATOR"
-        , sequenceName = "SQ_CUSTOMER"
+        , sequenceName = "SQ_OPERATION_INFO"
         , initialValue = 1
         , allocationSize = 1
 )
@@ -41,11 +41,12 @@ import java.util.Date;
 @DynamicUpdate
 // soft delete
 @Where(clause = "DELETE_YN = 'N'")
-@SQLDelete(sql = "UPDATE TB_OPERATION_INFO SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE OperationId = ?")
+@SQLDelete(sql = "UPDATE OPERATION_INFO SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE OperationId = ?")
 public class OperationInfo extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "SQ_OPERATION_INFO_GENERATOR")
+
     private Integer operationId;
     private String airline;
     private String flightName;
