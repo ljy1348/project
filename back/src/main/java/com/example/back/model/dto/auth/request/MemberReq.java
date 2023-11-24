@@ -40,5 +40,5 @@ public class MemberReq {
   private String memberCountry;
 
 
-  private boolean changePwd; // 프론트에서 패스워드 수정 했다는것을 나타내는 옵션(true, false)
+  private String changePw; // 프론트에서 패스워드 수정 했다는것을 나타내는 옵션(true, false)
 }

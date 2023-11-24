@@ -39,6 +39,13 @@ public interface OperationInfoRepository extends JpaRepository<OperationInfo, In
                                             @Param("sysdate") Date sysdate,
                                             Pageable pageable
     );
-//    List<OperationInfo>
+
+    Page<OperationInfo> findAllByStartAirportContaining(String startAirport, Pageable pageable);
+    Page<OperationInfo> findAllByFinalAirportContaining(String finalAirport, Pageable pageable);
+    Page<OperationInfo> findAllByAirlineContaining(String airline, Pageable pageable);
+    Page<OperationInfo> findAllByFlightNameContaining(String flightName, Pageable pageable);
+    Page<OperationInfo> findAllByOperationIdEquals(Integer operationId, Pageable pageable);
+    Page<OperationInfo> findAllBy(Pageable pageable);
+
 
 }

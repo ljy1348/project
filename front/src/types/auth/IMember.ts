@@ -12,4 +12,5 @@ export default interface IUser {
     memberDate: Date | null,       
     memberCountry: string,       
     memberMile: number, 
+    changePw:string
 }

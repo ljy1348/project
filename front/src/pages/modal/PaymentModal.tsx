@@ -5,6 +5,7 @@ import {
   ANONYMOUS,
 } from "@tosspayments/payment-widget-sdk" 
 import { Modal } from "react-bootstrap";
+import AuthService from "../../services/auth/authService";
 
 const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm" 
 const customerKey = "Rkhxv1jRmshLqgQjm3gY4" 
@@ -48,6 +49,9 @@ function PaymentModal(props: any) {
         paymentWidgetRef.current = paymentWidget 
         paymentMethodsWidgetRef.current = paymentMethodsWidget 
       })() 
+
+      
+
     }, [props]) 
   
     useEffect(() => {
@@ -97,7 +101,7 @@ function PaymentModal(props: any) {
 
           try {
             await paymentWidget?.requestPayment({
-              orderId: `dfoeijfioiejoijf`,
+              orderId: `fwefwefsdf2`,
               orderName: "토스 티셔츠 외 2건",
               customerName: "김토스",
               customerEmail: "customer123@gmail.com",
@@ -107,6 +111,7 @@ function PaymentModal(props: any) {
             }) 
           } catch (error) {
             // 에러 처리하기
+            alert(error);
             console.error(error) 
           }
         }}
