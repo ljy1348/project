@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * packageName : com.example.back.service.reserve
@@ -37,4 +38,10 @@ public class OperationInfoService {
         return operationInfoList;
     }
 
+    //    상세 조회(1건조회)
+    public Optional<OperationInfo> findById(int OperationId) {
+        Optional<OperationInfo> optionalOperationInfo = operationInfoRepository.findById(OperationId);
+
+        return optionalOperationInfo;
+    }
 }
