@@ -2,13 +2,14 @@ package com.example.back.service.reserve;
 
 import com.example.back.model.entity.reserve.OperationInfo;
 import com.example.back.repository.reserve.OperationInfoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * packageName : com.example.back.service.reserve
@@ -23,6 +24,7 @@ import java.util.List;
  * —————————————————————————————
  * 2023-11-22         GGG          최초 생성
  */
+@Slf4j
 @Service
 public class OperationInfoService {
 
@@ -35,6 +37,30 @@ public class OperationInfoService {
         Page<OperationInfo> operationInfoList = operationInfoRepository.selectOperationInfo(operationDate,finalAirport,startAirport,sysdate,pageable);
 
         return operationInfoList;
+    }
+
+    public Page<OperationInfo> findOperation(String search, String select, Pageable pageable) {
+
+        if (select.equals("operationId")) {
+            Integer id = Integer.parseInt(search);
+            if (id == 0) return operationInfoRepository.findAllBy(pageable);
+            return operationInfoRepository.findAllByOperationIdEquals(id, pageable);
+        } else if (select.equals("startAirport")) {
+            Integer id = Integer.parseInt(search);
+            return operationInfoRepository.findAllByStartAirportContaining(search, pageable);
+        } else if (select.equals("finalAirport")) {
+            Integer id = Integer.parseInt(search);
+            return operationInfoRepository.findAllByFinalAirportContaining(search, pageable);
+        } else if (select.equals("airline")) {
+            Integer id = Integer.parseInt(search);
+            return operationInfoRepository.findAllByAirlineContaining(search, pageable);
+        } else if (select.equals("flightName")) {
+            Integer id = Integer.parseInt(search);
+            return operationInfoRepository.findAllByFlightNameContaining(search, pageable);
+        }
+
+            return operationInfoRepository.findAllBy(pageable);
+
     }
 
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Nav } from 'react-bootstrap'
 import AdminMemberList from '../admin/AdminMemberList';
 import AdminMember from '../admin/AdminMember';
+import OperationInfoManager from '../admin/OperationInfoManager';
 
 function AdminPage() {
 
@@ -12,7 +13,7 @@ function AdminPage() {
   },[])
 
   const tabView = () => {
-    if (selectTab==="항공") return <>항공</>
+    if (selectTab==="항공") return <OperationInfoManager/>
     else if (selectTab==="체크인") return <>체크인</>
     else if (selectTab==="수화물") return <>수화물</>
     else if (selectTab==="회원") return <AdminMemberList setSelectTab={setSelectTab} setDataId={setDataId}/>

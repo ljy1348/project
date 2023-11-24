@@ -1,8 +1,11 @@
 import React from 'react'
 
 function PaymentFail() {
+
+
+
   return (
-    <div>PaymentFail</div>
+    <div>a</div>
   )
 }
 

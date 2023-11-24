@@ -32,6 +32,7 @@ import ReserveChoose from './pages/reserve/ReserveChoose';
 import ReservePayment from './pages/reserve/ReservePayment';
 import PaymentResult from './pages/payment/PaymentResult';
 import PaymentSuccess from './pages/payment/PaymentSuccess';
+import PaymentFail from './pages/payment/PaymentFail';
 // todo: 리액트 import
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
     <div className="App">
 
       {/* 머리말 */}                 
-      {/* <Nav/> */}
+      <Nav/>
       {/* 본문 */}
       <Routes>
 
@@ -66,6 +67,7 @@ function App() {
 
         {/* 결제 */}
         <Route path="/payment/success" element={<PaymentSuccess/>} />
+        <Route path="/aa/fail" element={<PaymentFail/>} />
 
 
           

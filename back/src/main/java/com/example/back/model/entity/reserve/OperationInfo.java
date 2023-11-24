@@ -24,7 +24,7 @@ import java.util.Date;
  * 2023-11-22         GGG          최초 생성
  */
 @Entity
-@Table(name="TB_OPERATION_INFO")
+@Table(name="OPERATION_INFO")
 @SequenceGenerator(
         name = "SQ_OPERATION_INFO_GENERATOR"
         , sequenceName = "SQ_CUSTOMER"
@@ -46,18 +46,18 @@ public class OperationInfo extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "SQ_OPERATION_INFO_GENERATOR")
-    private Integer OperationId;
-    private String Airline;
-    private String FlightName;
-    private String StartAirport;
-    private String FinalAirport;
-    private String StartTime;   //datetime
-    private String FinalTime;   //datetime
-    private String OperationDate;
-    private Date StartDate;   //date
-    private Date FinalDate;   //date
-    private String DomesticInternational;
-    private Integer Price;
+    private Integer operationId;
+    private String airline;
+    private String flightName;
+    private String startAirport;
+    private String finalAirport;
+    private String startTime;   //datetime
+    private String finalTime;   //datetime
+    private String operationDate;
+    private Date startDate;   //date
+    private Date finalDate;   //date
+    private String domesticInternational;
+    private Integer price;
 
 
 
