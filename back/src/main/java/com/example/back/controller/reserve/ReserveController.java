@@ -46,15 +46,39 @@ public class ReserveController {
     //  전체 조회 + question/questioner like 검색
     @GetMapping("/reserve")
 
-    public List<OperationInfo> selectOperationInfo(
+    public ResponseEntity<Object> selectOperationInfo(
             @RequestParam(required = false) String startAirport,
             @RequestParam(required = false) String finalAirport,
             @RequestParam(required = false) String operationDate,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date sysdate){
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date sysdate,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "4") int size
+    ) {
+        try {
+
+            Pageable pageable = PageRequest.of(page, size);
+            Page<OperationInfo> customerPage = operationInfoService.selectOperationInfo(startAirport,finalAirport,operationDate,sysdate,pageable);
 
 
+//          리엑트 전송 : 부서배열, 페이징 정보[자료구조 : Map<키이름, 값>]
+            Map<String,Object> response = new HashMap<>();
+            response.put("operation",customerPage.getContent());       // qna 배열
+            response.put("currentPage",customerPage.getNumber()); // 현재 페이지 번호
+            response.put("totalItems",customerPage.getTotalElements()); // 총건수 ( 개수 )
+            response.put("totalPages",customerPage.getTotalPages()); // 총페이지 수
+            if (customerPage.isEmpty() == false) {
+//                성공
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            } else {
+//                데이터 없음
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
 
-        return operationInfoService.selectOperationInfo(startAirport, finalAirport, operationDate, sysdate);
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
 
     }
 }

@@ -33,10 +33,11 @@ public interface OperationInfoRepository extends JpaRepository<OperationInfo, In
             "and start_date < :sysdate " +
             "and final_date > :sysdate",
             nativeQuery = true)
-    List<OperationInfo> selectOperationInfo(@Param("operationDate") String operationDate,
+    Page<OperationInfo> selectOperationInfo(@Param("operationDate") String operationDate,
                                             @Param("startAirport") String startAirport,
                                             @Param("finalAirport") String finalAirport,
-                                            @Param("sysdate") Date sysdate
+                                            @Param("sysdate") Date sysdate,
+                                            Pageable pageable
     );
 //    List<OperationInfo>
 

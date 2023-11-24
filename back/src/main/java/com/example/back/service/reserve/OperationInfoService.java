@@ -30,8 +30,9 @@ public class OperationInfoService {
     OperationInfoRepository operationInfoRepository;
 
     //    question like 검색
-    public List<OperationInfo> selectOperationInfo(String startAirport, String finalAirport, String operationDate, Date sysdate){
-        List<OperationInfo> operationInfoList = operationInfoRepository.selectOperationInfo(operationDate,finalAirport,startAirport,sysdate);
+    public Page<OperationInfo> selectOperationInfo(String startAirport, String finalAirport, String operationDate, Date sysdate, Pageable pageable){
+
+        Page<OperationInfo> operationInfoList = operationInfoRepository.selectOperationInfo(operationDate,finalAirport,startAirport,sysdate,pageable);
 
         return operationInfoList;
     }
