@@ -1,0 +1,24 @@
+// axios 공통함수 : 벡엔드 연동
+
+import INonmemberinfo from "../types/INonmemberinfo";
+import http from "../utils/http-common";
+
+
+// 전체 조회 + like 검색(paging 기능 : page(현재페이지), size(1페이지당개수))
+const getAll = (userName:string, page:number, size:number) => {
+  return http.get<Array<INonmemberinfo>>(`/ksm/nonmemberinfo?userName=${userName}&page=${page}&size=${size}`);
+};
+
+
+// 저장함수
+const create = (data:INonmemberinfo) => {
+  return http.post<INonmemberinfo>("/ksm/nonmemberinfo", data);
+};
+
+
+const NonmemberService = {
+  getAll,
+  create,
+};
+
+export default NonmemberService;
