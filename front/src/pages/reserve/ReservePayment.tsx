@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import MyareaModal from "../modal/MyareaModal";
-import ForiareaModal from "../modal/ForiareaModal";
-import IReservation from "../../types/reserve/IReservation";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
-import PaymentModal from "../modal/PaymentModal";
 import { useParams } from "react-router-dom";
 import IOperationinfo from "../../types/IOperationinfo";
 import OperationService from "../../services/OperationService";
 import ICount from "./../../types/reserve/ICount";
+import INonmemberinfo from "../../types/INonmemberinfo";
+import NonmemberService from "../../services/NonmemberService";
 
 function ReservePayment() {
   // 기본키
@@ -21,9 +19,10 @@ function ReservePayment() {
     endDayName,
     adultCount,
     childCount,
+    seatClass,
   } = useParams();
-
-  const [icount, setICount] = useState<ICount>();
+  // 사용 X?
+  // const [icount, setICount] = useState<ICount>();
 
   const initICount = {
     adult: false,
@@ -31,7 +30,7 @@ function ReservePayment() {
   };
   const [temp, setTemp] = useState<ICount[]>([initICount]);
 
-  // operationinfo 배열 변수 정의
+  // operationinfo 객체 초기화
 
   const initialOperationinfo = {
     operationId: null,
@@ -61,32 +60,19 @@ function ReservePayment() {
     domesticInternational: "",
     price: "",
   };
-  const initiaReservaionl = {
-    AirlineReservaitonNumber: null,
-    FlightName: "",
-    UserId: "",
-    RoundOrOne: "",
-    EnName: "",
-    Departure: "",
-    Arrival: "",
-    OperationDay: "",
-    Airline: "",
-    SeatType: "",
-    AdultCount: 0,
-    ChildCount: 0,
-    InfantCount: 0,
-    MileUseStatus: "",
-    MembershipStatus: "",
-    DomesticInternational: "",
-    KorCity: "",
-    ForiCountry: "",
-    ForiCity: "",
-    AirportFee: "",
-    Email: "",
-    PhoneNum: "",
-    PassWord: "",
+
+  // 저장 : 비회원 객체 초기화
+  const initialNonmemberinfo = {
+    userNumber: null,
+    userName: "",
+    userSex: "",
+    userCountry: "",
+    userDate: "",
+    userPhone: "",
+    ueseEmail: "",
   };
-  // operationinfo 배열 변수 정의
+
+  // operationinfo 객체 정의
 
   const [operationinfo, setOperationinfo] =
     useState<IOperationinfo>(initialOperationinfo);
@@ -94,9 +80,16 @@ function ReservePayment() {
     initialOperationinfo2
   );
 
+  // 비회원 객체
+  const [nonmemberinfo, setNonmemberinfo] =
+    useState<INonmemberinfo>(initialNonmemberinfo);
+
   // 도착 날짜 저장 함수
   const [day, setDay] = useState<string>("");
   const [day2, setDay2] = useState<string>("");
+
+  // 가격
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
   const days = ["일", "월", "화", "수", "목", "금", "토"];
   // startDate2와 endDate2를 Date 객체로 변환
@@ -110,6 +103,34 @@ function ReservePayment() {
   // days 배열에서 요일 이름을 얻음
   const startDayName2 = days[startDayIndex];
   const endDayName2 = days[endDayIndex];
+
+  // type 선언
+  // modalcontrol
+  const [modalShow, setModalShow] = useState(false);
+
+  // 비회원 수동 바인딩
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target; // 화면값
+    setNonmemberinfo({ ...nonmemberinfo, [name]: value }); // 변수저장
+  };
+
+  // 생년월일 바인딩
+  const handleBirthdateChange = () => {
+    // 선택된 년도, 월, 일 값을 가져옵니다.
+    const selectedYear = (
+      document.getElementById("birth-year") as HTMLSelectElement
+    ).value;
+    const selectedMonth = (
+      document.getElementById("birth-month") as HTMLSelectElement
+    ).value;
+    const selectedDay = (
+      document.getElementById("birth-day") as HTMLSelectElement
+    ).value;
+
+    // 이 값을 nonmemberinfo.userDate에 저장합니다.
+    const selectedDate = `${selectedYear}-${selectedMonth}-${selectedDay}`;
+    setNonmemberinfo((prevInfo) => ({ ...prevInfo, userDate: selectedDate }));
+  };
 
   // 상세조회 함수
   const getoperationinfo = (operationId: string) => {
@@ -133,16 +154,27 @@ function ReservePayment() {
         console.log(e);
       });
   };
-  // type 선언
-  const [reservation, setReservation] =
-    useState<IReservation>(initiaReservaionl);
-  // modalcontrol
-  const [modalShow, setModalShow] = useState(false);
-  const [foriModalShow, foriSetModalShow] = useState(false);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target; // 화면값
-    setReservation({ ...reservation, [name]: value }); // 변수저장
+  // 비회원 저장 함수
+  const saveNonmemberinfo = () => {
+    // 임시 부서 객체
+    var data = {
+      userName: nonmemberinfo.userName,
+      userSex: nonmemberinfo.userSex,
+      userCountry: nonmemberinfo.userCountry,
+      userDate: nonmemberinfo.userDate,
+      userPhone: nonmemberinfo.userPhone,
+      ueseEmail: nonmemberinfo.ueseEmail,
+    };
+
+    NonmemberService.create(data) // 저장 요청
+      .then((response: any) => {
+        // setSubmitted(true);
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
   };
 
   useEffect(() => {
@@ -156,8 +188,43 @@ function ReservePayment() {
       getoperationinfo2(secoundId);
       inputdays2(endDate2);
     }
-  }, []);
+    // 가격
+    if (seatClass === "이코노미") {
+      // adultCount와 childCount가 undefined가 아닌지 확인
+      if (adultCount !== undefined && childCount !== undefined) {
+        setTotalPrice(
+          (operationinfo.price * adultCount +((operationinfo.price * 9) / 10) * childCount) + 
+          (operationinfo2.price * adultCount +((operationinfo2.price * 9) / 10) * childCount)
+        );
+      }
+      console.log(setTotalPrice)
 
+    }
+
+    if (seatClass === "비지니스") {
+      // adultCount와 childCount가 undefined가 아닌지 확인
+      if (adultCount !== undefined && childCount !== undefined) {
+        setTotalPrice(
+          ((operationinfo.price * adultCount +((operationinfo.price * 9) / 10) * childCount) + 
+          (operationinfo2.price * adultCount +((operationinfo2.price * 9) / 10) * childCount)) * 3
+        );
+      }
+      console.log(setTotalPrice)
+
+    }
+
+    if (seatClass === "퍼스트") {
+      // adultCount와 childCount가 undefined가 아닌지 확인
+      if (adultCount !== undefined && childCount !== undefined) {
+        setTotalPrice(
+          ((operationinfo.price * adultCount +((operationinfo.price * 9) / 10) * childCount) + 
+          (operationinfo2.price * adultCount +((operationinfo2.price * 9) / 10) * childCount)) * 9
+        );
+      }
+      console.log(setTotalPrice)
+    }
+  }, []);
+  // 어른 아이 인원수에 따라 저장창 생성
   useEffect(() => {
     let arr: ICount[] = [];
     for (let i = 0; i < Number(adultCount); i++) {
@@ -220,6 +287,37 @@ function ReservePayment() {
       console.log(endDate2);
     }
   };
+
+  // 2번
+  // const calculatePrice = (basePrice, adultCount, childCount, multiplier) => {
+  //   // adultCount와 childCount가 undefined가 아닌지 확인
+  //   if (adultCount !== undefined && childCount !== undefined) {
+  //     return (basePrice * adultCount + (basePrice * 9 / 10) * childCount) * multiplier;
+  //   }
+  //   return 0; // 둘 중 하나라도 undefined이면 0을 반환
+  // };
+  
+  // // 가격
+  // if (seatClass === "이코노미") {
+  //   setTotalPrice(
+  //     calculatePrice(operationinfo.price, adultCount, childCount, 1) + 
+  //     calculatePrice(operationinfo2.price, adultCount, childCount, 1)
+  //   );
+  // }
+  
+  // if (seatClass === "비지니스") {
+  //   setTotalPrice(
+  //     calculatePrice(operationinfo.price, adultCount, childCount, 3) + 
+  //     calculatePrice(operationinfo2.price, adultCount, childCount, 3)
+  //   );
+  // }
+  
+  // if (seatClass === "퍼스트") {
+  //   setTotalPrice(
+  //     calculatePrice(operationinfo.price, adultCount, childCount, 9) + 
+  //     calculatePrice(operationinfo2.price, adultCount, childCount, 9)
+  //   );
+  // }
   return (
     <>
       {/* 공통 */}
@@ -390,31 +488,31 @@ function ReservePayment() {
                         <div className="row g-3 align-items-center mb-3">
                           {/* 성별 라벨 시작 */}
                           <div className="col-3">
-                            <label
-                              htmlFor="fullName"
-                              className="col-form-label"
-                            >
+                            <label htmlFor="userSex" className="col-form-label">
                               성별
                             </label>
                           </div>
-                          {/* 라벨 끝 */}
-                          {/* 성별 라디오 박스 */}
-                          <div className="sangmin_gender col-9">
+                          <div className="col-9">
                             <label htmlFor="male">남성</label>
                             <input
                               className="sangmin_gender_check"
                               id="male"
                               type="radio"
-                              name="gender"
-                              value="man"
+                              name="userSex"
+                              value="male"
+                              onChange={handleInputChange}
+                              checked={nonmemberinfo.userSex === "male"} // 선택된 경우에만 체크되도록 설정
                             />
+
                             <label htmlFor="female">여성</label>
                             <input
                               className="sangmin_gender_check"
                               id="female"
                               type="radio"
-                              name="gender"
-                              value="woman"
+                              name="userSex"
+                              value="female"
+                              onChange={handleInputChange}
+                              checked={nonmemberinfo.userSex === "female"} // 선택된 경우에만 체크되도록 설정
                             />
                           </div>
                         </div>
@@ -423,7 +521,7 @@ function ReservePayment() {
                           {/* 이름 라벨 시작 */}
                           <div className="col-3">
                             <label
-                              htmlFor="fullName"
+                              htmlFor="userName"
                               className="col-form-label"
                             >
                               이름
@@ -434,39 +532,38 @@ function ReservePayment() {
                           <div className="col-9">
                             <input
                               type="text"
-                              id="fullName"
+                              id="userName"
                               required
                               className="form-control"
-                              value={reservation.EnName}
+                              value={nonmemberinfo.userName}
                               onChange={handleInputChange}
                               placeholder="이름"
-                              name="fullName"
+                              name="userName"
                             />
                           </div>
                         </div>
-
+                        {/* 국적 입력 */}
                         <div className="row g-3 align-items-center mb-3">
                           {/* 국적 라벨 시작 */}
                           <div className="col-3">
                             <label
-                              htmlFor="fullName"
+                              htmlFor="userCountry"
                               className="col-form-label"
                             >
                               국적
                             </label>
                           </div>
-                          {/* 이름 라벨 끝 */}
                           {/* 국적 입력창 */}
                           <div className="col-9">
                             <input
                               type="text"
-                              id="fullName"
+                              id="userCountry"
                               required
                               className="form-control"
-                              value={reservation.EnName}
+                              value={nonmemberinfo.userCountry}
                               onChange={handleInputChange}
                               placeholder="국적"
-                              name="fullName"
+                              name="userCountry"
                             />
                           </div>
                         </div>
@@ -485,14 +582,26 @@ function ReservePayment() {
                           {/* 생년월일 입력창 */}
                           <div className="col-9">
                             <div className="info" id="info__birth">
-                              <select className="box" id="birth-year">
-                                <option>출생 연도</option>년
+                              <select
+                                className="box"
+                                id="birth-year"
+                                onChange={handleBirthdateChange}
+                              >
+                                {/* 년도 옵션들 */}
                               </select>
-                              <select className="box" id="birth-month">
-                                <option>월</option>월
+                              <select
+                                className="box"
+                                id="birth-month"
+                                onChange={handleBirthdateChange}
+                              >
+                                {/* 월 옵션들 */}
                               </select>
-                              <select className="box" id="birth-day">
-                                <option>일</option>일
+                              <select
+                                className="box"
+                                id="birth-day"
+                                onChange={handleBirthdateChange}
+                              >
+                                {/* 일 옵션들 */}
                               </select>
                             </div>
                           </div>
@@ -500,50 +609,51 @@ function ReservePayment() {
 
                         {/* 전화번호 입력 */}
                         <div className="row g-3 align-items-center mb-3">
-                          {/* 이름 라벨 시작 */}
+                          {/* 전화번호 라벨 시작 */}
                           <div className="col-3">
-                            <label htmlFor="UserId" className="col-form-label">
+                            <label
+                              htmlFor="userPhone"
+                              className="col-form-label"
+                            >
                               전화번호
                             </label>
                           </div>
-                          {/* 라벨 끝 */}
-                          {/* 이름 입력창 */}
+                          {/* 전화번호 입력창 */}
                           <div className="col-9">
                             <input
                               type="text"
-                              id="memberCode"
+                              id="userPhone"
                               required
                               className="form-control"
-                              value={reservation.UserId}
+                              value={nonmemberinfo.userPhone}
                               onChange={handleInputChange}
                               placeholder="번호만 입력해 주세요"
-                              name="UserId"
+                              name="userPhone"
                             />
                           </div>
                         </div>
-
+                        {/* 이메일 입력 */}
                         <div className="row g-3 align-items-center mb-3">
-                          {/* 국적 라벨 시작 */}
+                          {/* 이메일 라벨 시작 */}
                           <div className="col-3">
                             <label
-                              htmlFor="fullName"
+                              htmlFor="ueseEmail"
                               className="col-form-label"
                             >
                               이메일
                             </label>
                           </div>
-                          {/* 이름 라벨 끝 */}
-                          {/* 국적 입력창 */}
+                          {/* 이메일 입력창 */}
                           <div className="col-9">
                             <input
                               type="text"
-                              id="fullName"
+                              id="ueseEmail"
                               required
                               className="form-control"
-                              value={reservation.EnName}
+                              value={nonmemberinfo.ueseEmail}
                               onChange={handleInputChange}
                               placeholder="이메일"
-                              name="fullName"
+                              name="ueseEmail"
                             />
                           </div>
                         </div>
@@ -554,7 +664,6 @@ function ReservePayment() {
               );
             })}
         </div>
-
 
         <div className="d-flex justify-content-end ">
           <button
