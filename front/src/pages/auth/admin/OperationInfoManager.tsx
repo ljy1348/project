@@ -27,6 +27,7 @@ function OperationInfoManager() {
 
   //   전체조회 함수
   const retrieveDept = () => {
+    console.log("a")
     // 벡엔드 매개변수 전송 : + 현재페이지(page), 1페이지당개수(pageSize)
     AdminService.getOperationAll(search, select, page-1, pageSize)
     .then((response:any)=>{console.log(response)
@@ -73,9 +74,10 @@ function OperationInfoManager() {
         <div className="col-8 w-50 input-group mb-3 mt-5">
           <select value={select} onChange={onChangeSelect} className='me-3'>
             <option value="operationId">ID</option>
-            <option value="name">이름</option>
-            <option value="ename">E.이름</option>
-            <option value="email">이메일</option>
+            <option value="startAirport">출발공항</option>
+            <option value="finalAirport">도착공항</option>
+            <option value="airline">항공사</option>
+            <option value="flightName">편명</option>
           </select>
           <input
             type="text"
@@ -154,8 +156,10 @@ function OperationInfoManager() {
           </thead>
           <tbody>
             {dept &&
-              dept.map((data, idx) => (
-                <tr key={idx}>
+              dept.map((data, idx) => {
+                const startDate = data.startDate.toString().split("T");
+                const finalDate = data.finalDate.toString().split("T");
+                return (<tr key={idx}>
                   <td>{data.operationId}</td>
                   <td>{data.airline}</td>
                   <td>{data.flightName}</td>
@@ -163,17 +167,17 @@ function OperationInfoManager() {
                   <td>{data.finalTime}</td>
                   <td>{data.startAirport}</td>
                   <td>{data.finalAirport}</td>
-                  <td>{data.startDate.toString()}</td>
-                  <td>{data.finalDate.toString()}</td>
+                  <td>{startDate[0]}</td>
+                  <td>{finalDate[0]}</td>
+                  <td>{data.price}</td>
                   <td>{data.domesticInternational}</td>
-                  <td>{data.price}ㅁ</td>
                   <td>
                     {/* <a href="#" onClick={()=>{setSelectTab("회원상세"); setDataId(data.memberId)}}> */}
                       <span className="badge bg-success">Edit</span>
                     {/* </a>  */}
                   </td>
-                </tr>
-              ))}
+                </tr>)
+})}
           </tbody>
         </table>
         {/* table end */}

@@ -59,7 +59,12 @@ function AdminPage() {
         </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-        <Nav.Link eventKey="link-4" onClick={()=>{setSelectTab("회원")}}>
+        <Nav.Link eventKey="link-4" onClick={()=>{setSelectTab("게시물")}}>
+          게시판 관리
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link-5" onClick={()=>{setSelectTab("회원")}}>
           회원 관리
         </Nav.Link>
       </Nav.Item>

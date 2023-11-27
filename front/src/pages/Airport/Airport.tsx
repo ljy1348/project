@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import "../../assets/css/Airport.css";
 import AirportList from "../../utils/AirportList";
 
-function Airport() {
+function Airport({setAirport}:{setAirport:any}) {
   const initAirport = {
     cname: "",
     abbr: "",
@@ -31,6 +31,7 @@ function Airport() {
   };
 
   const selectedAirport = (data: string) => {
+    setAirport(data);
     console.log(data);
   };
 

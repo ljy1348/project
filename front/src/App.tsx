@@ -34,6 +34,7 @@ import ReservePayment from './pages/reserve/ReservePayment';
 import PaymentResult from './pages/payment/PaymentResult';
 import PaymentSuccess from './pages/payment/PaymentSuccess';
 import PaymentFail from './pages/payment/PaymentFail';
+import Home2 from "./pages/Home2";
 // todo: 리액트 import
 
 function App() {
@@ -87,7 +88,7 @@ function App() {
           element={<ReservePayment />}
         />
 
-        {/* <Route path="/test" element={<Test />} /> */}
+        <Route path="/test" element={<Home2 />} />
       </Routes>
 
       {/* 꼬리말 */}
