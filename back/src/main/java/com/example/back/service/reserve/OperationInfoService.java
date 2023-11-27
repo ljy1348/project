@@ -76,4 +76,13 @@ public class OperationInfoService {
         return operationInfoRepository.save(operationInfo);
     }
 
+    public boolean delete(int dataId) {
+        if (operationInfoRepository.existsById(dataId)) {
+            operationInfoRepository.deleteById(dataId);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
