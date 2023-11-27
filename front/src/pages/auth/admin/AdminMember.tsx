@@ -45,8 +45,8 @@ function AdminMember({setSelectTab, dataId}:{setSelectTab:any, dataId:string}) {
                 console.log(response);
         setGetUser(response.data);
         if (response.data.memberDate){
-            const date = new Date(response.data.memberDate);
-            setSelectedDate(date.toISOString().split('T')[0]);
+            // const date = new Date(response.data.memberDate);
+            setSelectedDate(response.data.memberDate);
           }
         })
         .catch((e:Error)=>{

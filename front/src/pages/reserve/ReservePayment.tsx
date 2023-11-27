@@ -47,7 +47,7 @@ function ReservePayment() {
     price: "",
   };
   const initialOperationinfo2 = {
-    operationId: "",
+    operationId: null,
     airline: "",
     flightName: "",
     startAirport: "",
@@ -188,41 +188,6 @@ function ReservePayment() {
       getoperationinfo2(secoundId);
       inputdays2(endDate2);
     }
-    // 가격
-    if (seatClass === "이코노미") {
-      // adultCount와 childCount가 undefined가 아닌지 확인
-      if (adultCount !== undefined && childCount !== undefined) {
-        setTotalPrice(
-          (operationinfo.price * adultCount +((operationinfo.price * 9) / 10) * childCount) + 
-          (operationinfo2.price * adultCount +((operationinfo2.price * 9) / 10) * childCount)
-        );
-      }
-      console.log(setTotalPrice)
-
-    }
-
-    if (seatClass === "비지니스") {
-      // adultCount와 childCount가 undefined가 아닌지 확인
-      if (adultCount !== undefined && childCount !== undefined) {
-        setTotalPrice(
-          ((operationinfo.price * adultCount +((operationinfo.price * 9) / 10) * childCount) + 
-          (operationinfo2.price * adultCount +((operationinfo2.price * 9) / 10) * childCount)) * 3
-        );
-      }
-      console.log(setTotalPrice)
-
-    }
-
-    if (seatClass === "퍼스트") {
-      // adultCount와 childCount가 undefined가 아닌지 확인
-      if (adultCount !== undefined && childCount !== undefined) {
-        setTotalPrice(
-          ((operationinfo.price * adultCount +((operationinfo.price * 9) / 10) * childCount) + 
-          (operationinfo2.price * adultCount +((operationinfo2.price * 9) / 10) * childCount)) * 9
-        );
-      }
-      console.log(setTotalPrice)
-    }
   }, []);
   // 어른 아이 인원수에 따라 저장창 생성
   useEffect(() => {
@@ -289,35 +254,30 @@ function ReservePayment() {
   };
 
   // 2번
-  // const calculatePrice = (basePrice, adultCount, childCount, multiplier) => {
-  //   // adultCount와 childCount가 undefined가 아닌지 확인
-  //   if (adultCount !== undefined && childCount !== undefined) {
-  //     return (basePrice * adultCount + (basePrice * 9 / 10) * childCount) * multiplier;
-  //   }
-  //   return 0; // 둘 중 하나라도 undefined이면 0을 반환
-  // };
+  // 가격 계산 함수
+const calculatePrice = (basePrice: number, adultCount: number, childCount: number, multiplier: number) => {
+  if (adultCount !== undefined && childCount !== undefined) {
+    return (basePrice * adultCount + (basePrice * 0.9) * childCount) * multiplier;
+  }
+  return 0;
+};
+
+// 총 가격 계산 함수
+const calculateTotalPrice = (seatClass: string) => {
+  const multiplier = seatClass === '비지니스' ? 3 : (seatClass === '퍼스트' ? 9 : 1);
+  return (
+    calculatePrice(Number(operationinfo.price), Number(adultCount), Number(childCount), multiplier) +
+    calculatePrice(Number(operationinfo2.price), Number(adultCount), Number(childCount), multiplier)
+  );
+};
+
+// useEffect를 사용하여 total price 업데이트
+useEffect(() => {
+  setTotalPrice(calculateTotalPrice(seatClass || '이코노미'));
+  console.log(totalPrice)
+}, [seatClass, adultCount, childCount, operationinfo.price, operationinfo2.price]);
   
-  // // 가격
-  // if (seatClass === "이코노미") {
-  //   setTotalPrice(
-  //     calculatePrice(operationinfo.price, adultCount, childCount, 1) + 
-  //     calculatePrice(operationinfo2.price, adultCount, childCount, 1)
-  //   );
-  // }
-  
-  // if (seatClass === "비지니스") {
-  //   setTotalPrice(
-  //     calculatePrice(operationinfo.price, adultCount, childCount, 3) + 
-  //     calculatePrice(operationinfo2.price, adultCount, childCount, 3)
-  //   );
-  // }
-  
-  // if (seatClass === "퍼스트") {
-  //   setTotalPrice(
-  //     calculatePrice(operationinfo.price, adultCount, childCount, 9) + 
-  //     calculatePrice(operationinfo2.price, adultCount, childCount, 9)
-  //   );
-  // }
+  // 가격
   return (
     <>
       {/* 공통 */}
@@ -641,6 +601,7 @@ function ReservePayment() {
                               className="col-form-label"
                             >
                               이메일
+                              
                             </label>
                           </div>
                           {/* 이메일 입력창 */}

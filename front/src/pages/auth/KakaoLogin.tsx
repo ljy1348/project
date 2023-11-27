@@ -18,6 +18,7 @@ function Oauth() {
       // 제이쿼리 스크립트 호출
 
         const code = new URL(window.location.href).searchParams.get("code");
+        
         console.log(code);
         let applogin = null;
         if (code) {
