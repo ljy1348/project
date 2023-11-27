@@ -51,6 +51,7 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <div id="writeEditor" style="display: none;"></div> 
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -62,6 +63,13 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <!-- 여기 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+    <script>
+      ClassicEditor.create( document.querySelector( '#editor' ), {
+        language: "ko"
+      } );
+    </script>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

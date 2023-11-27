@@ -54,11 +54,11 @@ function Nav() {
 
               {/* 고객 시작 */}
               <li className="has-children">
-                <Link to="#">체크인</Link>
+                <Link to="#">공지사항</Link>
                 <ul className="dropdown">
                   {/* 1st 드롭 메뉴 */}
                   <li>
-                    <Link to="/customer">One</Link>
+                    <Link to="/write-notice">공지사항 작성</Link>
                   </li>
                   {/* 2nd 드롭 메뉴 */}
                   <li>

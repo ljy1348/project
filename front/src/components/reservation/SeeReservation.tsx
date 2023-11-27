@@ -18,6 +18,7 @@ function SeeReservation() {
     childCount: "",
     mileUseYn: "",
     memberYn: "", // 회원여부
+    checkYn: "", // 체크인 여부
     memberId: "",
     userNumber: 0, // 비회원 번호
     operationId: 0, // 운항 ID
@@ -60,7 +61,9 @@ function SeeReservation() {
 
   return (
     <>
+    
       <form className="form">
+        <div className="blankBox3">&nbsp;</div>
         <div className="row mb-2">
           <h6 className="test1">예약 번호</h6>
           <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
@@ -209,6 +212,16 @@ function SeeReservation() {
               type="type"
               className="form-control"
               value={reservation.memberName}
+            />
+          </div>
+
+          <h6 className="test2">&nbsp;&nbsp;&nbsp;&nbsp;체크인 여부</h6>
+          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
+            <input
+              name=""
+              type="type"
+              className="form-control"
+              value={reservation.checkYn}
             />
           </div>
 

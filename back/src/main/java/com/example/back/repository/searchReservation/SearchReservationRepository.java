@@ -1,7 +1,7 @@
 package com.example.back.repository.searchReservation;
 
 import com.example.back.model.dto.OprResDto;
-import com.example.back.model.searchReservation.SearchReservation;
+import com.example.back.model.entity.searchReservation.SearchReservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -38,6 +38,7 @@ public interface SearchReservationRepository extends JpaRepository<SearchReserva
             "     , RES.MILE_USE_YN as mileUseYn " +
             "     , RES.SEAT_TYPE as seatType " +
             "     , RES.MEMBER_YN as memberYn " +
+            "     , RES.CHECK_YN as checkYn " +
             "     , RES.MEMBER_ID as memberId " +
             "     , RES.USER_NUMBER as userNumber " +
             "     , RES.OPERATION_ID as operationId " +

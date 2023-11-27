@@ -9,17 +9,10 @@ import Nav from "./components/common/Nav";
 import Home from "./pages/Home";
 import Footer from "./components/common/Footer";
 import { Routes, Route } from "react-router-dom";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import CustomerListPage from "./pages/customer/CustomerListPage";
-import AddCustomerPage from "./pages/customer/AddCustomerPage";
-import CustomerPage from "./pages/customer/CustomerPage";
-import QnaListPage from "./pages/qna/QnaListPage";
-import AddQnaPage from "./pages/qna/AddQnaPage";
-import QnaPage from "./pages/qna/QnaPage";
 import Login from "./pages/Login";
 import ReservationListPage from "./pages/ReservationListPage";
 import SearchReservationPage from "./pages/SearchReservation/SearchReservationPage";
+import WriteNoticePage from "./pages/writeNotice/WriteNoticePage";
 
 function App() {
   return (
@@ -34,21 +27,11 @@ function App() {
         <Route path="/search-reservation" element={<ReservationListPage />} />
         <Route path="/search-reservation/seeReservation/:airlineReservationNumber" element={<SearchReservationPage />} />
 
-
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
-
-        {/* 고객 */}
-        <Route path="/customer" element={<CustomerListPage />} />
-        <Route path="/add-customer" element={<AddCustomerPage />} />
-        <Route path="/customer/:cid" element={<CustomerPage />} />
-
-        {/* Q & A */}
-        <Route path="/qna" element={<QnaListPage />} />
-        <Route path="/add-qna" element={<AddQnaPage />} />
-        <Route path="/qna/:qno" element={<QnaPage />} />
+        <Route path="/write-notice" element={<WriteNoticePage />} />
       </Routes>
+    
+
 
       {/* 꼬리말 */}
       <Footer />

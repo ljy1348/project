@@ -8,8 +8,6 @@ function ReservationList() {
   // reservation 배열 변수
   const [reservation, setReservation] = useState<Array<IReservation>>([]);
 
-  const memberId = "qwe123"
-
   // 검색어(input) 변수
   const [airlineReservationNumber, setAirlineReservationNumber] = useState<any>("");
 
@@ -20,7 +18,7 @@ function ReservationList() {
       return;
     }
     // 벡엔드 매개변수 전송
-    ReservationService.getAll(airlineReservationNumber, memberId) // 벡엔드 전체조회요청
+    ReservationService.getAll(airlineReservationNumber) // 벡엔드 전체조회요청
       .then((response: any) => {
         setReservation(response.data);
         // 로그 출력
@@ -75,6 +73,7 @@ function ReservationList() {
               <th scope="col">성인</th>
               <th scope="col">소아</th>
               <th scope="col">회원 여부</th>
+              <th scope="col">체크인 여부</th>
               <th scope="col">마일리지 사용여부</th>
               <th scope="col">상세 조회</th>
             </tr>
@@ -87,6 +86,7 @@ function ReservationList() {
                   <td>{data.adultCount}</td>
                   <td>{data.childCount}</td>
                   <td>{data.memberYn}</td>
+                  <td>{data.checkYn}</td>
                   <td>{data.mileUseYn}</td>
                   <td>
                     <a href={"/search-reservation/seeReservation/" + data.airlineReservationNumber}>

@@ -1,27 +1,18 @@
-// CustomerListPage.tsx
-import React, { useEffect } from "react";
-import CustomerList from "../../components/basic/customer/CustomerList";
-import initScripts from "../../assets/js/scripts";
-import initCustom from "../../assets/js/custom";
+import React from "react";
+import WriteNotice from "./WriteNotice";
 
-function CustomerListPage() {
-  useEffect(() => {
-    initScripts();
-    initCustom();
-  }, []);
-
+function WriteNoticePage() {
   return (
     <>
-      {/* 테마 디자인 적용 : 컨택트 소스 */}
       {/* 테마 제목 시작 */}
       <div className="hero hero-inner">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6 mx-auto text-center">
               <div className="intro-wrap">
-                <h1 className="mb-0">고객 조회</h1>
+                <h1 className="mb-0">공지사항 작성</h1>
                 <p className="text-white">
-                  여기에서 고객 정보를 확인하실 수 있습니다.
+                  여기에서 공지사항을 작성하실 수 있습니다.
                 </p>
               </div>
             </div>
@@ -35,7 +26,7 @@ function CustomerListPage() {
         <div className="container">
           <div className="row">
             {/* 여기 */}
-            <CustomerList />
+            <WriteNotice />
           </div>
         </div>
       </div>
@@ -44,4 +35,4 @@ function CustomerListPage() {
   );
 }
 
-export default CustomerListPage;
+export default WriteNoticePage;

@@ -5,6 +5,7 @@ export default interface IReservation {
     childCount: string,                     // 소아 인수
     mileUseYn: string,                      // 마일리지 사용 여부 Y/N
     memberYn: string,                       // 회원 여부
+    checkYn: string,                       // 체크인 여부
     memberId: string,                       // 회원 ID
     userNumber: number,                     // 비회원 번호
     operationId: number,                    // 운항 ID

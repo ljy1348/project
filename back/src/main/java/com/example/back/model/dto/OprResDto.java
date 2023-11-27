@@ -28,6 +28,8 @@ public interface OprResDto {
 
     String getMemberYn();
 
+    String getCheckYn();
+
     String getMemberId();
 
     String getUserNumber();

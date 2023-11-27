@@ -1,14 +1,11 @@
 package com.example.back.service.searchReservation;
 
 import com.example.back.model.dto.OprResDto;
-import com.example.back.model.searchReservation.SearchReservation;
+import com.example.back.model.entity.searchReservation.SearchReservation;
 import com.example.back.repository.searchReservation.SearchReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,8 +29,8 @@ public class SearchReservationService {
     SearchReservationRepository searchReservationRepository; // DI
     
 //    전체 조회 + like 검색
-    public List<SearchReservation> findAllByAirlineReservationNumber(int airlineReservationNumber, String memberId) {
-        List<SearchReservation> list = searchReservationRepository.findAllByAirlineReservationNumberAndMemberId(airlineReservationNumber, memberId);
+    public List<SearchReservation> findAllByAirlineReservationNumber(int airlineReservationNumber) {
+        List<SearchReservation> list = searchReservationRepository.findAllByAirlineReservationNumber(airlineReservationNumber);
 
         return list;
     }

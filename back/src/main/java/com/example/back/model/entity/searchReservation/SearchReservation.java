@@ -1,4 +1,4 @@
-package com.example.back.model.searchReservation;
+package com.example.back.model.entity.searchReservation;
 
 import com.example.back.model.common.BaseTimeEntity;
 import lombok.*;
@@ -70,6 +70,10 @@ public class SearchReservation extends BaseTimeEntity {
 //    회원 여부
     @Column
     private String memberYn;
+
+//    체크인 여부
+    @Column
+    private String checkYn;
 
 //    회원 ID
     @Column

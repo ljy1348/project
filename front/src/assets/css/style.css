@@ -1876,7 +1876,7 @@ ul,li {list-style:none;}
   content: "\e8b4";
 }
 
-/* 예약 조회 */
+/* 예약 조회 페이지 */
 
 .searchRow {
   display: inline-block;
@@ -1956,5 +1956,15 @@ ul,li {list-style:none;}
 
 .btn1 {
   width: 365px;
-  margin-left: 250px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+
+/* 공지사항 작성 페이지 */
+
+#editor {
+  height: 400px;
+  width: 1070px;
+  font-size: 18px;
 }
