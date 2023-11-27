@@ -254,8 +254,8 @@ $(function(){
 	}
 	counter();
 	
-	if($('input[name="daterange"]').length) {
-		$('input[name="daterange"]').daterangepicker();
-	}
+	// if($('input[name="daterange"]').length) {
+	// 	$('input[name="daterange"]').daterangepicker();
+	// }
 })
 }

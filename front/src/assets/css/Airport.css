@@ -1,0 +1,119 @@
+ul {
+    list-style: none;
+}
+
+/* 국내선 / 국제선 글자 */
+h3 , h5{
+    margin-left: 50px;
+}
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* 국내선 국제선 사이의 공간 */
+/* 국내선 리스트 */
+.domestic > .city_list{
+    /* padding-bottom: 20px; */
+    padding: 0;
+}
+
+
+.domestic > .city_list > li {
+    cursor:pointer;
+    float: left;
+    width: 230px;
+    margin: 1px;
+    background-color: hsl(0, 0%, 94%);
+    height: 30px;
+}
+
+/* 리스트 글자 */
+li > .cname {
+    display: block;
+    color: #222;
+    font-size: 15px;
+    width: 30%;
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+li > .abbr {
+    display: block;
+    color: #747474;
+    font-size: 14px;
+    font-family: 'latofont', sans-serif;
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* 국제선 왼쪽 리스트 */
+.list_nation {
+    margin-left: 10px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    overflow-y: auto;
+    width: 220px;
+    height: 230px;
+    background: #f3f3f3;
+    text-align: start;
+}
+
+.list_nation > ul {
+    padding: 0;
+}
+
+.select_airport {
+    width: 720px;
+}
+
+.list_nation > ul > li {
+    cursor:pointer;
+    margin: 1px;
+    padding-top: 5px;
+    padding-left: 10px;
+    background-color: hsl(0, 0%, 94%);
+    height: 30px;
+    font-size: 15px;
+}
+
+.international_listbox > .city_list > li {
+    width: calc(100% - px);
+    height: 40px;
+    background: #f3f3f3;
+    margin: 5px 1px;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* 국제선 오른쪽 리스트 */
+.international_listbox {
+    width: 250px;
+    height: 230px;
+    border: 1px solid black;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.international_listbox > ul {
+    padding: 0;
+}
+
+.international_list.active {
+    background-color: #1A374D;
+    color: white;
+}
+
+.international_listbox > .city_list > li:hover, .list_nation > ul > li:hover,
+.domestic > .city_list > li:hover, .domestic > .city_list > li:hover .cname,
+.international_listbox > .city_list > li:hover .cname{
+    background-color: #1A374D;
+    color: white !important;
+}

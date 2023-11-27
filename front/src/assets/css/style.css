@@ -83,15 +83,14 @@ h4,
   padding-right: 30px;
   border-radius: 30px;
   font-size: 14px;
-
-  
 }
 
 
 /* 부가서비스 폰트 굵기 */
-.text-center > h2{
+.text-center h2{
   font-size: 30px;
   font-weight: bold;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 
@@ -122,14 +121,41 @@ h4,
   opacity: 0.7;
 }
 
-.form-control,
-.custom-select {
+
+/* .form-destination {
+  width: 80px;
   border: 2px solid #e9ecef;
   font-size: 16px;
-
   height: 45px; 
-  /* margin-top: 30px; */
+  text-align: center;
+  
+} */
+
+/* 검색버튼 */
+.form-search-control {
+  border: 1px solid rgb(206, 206, 206);
+  background-color: rgb(188, 220, 250);
+  border-radius: 5px;
+  font-size: 16px;
+  height: 60px; 
+  width: 100px;
+  margin-top: 20px;
+  color: #000000;
 }
+
+.form-search-control:hover {
+  background-color: rgba(167, 209, 248, 0.548);
+}
+
+.form-control,
+.custom-select {
+  border: 3px solid #e8eaec;
+  font-size: 14px;
+  height: 45px; 
+  margin-top: 30px;
+  color: #979797;
+}
+
   .form-control:active, .form-control:focus, .custom-select:active, .custom-select:focus {
     border-color: #1A374D;
     -webkit-box-shadow: none;
@@ -213,14 +239,24 @@ h4,
   position: relative;
 }
 
-/* 로고 설정 */
+/* 로고 글자 설정 */
 .logo {
   font-size: 30px;
-  color: #7debb4;
+  color: #2fdf87;
   font-weight: 700;
+  text-decoration-line: none;
+  /* 로고 메뉴 텍스트 간격 */
+  margin-right: 200px;
 }
 .logo:hover {
-  color: #ffffff;
+  color: #1fab65;
+}
+
+.main-logo-image {
+  width: 60px;
+  height: 40px;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 /* ------------------------------------------------------------- */
@@ -231,64 +267,102 @@ h4,
 
 /* 메인 메뉴 */
 #menu_bar {
-  margin-right: 10px;
+  margin-left: 100px;
 }
 
-#menu_bar > li {
-  padding-left: 10px;
+.main-menu {
+  list-style: none;
 }
 
+.main-menu > li {
+  display: inline-block;
+}
 
 /* 로그인 메뉴 */
 .login_menubar {
   list-style: none;
-  margin-left: 80px;
+  float: right;
+  padding-top: 15px;
+  width: 140px;
+  height: 50px;
 }
 
 /* 로그인 리스트 */
 .login_menubar > li {
   display: inline-block;
   list-style: none;
-  padding-left: 30px;
+  padding-left: 13px;
+  padding-top: 10px;
 }
 
 .login_menubar > li > a {
   color: rgb(180, 180, 180);
-  font-size: 12px;
-  display: inline-block;list-style: none;
+  font-size: 11px;
+  list-style: none;
   font-weight: bold;
 }
 
 .login_menubar > li :hover {
-  color: #000000;
+  color: #878787;
   text-decoration-line: underline;
 }
 
-/* 예약바 위에 있는거 */
-#sub_menu {
-  list-style: none;
-  margin:0; 
-  padding:0;
-  margin-top: 150px;
-  margin-left: 15px;
-}
-
-#sub_menu > li {
-  display: inline-block;
-}
-
-
 /* 예약바 */
+#sub_menu {
+  /* list-style: none; */
+  /* margin:0;  */
+  /* padding:0; */
+  margin-top: 50px;
+}
+
+
+/* 예약바 위에 있는거 */
 #submenu {
-  width: 300px;
   height: 50px;
-  padding-top: 15px;
+  padding-top: 10px;
   text-align: center;
-  background-color: #a5bbe6;
+  /* background-color: #1c85fc; */
+  /* background: linear-gradient(rgb(180, 234, 255), rgb(33, 182, 246)); */
+  background: linear-gradient( to right, rgb(60, 167, 209), rgb(27, 157, 212),  rgb(65, 65, 243) );
   border-radius: 15px 15px 0px 0px;
   font-weight: bold;
   box-shadow: none;
+  font-size: 19px;
+  /* border: 1px solid rgb(190, 190, 190); */
 }
+
+/* 공지사항 */
+.notice-title {
+  text-align: center;
+  font-size: 35px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: bold;
+  padding-right: 70px;
+}
+
+/* 공지사항 위에 줄 진하게 */
+.top-line-bold > th{
+  border-top: 2px solid #000;
+  padding-left: 70px;
+  font-size: 20px;
+}
+
+.line-sorting > td{
+  padding-left: 70px;
+  font-size: 20px;
+}
+
+/* 공지사항 제목 기준 위치 이동 */
+.line-sorting > #notice-title-location {
+  padding-right: 300px;
+}
+
+/* 공지사항, footer 사이 공백 */
+#notice-bottom-gap {
+  margin-bottom: 150px;
+}
+
+/* ============================================ */
 
 .sub_service_img {
   width: 50px;
@@ -296,65 +370,53 @@ h4,
   margin-bottom: 20px;
 }
 
-
-[tooltip] {
-  position: relative; /* opinion 1 */
+/* 탑승객 보드 popover */
+.boader_passenger {
+  background-color: rgb(255, 255, 255);
+  z-index: 100;
+  border: 1px solid rgb(215, 215, 215);
 }
 
 
-/* Applies to all tooltips */
-[tooltip]::before,
-[tooltip]::after {
-  text-transform: none; /* opinion 2 */
-  font-size: .9em; /* opinion 3 */
-  line-height: 1;
-  user-select: none;
-  pointer-events: none;
-  position: absolute;
-  display: none;
-  opacity: 0;
-}
-[tooltip]::before {
-  content: '';
-  border: 5px solid transparent; /* opinion 4 */
-  z-index: 1001; /* absurdity 1 */
-}
-[tooltip]::after {
-  content: attr(tooltip); /* magic! */
-  
-  /* most of the rest of this is opinion */
-  font-family: Helvetica, sans-serif;
-  text-align: center;
-  
-  /* 
-    Let the content set the size of the tooltips 
-    but this will also keep them from being obnoxious
-    */
-  min-width: 3em;
-  max-width: 21em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 1ch 1.5ch;
-  border-radius: .3ch;
-  box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
-  background: #333;
-  color: #fff;
-  z-index: 1000; /* absurdity 2 */
+.hnn_none_deco_a{
+  text-decoration-line:none
 }
 
-/* Make the tooltips respond to hover */
-[tooltip]:hover::before,
-[tooltip]:hover::after {
-  display: block;
+/* 인원 리스트 */
+.style-personel {
+  padding-bottom: 10px;
 }
 
-/* don't show empty tooltips */
-[tooltip='']::before,
-[tooltip='']::after {
-  display: none !important;
+.style-personel-button {
+  border: none;
+  width: 30px;
+  height: 30px;
+  background-color: rgb(226, 226, 226);
+  border-radius: 5px;
 }
 
+/* 좌석등급 버튼 */
+.seat-rating {
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+}
+
+.seat-rating:hover {
+  background-color: rgb(210, 224, 235);
+}
+
+.person-choice {
+  width: 110px;
+  border: 1px solid rgb(223, 222, 222);
+  border-radius: 10px;
+  background-color: #f8f7f7;
+}
+
+.person-choice:hover {
+  background-color: #e0f7ff;
+}
 
 /* ------------------------------------------------------------- */
 /* ------------------------------------------------------------- */
@@ -371,8 +433,8 @@ h4,
 
 /* nav 크기 공간 */
 .site-nav {
-  padding-top: 50px;
-  padding-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
 .site-nav h1 {
   margin: 0;
@@ -381,6 +443,7 @@ h4,
 }
 .site-nav .site-navigation .site-menu {
   margin-bottom: 0;
+  width: 1250px;
 }
 .site-nav .site-navigation .site-menu > li {
   display: inline-block;
@@ -390,15 +453,18 @@ h4,
 /**************************************/
 /* 메뉴 이름 */
 .site-nav .site-navigation .site-menu > li > a {
-  font-size: 20px;
-  padding: 10px 20px;
+  /* 메뉴 글자 크기 */
+  font-size: 16px;
+  /* 간격 */
+  padding: 10px 30px;
   display: inline-block;
   text-decoration: none !important;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(52, 52, 52, 0.7);
   font-weight: bold;
 }
+/* 메뉴 텍스트 hover */
 .site-nav .site-navigation .site-menu > li > a:hover {
-  color: #ffffff;
+  color: #323232;
 }
 .site-nav .site-navigation .site-menu > li.cta-button a {
   padding: 6px 20px;
@@ -475,13 +541,15 @@ h4,
   margin-left: -10px;
 }
 .site-nav .site-navigation .site-menu .has-children .dropdown a {
-  font-size: 14px;
+  font-size: 15px;
   text-transform: none;
   letter-spacing: normal;
   -webkit-transition: 0s all;
   -o-transition: 0s all;
   transition: 0s all;
-  color: #000000;
+  /* 고객센터 드롭다운 list 색상 */
+  color: #525252;
+  text-decoration-line: none;
 }
 .site-nav .site-navigation .site-menu .has-children .dropdown .active a {
   color: #1a374d !important;
@@ -496,8 +564,10 @@ h4,
   padding: 5px 20px;
   display: block;
 }
+
+/* 고객센터 드롭다운 hover 색상 */
 .site-nav .site-navigation .site-menu .has-children .dropdown > li > a:hover {
-  color: #1a374d;
+  color: #000000;
 }
 .site-nav
   .site-navigation
@@ -570,11 +640,11 @@ h4,
   color: #1a374d;
 }
 
-/* 메뉴 hover 색상 */
+/* 드롭다운 메뉴 hover 색상 */
 .site-nav .site-navigation .site-menu .has-children:hover > a,
 .site-nav .site-navigation .site-menu .has-children:focus > a,
 .site-nav .site-navigation .site-menu .has-children:active > a {
-  color: rgb(0, 180, 54);
+  color: #323232;
 }
 .site-nav .site-navigation .site-menu .has-children:hover,
 .site-nav .site-navigation .site-menu .has-children:focus,
@@ -943,12 +1013,10 @@ h4,
 /* 메뉴 뒷배경 */
 .hero {
   /* 크기 */
-  padding: 10rem 0 7rem 0;
+  padding: 200px 0 10rem 0;
   background-image: url("../images/구름.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  /* 마진 공간 */
-  margin-bottom: 30px;
 }
 .hero.hero-inner {
   padding: 9rem 0 7rem 0;
@@ -1012,7 +1080,8 @@ h4,
 }
 
 .untree_co-section {
-  padding: 70px 0;
+  margin-top: 100px;
+  margin-bottom: 170px;
 }
 
 .media-thumb {
@@ -1021,6 +1090,7 @@ h4,
   cursor: pointer;
   overflow: hidden;
   border-radius: 20px;
+  text-decoration-line:none;
 }
 .media-thumb:after {
   position: absolute;
@@ -1057,22 +1127,26 @@ h4,
   transition: 0.3s all ease;
   margin-top: 20px;
 }
+
+/* 여행 추천지 이미지 상단 */
 .media-thumb .media-text h3 {
-  font-size: 1rem;
+  font-size: 20px;
   font-weight: 900;
   color: #1a374d;
   margin: 0;
   padding: 0;
 }
-.media-thumb .media-text .location {
+.media-thumb .media-text {
   font-size: 0.8rem;
   color: rgba(26, 55, 77, 0.5);
 }
+/* 추천지 상단부분 */
 .media-thumb .media-text h3,
-.media-thumb .media-text .location {
+.media-thumb .media-text {
   -webkit-transition: 0.3s all ease;
   -o-transition: 0.3s all ease;
   transition: 0.3s all ease;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 .media-thumb:hover {
   z-index: 3;
@@ -1080,7 +1154,7 @@ h4,
 .media-thumb:hover h3 {
   color: #ffffff;
 }
-.media-thumb:hover .location {
+.media-thumb:hover {
   color: rgba(255, 255, 255, 0.5);
 }
 .media-thumb:hover img {
@@ -1100,19 +1174,32 @@ h4,
   visibility: visible;
 }
 
+/* 지역 아이콘 */
 .media-1 {
   text-align: left;
+  padding-left: 20px;
+  padding-top: 20px;
 }
 .media-1 img {
   border-radius: 20px;
 }
+
+/* 지역 아이콘 크기, 위치 */
 .media-1 .loc .icon-room {
   position: relative;
+  font-size: 18px;
 }
+
+/* 지역 글자 크기 */
+.location-font-size {
+  font-size: 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 .media-1 .loc .icon-room:after {
   content: "";
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   background: rgba(26, 55, 77, 0.1);
   position: absolute;
   left: 50%;
@@ -1127,23 +1214,11 @@ h4,
   margin-bottom: 20px;
   display: block;
 }
-.media-1 h3 {
-  font-size: 20px;
-}
-.media-1 h3 a {
-  color: #000000;
-}
-.media-1 .price {
-  font-size: 15px;
-  color: #1a374d;
-  font-weight: 700;
-  position: relative;
-  top: -2px;
-}
-.media-1 .price sup {
-  font-weight: 400;
-  font-size: 16px;
-  top: -7px;
+
+/* 여행지 명 글자 크기 */
+.media-1 > .attraction {
+  font-size: 27px;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .owl-3-slider .owl-nav {
@@ -1257,14 +1332,15 @@ h4,
   font-weight: 700;
 }
 
+/* 큰 예약바 전체 */
 .form {
   position: relative;
   -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.3);
   box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.3);
-  border-radius: 0px 10px 10px 10px;
+  border-radius: 0px 0px 10px 10px;
   z-index: 9;
   padding: 30px;
-  background: #ffffff;
+  background: rgb(255, 255, 255);
 }
 
 #map {
