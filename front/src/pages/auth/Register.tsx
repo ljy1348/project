@@ -145,7 +145,7 @@ function Register() {
       memberSex,
       memberAdd: address,
       memberAuth: "ROLE_USER",
-      memberDate: selectedDate,
+      memberDate: selectedDate?.toISOString(),
       memberCountry: "kor",
       memberMile: 0,
       changePw:""

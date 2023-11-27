@@ -38,11 +38,13 @@ function UserInfoList({user, setMessage}:{user:IUser, setMessage:any}) {
       if (user) {
 
         if (!user.memberDate) {
-          setGetUser({...getUser, memberDate:new Date()})
+          // setGetUser({...getUser, memberDate:new Date()})
         }
         
         if (getUser?.memberDate){
-          const date = new Date(getUser.memberDate);
+          const dateStringWithoutTimezone = getUser.memberDate.replace(' KST', '');
+          console.log(dateStringWithoutTimezone)
+          const date = new Date(dateStringWithoutTimezone);
           setSelectedDate(date.toISOString().split('T')[0]);
         }
       }

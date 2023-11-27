@@ -9,7 +9,7 @@ export default interface IUser {
     memberSex: string,       
     memberAdd: string,       
     memberAuth: string,       
-    memberDate: Date | null,       
+    memberDate?: string | null,       
     memberCountry: string,       
     memberMile: number, 
     changePw:string

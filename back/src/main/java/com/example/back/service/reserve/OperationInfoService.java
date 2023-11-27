@@ -52,27 +52,28 @@ public class OperationInfoService {
     }
 
     public Page<OperationInfo> findOperation(String search, String select, Pageable pageable) {
-
         if (select.equals("operationId")) {
-            Integer id = Integer.parseInt(search);
-            if (id == 0) return operationInfoRepository.findAllBy(pageable);
-            return operationInfoRepository.findAllByOperationIdEquals(id, pageable);
+            Integer id;
+            if (search.equals("")) id = 0;
+            else id = Integer.parseInt(search);
+            if (id == 0) return operationInfoRepository.findAllByOrderByOperationId(pageable);
+            return operationInfoRepository.findAllByOperationIdEqualsOrderByOperationId(id, pageable);
         } else if (select.equals("startAirport")) {
-            Integer id = Integer.parseInt(search);
-            return operationInfoRepository.findAllByStartAirportContaining(search, pageable);
+            return operationInfoRepository.findAllByStartAirportContainingOrderByOperationId(search, pageable);
         } else if (select.equals("finalAirport")) {
-            Integer id = Integer.parseInt(search);
-            return operationInfoRepository.findAllByFinalAirportContaining(search, pageable);
+            return operationInfoRepository.findAllByFinalAirportContainingOrderByOperationId(search, pageable);
         } else if (select.equals("airline")) {
-            Integer id = Integer.parseInt(search);
-            return operationInfoRepository.findAllByAirlineContaining(search, pageable);
+            return operationInfoRepository.findAllByAirlineContainingOrderByOperationId(search, pageable);
         } else if (select.equals("flightName")) {
-            Integer id = Integer.parseInt(search);
-            return operationInfoRepository.findAllByFlightNameContaining(search, pageable);
+            return operationInfoRepository.findAllByFlightNameContainingOrderByOperationId(search, pageable);
         }
 
-            return operationInfoRepository.findAllBy(pageable);
+            return operationInfoRepository.findAllByOrderByOperationId(pageable);
 
+    }
+
+    public OperationInfo save(OperationInfo operationInfo) {
+        return operationInfoRepository.save(operationInfo);
     }
 
 }
