@@ -105,10 +105,6 @@ function Nav() {
                 }
                   </>
                 }
-                <li>
-                  <Link to="/register">
-                    <p>고객센터</p></Link>
-                </li>
 
                 {/* home 메뉴 끝 */}
               </ul>

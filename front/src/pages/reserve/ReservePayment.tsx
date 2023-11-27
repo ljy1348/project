@@ -261,6 +261,11 @@ function ReservePayment() {
   useEffect(() => {
     initScripts();
     initCustom();
+
+    // 로그인이 되어있는지 판단하고
+    // 로그인이 안되어있으면, 비회원으로 진행할지, 로그인페이지로 이동할지 선택창 뜸,
+    // 로그인이 되어 있으면 결제 진행
+
     if (firstId) {
       getoperationinfo(firstId);
       inputdays(startDate2);
