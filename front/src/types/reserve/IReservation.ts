@@ -22,8 +22,6 @@ export default interface IReservation {
     Email:string
     PhoneNum:string
     PassWord:number | string
-    
 
-    
 }
 
