@@ -8,12 +8,11 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * packageName : com.example.back.model.entity.reserve
- * fileName : NonMemberInfo
- * author : rkdtk
+ * fileName : Reservation
+ * author : GGG
  * date : 2023-11-27
  * description :
  * 요약 :
@@ -21,14 +20,13 @@ import java.util.Date;
  * ===========================================================
  * DATE            AUTHOR             NOTE
  * —————————————————————————————
- * 2023-11-27         rkdtk          최초 생성
+ * 2023-11-27         GGG          최초 생성
  */
 @Entity
-@Table(name="TB_NON_MEMBERS_INFO")
+@Table(name="TB_RESERVATION")
 @SequenceGenerator(
-
-        name = "SQ_NON_MEMBERS_INFO_GENERATOR"
-        , sequenceName = "SQ_NON_MEMBERS_INFO"
+        name = "SQ_RESERVATION_GENERATOR"
+        , sequenceName = "SQ_RESERVATION"
         , initialValue = 1
         , allocationSize = 1
 )
@@ -42,20 +40,21 @@ import java.util.Date;
 @DynamicUpdate
 // soft delete
 @Where(clause = "DELETE_YN = 'N'")
-@SQLDelete(sql = "UPDATE TB_NON_MEMBERS_INFO SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE userNumber = ?")
-public class NonMemberInfo extends BaseTimeEntity {
-
+@SQLDelete(sql = "UPDATE TB_RESERVATION SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE OperationId = ?")
+public class Reservation extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "SQ_NON_MEMBER_INFO")
+            generator = "SQ_RESERVATION_GENERATOR")
 
+    private Integer airlineReservaitonNumber;
+    private String adultCount;
+    private String childCount;
+    private String mileUseYn;
+    private String seatType;
+    private String memberYn;
+    private String memberId;
     private Integer userNumber;
-    private String userName;
-    private String userSex;
-    private String userCountry;
-    private String userDate;
-    private String userPhone;
-    private String userEmail;
+    private Integer operationId;
+    private String checkYn;
+
 }
-
-

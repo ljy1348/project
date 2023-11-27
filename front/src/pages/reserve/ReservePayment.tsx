@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom";
 import IOperationinfo from "../../types/IOperationinfo";
 import OperationService from "../../services/OperationService";
 import ICount from "./../../types/reserve/ICount";
-import INonmemberinfo from "../../types/INonmemberinfo";
 import NonmemberService from "../../services/NonmemberService";
+import { info } from "console";
+import ReservationService from "../../services/ReservationService";
 
 function ReservePayment() {
   // 기본키
@@ -67,10 +68,25 @@ function ReservePayment() {
     userName: "",
     userSex: "",
     userCountry: "",
-    userDate: "",
+    userDate: "1983-1-1",
     userPhone: "",
     userEmail: "",
   }));
+
+  // 저장 : 예약 객체 초기화
+  const initialReservation = {
+    airlineReservaitonNumber: null,
+    adultCount: adultCount,
+    childCount: childCount,
+    mileUseYn: "N",
+    seatType: seatClass,
+    memberYn: "N",
+    memberId: "",
+    userNumber: 0,
+    operationId: 0,
+    checkYn: "N",
+  };
+
 
   // operationinfo 객체 정의
 
@@ -79,12 +95,21 @@ function ReservePayment() {
   const [operationinfo2, setOperationinfo2] = useState<IOperationinfo>(
     initialOperationinfo2
   );
-
-  // 비회원 객체
-  // const [nonmemberinfo, setNonmemberinfo] = useState<Array<INonmemberinfo>>([
-  //   initialNonmemberinfo,
-  // ]);
+  // 저장 : 비회원 객체정의
   const [nonmemberinfo, setNonmemberinfo] = useState(initialNonmemberinfo);
+
+  // 저장 : 예약 객체 정의
+  const [reservation, setReservation] = useState(initialReservation);
+  
+    // todo: input 태그에 수동 바인딩
+    const handleInputChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.target; // 화면값
+      setReservation({ ...reservation, [name]: value });  // 변수저장
+    };
+  
+  
+
+
   // 도착 날짜 저장 함수
   const [day, setDay] = useState<string>("");
   const [day2, setDay2] = useState<string>("");
@@ -109,43 +134,28 @@ function ReservePayment() {
   // modalcontrol
   const [modalShow, setModalShow] = useState(false);
 
-  // 비회원 정보를 추가하는 함수
-  const addNonmember = () => {
-    setNonmemberinfo((prevNonmemberinfo) => [
-      ...prevNonmemberinfo,
-      ...temp.map(() => ({
-        userNumber: null,
-        userName: "",
-        userSex: "",
-        userCountry: "",
-        userDate: "",
-        userPhone: "",
-        userEmail: "",
-      })),
-    ]);
-  };
-
-  // 비회원 정보를 업데이트하는 함수
-  // const handleInputChange = (
-  //   event: React.ChangeEvent<HTMLInputElement>,
-  //   index: number
-  // ) => {
-  //   const { name, value } = event.target;
-  //   setNonmemberinfo((prevNonmemberinfo) => {
-  //     const updatedNonmemberinfo = [...prevNonmemberinfo];
-  //     updatedNonmemberinfo[index] = {
-  //       ...updatedNonmemberinfo[index],
-  //       [name]: value,
-  //     };
-  //     return updatedNonmemberinfo;
-  //   });
+  // // 비회원 정보를 추가하는 함수
+  // const addNonmember = () => {
+  //   setNonmemberinfo((prevNonmemberinfo) => [
+  //     ...prevNonmemberinfo,
+  //     ...temp.map(() => ({
+  //       userNumber: null,
+  //       userName: "",
+  //       userSex: "",
+  //       userCountry: "",
+  //       userDate: "",
+  //       userPhone: "",
+  //       userEmail: "",
+  //     })),
+  //   ]);
   // };
+
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
     let { name, value } = event.target;
-    if (name === "radio+"+index) name = "userSex";
+    if (name === "radio+" + index) name = "userSex";
     setNonmemberinfo((prevNonmemberinfo) => {
       const updatedNonmemberinfo = [...prevNonmemberinfo];
       updatedNonmemberinfo[index] = {
@@ -155,18 +165,20 @@ function ReservePayment() {
       return updatedNonmemberinfo;
     });
   };
-  // 생년월일 바인딩
-  // 생년월일 바인딩 관련 오류 수정
+
+
+
+
   const handleBirthdateChange = (idx: number) => {
     // 선택된 년도, 월, 일 값을 가져옵니다.
     const selectedYear = (
-      document.getElementById("birth-year") as HTMLSelectElement
+      document.getElementById(`birth-year${idx}`) as HTMLSelectElement
     ).value;
     const selectedMonth = (
-      document.getElementById("birth-month") as HTMLSelectElement
+      document.getElementById(`birth-month${idx}`) as HTMLSelectElement
     ).value;
     const selectedDay = (
-      document.getElementById("birth-day") as HTMLSelectElement
+      document.getElementById(`birth-day${idx}`) as HTMLSelectElement
     ).value;
 
     // 이 값을 nonmemberinfo.userDate에 저장합니다.
@@ -179,6 +191,54 @@ function ReservePayment() {
       };
       return updatedInfo;
     });
+
+  };
+
+  // 년도 옵션들 생성
+  const renderYearOptions = () => {
+    const currentYear = new Date().getFullYear();
+    const startYear = currentYear - 150; // 100년 전부터
+    const endYear = currentYear; // 18세까지 허용
+
+    const yearOptions = [];
+    for (let year = startYear; year <= endYear; year++) {
+      yearOptions.push(
+        <option key={year} value={year}>
+          {year}
+        </option>
+      );
+    }
+
+    return yearOptions;
+  };
+
+  // 월 옵션들 생성
+  const renderMonthOptions = () => {
+    const monthOptions = [];
+    for (let month = 1; month <= 12; month++) {
+      monthOptions.push(
+        <option key={month} value={month}>
+          {month}
+        </option>
+      );
+    }
+
+    return monthOptions;
+  };
+
+  // 일 옵션들 생성
+  const renderDayOptions = () => {
+    const dayOptions = [];
+    for (let day = 1; day <= 31; day++) {
+      dayOptions.push(
+        <option key={day} value={day}>
+          {day}
+        </option>
+      );
+    }
+
+    return dayOptions;
+
   };
 
   // 상세조회 함수
@@ -201,31 +261,10 @@ function ReservePayment() {
       })
       .catch((e: Error) => {
         console.log(e);
+        setNonmemberinfo(initialNonmemberinfo);
       });
   };
 
-  // 비회원 저장 함수
-  // const saveNonmemberinfo = () => {
-  //   // 비회원 정보 배열을 반복하면서 저장 요청
-  //   nonmemberinfo.forEach((info) => {
-  //     var data = {
-  //       userName: info.userName,
-  //       userSex: info.userSex,
-  //       userCountry: info.userCountry,
-  //       userDate: info.userDate,
-  //       userPhone: info.userPhone,
-  //       userEmail: info.userEmail,
-  //     };
-
-  //     NonmemberService.create(data) // 저장 요청
-  //       .then((response: any) => {
-  //         console.log(response.data);
-  //       })
-  //       .catch((e: Error) => {
-  //         console.log(e);
-  //       });
-  //   });
-  // };
   const saveNonmemberinfo = () => {
     // 비회원 정보 배열을 반복하면서 저장 요청
     nonmemberinfo.forEach((info) => {
@@ -238,24 +277,52 @@ function ReservePayment() {
         userEmail: info.userEmail,
       };
 
-      console.log(nonmemberinfo);
-
-      // NonmemberService.create(data) // 저장 요청
-      //   .then((response: any) => {
-      //     console.log(response.data);
-      //   })
-      //   .catch((e: Error) => {
-      //     console.log(e);
-      //   });
+      NonmemberService.create(data) // 저장 요청
+        .then((response: any) => {
+          console.log(response.data);
+          console.log("확인용", nonmemberinfo);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
     });
   };
+
+  // 저장 예약
+  const saveReservation = () => {
+    // 임시 부서 객체
+    var data = {
+      adultCount: reservation.adultCount,
+      childCount: reservation.childCount,
+      mileUseYn: reservation.mileUseYn,
+      seatType: reservation.seatType,
+      memberYn: reservation.memberYn,
+      memberId: reservation.memberId,
+      userNumber: reservation.userNumber,
+      operationId: reservation.operationId,
+      checkYn: reservation.checkYn,
+    };
+
+    ReservationService.create(data)    // 저장 요청
+      .then((response: any) => {
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+
+  };
+
+
 
   const handlePayment = () => {
     // 여기서 다른 필요한 작업을 수행하고
     // 비회원 정보 저장 함수 호출
     saveNonmemberinfo();
+    saveReservation();
     setModalShow(true);
-    addNonmember();
+
+
   };
 
   useEffect(() => {
@@ -382,6 +449,9 @@ function ReservePayment() {
     operationinfo.price,
     operationinfo2.price,
   ]);
+
+  console.log(totalPrice);
+
 
   // 다른 부분에서 totalPrice를 참조해야 할 때
   // console.log(totalPrice);
@@ -555,26 +625,30 @@ function ReservePayment() {
                         <div className="row g-3 align-items-center mb-3">
                           {/* 성별 라벨 시작 */}
                           <div className="col-3">
-                            <label htmlFor="userSex" className="col-form-label">
+                            <label
+                              htmlFor={`userSex-${idx}`}
+                              className="col-form-label"
+                            >
                               성별
                             </label>
                           </div>
                           <div className="col-9">
-                            <label htmlFor={"radio+"+idx}>남성</label>
+                            <label htmlFor={"radio+" + idx}>남성</label>
                             <input
                               className="sangmin_gender_check"
                               type="radio"
-                              name={"radio+"+idx}
+                              name={"radio+" + idx}
                               value={"male"}
-                              id={"radio+"+idx}
+                              id={"radio+" + idx}
                               onChange={(e) => handleInputChange(e, idx)}
                             />
 
-                            <label htmlFor={"radio+"+idx}>여성</label>
+                            <label htmlFor={"radio+" + idx}>여성</label>
                             <input
                               className="sangmin_gender_check"
                               type="radio"
-                              name={"radio+"+idx}
+                              name={"radio+" + idx}
+
                               value={"female"}
                               onChange={(e) => handleInputChange(e, idx)}
                             />
@@ -648,24 +722,33 @@ function ReservePayment() {
                             <div className="info" id="info__birth">
                               <select
                                 className="box"
-                                id="birth-year"
-                                onChange={() => handleBirthdateChange(idx)}
+                                id={`birth-year${idx}`}
+                                onChange={(e) => {
+                                  handleBirthdateChange(idx);
+                                }}
+
                               >
-                                {/* 년도 옵션들 */}
+                                {renderYearOptions()}
                               </select>
                               <select
                                 className="box"
-                                id="birth-month"
-                                onChange={() => handleBirthdateChange(idx)}
+                                id={`birth-month${idx}`}
+                                onChange={(e) => {
+                                  handleBirthdateChange(idx);
+                                }}
+
                               >
-                                {/* 월 옵션들 */}
+                                {renderMonthOptions()}
                               </select>
                               <select
                                 className="box"
-                                id="birth-day"
-                                onChange={() => handleBirthdateChange(idx)}
+                                id={`birth-day${idx}`}
+                                onChange={(e) => {
+                                  handleBirthdateChange(idx);
+                                }}
+
                               >
-                                {/* 일 옵션들 */}
+                                {renderDayOptions()}
                               </select>
                             </div>
                           </div>
