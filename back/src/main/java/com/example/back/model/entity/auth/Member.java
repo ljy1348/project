@@ -50,7 +50,7 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private ERole memberAuth;
     private String memberCountry;
-    private Date memberDate;
+    private String memberDate;
     private int memberMile;
 
     public Member(String userId, String userPassword, String userName) {
@@ -66,7 +66,7 @@ public class Member extends BaseTimeEntity {
         this.memberAuth = right;
     }
 
-    public Member(String userId, String userPassword, String userName, String userEmail, String userAdd, String userPhone, String userSex, String userNationality, Date birthDate, String enName) {
+    public Member(String userId, String userPassword, String userName, String userEmail, String userAdd, String userPhone, String userSex, String userNationality, String birthDate, String enName) {
         this.memberId = userId;
         this.memberPw = userPassword;
         this.memberName = userName;

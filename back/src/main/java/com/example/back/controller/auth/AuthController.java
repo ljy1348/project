@@ -114,7 +114,7 @@ public class AuthController {
                     memberReq.getMemberPhone(),
                     memberReq.getMemberSex(),
                     memberReq.getMemberCountry(),
-                    date,
+                    date.toString(),
                     memberReq.getMemberEname()
             );
 

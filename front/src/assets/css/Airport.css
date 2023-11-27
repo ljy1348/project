@@ -2,24 +2,37 @@ ul {
     list-style: none;
 }
 
+/* 국내선 / 국제선 글자 */
 h3 , h5{
-    margin-left: 40px;
+    margin-left: 50px;
 }
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* 국내선 국제선 사이의 공간 */
+/* 국내선 리스트 */
+.domestic > .city_list{
+    /* padding-bottom: 20px; */
+    padding: 0;
+}
+
 
 .domestic > .city_list > li {
     cursor:pointer;
     float: left;
-    width: calc(50% - 2px);
+    width: 230px;
     margin: 1px;
     background-color: hsl(0, 0%, 94%);
     height: 30px;
 }
 
+/* 리스트 글자 */
 li > .cname {
     display: block;
     color: #222;
     font-size: 15px;
-    width: 40%;
+    width: 30%;
     float: left;
     margin-top: 5px;
     margin-left: 10px;
@@ -34,18 +47,20 @@ li > .abbr {
     margin-right: 10px;
     margin-top: 5px;
 }
-
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* 국제선 왼쪽 리스트 */
 .list_nation {
-    margin-left: 15px;
+    margin-left: 10px;
     display: block;
     position: relative;
     overflow: hidden;
     overflow-y: auto;
-    width: 200px;
-    height: 354px;
+    width: 220px;
+    height: 230px;
     background: #f3f3f3;
     text-align: start;
-    padding: 0;
 }
 
 .list_nation > ul {
@@ -67,17 +82,21 @@ li > .abbr {
 }
 
 .international_listbox > .city_list > li {
-    width: calc(100% - 2px);
-    height: 50px;
+    width: calc(100% - px);
+    height: 40px;
     background: #f3f3f3;
     margin: 5px 1px;
     cursor: pointer;
     padding-top: 10px;
 }
 
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* 국제선 오른쪽 리스트 */
 .international_listbox {
-    width: 480px;
-    height: 353px;
+    width: 250px;
+    height: 230px;
     border: 1px solid black;
     overflow: hidden;
     overflow-y: auto;
@@ -90,12 +109,11 @@ li > .abbr {
 .international_list.active {
     background-color: #1A374D;
     color: white;
-
 }
 
 .international_listbox > .city_list > li:hover, .list_nation > ul > li:hover,
 .domestic > .city_list > li:hover, .domestic > .city_list > li:hover .cname,
 .international_listbox > .city_list > li:hover .cname{
-    background-color: #4d411a;
+    background-color: #1A374D;
     color: white !important;
 }

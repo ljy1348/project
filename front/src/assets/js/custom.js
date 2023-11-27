@@ -339,5 +339,8 @@ export default function initCustom() {
     }
 
 	
-  });
+	// if($('input[name="daterange"]').length) {
+	// 	$('input[name="daterange"]').daterangepicker();
+	// }
+})
 }

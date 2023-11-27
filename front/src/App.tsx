@@ -10,10 +10,6 @@ import Nav from "./components/common/Nav";
 import Home from "./pages/Home";
 import Footer from "./components/common/Footer";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Services from "./pages/Services";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Elements from "./pages/Elements";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import Oauth from "./pages/auth/KakaoLogin";
@@ -22,7 +18,6 @@ import UserInfo from "./pages/auth/user/UserInfo";
 import ErrorBoundary from "./components/ErrorBoundary";
 import AdminPage from "./pages/auth/user/AdminPage";
 import AdminMemberList from "./pages/auth/admin/AdminMemberList";
-
 // import CustomerPage from './pages/customer/CustomerPage';
 
 import CheckIn from './pages/checkIn/CheckIn';
@@ -34,23 +29,18 @@ import ReservePayment from './pages/reserve/ReservePayment';
 import PaymentResult from './pages/payment/PaymentResult';
 import PaymentSuccess from './pages/payment/PaymentSuccess';
 import PaymentFail from './pages/payment/PaymentFail';
+import Home2 from "./pages/Home2";
 // todo: 리액트 import
 
 function App() {
   return (
     <div className="App">
-
-
       {/* 머리말 */}                 
       <Nav/>
 
       {/* 본문 */}
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/services" element={<Services />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/elements" element={<Elements />} />
 
         {/* 체크인 */}
         <Route path="/checkin" element={<CheckIn />} />
@@ -87,9 +77,8 @@ function App() {
           element={<ReservePayment />}
         />
 
-        {/* <Route path="/test" element={<Test />} /> */}
+        <Route path="/test" element={<Home2 />} />
       </Routes>
-
       {/* 꼬리말 */}
       <Footer />
     </div>

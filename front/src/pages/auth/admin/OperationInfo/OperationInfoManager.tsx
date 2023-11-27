@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import IUser from '../../../types/auth/IMember';
+import IUser from '../../../../types/auth/IMember';
 import { Pagination } from '@mui/material';
-import IOperationinfo from '../../../types/IOperationinfo';
-import AdminService from '../../../services/auth/adminService';
+import IOperationinfo from '../../../../types/IOperationinfo';
+import AdminService from '../../../../services/auth/adminService';
+import { Link } from 'react-router-dom';
 
-function OperationInfoManager() {
+function OperationInfoManager({setSelectTab, setDataId}:{setSelectTab:any, setDataId:any}) {
   // 부서 배열 변수
   const [dept, setDept] = useState<Array<IOperationinfo>>([]);
   // 검색어 변수
@@ -33,6 +34,7 @@ function OperationInfoManager() {
         const {data, totalPages} = response.data;
     setDept(data);
     setCount(totalPages);
+    // setPage(1);
     })
     .catch((e:Error)=>{console.log(e)})
 
@@ -73,9 +75,10 @@ function OperationInfoManager() {
         <div className="col-8 w-50 input-group mb-3 mt-5">
           <select value={select} onChange={onChangeSelect} className='me-3'>
             <option value="operationId">ID</option>
-            <option value="name">이름</option>
-            <option value="ename">E.이름</option>
-            <option value="email">이메일</option>
+            <option value="startAirport">출발공항</option>
+            <option value="finalAirport">도착공항</option>
+            <option value="airline">항공사</option>
+            <option value="flightName">편명</option>
           </select>
           <input
             type="text"
@@ -88,13 +91,13 @@ function OperationInfoManager() {
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onClick={retrieveDept}
+              onClick={()=> {retrieveDept(); setPage(1)}}
             >
               Search
             </button>
             <div>
             
-            <button className="btn btn-outline-secondary ms-3">추가</button>
+            <button className="btn btn-outline-secondary ms-3" onClick={()=>{setSelectTab("항공기 추가")}}>추가</button>
             </div>
           </div>
         </div>
@@ -154,8 +157,10 @@ function OperationInfoManager() {
           </thead>
           <tbody>
             {dept &&
-              dept.map((data, idx) => (
-                <tr key={idx}>
+              dept.map((data, idx) => {
+                const startDate = data.startDate.toString().split("T");
+                const finalDate = data.finalDate.toString().split("T");
+                return (<tr key={idx}>
                   <td>{data.operationId}</td>
                   <td>{data.airline}</td>
                   <td>{data.flightName}</td>
@@ -163,17 +168,17 @@ function OperationInfoManager() {
                   <td>{data.finalTime}</td>
                   <td>{data.startAirport}</td>
                   <td>{data.finalAirport}</td>
-                  <td>{data.startDate.toString()}</td>
-                  <td>{data.finalDate.toString()}</td>
+                  <td>{startDate[0]}</td>
+                  <td>{finalDate[0]}</td>
+                  <td>{data.price}</td>
                   <td>{data.domesticInternational}</td>
-                  <td>{data.price}ㅁ</td>
                   <td>
-                    {/* <a href="#" onClick={()=>{setSelectTab("회원상세"); setDataId(data.memberId)}}> */}
+                    <Link to="#" onClick={()=>{setSelectTab("항공기 상세"); setDataId(data.operationId)}}>
                       <span className="badge bg-success">Edit</span>
-                    {/* </a>  */}
+                    </Link> 
                   </td>
-                </tr>
-              ))}
+                </tr>)
+})}
           </tbody>
         </table>
         {/* table end */}
