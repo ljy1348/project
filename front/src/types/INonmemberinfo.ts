@@ -3,7 +3,7 @@ export default interface INonmemberinfo {
     userName: string,
     userSex: string,
     userCountry: string,
-    userDate: Date | string,
+    userDate:  string,
     userPhone: string,
-    ueseEmail: string,    
+    userEmail: string,    
 }

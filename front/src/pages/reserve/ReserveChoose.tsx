@@ -605,7 +605,7 @@ function ReserveChoose(props: any) {
           <button className="sangmin_choose_btn">
             <Link to="/reserve-payment">비회원 결제</Link>
           </button>
-          <Link className="sangmin_choose_btn" to={`/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount}/${childCount}`}>
+          <Link className="sangmin_choose_btn" to={`/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount}/${childCount}/${seatClass}`}>
             회원 결제
           </Link>
         </div>

@@ -2,7 +2,6 @@ package com.example.back.service.reserve;
 
 import com.example.back.model.entity.reserve.NonMemberInfo;
 import com.example.back.repository.reserve.NonMemberInfoRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,8 +29,8 @@ public class NonMemberInfoService {
     public Page<NonMemberInfo> findAllByuserNameContaining(
             String userName,
             Pageable pageable){
-        Page<NonMemberInfo> page = nonMemberInfoRepository.findAllByuserNameContaining(userName,pageable);
-        return page;
+        Page<NonMemberInfo> nonMemberInfoPage = nonMemberInfoRepository.findAllByuserNameContaining(userName,pageable);
+        return nonMemberInfoPage;
     }
 
 

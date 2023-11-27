@@ -24,7 +24,7 @@ export default function initCustom() {
       $("#birth-day").append('<option value="' + i + '">' + i + "</option>");
     }
   });
-  출처: //interestingjinjin.tistory.com/7 [흥미진진한 개발:티스토리]
+
 
   // sangmin
 

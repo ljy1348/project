@@ -83,7 +83,7 @@ function App() {
           element={<ReserveChoose />}
         />
         <Route
-          path="/reserve-payment/:firstId/:secoundId/:startDate2/:endDate2/:startDayName/:endDayName/:adultCount/:childCount"
+          path="/reserve-payment/:firstId/:secoundId/:startDate2/:endDate2/:startDayName/:endDayName/:adultCount/:childCount/:seatClass"
           element={<ReservePayment />}
         />
 
