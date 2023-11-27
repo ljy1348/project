@@ -56,20 +56,24 @@ public class OperationInfoService {
             Integer id;
             if (search.equals("")) id = 0;
             else id = Integer.parseInt(search);
-            if (id == 0) return operationInfoRepository.findAllBy(pageable);
-            return operationInfoRepository.findAllByOperationIdEquals(id, pageable);
+            if (id == 0) return operationInfoRepository.findAllByOrderByOperationId(pageable);
+            return operationInfoRepository.findAllByOperationIdEqualsOrderByOperationId(id, pageable);
         } else if (select.equals("startAirport")) {
-            return operationInfoRepository.findAllByStartAirportContaining(search, pageable);
+            return operationInfoRepository.findAllByStartAirportContainingOrderByOperationId(search, pageable);
         } else if (select.equals("finalAirport")) {
-            return operationInfoRepository.findAllByFinalAirportContaining(search, pageable);
+            return operationInfoRepository.findAllByFinalAirportContainingOrderByOperationId(search, pageable);
         } else if (select.equals("airline")) {
-            return operationInfoRepository.findAllByAirlineContaining(search, pageable);
+            return operationInfoRepository.findAllByAirlineContainingOrderByOperationId(search, pageable);
         } else if (select.equals("flightName")) {
-            return operationInfoRepository.findAllByFlightNameContaining(search, pageable);
+            return operationInfoRepository.findAllByFlightNameContainingOrderByOperationId(search, pageable);
         }
 
-            return operationInfoRepository.findAllBy(pageable);
+            return operationInfoRepository.findAllByOrderByOperationId(pageable);
 
+    }
+
+    public OperationInfo save(OperationInfo operationInfo) {
+        return operationInfoRepository.save(operationInfo);
     }
 
 }

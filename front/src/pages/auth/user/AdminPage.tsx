@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Nav } from 'react-bootstrap'
 import AdminMemberList from '../admin/AdminMemberList';
 import AdminMember from '../admin/AdminMember';
-import OperationInfoManager from '../admin/OperationInfoManager';
+import OperationInfoManager from '../admin/OperationInfo/OperationInfoManager';
+import AddOperationInfo from '../admin/OperationInfo/AddOperationInfo';
+import OperationInfo from '../admin/OperationInfo/OperationInfo';
 
 function AdminPage() {
 
@@ -13,11 +15,13 @@ function AdminPage() {
   },[])
 
   const tabView = () => {
-    if (selectTab==="항공") return <OperationInfoManager/>
+    if (selectTab==="항공") return <OperationInfoManager setSelectTab={setSelectTab} setDataId={setDataId}/>
     else if (selectTab==="체크인") return <>체크인</>
     else if (selectTab==="수화물") return <>수화물</>
     else if (selectTab==="회원") return <AdminMemberList setSelectTab={setSelectTab} setDataId={setDataId}/>
     else if (selectTab==="회원상세") return <AdminMember setSelectTab={setSelectTab} dataId={dataId}/>
+    else if (selectTab==="항공기 추가") return <AddOperationInfo setSelectTab={setSelectTab}/>
+    else if (selectTab==="항공기 상세") return <OperationInfo setSelectTab={setSelectTab} dataId={dataId}/>
     else return <>예약</>
   }
 

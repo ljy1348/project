@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import IUser from '../../../types/auth/IMember';
+import IUser from '../../../../types/auth/IMember';
 import { Pagination } from '@mui/material';
-import IOperationinfo from '../../../types/IOperationinfo';
-import AdminService from '../../../services/auth/adminService';
+import IOperationinfo from '../../../../types/IOperationinfo';
+import AdminService from '../../../../services/auth/adminService';
+import { Link } from 'react-router-dom';
 
-function OperationInfoManager() {
+function OperationInfoManager({setSelectTab, setDataId}:{setSelectTab:any, setDataId:any}) {
   // 부서 배열 변수
   const [dept, setDept] = useState<Array<IOperationinfo>>([]);
   // 검색어 변수
@@ -27,13 +28,13 @@ function OperationInfoManager() {
 
   //   전체조회 함수
   const retrieveDept = () => {
-    console.log("a")
     // 벡엔드 매개변수 전송 : + 현재페이지(page), 1페이지당개수(pageSize)
     AdminService.getOperationAll(search, select, page-1, pageSize)
     .then((response:any)=>{console.log(response)
         const {data, totalPages} = response.data;
     setDept(data);
     setCount(totalPages);
+    // setPage(1);
     })
     .catch((e:Error)=>{console.log(e)})
 
@@ -90,13 +91,13 @@ function OperationInfoManager() {
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onClick={retrieveDept}
+              onClick={()=> {retrieveDept(); setPage(1)}}
             >
               Search
             </button>
             <div>
             
-            <button className="btn btn-outline-secondary ms-3">추가</button>
+            <button className="btn btn-outline-secondary ms-3" onClick={()=>{setSelectTab("항공기 추가")}}>추가</button>
             </div>
           </div>
         </div>
@@ -172,9 +173,9 @@ function OperationInfoManager() {
                   <td>{data.price}</td>
                   <td>{data.domesticInternational}</td>
                   <td>
-                    {/* <a href="#" onClick={()=>{setSelectTab("회원상세"); setDataId(data.memberId)}}> */}
+                    <Link to="#" onClick={()=>{setSelectTab("항공기 상세"); setDataId(data.operationId)}}>
                       <span className="badge bg-success">Edit</span>
-                    {/* </a>  */}
+                    </Link> 
                   </td>
                 </tr>)
 })}

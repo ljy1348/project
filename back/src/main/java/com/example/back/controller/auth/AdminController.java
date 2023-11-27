@@ -17,10 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * packageName : com.example.back.controller.auth
@@ -121,6 +119,49 @@ public class AdminController {
 //    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 //    }
 }
+
+    @PostMapping("/operation")
+    public ResponseEntity<?> createOperation(@RequestBody OperationInfo operationInfo) {
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            // 입력된 문자열을 Date 객체로 파싱
+            String startDateStr = inputFormat.format(operationInfo.getStartDate());
+            String finalDateStr = inputFormat.format(operationInfo.getFinalDate());
+            operationInfo.setStartDate(inputFormat.parse(startDateStr));
+            operationInfo.setFinalDate(inputFormat.parse(finalDateStr));
+        OperationInfo operationInfo1 = operationInfoService.save(operationInfo);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+
+    @GetMapping("/operation/{dataId}")
+    public ResponseEntity<?> findOperation(@PathVariable int dataId) {
+        try {
+
+
+        Optional<OperationInfo> operationInfo = operationInfoService.findById(dataId);
+
+        if (operationInfo.isPresent()) {
+
+        return new ResponseEntity<>(operationInfo, HttpStatus.OK);
+        } else {
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+//    } catch(Exception e) {
+//    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+    }
 
 
 
