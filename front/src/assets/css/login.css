@@ -1,0 +1,131 @@
+﻿.bg-login-image {
+    background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+    background-position: center;
+    background-size: cover;
+}
+
+.bg-register-image {
+    background: url("https://cdn.pixabay.com/photo/2012/06/28/08/26/plane-50893_1280.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.bg-password-image {
+    background: url("https://source.unsplash.com/oWTW-jNGl9I/600x800");
+    background-position: center;
+    background-size: cover;
+}
+
+.form-control-user,
+.btn-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 0.8rem;
+    font-size: 0.8rem;
+    border-radius: 10rem;
+    padding: 1.5rem 1rem;
+}
+
+.btn-google {
+    color: #fff;
+    background-color: #ea4335;
+    border-color: #fff;
+}
+
+.btn-google:hover {
+    color: #fff;
+    background-color: #e12717;
+    border-color: #e6e6e6;
+}
+
+.btn-naver {
+    color: #fff;
+    background-color: #6B8E23;
+    border-color: #fff;
+}
+
+.btn-naver:hover {
+    color: #fff;
+    background-color: #556B2F;
+    border-color: #e6e6e6;
+}
+
+.btn-kakao {
+    color: #fff;
+    background-color: #DAA520;
+    border-color: #fff;
+}
+
+.btn-kakao:hover {
+    color: #fff;
+    background-color: #B8860B;
+    border-color: #e6e6e6;
+}
+    .nav-link.active {
+    background-color: #1A374D !important;
+    color: white !important;
+}
+
+.form-control-select {
+    border-radius:10rem;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+.user-info-nav {
+    font-size: 20px;
+}
+
+.user-info-hero {
+    padding: 7rem 0 10rem 0;
+    background: #6998AB;
+    margin-bottom: 100px;
+  }
+  
+  .user-info-hero-inner {
+    position: relative;
+    padding: 5rem 0 5rem 0;
+    margin-bottom: auto;
+    background-image: url("https://cdn.pixabay.com/photo/2022/04/26/13/04/sky-7158340_1280.jpg");
+    background-size: cover;
+    color: white;
+  }
+  
+  .hero-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: hsla(206, 50%, 20%, 0.616); /* 흰색 불투명도 50% */
+    z-index: 1;
+  }
+
+  .intro-wrap {
+    position: relative;
+    z-index: 2; /* 오버레이보다 높은 z-index */
+  }
+
+  .intro-wrap > li {
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 20px;
+  }
+
+  .hero-mile {
+    font-size: 18px;
+  }
+
+  .hero-count {
+    font-size: 18px;
+  }
+
+  .user-info ul {
+    padding: 0 !important;
+  }
