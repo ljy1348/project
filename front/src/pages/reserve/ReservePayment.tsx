@@ -87,7 +87,6 @@ function ReservePayment() {
     checkYn: "N",
   };
 
-
   // operationinfo 객체 정의
 
   const [operationinfo, setOperationinfo] =
@@ -108,7 +107,6 @@ function ReservePayment() {
     };
   
   
-
 
   // 도착 날짜 저장 함수
   const [day, setDay] = useState<string>("");
@@ -168,7 +166,6 @@ function ReservePayment() {
 
 
 
-
   const handleBirthdateChange = (idx: number) => {
     // 선택된 년도, 월, 일 값을 가져옵니다.
     const selectedYear = (
@@ -191,7 +188,6 @@ function ReservePayment() {
       };
       return updatedInfo;
     });
-
   };
 
   // 년도 옵션들 생성
@@ -238,7 +234,6 @@ function ReservePayment() {
     }
 
     return dayOptions;
-
   };
 
   // 상세조회 함수
@@ -264,7 +259,7 @@ function ReservePayment() {
         setNonmemberinfo(initialNonmemberinfo);
       });
   };
-
+  // 저장 비회원
   const saveNonmemberinfo = () => {
     // 비회원 정보 배열을 반복하면서 저장 요청
     nonmemberinfo.forEach((info) => {
@@ -310,7 +305,6 @@ function ReservePayment() {
       .catch((e: Error) => {
         console.log(e);
       });
-
   };
 
 
@@ -437,7 +431,6 @@ function ReservePayment() {
     );
   };
 
-
   useEffect(() => {
     const price = calculateTotalPrice(seatClass || "이코노미");
     setTotalPrice(price);
@@ -451,7 +444,6 @@ function ReservePayment() {
   ]);
 
   console.log(totalPrice);
-
 
   // 다른 부분에서 totalPrice를 참조해야 할 때
   // console.log(totalPrice);
@@ -648,7 +640,6 @@ function ReservePayment() {
                               className="sangmin_gender_check"
                               type="radio"
                               name={"radio+" + idx}
-
                               value={"female"}
                               onChange={(e) => handleInputChange(e, idx)}
                             />
@@ -726,7 +717,6 @@ function ReservePayment() {
                                 onChange={(e) => {
                                   handleBirthdateChange(idx);
                                 }}
-
                               >
                                 {renderYearOptions()}
                               </select>
@@ -736,7 +726,6 @@ function ReservePayment() {
                                 onChange={(e) => {
                                   handleBirthdateChange(idx);
                                 }}
-
                               >
                                 {renderMonthOptions()}
                               </select>
@@ -746,7 +735,6 @@ function ReservePayment() {
                                 onChange={(e) => {
                                   handleBirthdateChange(idx);
                                 }}
-
                               >
                                 {renderDayOptions()}
                               </select>
