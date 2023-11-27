@@ -107,7 +107,7 @@ public class AdminController {
 
 //    항공기 관리
     @GetMapping("/operation")
-    public ResponseEntity<?> findOperation(@RequestParam(defaultValue = "0") String search, @RequestParam String select, Pageable pageable) {
+    public ResponseEntity<?> findOperation(@RequestParam(defaultValue = "") String search, @RequestParam String select, Pageable pageable) {
     Page<OperationInfo> page = operationInfoService.findOperation(search, select, pageable);
 
 

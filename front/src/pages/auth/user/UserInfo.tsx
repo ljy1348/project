@@ -61,7 +61,7 @@ function UserInfo() {
       <div className="mx-auto text-center">
         <div className="intro-wrap container">
           <ul className='row'>
-            <li className='hero-user-info col-3'><span className='hero-title'>내 정보</span>
+            <li className='hero-user-info col-3 mt-5'><span className='hero-title'>내 정보</span>
             <br/>
             <ul style={{marginTop:"10px"}}>
               <li>name : {user&&user.memberName}</li>
@@ -69,13 +69,19 @@ function UserInfo() {
               <li>email : {user&&user.memberEmail}</li>
             </ul>
             </li>
-            <li className='hero-mile col-6'><span className='hero-title'>잔여 마일리지</span>
+            <div className="hero-mile col-6">
+    <div className="circle">
+
+
+            <li className='mt-5'><span className='hero-title'>잔여 마일리지</span>
             <br/><br/>
             <ul>
               <li> {user&&user.memberMile}</li>
             </ul>
             </li>
-            <li className='hero-count col-3'><span className='hero-title'>예약 횟수</span>
+            </div>
+</div>
+            <li className='hero-count col-3 mt-5'><span className='hero-title'>예약 횟수</span>
             <br/><br/>
             <ul>
               <li> 0</li>
