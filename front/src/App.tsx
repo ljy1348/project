@@ -72,7 +72,7 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
 
           {/* 예약 조회 */}
-        <Route path="/search-reservation" element={<ReservationListPage />} />
+        <Route path="/search-reservation/:memberId" element={<ReservationListPage />} />
         <Route path="/search-reservation/seeReservation/:airlineReservationNumber" element={<SearchReservationPage />} />
         <Route path="/write-notice" element={<WriteNoticePage />} />
         <Route path="/test" element={<Test />} />

@@ -11,6 +11,10 @@ const getAll = (airlineReservationNumber: any, memberId:string) => {
   return http.get<Array<IReservation>>(`/tour/search-reservation?airlineReservationNumber=${airlineReservationNumber}&memberId=${memberId}`);
 };
 
+const gett = (memberId: string) => {
+  return http.get<Array<IReservation>>(`/tour/search-reservation/${memberId}`);
+}
+
 // 상세 조회
 const get = (airlineReservationNumber: any) => {
   return http.get<IReservation>(`/tour/search-reservation/seeReservation/${airlineReservationNumber}`);
@@ -18,6 +22,7 @@ const get = (airlineReservationNumber: any) => {
   
 const ReservationService = {
   getAll,
+  gett,
   get,
 };
   

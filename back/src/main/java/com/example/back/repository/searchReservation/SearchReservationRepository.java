@@ -1,7 +1,8 @@
 package com.example.back.repository.searchReservation;
 
 import com.example.back.model.dto.OprResDto;
-import com.example.back.model.entity.searchReservation.SearchReservation;
+import com.example.back.model.dto.reserve.ReservationDto;
+import com.example.back.model.entity.reserve.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,12 +25,31 @@ import java.util.Optional;
  * 2023-11-17         GGG          최초 생성
  */
 @Repository
-public interface SearchReservationRepository extends JpaRepository<SearchReservation, Integer> {
+public interface SearchReservationRepository extends JpaRepository<Reservation, Integer> {
+    
+//    ID 조회 함수
+    @Query(value = "SELECT RES.AIRLINE_RESERVATION_NUMBER as airlineReservationNumber " +
+            "     , RES.ADULT_COUNT as adultCount " +
+            "     , RES.CHILD_COUNT as childCount " +
+            "     , RES.MILE_USE_YN as mileUseYn " +
+            "     , RES.SEAT_TYPE as seatType " +
+            "     , RES.MEMBER_YN as memberYn " +
+            "     , RES.CHECK_YN as checkYn " +
+            "     , RES.MEMBER_ID as memberId " +
+            "     , RES.USER_NUMBER as userNumber " +
+            "     , RES.OPERATION_ID as operationId " +
+            "     , MEM.MEMBER_NAME as memberName " +
+            "     , MEM.MEMBER_ENAME as memberEname " +
+            "FROM TB_RESERVATION RES, TB_MEMBERS_INFO MEM " +
+            "WHERE RES.MEMBER_ID = MEM.MEMBER_ID  " +
+            "AND RES.MEMBER_ID = :memberId "
+            , countQuery = "SELECT COUNT(*) " +
+            "FROM TB_RESERVATION " +
+            "WHERE MEMBER_ID =  :memberId ", nativeQuery = true)
+    List<ReservationDto> getAll(@Param("memberId")String memberId);
 
-//    전체 조회 + = 검색
-    List<SearchReservation> findAllByAirlineReservationNumber(int airlineReservationNumber);
-
-    List<SearchReservation> findAllByAirlineReservationNumberAndMemberId(int airlineReservationNumber, String memberId);
+//    예약번호 + ID 검색 함수
+    List<Reservation> findAllByAirlineReservationNumberAndMemberId(int airlineReservationNumber, String memberId);
 
 //    상세 조회
     @Query(value = "SELECT RES.AIRLINE_RESERVATION_NUMBER as airlineReservationNumber " +
