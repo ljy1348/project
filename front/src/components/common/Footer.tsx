@@ -138,14 +138,14 @@ function Footer() {
         </div>
       </div>
       {/* <!-- 꼬리말 끝 --> */}
-      <div id="overlayer"></div>
-      {/* <!-- 스피너 시작 --> */}
+      {/* <div id="overlayer"></div>
+
       <div className="loader">
         <div className="spinner-border" role="status">
           <span className="sr-only">Loading...</span>
         </div>
-      </div>
-      {/* <!-- 스피너 끝 -->   */}
+
+      </div> */}
     </>
   );
 }

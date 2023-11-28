@@ -24,6 +24,16 @@ npm i aos
 npm i @types/aos
 
 
+# 5) ck editor5 설치
+npm install --save @ckeditor/ckeditor5 -build-classic
+# 5-1) ck editor5 오류 방지
+npm install buffer
+
+# 5) bootstrap 설치
+npm i bootstrap
+npm i @types/bootstrap
+
+
 
 # * 외부 라이브러리 타입이 없을 경우 처리 : 타입 설정
 # 1) tsconfig.json 파일 - compilerOptions 속성에 아래 추가 : 프로젝트시작위치/types - 이 위치에 타입을 인식하게 하는 경로 설정

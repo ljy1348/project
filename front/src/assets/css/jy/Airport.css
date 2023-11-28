@@ -1,0 +1,102 @@
+ul {
+    list-style: none;
+}
+
+h3 , h5{
+    margin-left: 40px;
+}
+
+.domestic > .city_list > li {
+    cursor:pointer;
+    float: left;
+    width: calc(50% - 2px);
+    margin: 1px;
+    background-color: hsl(0, 0%, 94%);
+    height: 30px;
+}
+
+li > .cname {
+    display: block;
+    color: #222;
+    font-size: 15px;
+    width: 40%;
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+li > .abbr {
+    display: block;
+    color: #747474;
+    font-size: 14px;
+    font-family: 'latofont', sans-serif;
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.list_nation {
+    margin-left: 15px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    overflow-y: auto;
+    width: 200px;
+    height: 354px;
+    background: #f3f3f3;
+    text-align: start;
+    padding: 0;
+}
+
+.list_nation > ul {
+    padding: 0;
+}
+
+.select_airport {
+    width: 720px;
+}
+
+.list_nation > ul > li {
+    cursor:pointer;
+    margin: 1px;
+    padding-top: 5px;
+    padding-left: 10px;
+    background-color: hsl(0, 0%, 94%);
+    height: 30px;
+    font-size: 15px;
+}
+
+.international_listbox > .city_list > li {
+    width: calc(100% - 2px);
+    height: 50px;
+    background: #f3f3f3;
+    margin: 5px 1px;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.international_listbox {
+    width: 480px;
+    height: 353px;
+    border: 1px solid black;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.international_listbox > ul {
+    padding: 0;
+}
+
+.international_list.active {
+    background-color: #1A374D;
+    color: white;
+
+}
+
+.international_listbox > .city_list > li:hover, .list_nation > ul > li:hover,
+.domestic > .city_list > li:hover, .domestic > .city_list > li:hover .cname,
+.international_listbox > .city_list > li:hover .cname{
+    background-color: #1A374D;
+    color: white !important;
+}
+
