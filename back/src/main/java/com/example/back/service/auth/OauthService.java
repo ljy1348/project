@@ -131,7 +131,7 @@ public class OauthService {
             return optionalUser.get();
         } else {
 
-            Member user = new Member(kakaoId, passwordEncoder.encode(UUID.randomUUID().toString()), kakaoIdDto.getProperties().getNickname(), ERole.ROLE_USER);
+            Member user = new Member(kakaoId, passwordEncoder.encode(UUID.randomUUID().toString()), "", ERole.ROLE_USER);
             return userService.save(user);
         }
     }
@@ -215,7 +215,7 @@ public class OauthService {
             return optionalUser.get();
         } else {
 
-            Member user = new Member(kakaoId, passwordEncoder.encode(UUID.randomUUID().toString()), naverInfoDto.getResponse().getNickname(), ERole.ROLE_USER);
+            Member user = new Member(kakaoId, passwordEncoder.encode(UUID.randomUUID().toString()), "", ERole.ROLE_USER);
             return userService.save(user);
         }
     }
