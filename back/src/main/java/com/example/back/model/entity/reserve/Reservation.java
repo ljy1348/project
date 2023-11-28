@@ -45,12 +45,7 @@ public class Reservation extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "SQ_RESERVATION_GENERATOR")
-<<<<<<< Updated upstream
-
     private Integer airlineReservaitonNumber;
-=======
-    private Integer airlineReservationNumber;
->>>>>>> Stashed changes
     private String adultCount;
     private String childCount;
     private String mileUseYn;
