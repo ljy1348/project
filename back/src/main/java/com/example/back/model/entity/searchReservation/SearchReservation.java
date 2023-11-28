@@ -81,7 +81,7 @@ public class SearchReservation extends BaseTimeEntity {
 
 //    비회원 번호
     @Column
-    private Integer userNumber;
+    private String userNumber;
 
 //    운항 번호
     @Column
