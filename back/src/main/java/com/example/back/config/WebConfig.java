@@ -6,17 +6,15 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * packageName : config
+ * packageName : com.example.dongsungsi.controller
  * fileName : WebConfig
- * author : GGG
- * date : 2023-11-24
+ * author : kangtaegyung
+ * date : 2022/06/14
  * description :
- * 요약 :
- * <p>
  * ===========================================================
  * DATE            AUTHOR             NOTE
- * —————————————————————————————
- * 2023-11-24         GGG          최초 생성
+ * -----------------------------------------------------------
+ * 2022/06/14         kangtaegyung          최초 생성
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {

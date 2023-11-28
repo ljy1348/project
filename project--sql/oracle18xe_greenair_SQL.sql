@@ -1,0 +1,54 @@
+SELECT RES.AIRLINE_RESERVATION_NUMBER
+     , RES.ADULT_COUNT
+     , RES.CHILD_COUNT
+     , RES.MILE_USE_YN
+     , RES.SEAT_TYPE
+     , RES.MEMBER_YN
+     , RES.MEMBER_ID
+     , RES.USER_NUMBER
+     , RES.OPERATION_ID
+     , OPR.OPERATION_ID
+     , OPR.AIRLINE
+     , OPR.FLIGHT_NAME
+     , OPR.START_AIRPORT
+     , OPR.FINAL_AIRPORT
+     , OPR.START_TIME
+     , OPR.FINAL_TIME
+     , OPR.START_DATE
+     , OPR.FINAL_DATE
+     , OPR.DOMESTIC_INTERNATIONAL
+     , OPR.PRICE
+     , MEM.MEMBER_NAME
+FROM TB_RESERVATION RES, TB_OPERATION_INFO OPR, TB_MEMBERS_INFO MEM
+WHERE RES.OPERATION_ID = OPR.OPERATION_ID AND RES.MEMBER_ID = MEM.MEMBER_ID
+AND RES.AIRLINE_RESERVATION_NUMBER = 100000;
+
+SELECT *
+FROM TB_CUSTOMER_SERVICE;
+
+SELECT NTC.*, MEM.*
+FROM TB_NOTICE NTC, TB_MEMBERS_INFO MEM
+WHERE NTC.MEMBER_ID = MEM.MEMBER_ID
+AND NTC.MEMBER_ID = 'admin';
+
+SELECT *
+FROM TB_NOTICE
+ORDER BY NOTICE_ID DESC;
+
+INSERT INTO TB_CHECKIN
+VALUES ( nextval );
+
+insert into tb_reservation values (100001, '1', '0', 'N', '비지니스', 'Y', 'qwe1234', null, 1, '23/11/22', null, null, 'N');
+
+select
+       *
+    from
+        tb_reservation
+    where
+        (
+            DELETE_YN = 'N'
+        ) 
+        and airline_reservation_number='100000'
+        and member_id='qwe123';
+        
+        commit;

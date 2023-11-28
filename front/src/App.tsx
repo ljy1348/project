@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 // todo: 외부 lib import
 // aos css import(npm 설치)
 import "aos/dist/aos.css";
@@ -9,6 +10,11 @@ import "./assets/css/style.css";
 import Nav from "./components/common/Nav";
 import Home from "./pages/Home";
 import Footer from "./components/common/Footer";
+import ReservationListPage from "./pages/ReservationListPage";
+import SearchReservationPage from "./pages/SearchReservation/SearchReservationPage";
+import WriteNoticePage from "./pages/writeNotice/WriteNoticePage";
+import Test from "./pages/Test";
+
 import { Routes, Route, useLocation } from "react-router-dom";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
@@ -35,6 +41,10 @@ import Home2 from "./pages/Home2";
 function App() {
   return (
     <div className="App">
+
+
+
+
       {/* 머리말 */}                 
       <Nav/>
 
@@ -60,6 +70,12 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/user-info" element={<UserInfo />} />
         <Route path="/admin/*" element={<AdminPage />} />
+
+          {/* 예약 조회 */}
+        <Route path="/search-reservation" element={<ReservationListPage />} />
+        <Route path="/search-reservation/seeReservation/:airlineReservationNumber" element={<SearchReservationPage />} />
+        <Route path="/write-notice" element={<WriteNoticePage />} />
+        <Route path="/test" element={<Test />} />
 
         {/* 결제 */}
 
