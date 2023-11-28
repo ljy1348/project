@@ -2,9 +2,10 @@
 import React from "react";
 
 function Footer() {
-
   return (
     <>
+      {/* 여기 */}
+      {/* <!-- 꼬리말 시작 --> */}
 
       <div className="site-footer">
         <div className="inner first">
@@ -140,14 +141,15 @@ function Footer() {
       </div>
       {/* <!-- 꼬리말 끝 --> */}
       {/* <div id="overlayer"></div>
+
       <div className="loader">
         <div className="spinner-border" role="status">
           <span className="sr-only">Loading...</span>
         </div>
+
       </div> */}
     </>
   );
 }
-
 
 export default Footer;
