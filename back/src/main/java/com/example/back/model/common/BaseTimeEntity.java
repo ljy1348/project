@@ -4,15 +4,19 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import java.time.LocalDate;
+// import javax.persistence.EntityListeners;
+// import javax.persistence.MappedSuperclass;
+// import javax.persistence.PrePersist;
+// import javax.persistence.PreUpdate;
+// import java.time.LocalDate;
+// import java.time.LocalDateTime;
+// import java.time.ZoneId;
+// import java.time.format.DateTimeFormatter;
+// import java.util.Date;
+import org.hibernate.annotations.SQLDelete;
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 /**
  * packageName : com.example.jpaexam.model
@@ -45,6 +49,7 @@ public abstract class BaseTimeEntity {
 
     private String deleteTime; // 소프트 삭제
 
+
     @PrePersist
         //해당 엔티티 저장하기 전
     void onPrePersist(){
@@ -56,6 +61,9 @@ public abstract class BaseTimeEntity {
         //해당 엔티티 수정 하기 전
     void onPreUpdate(){
         this.updateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+        this.insertTime = this.updateTime;
         this.deleteYn = "N";
     }
 }
+

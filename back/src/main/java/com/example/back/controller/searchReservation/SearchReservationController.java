@@ -1,6 +1,7 @@
 package com.example.back.controller.searchReservation;
 
-//import com.example.back.model.dto.OprResDto;
+
+import com.example.back.model.dto.OprResDto;
 import com.example.back.model.entity.searchReservation.SearchReservation;
 
 import com.example.back.service.searchReservation.SearchReservationService;
@@ -35,7 +36,7 @@ public class SearchReservationController {
     SearchReservationService searchReservationService; // DI
 
     //    전체 조회 + like 검색
-    @GetMapping("/search-reservation")
+    @GetMapping("/search-reservation2")
     public ResponseEntity<Object> getSearchReservation(
             @RequestParam(defaultValue = "0") int airlineReservationNumber
 
@@ -43,6 +44,30 @@ public class SearchReservationController {
         try {
 //            전체 조회 + like 검색
             List<SearchReservation> list = searchReservationService.findAllByAirlineReservationNumber(airlineReservationNumber);
+                        if (list.isEmpty() == false) {
+//                성공
+                return new ResponseEntity<>(list, HttpStatus.OK);
+            } else {
+//                데이터 없음
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+        } catch (Exception e) {
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    
+//    전체 조회 + like 검색
+    @GetMapping("/search-reservation")
+    public ResponseEntity<Object> getSearchReservation(
+            @RequestParam(defaultValue = "0") int airlineReservationNumber,
+            @RequestParam(defaultValue = "") String memberId
+    ){
+        try {
+//            전체 조회 + like 검색
+            List<SearchReservation> list = searchReservationService.findAllByAirlineReservationNumberAndMemberId(airlineReservationNumber, memberId);
 
             if (list.isEmpty() == false) {
 //                성공
@@ -60,22 +85,23 @@ public class SearchReservationController {
 
 
 
-    //    상세 조회
-//    @GetMapping("/search-reservation/seeReservation/{airlineReservationNumber}")
-//    public ResponseEntity<Object> getAirlineReservationNumber(
-//            @PathVariable int airlineReservationNumber
-//    ) {
-//        try {
-//            Optional<OprResDto> optionalOprResDto = searchReservationService.searchReservation(airlineReservationNumber);
-//
-//            if(optionalOprResDto.isEmpty() == false) {
-//                return new ResponseEntity<>(optionalOprResDto.get(), HttpStatus.OK);
-//            } else {
-//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//            }
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+
+//    상세 조회
+    @GetMapping("/search-reservation/seeReservation/{airlineReservationNumber}")
+    public ResponseEntity<Object> getAirlineReservationNumber(
+            @PathVariable int airlineReservationNumber
+    ) {
+        try {
+            Optional<OprResDto> optionalOprResDto = searchReservationService.searchReservation(airlineReservationNumber);
+
+            if(optionalOprResDto.isEmpty() == false) {
+                return new ResponseEntity<>(optionalOprResDto.get(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

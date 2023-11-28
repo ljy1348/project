@@ -84,6 +84,18 @@ h4,
   border-radius: 30px;
   font-size: 14px;
 }
+
+
+/* 부가서비스 폰트 굵기 */
+.text-center h2{
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+/* 메뉴 active 효과 */
+
 .btn:active,
 .btn:focus {
   outline: none;
@@ -110,21 +122,49 @@ h4,
   opacity: 0.7;
 }
 
-.form-control,
-.custom-select {
+
+
+
+/* .form-destination {
+  width: 80px;
   border: 2px solid #e9ecef;
   font-size: 16px;
-  height: 45px;
-  /* margin-top: 30px; */
+  height: 45px; 
+  text-align: center;
+  
+} */
+
+/* 검색버튼 */
+.form-search-control {
+  border: 1px solid rgb(206, 206, 206);
+  background-color: rgb(188, 220, 250);
+  border-radius: 5px;
+  font-size: 16px;
+  height: 60px; 
+  width: 100px;
+  margin-top: 20px;
+  color: #000000;
 }
-.form-control:active,
-.form-control:focus,
-.custom-select:active,
-.custom-select:focus {
-  border-color: #1a374d;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+
+.form-search-control:hover {
+  background-color: rgba(167, 209, 248, 0.548);
 }
+
+.form-control,
+.custom-select {
+  border: 3px solid #e8eaec;
+  font-size: 14px;
+  height: 45px; 
+  margin-top: 30px;
+  color: #979797;
+}
+
+  .form-control:active, .form-control:focus, .custom-select:active, .custom-select:focus {
+    border-color: #1A374D;
+    -webkit-box-shadow: none;
+    box-shadow: none; 
+  }
+
 
 
 .gutter-v1 {
@@ -204,25 +244,210 @@ h4,
   position: relative;
 }
 
+
+/* 로고 글자 설정 */
 .logo {
-  font-size: 24px;
-  color: #ffffff;
+
+  font-size: 30px;
+  color: #2fdf87;
   font-weight: 700;
+  text-decoration-line: none;
+  /* 로고 메뉴 텍스트 간격 */
+  margin-right: 200px;
 }
 .logo:hover {
-  color: #ffffff;
+  color: #1fab65;
 }
 
+.main-logo-image {
+  width: 60px;
+  height: 40px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+
+
+/* ------------------------------------------------------------- */
+/* ------------------------------------------------------------- */
+/* ------------------------------------------------------------- */
+/* ------------------------------------------------------------- */
+/* ------------------------------------------------------------- */
+
+/* 메인 메뉴 */
+#menu_bar {
+  margin-left: 100px;
+}
+
+.main-menu {
+  list-style: none;
+}
+
+.main-menu > li {
+  display: inline-block;
+}
+
+/* 로그인 메뉴 */
+.login_menubar {
+  list-style: none;
+  float: right;
+  padding-top: 15px;
+  width: 160px;
+  height: 50px;
+}
+
+/* 로그인 리스트 */
+.login_menubar > li {
+  display: inline-block;
+  list-style: none;
+  padding-left: 13px;
+  padding-top: 10px;
+}
+
+.login_menubar > li > a {
+  color: rgb(180, 180, 180);
+  font-size: 11px;
+  list-style: none;
+  font-weight: bold;
+}
+
+.login_menubar > li :hover {
+  color: #878787;
+  text-decoration-line: underline;
+}
+
+/* 예약바 */
+#sub_menu {
+  /* list-style: none; */
+  /* margin:0;  */
+  /* padding:0; */
+  margin-top: 50px;
+}
+
+
+/* 예약바 위에 있는거 */
+#submenu {
+  height: 50px;
+  padding-top: 10px;
+  text-align: center;
+  /* background-color: #1c85fc; */
+  /* background: linear-gradient(rgb(180, 234, 255), rgb(33, 182, 246)); */
+  background: linear-gradient( to right, rgb(60, 167, 209), rgb(27, 157, 212),  rgb(65, 65, 243) );
+  border-radius: 15px 15px 0px 0px;
+  font-weight: bold;
+  box-shadow: none;
+  font-size: 19px;
+  /* border: 1px solid rgb(190, 190, 190); */
+}
+
+/* 공지사항 */
+.notice-title {
+  text-align: center;
+  font-size: 35px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: bold;
+  padding-right: 70px;
+}
+
+/* 공지사항 위에 줄 진하게 */
+.top-line-bold > th{
+  border-top: 2px solid #000;
+  padding-left: 70px;
+  font-size: 20px;
+}
+
+.line-sorting > td{
+  padding-left: 70px;
+  font-size: 20px;
+}
+
+/* 공지사항 제목 기준 위치 이동 */
+.line-sorting > #notice-title-location {
+  padding-right: 300px;
+}
+
+/* 공지사항, footer 사이 공백 */
+#notice-bottom-gap {
+  margin-bottom: 150px;
+}
+
+/* ============================================ */
+
+.sub_service_img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+/* 탑승객 보드 popover */
+.boader_passenger {
+  background-color: rgb(255, 255, 255);
+  z-index: 100;
+  border: 1px solid rgb(215, 215, 215);
+}
+
+
+.hnn_none_deco_a{
+  text-decoration-line:none
+}
+
+/* 인원 리스트 */
+.style-personel {
+  padding-bottom: 10px;
+}
+
+.style-personel-button {
+  border: none;
+  width: 30px;
+  height: 30px;
+  background-color: rgb(226, 226, 226);
+  border-radius: 5px;
+}
+
+/* 좌석등급 버튼 */
+.seat-rating {
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+}
+
+.seat-rating:hover {
+  background-color: rgb(210, 224, 235);
+}
+
+.person-choice {
+  width: 110px;
+  border: 1px solid rgb(223, 222, 222);
+  border-radius: 10px;
+  background-color: #f8f7f7;
+}
+
+.person-choice:hover {
+  background-color: #e0f7ff;
+}
+
+
+/* ------------------------------------------------------------- */
+/* ------------------------------------------------------------- */
+/* ------------------------------------------------------------- */
+/* ------------------------------------------------------------- */
+/* ------------------------------------------------------------- */
 .site-nav {
   position: absolute;
   top: 0;
   z-index: 9;
   width: 100%;
+
+  background-color: white;
 }
 
+/* nav 크기 공간 */
 .site-nav {
   padding-top: 20px;
   padding-bottom: 20px;
+  padding-bottom: 10px;
+
 }
 .site-nav h1 {
   margin: 0;
@@ -231,19 +456,34 @@ h4,
 }
 .site-nav .site-navigation .site-menu {
   margin-bottom: 0;
+  width: 1250px;
+
 }
 .site-nav .site-navigation .site-menu > li {
   display: inline-block;
 }
+
+
+
+/**************************************/
+/**************************************/
+/**************************************/
+/* 메뉴 이름 */
 .site-nav .site-navigation .site-menu > li > a {
-  font-size: 14px;
-  padding: 10px 15px;
+  /* 메뉴 글자 크기 */
+  font-size: 16px;
+  /* 간격 */
+  padding: 10px 30px;
   display: inline-block;
   text-decoration: none !important;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(52, 52, 52, 0.7);
+  font-weight: bold;
 }
+/* 메뉴 텍스트 hover */
 .site-nav .site-navigation .site-menu > li > a:hover {
-  color: #ffffff;
+  color: #323232;
+
+
 }
 .site-nav .site-navigation .site-menu > li.cta-button a {
   padding: 6px 20px;
@@ -256,8 +496,13 @@ h4,
   background: #1a374d;
   border-color: #1a374d;
 }
+
+
+/* ******************************* */
+/* 지정 메뉴 색상 */
 .site-nav .site-navigation .site-menu > li.active > a {
-  color: #ffffff;
+  color: rgb(0, 180, 54);
+
 }
 .site-nav .site-navigation .site-menu .has-children {
   position: relative;
@@ -266,6 +511,7 @@ h4,
   position: relative;
   padding-right: 20px;
 }
+
 .site-nav .site-navigation .site-menu .has-children > a:before {
   position: absolute;
   content: "\e313";
@@ -317,13 +563,18 @@ h4,
   margin-left: -10px;
 }
 .site-nav .site-navigation .site-menu .has-children .dropdown a {
-  font-size: 14px;
+
+  font-size: 15px;
+
   text-transform: none;
   letter-spacing: normal;
   -webkit-transition: 0s all;
   -o-transition: 0s all;
   transition: 0s all;
-  color: #000000;
+  /* 고객센터 드롭다운 list 색상 */
+  color: #525252;
+  text-decoration-line: none;
+
 }
 .site-nav .site-navigation .site-menu .has-children .dropdown .active a {
   color: #1a374d !important;
@@ -338,8 +589,11 @@ h4,
   padding: 5px 20px;
   display: block;
 }
+
+/* 고객센터 드롭다운 hover 색상 */
 .site-nav .site-navigation .site-menu .has-children .dropdown > li > a:hover {
-  color: #1a374d;
+  color: #000000;
+
 }
 .site-nav
   .site-navigation
@@ -411,10 +665,16 @@ h4,
   > a {
   color: #1a374d;
 }
+
+
+
+/* 드롭다운 메뉴 hover 색상 */
+
 .site-nav .site-navigation .site-menu .has-children:hover > a,
 .site-nav .site-navigation .site-menu .has-children:focus > a,
 .site-nav .site-navigation .site-menu .has-children:active > a {
-  color: #ffffff;
+  color: #323232;
+
 }
 .site-nav .site-navigation .site-menu .has-children:hover,
 .site-nav .site-navigation .site-menu .has-children:focus,
@@ -780,10 +1040,15 @@ h4,
   outline: none;
 }
 
+
+/* 메뉴 뒷배경 */
 .hero {
-  padding: 7rem 0 10rem 0;
-  background: #6998ab;
-  margin-bottom: 100px;
+  /* 크기 */
+  padding: 200px 0 10rem 0;
+  background-image: url("../images/구름.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 .hero.hero-inner {
   padding: 9rem 0 7rem 0;
@@ -845,9 +1110,13 @@ h4,
   opacity: 1;
   z-index: 1;
 }
-
+/* ..untree_co-section ubin */
 .untree_co-section {
-  padding: 70px 0;
+  /* padding: 70px 0; */
+
+  margin-top: 100px;
+  margin-bottom: 170px;
+
 }
 
 .media-thumb {
@@ -856,6 +1125,9 @@ h4,
   cursor: pointer;
   overflow: hidden;
   border-radius: 20px;
+
+  text-decoration-line:none;
+
 }
 .media-thumb:after {
   position: absolute;
@@ -892,22 +1164,29 @@ h4,
   transition: 0.3s all ease;
   margin-top: 20px;
 }
+
+/* 여행 추천지 이미지 상단 */
 .media-thumb .media-text h3 {
-  font-size: 1rem;
+  font-size: 20px;
+
   font-weight: 900;
   color: #1a374d;
   margin: 0;
   padding: 0;
 }
-.media-thumb .media-text .location {
+
+.media-thumb .media-text {
   font-size: 0.8rem;
   color: rgba(26, 55, 77, 0.5);
 }
+/* 추천지 상단부분 */
 .media-thumb .media-text h3,
-.media-thumb .media-text .location {
+.media-thumb .media-text {
   -webkit-transition: 0.3s all ease;
   -o-transition: 0.3s all ease;
   transition: 0.3s all ease;
+  font-family: 'Noto Sans KR', sans-serif;
+
 }
 .media-thumb:hover {
   z-index: 3;
@@ -915,7 +1194,9 @@ h4,
 .media-thumb:hover h3 {
   color: #ffffff;
 }
-.media-thumb:hover .location {
+
+.media-thumb:hover {
+
   color: rgba(255, 255, 255, 0.5);
 }
 .media-thumb:hover img {
@@ -935,40 +1216,37 @@ h4,
   visibility: visible;
 }
 
-.section-title {
-  position: relative;
-  padding-bottom: 20px;
-  display: inline-block;
-}
-.section-title:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 30px;
-  height: 2px;
-  background: #1a374d;
-}
-.section-title.text-center:before {
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-}
+
+/* 지역 아이콘 */
 
 .media-1 {
   text-align: left;
+  padding-left: 20px;
+  padding-top: 20px;
+
 }
 .media-1 img {
   border-radius: 20px;
 }
+
+
+/* 지역 아이콘 크기, 위치 */
 .media-1 .loc .icon-room {
   position: relative;
+  font-size: 18px;
 }
+
+/* 지역 글자 크기 */
+.location-font-size {
+  font-size: 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 .media-1 .loc .icon-room:after {
   content: "";
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
+
   background: rgba(26, 55, 77, 0.1);
   position: absolute;
   left: 50%;
@@ -983,23 +1261,11 @@ h4,
   margin-bottom: 20px;
   display: block;
 }
-.media-1 h3 {
-  font-size: 20px;
-}
-.media-1 h3 a {
-  color: #000000;
-}
-.media-1 .price {
-  font-size: 15px;
-  color: #1a374d;
-  font-weight: 700;
-  position: relative;
-  top: -2px;
-}
-.media-1 .price sup {
-  font-weight: 400;
-  font-size: 16px;
-  top: -7px;
+
+/* 여행지 명 글자 크기 */
+.media-1 > .attraction {
+  font-size: 27px;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .owl-3-slider .owl-nav {
@@ -1093,9 +1359,12 @@ h4,
   position: relative;
 }
 
+/* 부가서비스 */
 .feature-1 {
   padding: 30px;
-  background: rgba(26, 55, 77, 0.05);
+  /* 부가서비스 틀 색상 */
+  background: rgba(54, 117, 162, 0.164);
+
   border-radius: 20px;
   min-height: calc(50% - 15px);
   top: 0;
@@ -1111,14 +1380,23 @@ h4,
   font-weight: 700;
 }
 
+
+/* 큰 예약바 전체 */
+
 .form {
   position: relative;
   -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.3);
   box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
+
+
+  border-radius: 0px 0px 10px 10px;
+
+
+
   z-index: 9;
   padding: 30px;
-  background: #ffffff;
+  background: rgb(255, 255, 255);
+
 }
 
 #map {
@@ -1721,232 +1999,664 @@ h4,
 .site-footer {
   font-size: 14px;
   color: #777;
-  line-height: 1.6;
-}
+/* dev */
+line-height: 1.6; }
 .site-footer .inner {
   padding-top: 0px;
   padding-bottom: 70px;
-  background: #f8f9fa;
-}
-.site-footer .inner.first {
-  padding-top: 80px;
-}
+  background: #f8f9fa; }
+  .site-footer .inner.first {
+    padding-top: 80px; }
 @media (max-width: 991.98px) {
   .site-footer {
-    padding-top: 30px;
-  }
-}
+    padding-top: 30px; } }
 .site-footer a {
-  color: #000000;
-}
-.site-footer a:hover {
-  color: #000000;
-  text-decoration: underline;
-}
+  color: #000000; }
+  .site-footer a:hover {
+    color: #000000;
+    text-decoration: underline; }
 .site-footer .widget {
-  margin-bottom: 30px;
-}
-.site-footer .widget h3 {
-  font-size: 14px;
-  margin-bottom: 20px;
-  color: #000000;
-  font-family: "Inter", sans-serif;
-}
-.site-footer .widget .social li {
-  display: inline-block;
-}
-.site-footer .widget .social li a {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #1a374d;
-  display: inline-block;
-  position: relative;
-  color: #ffffff;
-  -webkit-box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.2);
-}
-.site-footer .widget .social li a span {
-  font-size: 16px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-.site-footer .widget .social li a:hover {
-  background-color: #1a374d;
-  color: #ffffff;
-}
-.site-footer .widget .links li {
-  display: block;
-  margin-bottom: 10px;
-}
-.site-footer .widget .links li a {
-  color: #000000;
-}
-.site-footer .widget .links li a:hover {
-  color: #000000;
-  text-decoration: underline;
-}
+  margin-bottom: 30px; }
+  .site-footer .widget h3 {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #000000;
+    font-family: "Inter", sans-serif; }
+  .site-footer .widget .social li {
+    display: inline-block; }
+    .site-footer .widget .social li a {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #1A374D;
+      display: inline-block;
+      position: relative;
+      color: #ffffff;
+      -webkit-box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.2); }
+      .site-footer .widget .social li a span {
+        font-size: 16px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%); }
+      .site-footer .widget .social li a:hover {
+        background-color: #1A374D;
+        color: #ffffff; }
+  .site-footer .widget .links li {
+    display: block;
+    margin-bottom: 10px; }
+    .site-footer .widget .links li a {
+      color: #000000; }
+      .site-footer .widget .links li a:hover {
+        color: #000000;
+        text-decoration: underline; }
 .site-footer ul.quick-info li {
   position: relative;
-  padding-left: 30px;
-}
-.site-footer ul.quick-info li:before {
-  left: 0;
-  position: absolute;
-  content: "";
-  font-family: "icomoon";
-  color: #6998ab;
-}
-.site-footer ul.quick-info li.email:before {
-  content: "\f0e0";
-}
-.site-footer ul.quick-info li.phone:before {
-  content: "\f095";
-}
-.site-footer ul.quick-info li.address:before {
-  content: "\e8b4";
-}
+  padding-left: 30px; }
+  .site-footer ul.quick-info li:before {
+    left: 0;
+    position: absolute;
+    content: "";
+    font-family: 'icomoon';
+    color: #6998AB; }
+  .site-footer ul.quick-info li.email:before {
+    content: "\f0e0"; }
+  .site-footer ul.quick-info li.phone:before {
+    content: "\f095"; }
+  .site-footer ul.quick-info li.address:before {
+    content: "\e8b4"; }
 
 
-/* 체크인 */
-.table-blue{
-  background-color: #1a374d;
-  color: white;
-}
-.table.table-bordered{
-  width: 1350px;
-  margin-top: 50px;
-}
-
-
-/* 모달 */
-
-.modal-title {
-  color: white;
-}
-.modal-header {
-  background-color: #1f425c;
-}
-
-.form-checkin {
+    .table-blue{
+      background-color: #1A374D;
+      color: white;
+    }
+    .modal-title{
+     color: white;
+    }
+    .modal-header{
+      background-color: #1f425c;
+    }
+   .foriareaButton{
+      padding-right: 100px;
+   }
+ .form{
   padding-left: 100px;
   padding-right: 100px;
+  ;
+ }
+ .checkInButton{
+  padding-left: 10px;
+  
+ }
+ 
+ .recordlocator{
+  padding-right: 30px;
+  padding-left: 30px;
+ }
+
+.jy-user-info-ul {
+    /* display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px; */
+    width: 880px;
+    font-size: 10px;
+    background: #834b4b;
 }
-.checkinbutton {
-  padding-left: 700px;
+
+.nav-hero {
+  padding: 7rem 0 10rem 0;
+  margin-bottom: 100px; }
+  .nav-hero.hero-inner {
+    padding: 8rem 0 0rem 0;
+    margin-bottom: auto;
+    background-color: white; }
+
+    .logo:hover{
+      color: #000;
+    }
+    .site-menu a:hover {
+      color: black !important;
+    }
+
+/* sangmin css start */
+
+/* 버튼 */
+.sangmin_reserve_btn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #d60815;
+  border-radius: 0.6em;
+  color: #d60815;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+
+  &:hover {
+    box-shadow: 0 0 40px 40px red inset;
+    color: #fff;
+  }
+}
+.sangmin_choose_btn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #d60815;
+  border-radius: 0.6em;
+  color: #d60815;
+  cursor: pointer;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  margin-left: 20px;
+
+  width: 200px;
+  &:hover {
+    box-shadow: 0 0 40px 40px red inset;
+    /* color: white; */
+    color: #fff;
+  }
+}
+
+/* 예약페이지 */
+.sangmin_step_bedge span {
   font-size: 15px;
-  color: white;
-  height: 25px;
+  margin: 20px;
+  padding: 20px;
 }
-.table{
-  text-align: center;
+.sangmin_reserve_notice ul {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+
+  padding: 30px;
 }
-
-.td{
-  text-align: center;
-}
- 
-
-/* 아코디언 */
-
-.testtttttttt1 {
-  font-size: 13px;
-  width: 1350px;
-  margin: 20px auto;
+.sangmin_reserve_sub_title h4 {
+  font-weight: bolder;
+  /* font-weight: 300; */
 }
 
-/* 탑승자정보 */
-#domesticpassengerForm{
+/* 예약선택(출발,도착,날짜) */
+.sangmin_reserve_itineary_select {
+  display: inline-block;
+  position: relative;
+  width: 33%;
+  height: 100px;
+  background-color: #f3f3f3;
+  vertical-align: top;
+}
+.sangmin_reserve_itineary_select input {
+  /* display: block; */
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  margin: 0px;
+  border: 1px solid #f3f3f3;
+  color: #737373;
+  box-sizing: border-box;
   outline: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  
-}
-.passengernameinfo{
-  margin-right: 20px;
-}
-.passengerinfobutton{
- float: right;
+  cursor: pointer;
 
+  /* position: relative; top:0%; */
 }
-
-.pluspassenger{
-  margin-right: 20px;
-  margin-top: 30px;
-}.minuspassenger{
-  margin-top: 20px;
- 
+.sangmin_reserve_myArea {
+  background: #f3f3f3 url(../images/icon_point.png) no-repeat;
+  background-size: 30px;
+  background-position: right 15px bottom 15px;
+  font-size: 28px;
+}
+.sangmin_reserve_arriveArea {
+  background: #f3f3f3 url(../images/icon_point.png) no-repeat;
+  background-size: 30px;
+  background-position: right 15px bottom 15px;
+  font-size: 28px;
 }
 
-
-/* 여권정보 */
-.input-group{
-  margin-top: 40px;
+.sangmin_reserve_date {
+  background: #f3f3f3 url(../images/calendar.png) no-repeat;
+  background-size: 30px;
+  background-position: right 15px bottom 15px;
+  font-size: 20px;
 }
 
-#passengerForm{
-  outline: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  
+.sangmin_reserve_itineary div:nth-child(2) {
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+
+/* 승객 카운트 박스 */
+.sangmin_reserve_passanger_count {
+  display: block;
+  position: relative;
+}
+.sangmin_reserve_area {
+  display: inline-block;
+  position: relative;
+  width: 50%;
+  height: 99px;
+  /* background-color: #f3f3f3; */
+  vertical-align: top;
+  text-align: left;
+}
+.sangmin_reserve_area h5 span {
+  font-size: 18px;
+  color: #666;
+}
+.sangmin_reserve_button_numbox {
+  /* margin-right: 10px; */
+  /* color: #666; */
+  padding: 5px;
+  margin: 5px;
+  background-color: #f3f3f3;
+}
+/* margin: auto 0 0 auto; */
+.sangmin_map_icon {
+  bottom: 8px;
+  right: 5px;
+  height: 40px;
+}
+
+.sangmin_reserve_button_numbox input {
+  /* margin-top: 20px; */
+  width: 90%;
+  background-color: #f3f3f3;
+  border: 1px solid #f3f3f3;
+  font-size: 24px;
+  text-align: center;
+  /* z-index: 1; */
+}
+
+.sangmin_reserve_button_numbox button {
+  width: 46px;
+  height: 46px;
+}
+.sangmin_btn_number {
+  background-color: white;
+  border: 1px solid #f3f3f3;
+}
+
+/* 좌석 선택 */
+.sangmin_reserve_class div {
+  width: 100%;
 }
 
 
-.btn.btn-dark{
+/* 모달 공통*/
+.modal-header {
+  background-color: #6d6e71;
+  color: #fff;
+}
+.reserve_modal_header {
+  /* background-color: #6d6e71; */
+  border: #6d6e71;
+}
+
+.sangmin_modal_table td {
+  border: 5px solid white;
+
+  background-color: #f3f3f3;
+}
+.sangmin_modal_click {
+  bottom: 8px;
+  right: 5px;
+  height: 50px;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  width: 50px;
+  z-index: 200;
+  cursor: pointer;
+}
+
+/* 모달 국제선 */
+.sangmin_modal_body_fori_city {
+  width: 75%;
+  border: 1px solid #ddd;
+}
+.sangmin_reserve_modal_fori_country {
+  border-left: 5px solid white;
+  /* border-bottom: 3px solid white; */
+  width: 25%;
+  background-color: #f3f3f3;
+  /* border: 1px solid white; */
+}
+.table tr td {
+  border: 1px solid #f3f3f3;
+}
+
+/* 항공권 선택 */
+.sangmin_choose_top {
+  background: #6d6e71;
+}
+
+.sangmin_choose_top_itineary_select {
+  display: inline-block;
+  position: relative;
+  width: 19%;
+  height: 40px;
+  background-color: #f3f3f3;
+  vertical-align: top;
   margin-top: 10px;
-  width: 121px;
+  margin-bottom: 15px;
+  margin-right: 1%;
+}
+.sangmin_choose_top_itineary_select input {
+  /* display: block; */
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  margin: 0px;
+  border: 1px solid #f3f3f3;
+  color: #737373;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+  /* position: relative; top:0%; */
+}
+.sangmin_choose_top_myArea {
+  background: #f3f3f3 url(../images/icon_point.png) no-repeat;
+  background-size: 14px;
+  background-position: right 12px bottom 12px;
+  font-size: 14px;
+}
+.sangmin_choose_top_arriveArea {
+  background: #f3f3f3 url(../images/icon_point.png) no-repeat;
+  background-size: 14px;
+  background-position: right 12px bottom 12px;
+  font-size: 14px;
+}
+
+.sangmin_choose_top_date {
+  background: #f3f3f3 url(../images/calendar.png) no-repeat;
+  background-size: 14px;
+  background-position: right 12px bottom 12px;
+  font-size: 14px;
+}
+
+.sangmin_choose_top_passanger_count {
+  background: #f3f3f3 url(../images/passenger2.png) no-repeat;
+  background-size: 14px;
+  background-position: right 12px bottom 12px;
+  font-size: 14px;
+}
+
+.sangmin_choose_top_class {
+  background: #f3f3f3 url(../images/class.png) no-repeat;
+  background-size: 14px;
+  background-position: right 12px bottom 12px;
+  font-size: 14px;
+}
+.sangmin_reserve_choose_subTitle {
+  display: block;
+  position: relative;
+  margin-bottom: 30px;
+  line-height: 20px;
+  color: #d60815;
+  font-size: 18px;
+  font-family: "Noto Sans KR", "notofont", "AppeGothic", "Malgun Gothic",
+    "맑은 고딕", "돋음", "Dotum", "Apple SD Gothic Neo", Arial, Helvetica,
+    sans-serif;
+  font-weight: bolder;
+}
+.air_icon {
+  margin-top: 3px;
+  margin-right: 5px;
+}
+.sangmin_choose_airport span {
+  font-family: "latofont";
+  margin-right: 10px;
+  text-align: center;
+  line-height: 1;
+  color: #000;
+  font-size: 40px;
+}
+.sangmin_choose_airport_pee_date {
+  width: 100%;
+}
+.sangmin_choose_airport_pee_date tr td {
+  width: 200px;
+}
+
+.sangmin_choose_datepicker {
+  background-color: #e6e2df;
+  /* border-bottom: 1px solid #222; */
+  /* margin: 20px; */
+  height: 75px;
+}
+.sangmin_choose_datepicker tr td {
+  border-right: 30px solid white;
+  border-left: 30px solid white;
+}
+.sangmin_choose_table_head {
+  color: #fff;
+  /* justify-content : center; */
+}
+.sangmin_choose_table_head th {
+  vertical-align: middle;
+}
+
+.sangmin_choose_table_content td {
+  vertical-align: middle;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: "latofont";
+}
+.sangmin_bottom_solid {
+  border-bottom: 1px solid #222;
+}
+.sangmin_gray_bg {
+  background-color: #6d6e70;
+  width: 32.8%;
+}
+.sangmin_unleftline {
+  background-color: #6d6e70;
+  width: 18.2%;
+}
+.sangmin_economy_bg {
+  background-color: #c50251;
+  width: 15.2%;
+}
+.sangmin_business_bg {
+  background-color: #283890;
+  width: 15.2%;
+}
+.sangmin_first_bg {
+  background-color: black;
+  width: 15.2%;
+}
+.sangmin_choose_table_head {
+  height: 100px;
+}
+.sangmin_choose_time li {
+  list-style-type: none;
+}
+.sang_min_arrow_icon {
+  color: #6d6e70;
+}
+.sangmin_choose_notice {
+  background-color: #f7f7f7;
+  padding: 30px;
+}
+.ksm_airline_flightname{
+  text-align: left;
+}
+.ksm_airline_flightname{
+  padding: 0;
+  margin: 0;
+}
+/* 결제 페이지 */
+.sangmin_reserve_payment_subtitle {
+  margin: 60px 0 50px 0;
+  font-size: 40px;
+  color: #000;
+  text-align: center;
+  font-weight: normal;
+  line-height: 1;
+  font-family: "Noto Sans KR", "notofont", "AppeGothic", "Malgun Gothic",
+    "맑은 고딕", "돋음", "Dotum", "Apple SD Gothic Neo", Arial, Helvetica,
+    sans-serif;
+}
+
+.sangmin_payment_reserve_info {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+
+  padding: 40px 0;
+}
+.sangmin_payment_reserve_two_info {
+  border-bottom: 1px solid #ddd;
+  padding: 40px 0;
+  /* align-items: center; */
+}
+.sangmin_payment_reserve_info div {
+  align-items: center;
+}
+.sangmin_payment_reserve_two_info div{
+  align-items: center;
+}
+.sangmin_payment_reserve_info_first {
+  font-size: 20px;
+  font-weight: 500;
+  color: #ab7d55;
+}
+
+.sangmin_payment_loca {
+  font-size: 20px;
+  color: #222;
+  margin-right: 100px;
+}
+.sangmin_payment_reserve_info_last span {
+  font-family: "Noto Sans KR", "notofont", "AppeGothic", "Malgun Gothic",
+    "맑은 고딕", "돋음", "Dotum", "Apple SD Gothic Neo", Arial, Helvetica,
+    sans-serif;
+  color: #737373;
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.sangmin_gender label,input{
+  margin-right: 10px;
+}
+
+/* sangmin css end */
+/* .sangmin_reserve_itineary div:nth-child(2) {ss
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+} */
+
+
+/* 예약 조회 페이지 */
+
+.searchRow {
+  display: inline-block;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.input-group-text {
+  width: 100px;
+  height: 45px;
+  color: white;
+  background-color: #1a374d;
+}
+
+.blankBox {
+  float: left;
+  width: 2%;
+}
+
+.searchNumber {
+  border: 2px solid #e9ecef;
+  font-size: 16px;
+  height: 45px;
+  width: 70%;
+  border-radius: 6px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.searchNumber:active,
+.searchNumber:focus {
+  border-color: #1a374d;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.searchButton {
+  margin: 0 auto;
+  margin-bottom: 50px;
+  margin-top: 30px;
+  width: 300px;
+  justify-content: center;
+}
+
+.tableText {
   text-align: center;
 }
 
-/* 수화물 */
-
-.toboardingpass{
-  padding-left: 1200px;
+.tabText{
+  text-align: center;
 }
 
-.boardingpass{
-  width: 1350px;
+.blankBox2 {
+  margin-bottom: 15px;
 }
 
-.boardingpass.h3 {
-  float: right
+.form-ex {
+  height: auto;
+  width: 100%;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding-top: 50px;
+  padding-left: 60px;
+  padding-bottom: 30px;
 }
-.btn-group-col {
+
+.test1{
+  padding-top: 10px;
+  margin-left: 50px;
+}
+
+.test2{
+  padding-top: 10px;
+  margin-left: 110px;
+}
+
+.btn1 {
+  width: 365px;
+  margin: 0 auto;
   margin-top: 30px;
-  margin-bottom: 30px;
-}
-.passengername{
-  width:300px;
-}
-.bagcount{
-  width:300px;
-}
-
-.bagprice{
-  width:300px;
-  font-size: 30px;
-
 }
 
 
+/* 공지사항 작성 페이지 */
 
-/* 탑승권  */
-
-.container{
-  width: 800px;
+#editor {
+  height: 100px;
+  width: 1070px;
+  font-size: 18px;
 }
-.finalInfo{
-  background-color: #f5f7fa;
-
-}
-
-
-
-
-
-
-

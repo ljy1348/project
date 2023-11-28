@@ -43,7 +43,9 @@ import javax.persistence.*;
 @SQLDelete(sql = "UPDATE TB_RESERVATION SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE AIRLINE_RESERVATION_NUMBER = ? ")
 public class SearchReservation extends BaseTimeEntity {
 
-    //    기본키 : 예약 번호
+    
+//    기본키 : 예약 번호
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE
             , generator = "SQ_RESERVATION_GENERATOR"
@@ -51,39 +53,40 @@ public class SearchReservation extends BaseTimeEntity {
     @Column
     private Integer airlineReservationNumber;
 
-    //    성인 인수
+    
+//    성인 인수
     @Column
     private String adultCount;
 
-    //    소아 인수
+//    소아 인수
     @Column
     private String childCount;
 
-    //    마일리지 사용 여부
+//    마일리지 사용 여부
     @Column
     private String mileUseYn;
 
-    //    좌석 등급
+//    좌석 등급
     @Column
     private String seatType;
 
-    //    회원 여부
+//    회원 여부
     @Column
     private String memberYn;
 
-    //    체크인 여부
+//    체크인 여부
     @Column
     private String checkYn;
 
-    //    회원 ID
+//    회원 ID
     @Column
     private String memberId;
 
-    //    비회원 번호
+//    비회원 번호
     @Column
-    private Integer userNumber;
+    private String userNumber;
 
-    //    운항 번호
+//    운항 번호
     @Column
     private Integer operationId;
 }
