@@ -19,10 +19,16 @@ import QnaListPage from './pages/qna/QnaListPage';
 import AddQnaPage from './pages/qna/AddQnaPage';
 import QnaPage from './pages/qna/QnaPage';
 import CustomerPage from './pages/customer/CustomerPage';
-import CheckIn from './pages/checkIn/CheckIn';
 
-import ForiareaModal from './pages/modal/ForiareaModal';
+
+
 import Passport from './pages/checkIn/Passport';
+import CheckIn from './pages/checkIn/CheckIn';
+import CheckInStateModal from './pages/modal/CheckInStateModal';
+import Boardingpass from './pages/checkIn/Boardingpass';
+import PassengerInfo from './pages/checkIn/PassengerInfo';
+
+
 
 
 // todo: 리액트 import
@@ -42,8 +48,12 @@ function App() {
 
           {/* 체크인 */}
           <Route path="/checkin" element={<CheckIn/>} />   
+          <Route path="/passengerinfo" element={<PassengerInfo/>} />   
           <Route path="/passport" element={<Passport/>} />   
-          <Route path="/foriareamodal" element={<ForiareaModal/>} />  
+          <Route path="/boardingpass" element={<Boardingpass/>} />   
+          <Route path="/checkinstate" element={<CheckInStateModal/>} />   
+       
+          {/* <Route path="/popover" element={<Popover/>} />   */}
           
 
           {/* 고객 */}

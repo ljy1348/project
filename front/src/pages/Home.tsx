@@ -1,14 +1,13 @@
 // pages/Home.tsx : rfce
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import initScripts from "../assets/js/scripts";
 import initCustom from "../assets/js/custom";
 
 function Home() {
-
-  useEffect(()=>{
+  useEffect(() => {
     initScripts();
     initCustom();
-  },[])
+  }, []);
 
   return (
     <>
@@ -23,62 +22,103 @@ function Home() {
                   <span className="d-block">Let's Enjoy Your</span> Trip In{" "}
                   <span className="typed-words"></span>
                 </h1>
-
+                {/* 필요한거  */}
                 <div className="row">
                   <div className="col-12">
-                    <form className="form">
+                  
+                    {/* 원래폼 */}
+                    <form className="form-checkin">
                       <div className="row mb-2">
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-3">
+                          <h6>국적</h6>
                           <select
                             name=""
                             id=""
                             className="form-control custom-select"
                           >
-                            <option value="">Destination</option>
-                            <option value="">Peru</option>
-                            <option value="">Japan</option>
-                            <option value="">Thailand</option>
-                            <option value="">Brazil</option>
-                            <option value="">United States</option>
-                            <option value="">Israel</option>
-                            <option value="">China</option>
-                            <option value="">Russia</option>
+                            <option value="">국적</option>
+                            <option value="">페루</option>
+                            <option value="">일본</option>
+                            <option value="">태국</option>
+                            <option value="">브라질</option>
+                            <option value="">미국</option>
+                            <option value="">일본</option>
+                            <option value="">한국</option>
                           </select>
                         </div>
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-5">
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-3">
+                          <h6>성별</h6>
+                          <select
+                            name=""
+                            id=""
+                            className="form-control custom-select"
+                          >
+                            <option value="">성별</option>
+                            <option value="">여성</option>
+                            <option value="">남성</option>
+                          </select>
+                        </div>
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
+                          <h6>생년월일</h6>
                           <input
-                            type="text"
+                            type="date"
                             className="form-control"
-                            name="daterange"
+                            placeholder="생년월일"
                           />
                         </div>
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-3">
+
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
+                          <h6>여권발급국가</h6>
+                          <select
+                            name=""
+                            id=""
+                            className="form-control custom-select"
+                          >
+                            <option value="">여권 발급 국가</option>
+                            <option value="">페루</option>
+                            <option value="">일본</option>
+                            <option value="">태국</option>
+                            <option value="">브라질</option>
+                            <option value="">미국</option>
+                            <option value="">일본</option>
+                            <option value="">한국</option>
+                          </select>
+                        </div>
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
+                          <h6>여권번호</h6>
                           <input
-                            type="text"
+                            name=""
+                            type="type"
                             className="form-control"
-                            placeholder="# of People"
+                            placeholder="여권번호"
                           />
                         </div>
-                      </div>
-                      <div className="row align-items-center">
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-3">
+                          <h6>여권만료일</h6>
                           <input
-                            type="submit"
-                            className="btn btn-primary btn-block"
-                            value="Search"
+                            type="date"
+                            className="form-control"
+                            placeholder="여권 만료일 "
                           />
                         </div>
-                        <div className="col-lg-8">
-                          <label className="control control--checkbox mt-3">
-                            <span className="caption">Save this search</span>
-                            <input type="checkbox" checked={true} />
-                            <div className="control__indicator"></div>
-                          </label>
+                        <br />
+                        <div>
+                          <div className="row align-items-center">
+                            <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
+                              <input
+                                type="submit"
+                                className="btn btn-primary btn-block"
+                                value="Search"
+                              />
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </form>
                   </div>
                 </div>
+
+                {/* 필요한거 */}
               </div>
             </div>
             <div className="col-lg-5">
@@ -361,10 +401,6 @@ function Home() {
           </div>
         </div>
       </div>
-
-      
-
-    
 
       {/* <!-- 6 --> */}
       <div className="untree_co-section">
