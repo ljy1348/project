@@ -6,6 +6,16 @@ import "aos/dist/aos.css";
 // 개발자가 직접 만든 css
 import "./assets/css/style.css";
 
+
+
+import CheckInStateModal from './pages/modal/CheckInStateModal';
+import Boardingpass from './pages/checkIn/Boardingpass';
+import PassengerInfo from './pages/checkIn/PassengerInfo';
+
+
+
+
+
 // todo: 리액트 import
 import Nav from "./components/common/Nav";
 import Home from "./pages/Home";
@@ -52,6 +62,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
 
+          {/* 체크인 */}
+          <Route path="/checkin" element={<CheckIn/>} />   
+          <Route path="/passengerinfo" element={<PassengerInfo/>} />   
+          <Route path="/passport" element={<Passport/>} />   
+          <Route path="/boardingpass" element={<Boardingpass/>} />   
+          <Route path="/checkinstate" element={<CheckInStateModal/>} />   
+       
+          
         {/* 체크인 */}
         <Route path="/checkin" element={<CheckIn />} />
         <Route path="/passport" element={<Passport />} />

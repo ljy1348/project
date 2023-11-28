@@ -124,6 +124,7 @@ h4,
 
 
 
+
 /* .form-destination {
   width: 80px;
   border: 2px solid #e9ecef;
@@ -163,6 +164,7 @@ h4,
     -webkit-box-shadow: none;
     box-shadow: none; 
   }
+
 
 
 .gutter-v1 {
@@ -245,6 +247,7 @@ h4,
 
 /* 로고 글자 설정 */
 .logo {
+
   font-size: 30px;
   color: #2fdf87;
   font-weight: 700;
@@ -442,6 +445,7 @@ h4,
 /* nav 크기 공간 */
 .site-nav {
   padding-top: 20px;
+  padding-bottom: 20px;
   padding-bottom: 10px;
 
 }
@@ -458,6 +462,7 @@ h4,
 .site-nav .site-navigation .site-menu > li {
   display: inline-block;
 }
+
 
 
 /**************************************/
@@ -478,6 +483,7 @@ h4,
 .site-nav .site-navigation .site-menu > li > a:hover {
   color: #323232;
 
+
 }
 .site-nav .site-navigation .site-menu > li.cta-button a {
   padding: 6px 20px;
@@ -490,6 +496,7 @@ h4,
   background: #1a374d;
   border-color: #1a374d;
 }
+
 
 /* ******************************* */
 /* 지정 메뉴 색상 */
@@ -1103,8 +1110,9 @@ h4,
   opacity: 1;
   z-index: 1;
 }
-
+/* ..untree_co-section ubin */
 .untree_co-section {
+  /* padding: 70px 0; */
 
   margin-top: 100px;
   margin-bottom: 170px;
@@ -1991,6 +1999,7 @@ h4,
 .site-footer {
   font-size: 14px;
   color: #777;
+/* dev */
 line-height: 1.6; }
 .site-footer .inner {
   padding-top: 0px;

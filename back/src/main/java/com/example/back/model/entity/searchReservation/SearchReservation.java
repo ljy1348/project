@@ -42,14 +42,17 @@ import javax.persistence.*;
 @Where(clause = "DELETE_YN = 'N'")
 @SQLDelete(sql = "UPDATE TB_RESERVATION SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE AIRLINE_RESERVATION_NUMBER = ? ")
 public class SearchReservation extends BaseTimeEntity {
+
     
 //    기본키 : 예약 번호
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE
             , generator = "SQ_RESERVATION_GENERATOR"
     )
     @Column
     private Integer airlineReservationNumber;
+
     
 //    성인 인수
     @Column
@@ -87,3 +90,4 @@ public class SearchReservation extends BaseTimeEntity {
     @Column
     private Integer operationId;
 }
+
