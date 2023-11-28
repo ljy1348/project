@@ -69,7 +69,7 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/user-info" element={<UserInfo />} />
-        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin/*" element={<AdminPage />} />
 
           {/* 예약 조회 */}
         <Route path="/search-reservation" element={<ReservationListPage />} />

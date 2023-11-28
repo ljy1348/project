@@ -287,6 +287,7 @@ function ReservePayment() {
   const saveReservation = () => {
     // 임시 부서 객체
     // var data = {
+    //   airlineReservaitonNumber: null,
     //   adultCount: reservation.adultCount,
     //   childCount: reservation.childCount,
     //   mileUseYn: reservation.mileUseYn,
@@ -297,7 +298,6 @@ function ReservePayment() {
     //   operationId: reservation.operationId,
     //   checkYn: reservation.checkYn,
     // };
-
     // ReservationService.create(data)    // 저장 요청
     //   .then((response: any) => {
     //     console.log(response.data);
