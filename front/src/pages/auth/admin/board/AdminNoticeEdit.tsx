@@ -4,8 +4,6 @@ import { useEffect } from 'react';
 import INotice from '../../../../types/tour/INotice';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store/store';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 function AdminNoticeEdit() {
 
