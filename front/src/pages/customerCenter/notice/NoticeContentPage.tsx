@@ -1,23 +1,23 @@
-// NoticeListPage.tsx
-import React from 'react'
-import CustomerList from '../../components/basic/customer/CustomerList'
-import NoticeList from '../../components/center/notice/NoticeList'
+import React, { useEffect } from 'react'
+import Notice from '../../../components/center/notice/Notice'
+import initScripts from '../../../assets/js/scripts';
+import initCustom from '../../../assets/js/custom';
 
-
-function NoticeListPage() {
+function NoticeContentPage() {
+  useEffect(() => {
+    initScripts();
+    initCustom();
+  }, []);
   return (
-    <div>
-      {/* 테마 디자인 적용 : 컨택트 소스 */}
+    <>
       {/* 테마 제목 시작 */}
-      <div className="hero hero-inner">
+      <div className="hero hero-customer">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6 mx-auto text-center">
               <div className="intro-wrap">
                 <h1 className="mb-0">공지 사항</h1>
-                {/* <p className="text-white">
-                  여기에서 고객 정보를 확인하실 수 있습니다.
-                </p> */}
+                <p className="text-white">새소식과 운임 공지를 확인해보세요.</p>
               </div>
             </div>
           </div>
@@ -30,13 +30,13 @@ function NoticeListPage() {
         <div className="container">
           <div className="row">
             {/* 여기 */}
-            <NoticeList />
+            <Notice />
           </div>
         </div>
       </div>
       {/* 본문 끝 */}
-    </div>
+    </>
   )
 }
 
-export default NoticeListPage
+export default NoticeContentPage

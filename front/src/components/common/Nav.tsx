@@ -22,19 +22,19 @@ function Nav() {
         <div className="container">
           <div className="site-navigation">
             <Link to="/" className="logo m-0">
-              Tour <span className="text-primary">.</span>
+              GreenAirline <span className="text-primary"></span>
             </Link>
             {/* 메뉴들 시작 */}
             <ul className="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
               {/* home 메뉴 시작 */}
               <li className="active">
-                <Link to="/">Home</Link>
+                <Link to="/">예약</Link>
               </li>
               {/* home 메뉴 끝 */}
 
               {/* 드롭다운 메뉴 시작 */}
               <li className="has-children">
-                <a href="#">Dropdown</a>
+                <a href="#">예약조회</a>
                 <ul className="dropdown">
                   <li>
                     <Link to="/elements">Elements</Link>
@@ -63,23 +63,17 @@ function Nav() {
               </li>
               {/* 드롭다운 메뉴 끝 */}
 
-               {/* 체크인 메뉴 시작 */}
-               <li>
-                <Link to="/checkin">체크인</Link>
-              </li>
-              {/* 체크인 메뉴 끝 */}
-
               {/* 고객 시작 */}
               <li className="has-children">
-                <Link to="#">고객</Link>
+                <Link to="#">체크인</Link>
                 <ul className="dropdown">
                   {/* 1st 드롭 메뉴 */}
                   <li>
-                    <Link to="/customer">고객 조회</Link>
+                    <Link to="/customer">오토 체크인</Link>
                   </li>
                   {/* 2nd 드롭 메뉴 */}
                   <li>
-                    <Link to="/add-customer">고객 추가</Link>
+                    <Link to="/add-customer">모바일 체크인</Link>
                   </li>
                 </ul>
               </li>
@@ -87,25 +81,37 @@ function Nav() {
 
               {/* Q & A 시작 */}
               <li className="has-children">
-                <Link to="#">Q & A</Link>
+                <Link to="#">마일리지</Link>
                 <ul className="dropdown">
                   {/* 1st 드롭 메뉴 */}
                   <li>
-                    <Link to="/qna">Q & A 조회</Link>
+                    <Link to="/qna">마일리지 조회</Link>
                   </li>
                   {/* 2nd 드롭 메뉴 */}
                   <li>
-                    <Link to="/add-qna">Q & A 추가</Link>
+                    <Link to="/add-qna">마일리지 샵</Link>
                   </li>
                 </ul>
               </li>
               {/* Q & A 끝 */}
 
-              {/* 서비스 메뉴 시작 */}
-              <li>
-                <Link to="/services">Services</Link>
+              {/* 고객센터 메뉴 시작 */}
+              <li className="has-children">
+                <Link to="/cucenter">고객 센터</Link>
+                <ul className="dropdown">
+                  <li>
+                    <Link to="/notice">공지사항</Link>
+                  </li>
+                  <li>
+                    <Link to="/question">자주 찾는 질문</Link>
+                  </li>
+                  <li>
+                    <Link to="/question-board">1:1 문의</Link>
+                  </li>
+                </ul> 
+
               </li>
-              {/* 서비스 메뉴 끝 */}
+              {/* 고객센터 메뉴 끝 */}
 
               {/* 어바웃 메뉴 시작 */}
               <li>
@@ -113,11 +119,6 @@ function Nav() {
               </li>
               {/* 어바웃 메뉴 끝 */}
 
-              {/* 컨택트 메뉴 시작 */}
-              <li>
-                <Link to="/contact">Contact Us</Link>
-              </li>
-              {/* 컨택트 메뉴 끝 */}
             </ul>
             {/* 메뉴들 끝 */}
 

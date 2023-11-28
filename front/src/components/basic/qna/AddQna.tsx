@@ -186,3 +186,8 @@ function AddQna() {
 }
 
 export default AddQna;
+
+
+
+
+

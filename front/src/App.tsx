@@ -4,61 +4,77 @@ import React from 'react';
 import "aos/dist/aos.css";
 // 개발자가 직접 만든 css 
 import "./assets/css/style.css";
+
+// todo: 리액트 import
 import Nav from './components/common/Nav';
 import Home from './pages/Home';
 import Footer from './components/common/Footer';
-import { Route, Routes } from 'react-router-dom';
-import Services from './pages/Services';
+import { Routes, Route } from 'react-router-dom';
+
 import About from './pages/About';
-import Contact from './pages/Contact';
+
 import Elements from './pages/Elements';
 import CustomerListPage from './pages/customer/CustomerListPage';
 import AddCustomerPage from './pages/customer/AddCustomerPage';
-// import CustomerPage from './pages/customer/CustomerPage';
+import CustomerPage from './pages/customer/CustomerPage';
 import QnaListPage from './pages/qna/QnaListPage';
 import AddQnaPage from './pages/qna/AddQnaPage';
 import QnaPage from './pages/qna/QnaPage';
-import CustomerPage from './pages/customer/CustomerPage';
-import CheckIn from './pages/checkIn/CheckIn';
+import CuCenter from './pages/customerCenter/CuCenter';
+import NoticeListPage from './pages/customerCenter/notice/NoticeListPage';
 
-import ForiareaModal from './pages/modal/ForiareaModal';
-import Passport from './pages/checkIn/Passport';
+import QuestionPage from './pages/customerCenter/question/QuestionPage';
+import QuestionBoardPage from './pages/customerCenter/board/QuestionBoardPage';
 
-
-// todo: 리액트 import
+import Notice0 from './pages/customerCenter/notice/공지사항내용';
+import NoticeContentPage from './pages/customerCenter/notice/NoticeContentPage';
+import AddboardList from './pages/customerCenter/board/AddboardList';
 
 function App() {
   return (
     <div className="App">
-      {/* 머리말 */}                 
+      {/* 머리말 */}
       <Nav/>
+
       {/* 본문 */}
       <Routes>
-          <Route path="/" element={<Home/>}></Route>
-          <Route path="/services" element={<Services/>} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/contact" element={<Contact/>} />
-          <Route path="/elements" element={<Elements/>} />  
+        <Route path="/" element={<Home/>} />
+        <Route path="/about" element={<About/>} />
+        
+        <Route path="/elements" element={<Elements/>} />
 
-          {/* 체크인 */}
-          <Route path="/checkin" element={<CheckIn/>} />   
-          <Route path="/passport" element={<Passport/>} />   
-          <Route path="/foriareamodal" element={<ForiareaModal/>} />  
-          
+        {/* 고객센터 */}
+        <Route path="/cucenter" element={<CuCenter/>} />
 
-          {/* 고객 */}
-          <Route path="/customer" element={<CustomerListPage/>} />  
-          <Route path="/add-customer" element={<AddCustomerPage/>} />  
-          <Route path="/customer/:cid" element={<CustomerPage/>} />  
-          {/* <Route path="/customer/:cid" element={<Customer />} /> */}
+        {/* 공지사항 */}
+        <Route path="/notice" element={<NoticeListPage/>} />
+        <Route path="/notice/:noticeId" element={<NoticeContentPage/>} />
+
+      
+
+        {/* 자주 찾는 질문 */}
+        <Route path="/question" element={<QuestionPage/>} />
+
+        {/* 1:1 문의 게시판 */}
+        <Route path="/question-board" element={<QuestionBoardPage/>} />
+        <Route path="/addquestion-board" element={<AddboardList/>} />
+
+        
+        
+        
 
 
-          {/* Qna */}
-          <Route path="/qna" element={<QnaListPage/>} />  
-          <Route path="/add-qna" element={<AddQnaPage/>} />  
-          <Route path="/qna/:qno" element={<QnaPage/>} />  
-       </Routes> 
-       
+        {/* 고객 */}
+        <Route path="/customer" element={<CustomerListPage/>} />
+        <Route path="/add-customer" element={<AddCustomerPage/>} />
+        <Route path="/customer/:cid" element={<CustomerPage/>} />
+
+        {/* Q & A */}
+        <Route path="/qna" element={<QnaListPage/>} />
+        <Route path="/add-qna" element={<AddQnaPage/>} />
+        <Route path="/qna/:qno" element={<QnaPage/>} />
+      </Routes>
+      
       {/* 꼬리말 */}
       <Footer/>
     </div>
