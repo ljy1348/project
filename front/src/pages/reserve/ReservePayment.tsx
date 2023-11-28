@@ -8,6 +8,7 @@ import ICount from "./../../types/reserve/ICount";
 import NonmemberService from "../../services/NonmemberService";
 import { info } from "console";
 import ReservationService from "../../services/ReservationService";
+import PaymentModal from "../modal/PaymentModal";
 
 function ReservePayment() {
   // 기본키
@@ -800,6 +801,11 @@ function ReservePayment() {
           </button>
         </div>
       </div>
+
+      <PaymentModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
 
       {/* 모달 불러오기 */}
     </>
