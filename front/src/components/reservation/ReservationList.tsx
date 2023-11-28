@@ -4,6 +4,7 @@ import ReservationService from "../../services/reservation/ReservationService";
 import IReservation from "../../types/tour/IReservation";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { useNavigate } from "react-router-dom";
 
 function ReservationList() {
   // 변수 정의
@@ -16,10 +17,13 @@ function ReservationList() {
   // 검색어(input) 변수
   const [airlineReservationNumber, setAirlineReservationNumber] = useState<any>("");
 
+  const navi = useNavigate();
+
   // 자동 조회
   useEffect(() => {
     retrieveReservation();
-  }, [])
+    if (!currentUser) navi("/login");
+  }, [currentUser])
 
 
   // 전체 조회
