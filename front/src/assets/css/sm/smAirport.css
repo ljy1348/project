@@ -96,7 +96,6 @@ li > .abbr {
 .international_listbox > .city_list > li:hover, .list_nation > ul > li:hover,
 .domestic > .city_list > li:hover, .domestic > .city_list > li:hover .cname,
 .international_listbox > .city_list > li:hover .cname{
-    background-color: #1A374D;
+    background-color: #4d411a;
     color: white !important;
 }
-

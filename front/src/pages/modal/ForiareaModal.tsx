@@ -3,7 +3,7 @@
 import IReservation from "../../types/reserve/IReservation";
 import React, { useRef, useState } from "react";
 // import AirportList from "./AirportList";
-import "../../assets/css/Airport.css";
+import "../../assets/css/sm/smAirport.css";
 import AirportList from "../../utils/AirportList";
 import { Modal } from "react-bootstrap";
 // import AirportList from './../AirportList/AirportList';
@@ -76,7 +76,7 @@ function ForiareaModal(props: any) {
 
           <h5 className="mt-2">국제선</h5>
 
-          <div className="flights_list national row no-gutters">
+          <div className="flights_list national row no-gutters r">
             <div className="list_nation col">
               <ul>
                 <li

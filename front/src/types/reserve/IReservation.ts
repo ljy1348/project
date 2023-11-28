@@ -1,16 +1,16 @@
 export default interface IReservation {
-    airlineReservaitonNumber?: any | null,
-    adultCount: string,
-    childCount: string,
+    airlineReservaitonNumber?: number | null,
+    adultCount: string | number,
+    childCount: string | number,
     mileUseYn: string,
     seatType: string,
     memberYn: string,
     memberId: string,
-    userNumber: number,
+    userNumber: number | string;
     operationId: number,
     checkYn: string,
 
 
-    
+
 }
 
