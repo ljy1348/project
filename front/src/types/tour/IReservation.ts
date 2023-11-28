@@ -7,7 +7,7 @@ export default interface IReservation {
     memberYn: string,                       // 회원 여부
     checkYn: string,                       // 체크인 여부
     memberId: string,                       // 회원 ID
-    userNumber: number,                     // 비회원 번호
+    userNumber: string,                     // 비회원 번호
     operationId: number,                    // 운항 ID
     airline: string,                        // 항공사
     flightName: string,                     // 항공편명

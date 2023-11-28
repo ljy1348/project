@@ -20,7 +20,7 @@ function SeeReservation() {
     memberYn: "", // 회원여부
     checkYn: "", // 체크인 여부
     memberId: "",
-    userNumber: 0, // 비회원 번호
+    userNumber: "", // 비회원 번호
     operationId: 0, // 운항 ID
     airline: "",
     flightName: "", // 항공편명

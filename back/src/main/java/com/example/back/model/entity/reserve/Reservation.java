@@ -53,7 +53,7 @@ public class Reservation extends BaseTimeEntity {
     private String seatType;
     private String memberYn;
     private String memberId;
-    private Integer userNumber;
+    private String userNumber;
     private Integer operationId;
     private String checkYn;
 
