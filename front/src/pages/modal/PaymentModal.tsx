@@ -50,7 +50,7 @@ function PaymentModal(props: any) {
         paymentMethodsWidgetRef.current = paymentMethodsWidget 
       })() 
 
-      
+      // ReservationService
 
     }, [props]) 
   

@@ -28,7 +28,7 @@ function Nav() {
               className="js-clone-nav d-none d-lg-inline-block text-left site-menu"
             >
               <Link to="/" className="logo">
-                <img src="images/그린에어로고.png" className="main-logo-image" />
+                <img src="/images/그린에어로고.png" className="main-logo-image" />
                 GreanAir
               </Link>
               

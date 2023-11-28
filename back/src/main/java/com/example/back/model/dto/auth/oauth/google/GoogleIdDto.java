@@ -11,7 +11,8 @@ import lombok.ToString;
 @ToString
 public class GoogleIdDto {
     private String email;
-    private GoogleAccountDto properties;
+//    private GoogleAccountDto properties;
+    private String name;
 
 
 }
