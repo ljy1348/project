@@ -8,6 +8,8 @@ import ICount from "./../../types/reserve/ICount";
 import NonmemberService from "../../services/NonmemberService";
 import { info } from "console";
 import ReservationService from "../../services/ReservationService";
+import IRdata from "../../types/reserve/IRdata";
+import OperationInfo from "./../auth/admin/OperationInfo/OperationInfo";
 
 function ReservePayment() {
   // 기본키
@@ -29,8 +31,9 @@ function ReservePayment() {
     adult: false,
     name: "",
   };
-  const [temp, setTemp] = useState<ICount[]>([initICount]);
 
+  const [temp, setTemp] = useState<ICount[]>([initICount]);
+  const [reInfo, setReInfo] = useState<IRdata[]>([]);
   // operationinfo 객체 초기화
 
   const initialOperationinfo = {
@@ -82,7 +85,7 @@ function ReservePayment() {
     seatType: seatClass,
     memberYn: "N",
     memberId: "",
-    userNumber: 0,
+    userNumber: "",
     operationId: 0,
     checkYn: "N",
   };
@@ -99,15 +102,15 @@ function ReservePayment() {
 
   // 저장 : 예약 객체 정의
   const [reservation, setReservation] = useState(initialReservation);
-  
-    // todo: input 태그에 수동 바인딩
-    const handleInputChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.target; // 화면값
-      setReservation({ ...reservation, [name]: value });  // 변수저장
-    };
-  
-  
 
+  // todo: input 태그에 수동 바인딩
+  const handleInputChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target; // 화면값
+    setReservation({ ...reservation, [name]: value }); // 변수저장
+  };
+
+  // 사용자 번호 배열
+  const [userNumbers, setUserNumbers] = useState<number[]>([]);
   // 도착 날짜 저장 함수
   const [day, setDay] = useState<string>("");
   const [day2, setDay2] = useState<string>("");
@@ -147,8 +150,6 @@ function ReservePayment() {
       return updatedNonmemberinfo;
     });
   };
-
-
 
   const handleBirthdateChange = (idx: number) => {
     // 선택된 년도, 월, 일 값을 가져옵니다.
@@ -244,10 +245,9 @@ function ReservePayment() {
       });
   };
   // 저장 비회원
-  const saveNonmemberinfo = () => {
-    // 비회원 정보 배열을 반복하면서 저장 요청
-    nonmemberinfo.forEach((info) => {
-      var data = {
+  const saveNonmemberinfo = async () => {
+    const promises = nonmemberinfo.map((info) => {
+      const data = {
         userName: info.userName,
         userSex: info.userSex,
         userCountry: info.userCountry,
@@ -256,56 +256,74 @@ function ReservePayment() {
         userEmail: info.userEmail,
       };
 
-      NonmemberService.create(data) // 저장 요청
-        .then((response: any) => {
-          console.log(response.data);
-          console.log("확인용", nonmemberinfo);
-        })
-        .catch((e: Error) => {
-          console.log(e);
+      return NonmemberService.create(data)
+        .then((response) => response.data.userNumber)
+        .catch((e) => {
+          console.error(e);
+          return null; // 오류가 발생한 경우 null 반환
         });
     });
+
+    const userNumbersArray = await Promise.all(promises);
+    return userNumbersArray.filter((number) => number !== null); // null이 아닌 번호들만 반환
   };
 
   // 저장 예약
-  const saveReservation = () => {
+  const saveReservation = (
+    userNumbersArray: any,
+    operation: IOperationinfo
+  ) => {
     // 임시 부서 객체
 
-    var data = {
-      // airlineReservaitonNumber: reservation.airlineReservaitonNumber,
-      adultCount: adultCount ?? 0, // Change 0 to the appropriate default value
-    childCount: childCount ?? 0, // Change 0 to the appropriate default value
-    mileUseYn: reservation.mileUseYn,
-    seatType: seatClass ?? "이코노미", // 기본값 제공 또는 응용 프로그램 논리에 따라 처리
-    memberYn: reservation.memberYn,
-    memberId: reservation.memberId,
-    userNumber: reservation.userNumber,
-    operationId: reservation.operationId,
-    checkYn: reservation.checkYn,
+    const data = {
+      adultCount: adultCount ?? 0,
+      childCount: childCount ?? 0,
+      mileUseYn: reservation.mileUseYn,
+      seatType: seatClass ?? "이코노미",
+      memberYn: reservation.memberYn,
+      memberId: reservation.memberId,
+      userNumber: userNumbersArray.join(","), // 배열을 쉼표로 구분된 문자열로 변환
+      operationId: operation.operationId, // 여정에 해당하는 operationId 사용
+      checkYn: reservation.checkYn,
     };
 
-    ReservationService.create(data)    // 저장 요청
-      .then((response: any) => {
-        console.log(response.data);
-      })
-      .catch((e: Error) => {
-        console.log(e);
+    const totalPrice = calculateTotalPrice(data.seatType, operation);
+
+    ReservationService.create(data).then((response: any) => {
+      console.log(response.data);
+      // 가격 정보를 활용할 수 있도록 원하는 작업 수행
+      console.log("가격:", totalPrice);
+
+      // ReservationService.create가 성공한 경우에만 실행
+      // response.data에서 필요한 정보를 추출하여 reInfo 업데이트
+
+      // reInfo 업데이트
+      setReInfo((prevReInfo) => {
+        const updatedReInfo = [...prevReInfo];
+        updatedReInfo[0] = {
+          ...updatedReInfo[0],
+          reservenum: response.data.airlineReservationNumber, // 수정 필요
+          price: totalPrice.toString(),
+        };
+        console.log()
+        return updatedReInfo;
       });
-
+    });
   };
 
 
+  const handlePayment = async () => {
+    const userNumbersArray = await saveNonmemberinfo();
+    if (userNumbersArray.length > 0) {
+      await saveReservation(userNumbersArray, operationinfo);
+      // 여정 2에 대한 예약 저장
+      await saveReservation(userNumbersArray, operationinfo2);
 
-  const handlePayment = () => {
-    // 여기서 다른 필요한 작업을 수행하고
-    // 비회원 정보 저장 함수 호출
-    saveNonmemberinfo();
-    saveReservation();
-    setModalShow(true);
-
-
+      setModalShow(true);
+    } else {
+      console.log("비회원 정보 저장에 실패했습니다.");
+    }
   };
-
   useEffect(() => {
     initScripts();
     initCustom();
@@ -404,36 +422,33 @@ function ReservePayment() {
   };
 
   // 총 가격 계산 함수
-  const calculateTotalPrice = (seatClass: string) => {
+  const calculateTotalPrice = (
+    seatClass: string,
+    OperationInfo: IOperationinfo
+  ) => {
     const multiplier =
       seatClass === "비지니스" ? 3 : seatClass === "퍼스트" ? 9 : 1;
-    return (
-      calculatePrice(
-        Number(operationinfo.price),
-        Number(adultCount),
-        Number(childCount),
-        multiplier
-      ) +
-      calculatePrice(
-        Number(operationinfo2.price),
-        Number(adultCount),
-        Number(childCount),
-        multiplier
-      )
-    );
-  };
 
-  useEffect(() => {
-    const price = calculateTotalPrice(seatClass || "이코노미");
-    setTotalPrice(price);
-    // console.log(price);
-  }, [
-    seatClass,
-    adultCount,
-    childCount,
-    operationinfo.price,
-    operationinfo2.price,
-  ]);
+    const price = calculatePrice(
+      Number(OperationInfo.price),
+      Number(adultCount),
+      Number(childCount),
+      multiplier
+    );
+    return price;
+  };
+  console.log(reInfo)
+  // useEffect(() => {
+  //   const price = calculateTotalPrice(seatClass || "이코노미");
+  //   setTotalPrice(price);
+  //   // console.log(price);
+  // }, [
+  //   seatClass,
+  //   adultCount,
+  //   childCount,
+  //   operationinfo.price,
+  //   operationinfo2.price,
+  // ]);
 
   console.log(totalPrice);
 

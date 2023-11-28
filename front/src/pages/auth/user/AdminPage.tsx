@@ -7,7 +7,7 @@ import AddOperationInfo from '../admin/OperationInfo/AddOperationInfo';
 import OperationInfo from '../admin/OperationInfo/OperationInfo';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import BoardMain from '../admin/board/BoardMain';
 import '../../../assets/css/jy/style_jy.css';
 
@@ -73,7 +73,7 @@ function AdminPage() {
         </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-        <Nav.Link eventKey="link-4" onClick={()=>{setSelectTab("게시판")}}>
+        <Nav.Link eventKey="link-4"  onClick={()=>{setSelectTab("게시판")}}>
           게시판 관리
         </Nav.Link>
       </Nav.Item>

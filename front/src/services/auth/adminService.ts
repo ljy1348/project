@@ -31,6 +31,10 @@ const editUser = (user:IUser) => {
     return http.delete(`/admin/operation/`+id, {headers : authHeader()})
  }
 
+ const getNociceAll = () => {
+   return http.get(`/admin/board/notice`, {headers : authHeader()});
+}
+
 
 const AdminService = {
     getMemberAll,
@@ -39,7 +43,8 @@ const AdminService = {
     getOperationAll,
     createOperationInfo,
     getOperationInfo,
-    deleteOperationInfo
+    deleteOperationInfo,
+    getNociceAll
 }
 
 export default AdminService;
