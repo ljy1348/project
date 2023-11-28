@@ -6,11 +6,12 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 
 /**
- * packageName : model.entity.notice
- * fileName : NotiCE
+ * packageName : com.example.back.model.entity.notice
+ * fileName : Notice
  * author : GGG
  * date : 2023-11-24
  * description :
@@ -55,7 +56,7 @@ public class Notice extends BaseTimeEntity {
     @Column
     private String noticeWriter;
 
-    @Column
+    @Column(name = "notice_content", columnDefinition = "CLOB")
     private String noticeContent;
 
     @Column

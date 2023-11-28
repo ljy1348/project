@@ -4,13 +4,16 @@ import AOS from "aos";
 /* eslint-disable */
 export default function initCustom() {
   // 여기
-  // aos(MIT) == wow(상용, GNU)
-  // npm 설치
+
+//   aos(MIT) == wow(상용, GNU)
+// npm 설치
+
   AOS.init({
     duration: 800,
     easing: "slide",
     once: true,
   });
+
 
   // sangmin
   $(document).ready(function () {
@@ -252,6 +255,7 @@ export default function initCustom() {
     };
     owlPlugin();
 
+
     // var counter = function () {
     //   $(".count-numbers").waypoint(
     //     function (direction) {
@@ -343,4 +347,5 @@ export default function initCustom() {
 	// 	$('input[name="daterange"]').daterangepicker();
 	// }
 })
+
 }

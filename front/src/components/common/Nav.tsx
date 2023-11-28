@@ -41,7 +41,7 @@ function Nav() {
 
               {/* 예약 조회 메뉴 시작 */}
               <li>
-                <Link to="/">예약 조회</Link>
+                <Link to="/search-reservation">예약 조회</Link>
               </li>
               {/* 예약 조회 메뉴 끝 */}
 
@@ -105,10 +105,6 @@ function Nav() {
                 }
                   </>
                 }
-                <li>
-                  <Link to="/register">
-                    <p>고객센터</p></Link>
-                </li>
 
                 {/* home 메뉴 끝 */}
               </ul>

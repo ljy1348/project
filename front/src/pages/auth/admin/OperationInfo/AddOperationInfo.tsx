@@ -50,7 +50,7 @@ function AddOperationInfo({setSelectTab}:{setSelectTab:any}) {
       if (operationInfo)
       AdminService.createOperationInfo(operationInfo)
       .then((response:any)=>{console.log(response);
-        // setSelectTab("항공");
+        setSelectTab("항공");
       })
       .catch((error:Error)=>{console.log(error)})
     }

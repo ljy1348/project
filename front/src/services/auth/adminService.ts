@@ -27,6 +27,10 @@ const editUser = (user:IUser) => {
     return http.get(`/admin/operation/${data}`, {headers : authHeader()});
  }
 
+ const deleteOperationInfo = (id:number) => {
+    return http.delete(`/admin/operation/`+id, {headers : authHeader()})
+ }
+
 
 const AdminService = {
     getMemberAll,
@@ -34,7 +38,8 @@ const AdminService = {
     editUser,
     getOperationAll,
     createOperationInfo,
-    getOperationInfo
+    getOperationInfo,
+    deleteOperationInfo
 }
 
 export default AdminService;
