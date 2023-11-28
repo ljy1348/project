@@ -39,4 +39,22 @@ public class NoticeService {
 
         return list;
     }
+
+//    저장(수정)
+    public Notice save(Notice notice) {
+        Notice notice2 = noticeRepository.save(notice);
+
+        return notice2;
+    }
+
+//    삭제
+public boolean removeById(Integer noticeId) {
+
+//      existsById : jpa 함수 - 리턴값: 있으면 true, 없으면 false
+    if(noticeRepository.existsById(noticeId)) {
+        noticeRepository.deleteById(noticeId); // DB 삭제(dno)
+        return true;
+    }
+    return false;
+}
 }

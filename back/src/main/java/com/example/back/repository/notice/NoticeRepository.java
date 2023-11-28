@@ -27,7 +27,7 @@ public interface NoticeRepository extends JpaRepository<Notice, Integer> {
 //    전체 조회 내림차순
     @Query(value = "SELECT * " +
             "FROM TB_NOTICE " +
-            "ORDER BY NOTICE_ID DESC ", countQuery = "SELECT * " +
+            "ORDER BY NOTICE_ID DESC ", countQuery = "SELECT COUNT(*) " +
             "FROM TB_NOTICE " +
             "ORDER BY NOTICE_ID DESC ", nativeQuery = true)
     List<Notice> noticeIdDesc();

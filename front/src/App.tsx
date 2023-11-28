@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import ReservationListPage from "./pages/ReservationListPage";
 import SearchReservationPage from "./pages/SearchReservation/SearchReservationPage";
 import WriteNoticePage from "./pages/writeNotice/WriteNoticePage";
+import Test from "./pages/Test";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/write-notice" element={<WriteNoticePage />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     
 

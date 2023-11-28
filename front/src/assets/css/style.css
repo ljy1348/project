@@ -1964,7 +1964,7 @@ ul,li {list-style:none;}
 /* 공지사항 작성 페이지 */
 
 #editor {
-  height: 400px;
+  height: 100px;
   width: 1070px;
   font-size: 18px;
 }

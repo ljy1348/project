@@ -56,7 +56,7 @@ public class Notice extends BaseTimeEntity {
     @Column
     private String noticeWriter;
 
-    @Column
+    @Column(name = "notice_content", columnDefinition = "CLOB")
     private String noticeContent;
 
     @Column
