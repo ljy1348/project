@@ -26,6 +26,7 @@ import java.util.Date;
 @Entity
 @Table(name="TB_NON_MEMBERS_INFO")
 @SequenceGenerator(
+
         name = "SQ_NON_MEMBER_INFO"
         , sequenceName = "SQ_NON_MEMBER_INFO"
         , initialValue = 1

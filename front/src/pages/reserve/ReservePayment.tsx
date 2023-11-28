@@ -75,7 +75,7 @@ function ReservePayment() {
 
   // 저장 : 예약 객체 초기화
   const initialReservation = {
-    airlineReservaitonNumber: null,
+    airlineReservationNumber: null,
     adultCount: adultCount,
     childCount: childCount,
     mileUseYn: "N",
@@ -131,22 +131,6 @@ function ReservePayment() {
   // type 선언
   // modalcontrol
   const [modalShow, setModalShow] = useState(false);
-
-  // // 비회원 정보를 추가하는 함수
-  // const addNonmember = () => {
-  //   setNonmemberinfo((prevNonmemberinfo) => [
-  //     ...prevNonmemberinfo,
-  //     ...temp.map(() => ({
-  //       userNumber: null,
-  //       userName: "",
-  //       userSex: "",
-  //       userCountry: "",
-  //       userDate: "",
-  //       userPhone: "",
-  //       userEmail: "",
-  //     })),
-  //   ]);
-  // };
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -287,15 +271,16 @@ function ReservePayment() {
   const saveReservation = () => {
     // 임시 부서 객체
     var data = {
-      adultCount: reservation.adultCount,
-      childCount: reservation.childCount,
-      mileUseYn: reservation.mileUseYn,
-      seatType: reservation.seatType,
-      memberYn: reservation.memberYn,
-      memberId: reservation.memberId,
-      userNumber: reservation.userNumber,
-      operationId: reservation.operationId,
-      checkYn: reservation.checkYn,
+      // airlineReservaitonNumber: reservation.airlineReservaitonNumber,
+      adultCount: adultCount ?? 0, // Change 0 to the appropriate default value
+    childCount: childCount ?? 0, // Change 0 to the appropriate default value
+    mileUseYn: reservation.mileUseYn,
+    seatType: seatClass ?? "이코노미", // 기본값 제공 또는 응용 프로그램 논리에 따라 처리
+    memberYn: reservation.memberYn,
+    memberId: reservation.memberId,
+    userNumber: reservation.userNumber,
+    operationId: reservation.operationId,
+    checkYn: reservation.checkYn,
     };
 
     ReservationService.create(data)    // 저장 요청

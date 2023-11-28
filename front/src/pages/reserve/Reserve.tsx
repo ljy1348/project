@@ -1,15 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
-import { Button, Overlay } from "react-bootstrap";
 import MyareaModal from "../modal/MyareaModal";
 import ForiareaModal from "../modal/ForiareaModal";
-import IReservation from "../../types/reserve/IReservation";
 import { Link, useNavigate } from "react-router-dom";
-import Airport from "../Airport/Airport";
-import ReserveChoose from "./ReserveChoose";
-import { Value } from "sass";
-// import Airport from './../Airport/Airport';
 
 function Reserve(props: any) {
   // 출도착 설정
