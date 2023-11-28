@@ -23,10 +23,16 @@ import Typed from "typed.js";
 npm i aos
 npm i @types/aos
 
+
 # 5) ck editor5 설치
 npm install --save @ckeditor/ckeditor5 -build-classic
 # 5-1) ck editor5 오류 방지
 npm install buffer
+
+# 5) bootstrap 설치
+npm i bootstrap
+npm i @types/bootstrap
+
 
 
 # * 외부 라이브러리 타입이 없을 경우 처리 : 타입 설정

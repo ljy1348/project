@@ -1,79 +1,474 @@
 // pages/Home.tsx : rfce
-import React,{useEffect} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import initScripts from "../assets/js/scripts";
 import initCustom from "../assets/js/custom";
+import { Overlay } from "react-bootstrap";
 
+import Airport from "../components/airport/Airport";
+import Notice from "./notice/Notice";
+
+
+/* eslint-disable */
 function Home() {
 
-  useEffect(()=>{
+  const [adultCount, setAdultCount] = useState(0);
+  // const [childCount, setChildCount] = useState(0);
+  const [infantCount, setInfantCount] = useState(0);
+
+  const [q, setQ] = useState(false);
+
+  const [도착공항, set도착공항] = useState("ㅁ");
+  const [출발공항, set출발공항] = useState("ㅠ");
+
+  const handleIncrement = (category: any) => {
+    switch (category) {
+      case "adult":
+        setAdultCount(adultCount + 1);
+        break;
+      case "infant":
+        setInfantCount(infantCount + 1);
+        break;
+      default:
+        break;
+    }
+  };
+  const handleDecrement = (category: any) => {
+    switch (category) {
+      case "adult":
+        setAdultCount(adultCount > 0 ? adultCount - 1 : 0);
+        break;
+      case "infant":
+        setInfantCount(infantCount > 0 ? infantCount - 1 : 0);
+        break;
+      default:
+        break;
+    }
+  };
+
+
+  const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
+  const [show3, setShow3] = useState(false);
+  const [show4, setShow4] = useState(false);
+  const target = useRef(null);
+  const target2 = useRef(null);
+  const target3 = useRef(null);
+  const target4 = useRef(null);
+
+
+  useEffect(() => {
     initScripts();
     initCustom();
-  },[])
+
+    if ($('input[name="daterange"]').length) {
+      ($('input[name="daterange"]') as any).daterangepicker(
+        {
+          // singleDatePicker: true,
+          locale: {
+            format: "YYYY-MM-DD",
+            separator: " - ",
+            applyLabel: "Apply",
+            cancelLabel: "Cancel",
+            fromLabel: "From",
+            toLabel: "To",
+            customRangeLabel: "Custom",
+            weekLabel: "W",
+            daysOfWeek: ["일", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+            monthNames: [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December",
+            ],
+            firstDay: 1,
+          },
+          "singleDatePicker": q,
+          // startDate: startDate,
+          // endDate: endDate,
+        },
+        function (start: any, end: any, label: any) {
+          // setStartDate(start.format("YYYY-MM-DD"));
+          // setEndDate(end.format("YYYY-MM-DD"));
+        }
+      );
+    }
+
+
+  }, [q]);
+
+  const clickNone = (event:any) => {
+    event.stopPropagation();
+    setShow(!show), setShow2(false), setShow3(false), setShow4(false)
+  }
+
+  const clickNone2 = (event:any) => {
+    event.stopPropagation();
+    setShow2(!show2), setShow(false), setShow3(false), setShow4(false)
+  }
+
+  const clickNone3 = (event:any) => {
+    event.stopPropagation();
+    setShow(false), setShow2(false), setShow3(false), setShow4(false)
+  }
+
+  const clickNone4 = (event:any) => {
+    event.stopPropagation();
+    setShow3(!show3), setShow(false), setShow2(false), setShow4(false)
+  }
+
+  const clickNone5 = (event:any) => {
+    event.stopPropagation();
+    setShow4(!show4), setShow(false), setShow2(false), setShow3(false)
+  }
+
+  const divClick = () => { setShow(false); setShow2(false); setShow3(false); setShow4(false) }
+
+  const AirportChange = () => { 
+    const 출발 = 출발공항;
+    const 도착 = 도착공항;
+
+    set출발공항(도착);
+    set도착공항(출발);
+   }
 
   return (
-    <>
+    <div onClick={divClick}>
       {/* 여기 */}
       {/* 1 */}
       <div className="hero">
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-lg-7">
-              <div className="intro-wrap">
-                <h1 className="mb-5">
-                  <span className="d-block">Let's Enjoy Your</span> Trip In{" "}
-                  <span className="typed-words"></span>
-                </h1>
+            {/* 서브 메뉴 */}
+            <div className="col-md-12">
+              <div id="sub_menu">
+                <div>
+                  <form className="form" id="submenu">
+                    GreenAir 항공권 예매
+                  </form>
+                </div>
+              </div>
+            </div>
+            {/* 예약바 너비 조절 */}
 
+            {/* <div className="row align-items-center">
+            </div> */}
+            <div className="col-md-12">
+              <div className="intro-wrap">
                 <div className="row">
                   <div className="col-12">
                     <form className="form">
-                      <div className="row mb-2">
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-                          <select
-                            name=""
-                            id=""
-                            className="form-control custom-select"
+                      {/* 예약바 높이 조절 */}
+                      <div className="row mb-4">
+                        <div>
+                          <div
+                            className="btn-group"
+                            role="group"
+                            aria-label="Basic radio toggle button group"
                           >
-                            <option value="">Destination</option>
-                            <option value="">Peru</option>
-                            <option value="">Japan</option>
-                            <option value="">Thailand</option>
-                            <option value="">Brazil</option>
-                            <option value="">United States</option>
-                            <option value="">Israel</option>
-                            <option value="">China</option>
-                            <option value="">Russia</option>
-                          </select>
+                            <input
+                              type="radio"
+                              className="btn-check"
+                              name="btnradio"
+                              id="oneWay"
+                              autoComplete="off"
+                              onClick={()=>{setQ(true); console.log(q)}}
+                            />
+                            <label
+                              className="btn btn-outline-primary rounded-left"
+                              htmlFor="oneWay"
+                            >
+                              편도
+                            </label>
+
+                            <input
+                              type="radio"
+                              className="btn-check"
+                              name="btnradio"
+                              id="goBack"
+                              autoComplete="off"
+                              onClick={()=>{setQ(false);  console.log(q)}}
+                            />
+                            <label
+                              className="btn btn-outline-primary rounded-right"
+                              htmlFor="goBack"
+                            >
+                              왕복
+                            </label>
+                          </div>
                         </div>
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-5">
+                        {/* 출발지 */}
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
                           <input
                             type="text"
                             className="form-control"
-                            name="daterange"
-                          />
+                            ref={target}
+                            onClick={(e) => clickNone(e)}
+                            value={출발공항}
+                          ></input>
                         </div>
+
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-1">
+                          <input
+                            type="button"
+                            className="form-control"
+                            value={"⮂"}
+                            onClick={AirportChange}
+                          ></input>
+                        </div>
+
+                        {/* 도착지 */}
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
+                          <input
+                            type="text"
+                            className="form-control"
+                            ref={target2}
+                            onClick={(e) => clickNone2(e)}
+                            value={도착공항}
+                          ></input>
+                        </div>
+
+                        {/* 달력 */}
                         <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-3">
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="# of People"
+                            name="daterange"
+                            onClick={(e) => clickNone3(e)}
                           />
                         </div>
+
+                        {/* 인원 */}
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-1">
+                          <input
+                            type="text"
+                            className="form-control"
+                            ref={target3}
+                            onClick={(e) => clickNone4(e)}
+                            value={`어른:${adultCount}, 어린이:${infantCount}`}
+                          ></input>
+                        </div>
+
+                        {/* 좌석등급 */}
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
+                          <input
+                            type="text"
+                            className="form-control"
+                            ref={target4}
+                            onClick={(e) => clickNone5(e)}
+                            value={"좌석등급"}
+                          ></input>
+                        </div>
+
+                        {/* 검색 */}
+                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-1">
+                          <input
+                            type="button"
+                            className="form-search-control"
+                            value={"조회"}
+                          ></input>
+                        </div>
+
+                        <Overlay
+                          target={target.current}
+                          show={show}
+                          placement="bottom"
+                        >
+                          {({
+                            placement: _placement,
+                            arrowProps: _arrowProps,
+                            show: _show,
+                            popper: _popper,
+                            hasDoneInitialMeasure: _hasDoneInitialMeasure,
+                            ...props
+                          }) => (
+                            <div
+                              className="boader_passenger"
+                              {...props}
+                              onClick={(e)=>{e.stopPropagation();}}
+                              style={{
+                                position: "absolute",
+                                // backgroundColor: "white",
+                                width: "530px",
+                                // 길이 지정
+                                margin: "20px 0px 0px 30px",
+                                padding: "20px 0px 0px 0px",
+                                color: "black",
+                                borderRadius: 3,
+                                ...props.style,
+                                
+                              }}
+                            >
+                              <Airport setShow={setShow} set공항={set출발공항} />
+                            </div>
+                          )}
+                        </Overlay>
+
+                        <Overlay
+                          target={target2.current}
+                          show={show2}
+                          placement="bottom"
+                        >
+                          {({
+                            placement: _placement,
+                            arrowProps: _arrowProps,
+                            show: _show,
+                            popper: _popper,
+                            hasDoneInitialMeasure: _hasDoneInitialMeasure,
+                            ...props
+                          }) => (
+                            <div
+                              className="boader_passenger"
+                              {...props}
+                              onClick={(e)=>{e.stopPropagation();}}
+                              style={{
+                                position: "absolute",
+                                // backgroundColor: "white",
+                                width: "530px",
+                                // 길이 지정
+                                margin: "20px 0px 0px 30px",
+                                padding: "20px 0px 0px 0px",
+                                color: "black",
+                                borderRadius: 3,
+                                ...props.style,
+                              }}
+                            >
+                              <Airport setShow={setShow2} set공항={set도착공항} />
+                            </div>
+                          )}
+                        </Overlay>
+
+                        {/* 인원 */}
+                        <Overlay
+                          target={target3.current}
+                          show={show3}
+                          placement="bottom"
+                        >
+                          {({
+                            placement: _placement,
+                            arrowProps: _arrowProps,
+                            show: _show,
+                            popper: _popper,
+                            hasDoneInitialMeasure: _hasDoneInitialMeasure,
+                            ...props
+                          }) => (
+                            <div
+                            onClick={(e)=>{e.stopPropagation();}}
+                              className="boader_passenger"
+                              {...props}
+                              style={{
+                                position: "absolute",
+                                // backgroundColor: "white",
+                                width: "200px",
+                                // 길이 지정
+                                margin: "20px 0px 0px 0px",
+                                padding: "20px 0px 10px 40px",
+                                color: "black",
+                                borderRadius: 3,
+                                ...props.style,
+                              }}
+                            >
+                              <div>
+                                <div className="style-personel">
+                                  <button
+                                    className="style-personel-button"
+                                    onClick={() => handleDecrement("adult")}
+                                  >
+                                    -
+                                  </button>
+                                  <span> 성인: {adultCount} </span>
+                                  <button
+                                    className="style-personel-button"
+                                    onClick={() => handleIncrement("adult")}
+                                  >
+                                    +
+                                  </button>
+                                </div>
+
+
+                                <div className="style-personel">
+                                  <button
+                                    className="style-personel-button"
+                                    onClick={() => handleDecrement("infant")}
+                                  >
+                                    -
+                                  </button>
+                                  <span> 소아: {infantCount} </span>
+                                  <button
+                                    className="style-personel-button"
+                                    onClick={() => handleIncrement("infant")}
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                                <button className="person-choice" onClick={(e)=>{setShow3(false); }}>
+                                  선택
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </Overlay>
+
+                        {/* 좌석등급 */}
+                        <Overlay
+                          target={target4.current}
+                          show={show4}
+                          placement="bottom"
+                        >
+                          {({
+                            placement: _placement,
+                            arrowProps: _arrowProps,
+                            show: _show,
+                            popper: _popper,
+                            hasDoneInitialMeasure: _hasDoneInitialMeasure,
+                            ...props
+                          }) => (
+                            <div
+                            onClick={(e)=>{e.stopPropagation();}}
+                              className="boader_passenger"
+                              {...props}
+                              style={{
+                                position: "absolute",
+                                // backgroundColor: "white",
+                                width: "250px",
+                                // 길이 지정
+                                margin: "20px 0px 0px 0px",
+                                padding: "30px 0px 30px 50px",
+                                color: "black",
+                                borderRadius: 3,
+                                ...props.style,
+                              }}
+                            >
+                              {/* 여기 */}
+                              <div className="d-grid gap-3">
+                                <button className="seat-rating" type="button">
+                                  이코노미
+                                </button>
+                                <button className="seat-rating" type="button">
+                                  비지니스
+                                </button>
+                                <button className="seat-rating" type="button">
+                                  퍼스트
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </Overlay>
                       </div>
                       <div className="row align-items-center">
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-                          <input
-                            type="submit"
-                            className="btn btn-primary btn-block"
-                            value="Search"
-                          />
-                        </div>
                         <div className="col-lg-8">
-                          <label className="control control--checkbox mt-3">
-                            <span className="caption">Save this search</span>
+                          {/* <label className="control control--checkbox mt-3"> */}
+                          {/* <span className="caption">Save this search</span>
                             <input type="checkbox" checked={true} />
-                            <div className="control__indicator"></div>
-                          </label>
+                            <div className="control__indicator"></div> */}
+                          {/* </label> */}
                         </div>
                       </div>
                     </form>
@@ -81,176 +476,21 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-5">
-              <div className="slides">
-                <img
-                  src="images/hero-slider-1.jpg"
-                  alt="Image"
-                  className="img-fluid active"
-                />
-                <img
-                  src="images/hero-slider-2.jpg"
-                  alt="Image"
-                  className="img-fluid"
-                />
-                <img
-                  src="images/hero-slider-3.jpg"
-                  alt="Image"
-                  className="img-fluid"
-                />
-                <img
-                  src="images/hero-slider-4.jpg"
-                  alt="Image"
-                  className="img-fluid"
-                />
-                <img
-                  src="images/hero-slider-5.jpg"
-                  alt="Image"
-                  className="img-fluid"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* <!-- 2 --> */}
-      <div className="untree_co-section">
-        <div className="container">
-          <div className="row mb-5 justify-content-center">
-            <div className="col-lg-6 text-center">
-              <h2 className="section-title text-center mb-3">Our Services</h2>
-              <p>
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there live the blind texts. Separated
-                they live in Bookmarksgrove right at the coast of the Semantics,
-                a large language ocean.
-              </p>
-            </div>
-          </div>
-          <div className="row align-items-stretch">
-            <div className="col-lg-4 order-lg-1">
-              <div className="h-100">
-                <div className="frame h-100">
-                  <div
-                    className="feature-img-bg h-100"
-                    style={{
-                      backgroundImage: "url('images/hero-slider-1.jpg')",
-                    }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-6 col-sm-6 col-lg-4 feature-1-wrap d-md-flex flex-md-column order-lg-1">
-              <div className="feature-1 d-md-flex">
-                <div className="align-self-center">
-                  <span className="flaticon-house display-4 text-primary"></span>
-                  <h3>Beautiful Condo</h3>
-                  <p className="mb-0">
-                    Even the all-powerful Pointing has no control about the
-                    blind texts.
-                  </p>
-                </div>
-              </div>
-
-              <div className="feature-1 ">
-                <div className="align-self-center">
-                  <span className="flaticon-restaurant display-4 text-primary"></span>
-                  <h3>Restaurants & Cafe</h3>
-                  <p className="mb-0">
-                    Even the all-powerful Pointing has no control about the
-                    blind texts.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-6 col-sm-6 col-lg-4 feature-1-wrap d-md-flex flex-md-column order-lg-3">
-              <div className="feature-1 d-md-flex">
-                <div className="align-self-center">
-                  <span className="flaticon-mail display-4 text-primary"></span>
-                  <h3>Easy to Connect</h3>
-                  <p className="mb-0">
-                    Even the all-powerful Pointing has no control about the
-                    blind texts.
-                  </p>
-                </div>
-              </div>
-
-              <div className="feature-1 d-md-flex">
-                <div className="align-self-center">
-                  <span className="flaticon-phone-call display-4 text-primary"></span>
-                  <h3>24/7 Support</h3>
-                  <p className="mb-0">
-                    Even the all-powerful Pointing has no control about the
-                    blind texts.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <!-- 3 --> */}
-      <div className="untree_co-section count-numbers py-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-6 col-sm-6 col-md-6 col-lg-3">
-              <div className="counter-wrap">
-                <div className="counter">
-                  <span className="" data-number="9313">
-                    0
-                  </span>
-                </div>
-                <span className="caption">No. of Travels</span>
-              </div>
-            </div>
-            <div className="col-6 col-sm-6 col-md-6 col-lg-3">
-              <div className="counter-wrap">
-                <div className="counter">
-                  <span className="" data-number="8492">
-                    0
-                  </span>
-                </div>
-                <span className="caption">No. of Clients</span>
-              </div>
-            </div>
-            <div className="col-6 col-sm-6 col-md-6 col-lg-3">
-              <div className="counter-wrap">
-                <div className="counter">
-                  <span className="" data-number="100">
-                    0
-                  </span>
-                </div>
-                <span className="caption">No. of Employees</span>
-              </div>
-            </div>
-            <div className="col-6 col-sm-6 col-md-6 col-lg-3">
-              <div className="counter-wrap">
-                <div className="counter">
-                  <span className="" data-number="120">
-                    0
-                  </span>
-                </div>
-                <span className="caption">No. of Countries</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <!-- 4 --> */}
+      {/* 여행추천지 */}
       <div className="untree_co-section">
         <div className="container">
           <div className="row text-center justify-content-center mb-5">
             <div className="col-lg-7">
-              <h2 className="section-title text-center">Popular Destination</h2>
+              <h2 className="section-title text-center">여행 추천지</h2>
             </div>
           </div>
 
           <div className="owl-carousel owl-3-slider">
+            {/* 1 */}
             <div className="item">
               <a
                 className="media-thumb"
@@ -258,8 +498,7 @@ function Home() {
                 data-fancybox="gallery"
               >
                 <div className="media-text">
-                  <h3>Pragser Wildsee</h3>
-                  <span className="location">Italy</span>
+                  <h3>골든게이트 교</h3>
                 </div>
                 <img
                   src="images/hero-slider-1.jpg"
@@ -267,8 +506,18 @@ function Home() {
                   className="img-fluid"
                 />
               </a>
+              <div className="media-1">
+                <span className="d-flex align-items-center loc mb-2">
+                  <span className="icon-room mr-3"></span>
+                  <span className="location-font-size">미국, 샌프란시스코</span>
+                </span>
+                <div className="attraction">
+                  골든게이트 교
+              </div>
+              </div>
             </div>
 
+            {/* 2 */}
             <div className="item">
               <a
                 className="media-thumb"
@@ -276,8 +525,7 @@ function Home() {
                 data-fancybox="gallery"
               >
                 <div className="media-text">
-                  <h3>Oia</h3>
-                  <span className="location">Greece</span>
+                  <h3>에펠 탑</h3>
                 </div>
                 <img
                   src="images/hero-slider-2.jpg"
@@ -285,8 +533,18 @@ function Home() {
                   className="img-fluid"
                 />
               </a>
+              <div className="media-1">
+                <span className="d-flex align-items-center loc mb-2">
+                  <span className="icon-room mr-3"></span>
+                  <span className="location-font-size">프랑스</span>
+                </span>
+                <div className="attraction">
+                  에펠 탑
+              </div>
+              </div>
             </div>
 
+            {/* 3 */}
             <div className="item">
               <a
                 className="media-thumb"
@@ -294,8 +552,7 @@ function Home() {
                 data-fancybox="gallery"
               >
                 <div className="media-text">
-                  <h3>Perhentian Islands</h3>
-                  <span className="location">Malaysia</span>
+                  <h3>오클랜드</h3>
                 </div>
                 <img
                   src="images/hero-slider-3.jpg"
@@ -303,8 +560,18 @@ function Home() {
                   className="img-fluid"
                 />
               </a>
+              <div className="media-1">
+                <span className="d-flex align-items-center loc mb-2">
+                  <span className="icon-room mr-3"></span>
+                  <span className="location-font-size">뉴질랜드</span>
+                </span>
+                <div className="attraction">
+                  오클랜드
+                </div>
+              </div>
             </div>
 
+            {/* 4 */}
             <div className="item">
               <a
                 className="media-thumb"
@@ -312,8 +579,7 @@ function Home() {
                 data-fancybox="gallery"
               >
                 <div className="media-text">
-                  <h3>Rialto Bridge</h3>
-                  <span className="location">Italy</span>
+                  <h3>쁘렌띠안 섬</h3>
                 </div>
                 <img
                   src="images/hero-slider-4.jpg"
@@ -321,8 +587,18 @@ function Home() {
                   className="img-fluid"
                 />
               </a>
+              <div className="media-1">
+                <span className="d-flex align-items-center loc mb-2">
+                  <span className="icon-room mr-3"></span>
+                  <span className="location-font-size">말레이시아</span>
+                </span>
+                <div className="attraction">
+                  쁘렌띠안 섬
+                </div>
+              </div>
             </div>
 
+            {/* 5 */}
             <div className="item">
               <a
                 className="media-thumb"
@@ -330,8 +606,7 @@ function Home() {
                 data-fancybox="gallery"
               >
                 <div className="media-text">
-                  <h3>San Francisco, United States</h3>
-                  <span className="location">United States</span>
+                  <h3>빅 벤</h3>
                 </div>
                 <img
                   src="images/hero-slider-5.jpg"
@@ -339,212 +614,40 @@ function Home() {
                   className="img-fluid"
                 />
               </a>
+              <div className="media-1">
+                <span className="d-flex align-items-center loc mb-2">
+                  <span className="icon-room mr-3"></span>
+                  <span className="location-font-size">런던</span>
+                </span>
+                <div className="attraction">
+                  빅 벤
+                </div>
+              </div>
             </div>
 
+            {/* 6 */}
             <div className="item">
               <a
                 className="media-thumb"
-                href="images/hero-slider-1.jpg"
+                href="images/오사카성.jpg"
                 data-fancybox="gallery"
               >
                 <div className="media-text">
-                  <h3>Lake Thun</h3>
-                  <span className="location">Switzerland</span>
+                  <h3>오사카성</h3>
                 </div>
                 <img
-                  src="images/hero-slider-2.jpg"
+                  src="images/오사카성.jpg"
                   alt="Image"
                   className="img-fluid"
                 />
               </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <!-- 5 --> */}
-      <div className="untree_co-section testimonial-section mt-5">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-7 text-center">
-              <h2 className="section-title text-center mb-5">Testimonials</h2>
-
-              <div className="owl-single owl-carousel no-nav">
-                <div className="testimonial mx-auto">
-                  <figure className="img-wrap">
-                    <img
-                      src="images/person_2.jpg"
-                      alt="Image"
-                      className="img-fluid"
-                    />
-                  </figure>
-                  <h3 className="name">Adam Aderson</h3>
-                  <blockquote>
-                    <p>
-                      &ldquo;There live the blind texts. Separated they live in
-                      Bookmarksgrove right at the coast of the Semantics, a
-                      large language ocean.&rdquo;
-                    </p>
-                  </blockquote>
-                </div>
-
-                <div className="testimonial mx-auto">
-                  <figure className="img-wrap">
-                    <img
-                      src="images/person_3.jpg"
-                      alt="Image"
-                      className="img-fluid"
-                    />
-                  </figure>
-                  <h3 className="name">Lukas Devlin</h3>
-                  <blockquote>
-                    <p>
-                      &ldquo;There live the blind texts. Separated they live in
-                      Bookmarksgrove right at the coast of the Semantics, a
-                      large language ocean.&rdquo;
-                    </p>
-                  </blockquote>
-                </div>
-
-                <div className="testimonial mx-auto">
-                  <figure className="img-wrap">
-                    <img
-                      src="images/person_4.jpg"
-                      alt="Image"
-                      className="img-fluid"
-                    />
-                  </figure>
-                  <h3 className="name">Kayla Bryant</h3>
-                  <blockquote>
-                    <p>
-                      &ldquo;There live the blind texts. Separated they live in
-                      Bookmarksgrove right at the coast of the Semantics, a
-                      large language ocean.&rdquo;
-                    </p>
-                  </blockquote>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <!-- 6 --> */}
-      <div className="untree_co-section">
-        <div className="container">
-          <div className="row justify-content-center text-center mb-5">
-            <div className="col-lg-6">
-              <h2 className="section-title text-center mb-3">
-                Special Offers &amp; Discounts
-              </h2>
-              <p>
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there live the blind texts. Separated
-                they live in Bookmarksgrove right at the coast of the Semantics,
-                a large language ocean.
-              </p>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-6 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
               <div className="media-1">
-                <a href="#" className="d-block mb-3">
-                  <img
-                    src="images/hero-slider-1.jpg"
-                    alt="Image"
-                    className="img-fluid"
-                  />
-                </a>
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span>Italy</span>
+                  <span className="location-font-size">일본</span>
                 </span>
-                <div className="d-flex align-items-center">
-                  <div>
-                    <h3>
-                      <a href="#">Rialto Mountains</a>
-                    </h3>
-                    <div className="price ml-auto">
-                      <span>$520.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-6 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-              <div className="media-1">
-                <a href="#" className="d-block mb-3">
-                  <img
-                    src="images/hero-slider-2.jpg"
-                    alt="Image"
-                    className="img-fluid"
-                  />
-                </a>
-                <span className="d-flex align-items-center loc mb-2">
-                  <span className="icon-room mr-3"></span>
-                  <span>United States</span>
-                </span>
-                <div className="d-flex align-items-center">
-                  <div>
-                    <h3>
-                      <a href="#">San Francisco</a>
-                    </h3>
-                    <div className="price ml-auto">
-                      <span>$520.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-6 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-              <div className="media-1">
-                <a href="#" className="d-block mb-3">
-                  <img
-                    src="images/hero-slider-3.jpg"
-                    alt="Image"
-                    className="img-fluid"
-                  />
-                </a>
-                <span className="d-flex align-items-center loc mb-2">
-                  <span className="icon-room mr-3"></span>
-                  <span>Malaysia</span>
-                </span>
-                <div className="d-flex align-items-center">
-                  <div>
-                    <h3>
-                      <a href="#">Perhentian Islands</a>
-                    </h3>
-                    <div className="price ml-auto">
-                      <span>$750.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-6 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-              <div className="media-1">
-                <a href="#" className="d-block mb-3">
-                  <img
-                    src="images/hero-slider-4.jpg"
-                    alt="Image"
-                    className="img-fluid"
-                  />
-                </a>
-
-                <span className="d-flex align-items-center loc mb-2">
-                  <span className="icon-room mr-3"></span>
-                  <span>Switzerland</span>
-                </span>
-
-                <div className="d-flex align-items-center">
-                  <div>
-                    <h3>
-                      <a href="#">Lake Thun</a>
-                    </h3>
-                    <div className="price ml-auto">
-                      <span>$520.00</span>
-                    </div>
-                  </div>
+                <div className="attraction">
+                  오사카성
                 </div>
               </div>
             </div>
@@ -552,93 +655,10 @@ function Home() {
         </div>
       </div>
 
-      {/* <!-- 7 --> */}
-      <div className="untree_co-section">
-        <div className="container">
-          <div className="row justify-content-between align-items-center">
-            <div className="col-lg-6">
-              <figure className="img-play-video">
-                <a
-                  id="play-video"
-                  className="video-play-button"
-                  href="https://www.youtube.com/watch?v=mwtbEGNABWU"
-                  data-fancybox
-                >
-                  <span></span>
-                </a>
-                <img
-                  src="images/hero-slider-2.jpg"
-                  alt="Image"
-                  className="img-fluid rounded-20"
-                />
-              </figure>
-            </div>
+      <h3 className="notice-title">공지사항</h3>
+      <Notice />
 
-            <div className="col-lg-5">
-              <h2 className="section-title text-left mb-4">
-                Take a look at Tour Video
-              </h2>
-              <p>
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there live the blind texts. Separated
-                they live in Bookmarksgrove right at the coast of the Semantics,
-                a large language ocean.
-              </p>
-
-              <p className="mb-4">
-                A small river named Duden flows by their place and supplies it
-                with the necessary regelialia. It is a paradisematic country, in
-                which roasted parts of sentences fly into your mouth.
-              </p>
-
-              <ul className="list-unstyled two-col clearfix">
-                <li>Outdoor recreation activities</li>
-                <li>Airlines</li>
-                <li>Car Rentals</li>
-                <li>Cruise Lines</li>
-                <li>Hotels</li>
-                <li>Railways</li>
-                <li>Travel Insurance</li>
-                <li>Package Tours</li>
-                <li>Insurance</li>
-                <li>Guide Books</li>
-              </ul>
-
-              <p>
-                <a href="#" className="btn btn-primary">
-                  Get Started
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <!-- 8 --> */}
-      <div className="py-5 cta-section">
-        <div className="container">
-          <div className="row text-center">
-            <div className="col-md-12">
-              <h2 className="mb-2 text-white">
-                Lets you Explore the Best. Contact Us Now
-              </h2>
-              <p className="mb-4 lead text-white text-white-opacity">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Excepturi, fugit?
-              </p>
-              <p className="mb-0">
-                <a
-                  href="booking.html"
-                  className="btn btn-outline-white text-white btn-md font-weight-bold"
-                >
-                  Get in touch
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    </div>
   );
 }
 

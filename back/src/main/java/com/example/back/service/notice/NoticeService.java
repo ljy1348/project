@@ -1,9 +1,11 @@
 package com.example.back.service.notice;
 
 import com.example.back.model.entity.notice.Notice;
+
 import com.example.back.repository.notice.NoticeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
@@ -40,6 +42,7 @@ public class NoticeService {
         return list;
     }
 
+
 //    저장(수정)
     public Notice save(Notice notice) {
         Notice notice2 = noticeRepository.save(notice);
@@ -57,4 +60,5 @@ public boolean removeById(Integer noticeId) {
     }
     return false;
 }
+
 }

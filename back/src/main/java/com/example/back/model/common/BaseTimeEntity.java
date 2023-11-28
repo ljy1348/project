@@ -3,11 +3,8 @@ package com.example.back.model.common;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import org.hibernate.annotations.SQLDelete;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -41,6 +38,7 @@ public abstract class BaseTimeEntity {
     private String deleteYn;  // 소프트 삭제
 
     private String deleteTime; // 소프트 삭제
+
 
     @PrePersist
         //해당 엔티티 저장하기 전
