@@ -10,6 +10,7 @@ import { info } from "console";
 import ReservationService from "../../services/ReservationService";
 import IRdata from "../../types/reserve/IRdata";
 import OperationInfo from "./../auth/admin/OperationInfo/OperationInfo";
+import PaymentModal from "../modal/PaymentModal";
 
 function ReservePayment() {
   // 기본키
@@ -299,18 +300,21 @@ function ReservePayment() {
 
       // reInfo 업데이트
       setReInfo((prevReInfo) => {
-        const updatedReInfo = [...prevReInfo];
-        updatedReInfo[0] = {
-          ...updatedReInfo[0],
-          reservenum: response.data.airlineReservationNumber, // 수정 필요
-          price: totalPrice.toString(),
-        };
-        console.log()
+        const updatedReInfo = [...prevReInfo, {reservenum: response.data.airlineReservationNumber, // 수정 필요
+        price: totalPrice.toString()}];
+        // updatedReInfo[0] = {
+        //   ...updatedReInfo[0],
+        //   reservenum: response.data.airlineReservationNumber, // 수정 필요
+        //   price: totalPrice.toString(),
+        // };
+        // console.log(updatedReInfo);
         return updatedReInfo;
       });
     });
   };
 
+  let payInfo1;
+  let payInfo2;
 
   const handlePayment = async () => {
     const userNumbersArray = await saveNonmemberinfo();
@@ -817,6 +821,11 @@ function ReservePayment() {
       </div>
 
       {/* 모달 불러오기 */}
+      <PaymentModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            reInfo={reInfo}
+          />
     </>
   );
 }

@@ -26,7 +26,10 @@ public class PaymentController {
             Payment payment = new Payment();
             payment.setCertifiedId(paymentKey);
             payment.setProductCode(orderId);
+            String[] tempStr = orderId.split("-");
             payment.setProductPrice(amount);
+            payment.setStartReservationNumber(tempStr[0]);
+            payment.setFinalReservationNumber(tempStr[1]);
 
             paymentService.create(payment);
             return new ResponseEntity<>(HttpStatus.OK);

@@ -13,7 +13,7 @@ const getAll = (airlineReservationNumber: any, memberId:string) => {
 
 // 상세 조회
 const get = (airlineReservationNumber: any) => {
-  return http.get<IReservation>(`/tour/search-reservation/seeReservation/${airlineReservationNumber}`);
+  return http.get<IReservation>(`/tour/search-reservation/payment/${airlineReservationNumber}`);
 };
   
 const ReservationService = {

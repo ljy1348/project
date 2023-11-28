@@ -42,5 +42,11 @@ public class SearchReservationService {
         return optionalOprResDto;
     }
 
+    public Optional<OprResDto> jySearchReservation(int airlineReservationNumber) {
+        Optional<OprResDto> optionalOprResDto = searchReservationRepository.searchById(airlineReservationNumber);
+
+        return optionalOprResDto;
+    }
+
 
 }

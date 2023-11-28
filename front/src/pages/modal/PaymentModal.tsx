@@ -6,6 +6,9 @@ import {
 } from "@tosspayments/payment-widget-sdk" 
 import { Modal } from "react-bootstrap";
 import AuthService from "../../services/auth/authService";
+import { start } from "repl";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm" 
 const customerKey = "Rkhxv1jRmshLqgQjm3gY4" 
@@ -17,7 +20,14 @@ function PaymentModal(props: any) {
     const paymentMethodsWidgetRef = useRef<ReturnType<
       PaymentWidgetInstance["renderPaymentMethods"]
     > | null>(null) 
-    const [price, setPrice] = useState(50000) 
+    
+    const [startReserveNum, setStartReserveNum] = useState("");
+    const [startPay, setStartPay] = useState("");
+    const [finalReserveNum, setFinalReserveNum] = useState("")
+    const [finalPay, setFinalPay] = useState("");
+    const [price, setPrice] = useState(Number(startPay)+Number(finalPay)) ;
+    const { user: currentUser } = useSelector((state:RootState)=> state.auth);
+    const [mile, setMile] = useState(0);
   
     useEffect(() => {
       (async () => {
@@ -49,8 +59,25 @@ function PaymentModal(props: any) {
         paymentWidgetRef.current = paymentWidget 
         paymentMethodsWidgetRef.current = paymentMethodsWidget 
       })() 
-
+      // alert(startReserveNum+"\n"+finalReserveNum)
       // ReservationService
+
+      if (props.reInfo.length == 2) {
+        setStartReserveNum(props.reInfo[0].reservenum);
+        setFinalReserveNum(props.reInfo[1].reservenum);
+        setStartPay(props.reInfo[0].price);
+        setFinalPay(props.reInfo[1].price);
+        setPrice(Number(props.reInfo[0].price)+Number(props.reInfo[1].price))
+      }
+
+
+      if (currentUser)
+      if (currentUser.memberId)
+      AuthService.getUserInfo(currentUser.memberId)
+      .then((response)=>{console.log(response)
+      setMile(response.data.memberMile)
+      })
+      .catch((e:Error)=>{console.log(e)})
 
     }, [props]) 
   
@@ -81,7 +108,8 @@ function PaymentModal(props: any) {
       <Modal.Body>
       <div>
       <h1 >주문서</h1>
-      <span >{`${price.toLocaleString()}원`}</span>
+      <span >{`${price.toLocaleString()}원`}</span><br/>
+      <span >{`${mile}마일리지`}</span>
       <div >
         <label>
           <input
@@ -101,8 +129,8 @@ function PaymentModal(props: any) {
 
           try {
             await paymentWidget?.requestPayment({
-              orderId: `fwefwefsdf2`,
-              orderName: "토스 티셔츠 외 2건",
+              orderId: `${startReserveNum}-${finalReserveNum}`,
+              orderName: "항공권 예약",
               customerName: "김토스",
               customerEmail: "customer123@gmail.com",
               customerMobilePhone: "01012341234",
