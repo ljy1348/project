@@ -18,7 +18,7 @@ function ReservationList() {
       return;
     }
     // 벡엔드 매개변수 전송
-    ReservationService.getAll(airlineReservationNumber) // 벡엔드 전체조회요청
+    ReservationService.getAll(airlineReservationNumber, "qwe123") // 벡엔드 전체조회요청
       .then((response: any) => {
         setReservation(response.data);
         // 로그 출력

@@ -37,11 +37,12 @@ public class SearchReservationController {
 //    전체 조회 + like 검색
     @GetMapping("/search-reservation")
     public ResponseEntity<Object> getSearchReservation(
-            @RequestParam(defaultValue = "0") int airlineReservationNumber
+            @RequestParam(defaultValue = "0") int airlineReservationNumber,
+            @RequestParam(defaultValue = "") String memberId
     ){
         try {
 //            전체 조회 + like 검색
-            List<SearchReservation> list = searchReservationService.findAllByAirlineReservationNumber(airlineReservationNumber);
+            List<SearchReservation> list = searchReservationService.findAllByAirlineReservationNumberAndMemberId(airlineReservationNumber, memberId);
 
             if (list.isEmpty() == false) {
 //                성공

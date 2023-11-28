@@ -29,8 +29,8 @@ public class SearchReservationService {
     SearchReservationRepository searchReservationRepository; // DI
     
 //    전체 조회 + like 검색
-    public List<SearchReservation> findAllByAirlineReservationNumber(int airlineReservationNumber) {
-        List<SearchReservation> list = searchReservationRepository.findAllByAirlineReservationNumber(airlineReservationNumber);
+    public List<SearchReservation> findAllByAirlineReservationNumberAndMemberId(int airlineReservationNumber, String memberId) {
+        List<SearchReservation> list = searchReservationRepository.findAllByAirlineReservationNumberAndMemberId(airlineReservationNumber, memberId);
 
         return list;
     }
