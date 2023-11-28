@@ -5,7 +5,7 @@ import { Accordion } from "react-bootstrap";
 import { Button } from "@mui/material";
 import { Form, Link } from "react-router-dom";
 import { ClassNames } from "@emotion/react";
-import About from "./../About";
+// import About from "./../About";
 
 function PassengerInfo() {
   // todo: 장바구니 물품 개수를 저장할 변수

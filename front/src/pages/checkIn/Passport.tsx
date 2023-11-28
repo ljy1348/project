@@ -5,7 +5,7 @@ import { Accordion } from "react-bootstrap";
 import { Button } from "@mui/material";
 import { Form, Link } from "react-router-dom";
 import { ClassNames } from "@emotion/react";
-import About from './../About';
+// import About from './../About';
 import IPassport from "../../types/passport/IPassport";
 import PassportService from "../../services/checkin/PassportService";
 import IMemberInfo from "../../types/memberInfo/IMemberInfo";

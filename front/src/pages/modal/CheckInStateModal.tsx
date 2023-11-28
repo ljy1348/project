@@ -144,7 +144,7 @@ function CheckInStateModal(props: any) {
                   <td>
                     <Button
                       name="checkinbutton"
-                      variant="primary"
+                      // variant="primary"
                       onClick={handleCheckinButtonClick}
                       disabled={checkInState || !selectedOption} 
                     >

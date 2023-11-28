@@ -8,8 +8,6 @@ import "./assets/css/style.css";
 
 
 
-import Passport from './pages/checkIn/Passport';
-import CheckIn from './pages/checkIn/CheckIn';
 import CheckInStateModal from './pages/modal/CheckInStateModal';
 import Boardingpass from './pages/checkIn/Boardingpass';
 import PassengerInfo from './pages/checkIn/PassengerInfo';
