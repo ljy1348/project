@@ -6,6 +6,8 @@ import com.example.back.repository.payment.PaymentRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -42,4 +44,10 @@ public class PaymentService {
 
         return paymentRepository.save(payment);
     }
+
+    public Page<Payment> selectAllByMemberId(String memberId, Pageable pageable) {
+        return paymentRepository.selectAllByMemberId(memberId, pageable);
+    }
+
+
 }

@@ -9,12 +9,15 @@ import AuthService from "../../services/auth/authService";
 import { start } from "repl";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { useNavigate } from "react-router-dom";
 
 const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm" 
 const customerKey = "Rkhxv1jRmshLqgQjm3gY4" 
 
 
 function PaymentModal(props: any) {
+
+  
 
     const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null) 
     const paymentMethodsWidgetRef = useRef<ReturnType<
@@ -25,9 +28,11 @@ function PaymentModal(props: any) {
     const [startPay, setStartPay] = useState("");
     const [finalReserveNum, setFinalReserveNum] = useState("")
     const [finalPay, setFinalPay] = useState("");
-    const [price, setPrice] = useState(Number(startPay)+Number(finalPay)) ;
+    const [price, setPrice] = useState(0) ;
+    const [originPrice, setOriginPrice] = useState(0);
     const { user: currentUser } = useSelector((state:RootState)=> state.auth);
     const [mile, setMile] = useState(0);
+    const navi = useNavigate();
   
     useEffect(() => {
       (async () => {
@@ -68,6 +73,7 @@ function PaymentModal(props: any) {
         setStartPay(props.reInfo[0].price);
         setFinalPay(props.reInfo[1].price);
         setPrice(Number(props.reInfo[0].price)+Number(props.reInfo[1].price))
+        setOriginPrice(Number(props.reInfo[0].price)+Number(props.reInfo[1].price))
       }
 
 
@@ -111,22 +117,27 @@ function PaymentModal(props: any) {
       <span >{`${price.toLocaleString()}원`}</span><br/>
       <span >{`${mile}마일리지`}</span>
       <div >
+        { (mile > price) &&
         <label>
           <input
             type="checkbox"
             onChange={(event) => {
-              setPrice(event.target.checked ? price - 5000 : price + 5000) 
+              setPrice(event.target.checked ? 0 : originPrice) 
             }}
           />
-          5,000원 할인 쿠폰 적용
-        </label>
+          마일리지 - 구매하기
+        </label>}
       </div>
       <div id="payment-widget" />
       <div id="agreement" />
       <button
         onClick={async () => {
-          const paymentWidget = paymentWidgetRef.current 
+          if(price === 0) {
+            navi(`/payment/success?orderId=${startReserveNum}-${finalReserveNum}&paymentKey=${"mile"}&amount=${originPrice}`)
+            return 
+          }
 
+          const paymentWidget = paymentWidgetRef.current 
           try {
             await paymentWidget?.requestPayment({
               orderId: `${startReserveNum}-${finalReserveNum}`,

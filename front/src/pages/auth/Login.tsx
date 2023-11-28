@@ -159,7 +159,7 @@ function Login() {
         // 강제 /home 페이지 이동
         navigate("/");
         // js : 페이지 새로고침
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((e:Error)=>{
         console.log(e);

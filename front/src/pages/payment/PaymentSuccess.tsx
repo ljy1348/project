@@ -26,7 +26,6 @@ function PaymentSuccess() {
     if (orderId)
     reserveNum = orderId.split("-");
   if (reserveNum) {
-
     ReservationService.get(Number(reserveNum[0]))
     .then((response)=>{console.log(response)})
     .catch((e:Error)=>{console.log(e)})
@@ -42,10 +41,21 @@ function PaymentSuccess() {
     if (orderId === null) {navi("/payment/fail"); orderId=""}
     if (paymentKey === null) {navi("/payment/fail"); paymentKey=""}
     if (amount === null) {navi("/payment/fail"); amount=""}
-    PaymentService.paymentMember(orderId, paymentKey, amount)
+    
+
+    if (paymentKey === "mile") {
+
+      PaymentService.paymentMile(orderId, paymentKey, amount)
+      .then((response:any)=>{console.log(response);
+      })
+      .catch((e:Error)=>{console.log(e)})
+    } else {
+      PaymentService.paymentMember(orderId, paymentKey, amount)
     .then((response:any)=>{console.log(response);
     })
     .catch((e:Error)=>{console.log(e)})
+    }
+
   },[])
 
 return (

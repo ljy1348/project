@@ -11,6 +11,8 @@ import ReservationService from "../../services/ReservationService";
 import IRdata from "../../types/reserve/IRdata";
 import OperationInfo from "./../auth/admin/OperationInfo/OperationInfo";
 import PaymentModal from "../modal/PaymentModal";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 function ReservePayment() {
   // 기본키
@@ -32,6 +34,8 @@ function ReservePayment() {
     adult: false,
     name: "",
   };
+
+  const { user: currentUser } = useSelector((state:RootState)=> state.auth);
 
   const [temp, setTemp] = useState<ICount[]>([initICount]);
   const [reInfo, setReInfo] = useState<IRdata[]>([]);
@@ -287,6 +291,8 @@ function ReservePayment() {
       operationId: operation.operationId, // 여정에 해당하는 operationId 사용
       checkYn: reservation.checkYn,
     };
+
+    if (currentUser?.memberId) {data.memberId=currentUser.memberId; data.memberYn="Y";}
 
     const totalPrice = calculateTotalPrice(data.seatType, operation);
 
