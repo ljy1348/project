@@ -2,11 +2,16 @@
 import { useState } from "react";
 import ReservationService from "../../services/reservation/ReservationService";
 import IReservation from "../../types/tour/IReservation";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 function ReservationList() {
   // 변수 정의
   // reservation 배열 변수
   const [reservation, setReservation] = useState<Array<IReservation>>([]);
+
+  // 유저 정보 가져오기 함수
+  const { user: currentUser } = useSelector((state:RootState)=> state.auth);
 
   // 검색어(input) 변수
   const [airlineReservationNumber, setAirlineReservationNumber] = useState<any>("");
@@ -17,8 +22,9 @@ function ReservationList() {
       alert("예약번호 6 자리를 입력해 주세요.");
       return;
     }
+    if (currentUser?.memberId != undefined && currentUser?.memberId != null)
     // 벡엔드 매개변수 전송
-    ReservationService.getAll(airlineReservationNumber, "qwe123") // 벡엔드 전체조회요청
+    ReservationService.getAll(airlineReservationNumber, currentUser.memberId) // 벡엔드 전체조회요청
       .then((response: any) => {
         setReservation(response.data);
         // 로그 출력

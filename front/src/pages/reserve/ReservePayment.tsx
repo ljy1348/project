@@ -286,25 +286,25 @@ function ReservePayment() {
   // 저장 예약
   const saveReservation = () => {
     // 임시 부서 객체
-    var data = {
-      adultCount: reservation.adultCount,
-      childCount: reservation.childCount,
-      mileUseYn: reservation.mileUseYn,
-      seatType: reservation.seatType,
-      memberYn: reservation.memberYn,
-      memberId: reservation.memberId,
-      userNumber: reservation.userNumber,
-      operationId: reservation.operationId,
-      checkYn: reservation.checkYn,
-    };
+    // var data = {
+    //   adultCount: reservation.adultCount,
+    //   childCount: reservation.childCount,
+    //   mileUseYn: reservation.mileUseYn,
+    //   seatType: reservation.seatType,
+    //   memberYn: reservation.memberYn,
+    //   memberId: reservation.memberId,
+    //   userNumber: reservation.userNumber,
+    //   operationId: reservation.operationId,
+    //   checkYn: reservation.checkYn,
+    // };
 
-    ReservationService.create(data)    // 저장 요청
-      .then((response: any) => {
-        console.log(response.data);
-      })
-      .catch((e: Error) => {
-        console.log(e);
-      });
+    // ReservationService.create(data)    // 저장 요청
+    //   .then((response: any) => {
+    //     console.log(response.data);
+    //   })
+    //   .catch((e: Error) => {
+    //     console.log(e);
+    //   });
   };
 
 
