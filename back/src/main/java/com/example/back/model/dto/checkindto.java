@@ -14,12 +14,17 @@ package com.example.back.model.dto;
  * 2023-11-27         GGG          최초 생성
  */
 public interface checkindto {
-    String getCheckId();
-    String seatNumber();
+
+    Integer getAirlineReservationNumber();
     String getAdultCount();
     String getChildCount();
-    Integer getAirlineReservationNumber();
     String getCheckYn();
-    String getMemberYn();
+
+    Integer getOperationId();
+    String getStartAirport();
+    String getFinalAirport();
+
+
+
 
 }

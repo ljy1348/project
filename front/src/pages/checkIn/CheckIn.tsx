@@ -24,7 +24,7 @@ function CheckIn() {
   //  모달이동
    const [checkInState, setCheckinstate] = useState(false);
   //  const [show, setShow] = useState(false);
-
+  const [airlinereservationnumber, setAirlinereservationnumber] = useState(0);
 
  
 
@@ -167,6 +167,8 @@ const onChangeSearchAirlinereservationnumber = (e: any) => {
         show={checkInState}
         onHide={() => setCheckinstate(false)}
         searchAirlinereservationnumber={searchAirlinereservationnumber}
+        data = {airlinereservationnumber}
+        
 
       />
     

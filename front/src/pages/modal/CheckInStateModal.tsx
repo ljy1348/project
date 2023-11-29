@@ -7,33 +7,39 @@ import CheckinService from "../../services/checkin/CheckinService";
 import IReservation from "../../types/reservation/ISearchReservation";
 import ISearchReservation from "../../types/reservation/ISearchReservation";
 
-function CheckInStateModal(props: any) {
+function CheckInStateModal( props: any) {
   const initChckStt = {
-    airlinereservation: null,
-    // 좌석등급
-    seatType: "",
-    // 성인
-    adultCount: "",
-    // 어린이
+
+     // 예약 번호
+     airlineReservationNumber: null,
+    //  성인
+     adultCount: "",
+    //  소아
     childCount: "",
-    // 마일리지 여부
-    mileuseYn: "",
+    // 마일리지
+    mileUseYn: "",
+    //  좌석번호 
+    seatType: "",
+   // 회원여부 
+     memberYn: "",
     // 체크인 여부
     checkYn: "",
-    memberId: "",
-    userNumber: "",
-    operationId: 0,
-
-    // 운항정보
-    startAirport: "",
-    finalAirport: ""
-
- 
+     // 회원 id
+     memberId: "",
+     // 비회원
+     userNumber: "",
+    //  운항id
+     operationId: 0,
+     // 조인 
+     startAirport: "",
+     finalAirport: ""
+  
   };
 
   // 변수정의
   const [checkInState, setCheckinState] = useState(false);
   const [checkStt, setCheckStt] = useState<any>(initChckStt);
+
   // 국제선, 국내선
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -55,16 +61,18 @@ function CheckInStateModal(props: any) {
   const handleCheckinButtonClick = () => {
     setCheckinState(true);
 
-    if (checkStt.checkYn === "Y") {
+    if (checkStt.checkYn === 'Y') {
       alert("체크인 상태를 다시 확인해주시길 바랍니다.");
-    } else if (checkStt.checkYn === "N") {
-      if (checkStt.startAirport === "국제") {
-        window.location.href = "/passport";
-      } else if (checkStt.startAirport === "국내") {
-        window.location.href = "/passengerInfo";
-      }
+    }else {
+      // checkYn이 'N'일 때, 이동할 URL 설정
+      const targetUrl = '/passport'; // 또는 '/passengerinfo'
+  
+      // 실제로 페이지를 이동
+      window.location.href = targetUrl;
     }
+ 
   };
+    
 
 
   // todo: 전체 조회 함수
@@ -108,7 +116,6 @@ function CheckInStateModal(props: any) {
                   <th scope="col">승객</th>
                   <th scope="col">운항정보</th>
                   <th scope="col">체크인 상태</th>
-                  <th scope="col">체크인 등록</th>
                 </tr>
                 <tr>
                   <td scope="col">
@@ -118,27 +125,9 @@ function CheckInStateModal(props: any) {
                     출발지: {checkStt.startAirport} - 도착지: {checkStt.finalAirport}
                   </td>
                   <td scope="col">{checkStt.checkYn}</td>
-
-                  <td scope="col">
-                    <div className="form-check form-check-inline">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id="inlineCheckbox1"
-                        value="option1"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="inlineCheckbox1"
-                      >
-                        선택하기
-                      </label>
-                    </div>
-                  </td>
                 </tr>
 
                 <tr>
-                  <td scope="col"></td>
                   <td></td>
                   <td></td>
                   <td>
@@ -146,7 +135,6 @@ function CheckInStateModal(props: any) {
                       name="checkinbutton"
                       // variant="primary"
                       onClick={handleCheckinButtonClick}
-                      disabled={checkInState || !selectedOption} 
                     >
                       체크인
                     </Button>
