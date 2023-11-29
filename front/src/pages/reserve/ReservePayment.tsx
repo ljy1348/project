@@ -832,7 +832,13 @@ function ReservePayment() {
       {/* 모달 불러오기 */}
       <PaymentModal
             show={modalShow}
-            onHide={() => setModalShow(false)}
+            onHide={() => {setModalShow(false);
+            ReservationService.deleteRoundTrip(reInfo[0].reservenum, reInfo[1].reservenum)
+            .then((response)=>{console.log(response)})
+            .catch((e)=>{console.log(e)}
+            )
+            setReInfo([])
+            }}
             reInfo={reInfo}
           />
     </>

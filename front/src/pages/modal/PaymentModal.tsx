@@ -28,13 +28,26 @@ function PaymentModal(props: any) {
     const [startPay, setStartPay] = useState("");
     const [finalReserveNum, setFinalReserveNum] = useState("")
     const [finalPay, setFinalPay] = useState("");
-    const [price, setPrice] = useState(0) ;
+    const [price, setPrice] = useState(1) ;
     const [originPrice, setOriginPrice] = useState(0);
     const { user: currentUser } = useSelector((state:RootState)=> state.auth);
     const [mile, setMile] = useState(0);
     const navi = useNavigate();
   
     useEffect(() => {
+      
+      // alert(startReserveNum+"\n"+finalReserveNum)
+      // ReservationService
+
+      if (props.reInfo.length == 2) {
+        setStartReserveNum(props.reInfo[0].reservenum);
+        setFinalReserveNum(props.reInfo[1].reservenum);
+        setStartPay(props.reInfo[0].price);
+        setFinalPay(props.reInfo[1].price);
+        setPrice(Number(props.reInfo[0].price)+Number(props.reInfo[1].price))
+        setOriginPrice(Number(props.reInfo[0].price)+Number(props.reInfo[1].price))
+      }
+
       (async () => {
         // ------  결제위젯 초기화 ------
         // 비회원 결제에는 customerKey 대신 ANONYMOUS를 사용하세요.
@@ -53,6 +66,8 @@ function PaymentModal(props: any) {
           // https://docs.tosspayments.com/guides/payment-widget/admin#멀티-결제-ui
           { variantKey: "DEFAULT" }
         ) 
+    
+       
   
         // ------  이용약관 UI 렌더링 ------
         // 이용약관 UI를 렌더링할 위치를 지정합니다. `#agreement`와 같은 CSS 선택자를 추가하세요.
@@ -63,20 +78,14 @@ function PaymentModal(props: any) {
         )
         paymentWidgetRef.current = paymentWidget 
         paymentMethodsWidgetRef.current = paymentMethodsWidget 
+
+         // ------ 금액 업데이트 ------
+        // 새로운 결제 금액을 넣어주세요.
+        // https://docs.tosspayments.com/reference/widget-sdk#updateamount결제-금액
+        paymentMethodsWidgetRef.current.updateAmount(
+          price
+        ) 
       })() 
-      // alert(startReserveNum+"\n"+finalReserveNum)
-      // ReservationService
-
-      if (props.reInfo.length == 2) {
-        setStartReserveNum(props.reInfo[0].reservenum);
-        setFinalReserveNum(props.reInfo[1].reservenum);
-        setStartPay(props.reInfo[0].price);
-        setFinalPay(props.reInfo[1].price);
-        setPrice(Number(props.reInfo[0].price)+Number(props.reInfo[1].price))
-        setOriginPrice(Number(props.reInfo[0].price)+Number(props.reInfo[1].price))
-      }
-
-
       if (currentUser)
       if (currentUser.memberId)
       AuthService.getUserInfo(currentUser.memberId)
@@ -114,7 +123,7 @@ function PaymentModal(props: any) {
       <Modal.Body>
       <div>
       <h1 >주문서</h1>
-      <span >{`${price.toLocaleString()}원`}</span><br/>
+      <span >{`${price}원`}</span><br/>
       <span >{`${mile}마일리지`}</span>
       <div >
         { (mile > price) &&
@@ -132,10 +141,13 @@ function PaymentModal(props: any) {
       <div id="agreement" />
       <button
         onClick={async () => {
+          console.log(price)
           if(price === 0) {
             navi(`/payment/success?orderId=${startReserveNum}-${finalReserveNum}&paymentKey=${"mile"}&amount=${originPrice}`)
             return 
           }
+
+          
 
           const paymentWidget = paymentWidgetRef.current 
           try {
@@ -150,7 +162,7 @@ function PaymentModal(props: any) {
             }) 
           } catch (error) {
             // 에러 처리하기
-            alert(error);
+            alert(price);
             console.error(error) 
           }
         }}

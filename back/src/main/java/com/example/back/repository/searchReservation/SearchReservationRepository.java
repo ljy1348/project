@@ -44,7 +44,7 @@ public interface SearchReservationRepository extends JpaRepository<Reservation, 
             "     , MEM.MEMBER_ENAME as memberEname " +
             "FROM TB_RESERVATION RES, TB_MEMBERS_INFO MEM " +
             "WHERE RES.MEMBER_ID = MEM.MEMBER_ID  " +
-            "AND RES.MEMBER_ID = :memberId "
+            "AND RES.MEMBER_ID = :memberId and res.delete_yn = 'N' "
             , countQuery = "SELECT COUNT(*) " +
             "FROM TB_RESERVATION " +
             "WHERE MEMBER_ID =  :memberId ", nativeQuery = true)
