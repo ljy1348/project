@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CuCenterRepository extends JpaRepository<CuCenter, Integer> {
     // title like 검색
-    Page<CuCenter> findAllByCuCenterTitleContaining(String title, Pageable pageable);
+    Page<CuCenter> findAllByTitleContaining(String title, Pageable pageable);
 
 }
