@@ -18,11 +18,11 @@ function Notice() {
 
   //   전체조회 함수
   const retrieveNotice = () => {
-    NoticeService.getAll(noticeTitle) // 벡엔드 전체조회요청
+    NoticeService.getAllNotice(noticeTitle, "", 0, 3) // 벡엔드 전체조회요청
       .then((response: any) => {
-        setNotice(response.data);
+        setNotice(response.data.notice);
         // 로그 출력
-        console.log("response", response.data);
+        console.log("response", response.data.notice);
       })
       .catch((e: Error) => {
         // 벡엔드 실패시 실행됨
