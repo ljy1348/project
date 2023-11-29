@@ -18,7 +18,7 @@ public class CuCenterService {
     // title 검색
     public Page<CuCenter> findAllByCuCenterTitleContaining(String title, Pageable pageable) {
         Page<CuCenter> page
-                = cuCenterRepository.findAllByCuCenterTitleContaining(title, pageable);
+                = cuCenterRepository.findAllByTitleContaining(title, pageable);
 
         return page;
     }
