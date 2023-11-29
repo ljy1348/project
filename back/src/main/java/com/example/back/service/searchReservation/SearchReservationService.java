@@ -63,7 +63,7 @@ public class SearchReservationService {
     }
 
     // 아이디로 단건 찾기 - 주영
-    public Optional<SearchReservation> findById(int id) {
+    public Optional<Reservation> findById(int id) {
         return searchReservationRepository.findById(id);
     }
 

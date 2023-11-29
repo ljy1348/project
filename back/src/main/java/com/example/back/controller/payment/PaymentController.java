@@ -2,6 +2,7 @@ package com.example.back.controller.payment;
 
 import com.example.back.model.entity.auth.Member;
 import com.example.back.model.entity.payment.Payment;
+import com.example.back.model.entity.reserve.Reservation;
 import com.example.back.model.entity.searchReservation.SearchReservation;
 import com.example.back.service.auth.UserService;
 import com.example.back.service.payment.PaymentService;
@@ -48,7 +49,7 @@ public class PaymentController {
             payment.setStartReservationNumber(tempStr[0]);
             payment.setFinalReservationNumber(tempStr[1]);
 
-            Optional<SearchReservation> searchReservation1 = searchReservationService.findById(Integer.parseInt(tempStr[1]));
+            Optional<Reservation> searchReservation1 = searchReservationService.findById(Integer.parseInt(tempStr[1]));
 
             Optional<Member> member = userService.findById(searchReservation1.get().getMemberId());
             member.get().setMemberMile(member.get().getMemberMile() + (int)Math.floor(amount/10));
@@ -79,8 +80,8 @@ public class PaymentController {
             payment.setFinalReservationNumber(tempStr[1]);
 
 
-            Optional<SearchReservation> searchReservation1 = searchReservationService.findById(Integer.parseInt(tempStr[0]));
-            Optional<SearchReservation> searchReservation2 = searchReservationService.findById(Integer.parseInt(tempStr[1]));
+            Optional<Reservation> searchReservation1 = searchReservationService.findById(Integer.parseInt(tempStr[0]));
+            Optional<Reservation> searchReservation2 = searchReservationService.findById(Integer.parseInt(tempStr[1]));
 
             Optional<Member> member = userService.findById(searchReservation1.get().getMemberId());
 
