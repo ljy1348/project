@@ -1,8 +1,11 @@
 package com.example.back.repository.searchReservation;
 
+
 import com.example.back.model.dto.OprResDto;
 import com.example.back.model.dto.reserve.ReservationDto;
 import com.example.back.model.entity.reserve.Reservation;
+
+import com.example.back.model.entity.searchReservation.SearchReservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -48,8 +51,17 @@ public interface SearchReservationRepository extends JpaRepository<Reservation, 
             "WHERE MEMBER_ID =  :memberId ", nativeQuery = true)
     List<ReservationDto> getAll(@Param("memberId")String memberId);
 
+
 //    예약번호 + ID 검색 함수
     List<Reservation> findAllByAirlineReservationNumberAndMemberId(int airlineReservationNumber, String memberId);
+
+//    전체 조회 + = 검색
+
+    List<SearchReservation> findAllByAirlineReservationNumber(int airlineReservationNumber);
+
+    List<SearchReservation> findAllByAirlineReservationNumberAndMemberId2(int airlineReservationNumber, String memberId);
+
+
 
 //    상세 조회
     @Query(value = "SELECT RES.AIRLINE_RESERVATION_NUMBER as airlineReservationNumber " +
@@ -80,6 +92,7 @@ public interface SearchReservationRepository extends JpaRepository<Reservation, 
             "WHERE RES.OPERATION_ID = OPR.OPERATION_ID AND RES.MEMBER_ID = MEM.MEMBER_ID " +
             "AND RES.AIRLINE_RESERVATION_NUMBER LIKE '%' || :airlineReservationNumber || '%' ", nativeQuery = true)
     Optional<OprResDto> searchReservation(@Param("airlineReservationNumber") int airlineReservationNumber);
+
 
 
 }

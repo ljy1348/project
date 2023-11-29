@@ -1,7 +1,9 @@
 package com.example.back.controller.notice;
 
 
+
 import com.example.back.model.dto.notice.NoticeDto;
+import com.example.back.service.notice.NoticeService;
 import lombok.extern.slf4j.Slf4j;
 import com.example.back.model.entity.notice.Notice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.back.service.notice.NoticeService;
 
 
 import java.util.HashMap;

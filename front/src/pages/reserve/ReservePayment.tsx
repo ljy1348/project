@@ -26,7 +26,7 @@ function ReservePayment() {
   } = useParams();
   // 사용 X?
   // const [icount, setICount] = useState<ICount>();
-
+  
   const initICount = {
     adult: false,
     name: "",

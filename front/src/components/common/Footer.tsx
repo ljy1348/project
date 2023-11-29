@@ -6,7 +6,6 @@ function Footer() {
     <>
       {/* 여기 */}
       {/* <!-- 꼬리말 시작 --> */}
-
       <div className="site-footer">
         <div className="inner first">
           <div className="container">
@@ -129,7 +128,6 @@ function Footer() {
                     Untree.co
                   </a>{" "}
                   License information: https://untree.co/license/ Distributed By{" "}
-
                   <a href="https://themewagon.com" target="_blank">
                     ThemeWagon
                   </a>

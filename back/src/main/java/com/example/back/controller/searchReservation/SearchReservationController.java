@@ -1,5 +1,6 @@
 package com.example.back.controller.searchReservation;
 
+
 import com.example.back.model.dto.OprResDto;
 import com.example.back.model.dto.reserve.ReservationDto;
 import com.example.back.model.entity.reserve.Reservation;
@@ -36,6 +37,7 @@ public class SearchReservationController {
     @Autowired
     SearchReservationService searchReservationService; // DI
 
+
 //    ID 검색
     @GetMapping("/search-reservation/{memberId}")
     public ResponseEntity<Object> getAll(
@@ -46,6 +48,7 @@ public class SearchReservationController {
             List<ReservationDto> list = searchReservationService.getAll(memberId);
 
             if (list.isEmpty() == false) {
+
 //                성공
                 return new ResponseEntity<>(list, HttpStatus.OK);
             } else {
@@ -82,6 +85,7 @@ public class SearchReservationController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
 
 
