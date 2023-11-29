@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import NoticeService from "../../services/NoticeService";
-import INotice from "../../types/INotice";
-import { Link } from "react-router-dom";
+import INotice from "../../types/notice/INotice";
+import NoticeService from "../../services/notice/NoticeService";
+
 
 function Notice() {
   const [notice, setNotice] = useState<Array<INotice>>([]);
+
+  const [noticeTitle, setNoticeTitle] = useState<string>("");
   // 검색어 변수
 
   // 함수 정의
@@ -16,7 +18,7 @@ function Notice() {
 
   //   전체조회 함수
   const retrieveNotice = () => {
-    NoticeService.getAll() // 벡엔드 전체조회요청
+    NoticeService.getAll(noticeTitle) // 벡엔드 전체조회요청
       .then((response: any) => {
         setNotice(response.data);
         // 로그 출력

@@ -1,5 +1,6 @@
-import IOperationinfo from "../../types/IOperationinfo";
+
 import IUser from "../../types/auth/IMember";
+import IOperationinfo from "../../types/operationInfo/IOperationinfo";
 import http from "../../utils/http-common";
 import authHeader from "./authHeader";
 

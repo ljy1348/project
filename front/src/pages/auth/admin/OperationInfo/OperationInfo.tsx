@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import IOperationinfo from '../../../../types/IOperationinfo';
 import AdminService from '../../../../services/auth/adminService';
+import IOperationinfo from '../../../../types/operationInfo/IOperationinfo';
 
 function OperationInfo({setSelectTab, dataId}:{setSelectTab:any, dataId:any}) {
     const initOperationInfo = {

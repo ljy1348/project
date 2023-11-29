@@ -34,6 +34,7 @@ function AdminPage() {
     else if (selectTab==="항공기 상세") return <OperationInfo setSelectTab={setSelectTab} dataId={dataId}/>
     else if (selectTab==="게시판") return <BoardMain/>
     else return <><AdminPayment/></>
+
   }
 
   return (

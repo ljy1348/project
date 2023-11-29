@@ -23,4 +23,5 @@ import org.springframework.stereotype.Repository;
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
     Page<Reservation> findAllByseatTypeContaining(String seatType, Pageable pageable);
+
 }

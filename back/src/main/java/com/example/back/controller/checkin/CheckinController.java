@@ -1,7 +1,9 @@
-package com.example.back.controller.checkin;
+package com.example.back.controller;
 
-import com.example.back.model.dto.checkindto;
+import com.example.back.model.dto.checkin.checkindto;
+import com.example.back.model.entity.passport.Passport;
 import com.example.back.service.checkin.CheckinService;
+import com.example.back.service.passport.PassportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,22 +27,24 @@ import java.util.Optional;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/tour")
 public class CheckinController {
     @Autowired
     CheckinService checkinService; // DI
 
+    @Autowired
+    PassportService passportService;
+
     //   전체 조회 + dname like 검색
     @GetMapping("/checkin/{airlineReservationNumber}")
-    public ResponseEntity<Object>  airnumber(
+    public ResponseEntity<Object>  checkresnum(
             @PathVariable int airlineReservationNumber
     ){
         try {
             log.info("aaaaaaaaaaaaaaaaaaaa : "+airlineReservationNumber);
 
-//          전체조회(dname="") + like 검색(dname="S")
             Optional<checkindto> checkinOptional
-                    = checkinService.airnumber(airlineReservationNumber);
+                    = checkinService.checkresnum(airlineReservationNumber);
 
             if (checkinOptional.isEmpty() == false) {
 //                성공
@@ -54,6 +58,5 @@ public class CheckinController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
 }

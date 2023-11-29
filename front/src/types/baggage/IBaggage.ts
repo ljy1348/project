@@ -1,18 +1,18 @@
 export default interface IBaggage {
     // 수화물 번호
-    bagnumber?: any | null,
+    bagNumber?: any | null,
     // 수화물 개수
-    bagcount: any | null,
+    bagCount:  number,
     // 수화물 면적
-    bagarea: any | null,
+    bagArea:  number,
     // 수화물 무게
-    bagweight: any | null,
+    bagWeight: number,
     // 추가 금액 
-    bagprice: any | null,
+    bagPrice:  number,
     // 체크인 id
-    checkin: string,
+    checkId: string,
     // 수화물 등록 여부 
-    bagyn : string
+    bagYn : string
     }
     
     

@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import { useParams } from "react-router-dom";
-import IOperationinfo from "../../types/IOperationinfo";
-import OperationService from "../../services/OperationService";
-import ICount from "./../../types/reserve/ICount";
-import NonmemberService from "../../services/NonmemberService";
-import { info } from "console";
-import ReservationService from "../../services/ReservationService";
+import ICount from "../../types/reserve/ICount";
 import IRdata from "../../types/reserve/IRdata";
 import OperationInfo from "./../auth/admin/OperationInfo/OperationInfo";
 import PaymentModal from "../modal/PaymentModal";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import IOperationinfo from "../../types/operationInfo/IOperationinfo";
+import OperationService from "../../services/operation/OperationService";
+import NonmemberService from "../../services/nonmemberinfo/NonmemberService";
+import ReservationService from "../../services/reservation/ReservationService";
 
 function ReservePayment() {
   // 기본키
@@ -29,7 +28,7 @@ function ReservePayment() {
   } = useParams();
   // 사용 X?
   // const [icount, setICount] = useState<ICount>();
-
+  
   const initICount = {
     adult: false,
     name: "",
@@ -289,7 +288,7 @@ function ReservePayment() {
       memberId: reservation.memberId,
       userNumber: userNumbersArray.join(","), // 배열을 쉼표로 구분된 문자열로 변환
       operationId: operation.operationId, // 여정에 해당하는 operationId 사용
-      checkYn: reservation.checkYn,
+      checkYn: reservation.checkYn
     };
 
     if (currentUser?.memberId) {data.memberId=currentUser.memberId; data.memberYn="Y";}
