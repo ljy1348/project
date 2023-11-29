@@ -1,8 +1,9 @@
 package com.example.back.controller.center;
 
 
-import com.example.back.model.entity.center.Notice;
-import com.example.back.service.center.NoticeService;
+//import com.example.back.model.entity.center.Notice2;
+import com.example.back.model.entity.notice.Notice;
+import com.example.back.service.center.NoticeService2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,10 +20,10 @@ import java.util.Optional;
 @Slf4j
 @RestController
 @RequestMapping("/api/notice")
-public class NoticeController {
+public class NoticeController2 {
 
     @Autowired
-    NoticeService noticeService; // DI
+    NoticeService2 noticeService; // DI
 
 
     // 전체 조회

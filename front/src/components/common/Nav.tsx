@@ -1,19 +1,3 @@
-// components/common/Nav.tsx : rfce
-
-
-
-      {/* 여기 */}
-      {/* <!-- 머리말 시작 --> */}
-      {/* <div className="site-mobile-menu site-navbar-target">
-        <div className="site-mobile-menu-header">
-          <div className="site-mobile-menu-close">
-            <span className="icofont-close js-menu-toggle"></span>
-          </div>
-        </div>
-        <div className="site-mobile-menu-body"></div>
-      </div> */}
-      {/* <!-- 머리말 끝 --> */}
-
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -68,16 +52,16 @@ function Nav() {
 
               {/* 드롭다운 메뉴 시작 */}
               <li className="has-children">
-                <Link to="#">고객센터</Link>
+                <Link to="cucenter">고객센터</Link>
                 <ul className="dropdown">
                   <li>
-                    <Link to="/elements">공지사항</Link>
+                    <Link to="/notice">공지사항</Link>
                   </li>
                   <li>
-                    <Link to="/elements">자주 찾는 질문</Link>
+                    <Link to="/question">자주 찾는 질문</Link>
                   </li>
                   <li>
-                    <Link to="/elements">1:1 문의</Link>
+                    <Link to="/question-board">1:1 문의</Link>
                   </li>
                   <li>
                     <Link to="/elements">1:1 문의목록</Link>

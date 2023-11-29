@@ -103,37 +103,41 @@ function NoticeList() {
 
       {/* 내용 */}
 
-      {/* table start(본문) */}
-      <div className="col-12">
-        <table className="table">
+      <div className="row mb-3">
+      </div>
+
+      <div className="container" id="notice-bottom-gap">
+      <div className="col-md-12 row">
+        <table className="table" id="table-bottom-gap">
           <thead>
-            <tr>
-              <th scope="col">number</th>
+            <tr className="top-line-bold">
+              <th scope="col">No</th>
               <th scope="col">제목</th>
+              <th scope="col">날짜</th>
+              <th scope="col">작성자</th>
             </tr>
           </thead>
           <tbody>
             {notice &&
               notice.map((data) => (
-                // 키값 추가 않하면 react 에서 경고를 추가 : 키는 내부적으로 리액트가 rerending 할때 체크하는 값임
-                <tr key={data.noticeId}>
-                  <td>
-                    <Link to={`/notice/${data.noticeId}`}>
-                      {data.noticeTitle}
-                    </Link>
-                  </td>
-                  <td>{data.insertTime}</td>
+                <tr className="line-sorting" key={data.noticeId}>
+                  <td id="notice-id-location">{data.noticeId}</td>      
+                  <td id="notice-title-location"><a href={`/notice/${data.noticeId}`}>{data.noticeTitle}</a></td>
+                  <td id="notice-insertTime-location">{data.insertTime}</td>
+                  <td id="notice-writer-location">{data.noticeWriter}</td>
                 </tr>
               ))}
           </tbody>
         </table>
+        
+        {/* table end */}
+      </div>
       </div>
       {/* table end */}
 
       {/* 페이지네이션 시작 */}
-
       <div className="col-md-4 offset-5">
-      <Pagination
+        <Pagination
           className="my-3"
           count={count}
           page={page}

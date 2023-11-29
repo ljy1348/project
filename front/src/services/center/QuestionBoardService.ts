@@ -9,12 +9,12 @@ const getAll = (titleId:string, page:number, size:number) => {
 
 // 상세 조회
 const get = (titleId:any) => {
-  return http.get<ICenter>(`/cuCenter/cu-center/${titleId}`);
+  return http.get<ICenter>(`/addquestion-board/addquestion-board/${titleId}`);
 };
 
 // 저장함수
 const create = (data:ICenter) => {
-  return http.post<ICenter>("/cuCenter/cu-center", data);
+  return http.post<ICenter>("/addquestion-board/addquestion-board", data);
 };
 // 수정함수
 const update = (titleId:any, data:ICenter) => {

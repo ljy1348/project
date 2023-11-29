@@ -1,8 +1,11 @@
 package com.example.back.service.center;
 
 import com.example.back.model.entity.center.CuCenter;
+import com.example.back.model.entity.notice.Notice;
 import com.example.back.repository.center.CuCenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -11,6 +14,14 @@ public class CuCenterService {
 
     @Autowired
     CuCenterRepository cuCenterRepository;
+
+    // title 검색
+    public Page<CuCenter> findAllByCuCenterTitleContaining(String title, Pageable pageable) {
+        Page<CuCenter> page
+                = cuCenterRepository.findAllByCuCenterTitleContaining(title, pageable);
+
+        return page;
+    }
 
 
     // 저장 함수

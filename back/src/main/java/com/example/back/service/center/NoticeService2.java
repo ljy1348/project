@@ -1,7 +1,7 @@
 package com.example.back.service.center;
 
-import com.example.back.model.entity.center.Notice;
-import com.example.back.repository.center.NoticeRepository;
+import com.example.back.model.entity.notice.Notice;
+import com.example.back.repository.center.NoticeRepository2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class NoticeService {
+public class NoticeService2 {
 
     @Autowired
-    NoticeRepository noticeRepository; // DI
+    NoticeRepository2 noticeRepository; // DI
 
     // title 검색
     public Page<Notice> findAllByNoticeTitleContaining(String title, Pageable pageable) {
