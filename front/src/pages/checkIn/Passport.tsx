@@ -12,9 +12,39 @@ import IMemberInfo from "../../types/memberInfo/IMemberInfo";
 import INonMemberInfo from "../../types/nonmemberInfo/INonMembersInfo";
 import IBaggage from "../../types/baggage/IBaggage";
 import BaggageService from "../../services/checkin/BaggageService";
+import ReservationService from "../../services/ReservationService";
 
 function Passport() {
 const{airlinereservationnumber}= useParams();
+
+  // 예약번호를 받아옴
+  const {
+    searchAirlinereservationnumber,
+  } = useParams();
+
+  // 예약 상세조회 객체 초기화
+  const initialReservation = {
+    airlineReservationNumber: null,
+    adultCount: 0,
+    childCount: 0,
+    mileUseYn: "N",
+    seatType: "이코노미",
+    memberYn: "N",
+    memberId: "",
+    userNumber: "",
+    operationId: 0,
+    checkYn: "N",
+  };
+
+  
+  // 예약 변수 생성
+  const [reservation, setReservation] = useState(initialReservation);
+  const [totalpeople, setTotalPeople] = useState<number>(5);
+
+
+  console.log("총인원수",totalpeople)
+  
+
 
   // todo : 여권정보 
   //  객체 초기화 
@@ -49,7 +79,7 @@ const{airlinereservationnumber}= useParams();
   const [baggage, setBaggage] = useState<IBaggage>(initialBaggage);
 
    // 저장버튼 클릭후 submitted = true 변경됨
-   const [submitted, setSubmitted] = useState<boolean>(false);
+  //  const [submitted, setSubmitted] = useState<boolean>(false);
  
 
   // 저장버튼 클릭후 submitted = true 변경됨
@@ -59,7 +89,19 @@ const{airlinereservationnumber}= useParams();
     const { name, value } = event.target; // 화면값
     setPassport({ ...passport, [name]: value });  // 변수 저장
   };
- 
+  
+  // 예약정보 상세조회 함수
+  const getReservation = (airlineReservationNumber: string) => {
+    ReservationService.get(airlineReservationNumber)         // 벡엔드로 상세조회 요청
+      .then((response: any) => {
+        setReservation(response.data);
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
+
   
     // 저장 함수
     const savePassport = () => {
@@ -113,9 +155,18 @@ const{airlinereservationnumber}= useParams();
   const [array, setArray] = useState<Array<string>>(["a"]);
 
   useEffect(() => {
+    // 화면이 생성될때 받아온 예약번호를 상세조회하는 조건문
+    if (searchAirlinereservationnumber) getReservation(searchAirlinereservationnumber);
     initScripts();
     initCustom();
   }, []);
+  //reservation이 변경될 때마다 totalCount 수가변함
+  useEffect(() => {
+    // adultCount와 childCount를 합산하여 totalpeople 업데이트
+    setTotalPeople(Number(reservation.adultCount) + Number(reservation.childCount));
+    const newArray = array.length < totalpeople ? [...array, ...Array(totalpeople - array.length).fill("a")] : array.slice(0, totalpeople);
+    setArray(newArray);
+  }, [reservation,totalpeople]); // reservation이 변경될 때마다 useEffect가 실행
 
 
 
@@ -191,6 +242,7 @@ const decreaseCount = () => {
                       {/* <div className="col-10"> */}
            
                       <div className="input-group">
+
                         <div className="col-sm-10 col-md-6 mb-3 mb-lg-0 col-lg-2">
                           <div className="was-validated">
                             <h6>국적</h6>
@@ -314,6 +366,7 @@ const decreaseCount = () => {
                               제거
                             </button>                            
                           </div>                      */}
+
 
                       </div>
                     </div>
