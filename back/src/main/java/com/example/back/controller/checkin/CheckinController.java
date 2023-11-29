@@ -62,21 +62,5 @@ public class CheckinController {
         }
     }
 
-    //    저장 함수
-    @PostMapping("/")
-    public ResponseEntity<Object> create(@RequestBody Passport passport) {
-
-        try {
-            Passport passport2 = passportService.save(passport); // db 저장
-
-            return new ResponseEntity<>(passport2, HttpStatus.OK);
-        } catch (Exception e) {
-//            DB 에러가 났을경우 : INTERNAL_SERVER_ERROR 프론트엔드로 전송
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-
-
 
 }

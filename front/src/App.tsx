@@ -77,14 +77,10 @@ function App() {
         {/* 체크인 */}
         <Route path="/checkin" element={<CheckIn />} />
         <Route path="/passengerinfo" element={<PassengerInfo />} />
-        <Route path="/passport" element={<Passport />} />
+        <Route path="/passport/:searchAirlinereservationnumber" element={<Passport />} />
         <Route path="/boardingpass" element={<Boardingpass />} />
         <Route path="/checkinstate" element={<CheckInStateModal />} />
 
-        {/* 체크인 */}
-        <Route path="/checkin" element={<CheckIn />} />
-        <Route path="/passport" element={<Passport />} />
-        <Route path="/foriareamodal" element={<ForiareaModal />} />
 
         {/* 회원 */}
         <Route path="/register" element={<Register />} />
