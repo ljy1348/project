@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -51,6 +52,17 @@ public class CheckinController {
             }
         }catch (Exception e) {
             log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/checkin/sheat/{operaionId}")
+    public ResponseEntity<?> getSheat(@PathVariable int operaionId) {
+        try {
+            List<checkindto> list = checkinService.getSheat(operaionId);
+            return new ResponseEntity<>(list, HttpStatus.OK);
+
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

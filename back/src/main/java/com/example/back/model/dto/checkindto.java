@@ -15,7 +15,7 @@ package com.example.back.model.dto;
  */
 public interface checkindto {
     String getCheckId();
-    String seatNumber();
+    String getSeatNumber();
     String getAdultCount();
     String getChildCount();
     Integer getAirlineReservationNumber();

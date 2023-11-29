@@ -48,6 +48,7 @@ import PaymentResult from "./pages/payment/PaymentResult";
 import PaymentSuccess from "./pages/payment/PaymentSuccess";
 import PaymentFail from "./pages/payment/PaymentFail";
 import Home2 from "./pages/Home2";
+import SelectSeat from "./pages/modal/SelectSeat";
 // todo: 리액트 import
 
 function App() {
@@ -107,7 +108,6 @@ function App() {
           element={<SearchReservationPage />}
         />
         <Route path="/write-notice" element={<WriteNoticePage />} />
-        <Route path="/test" element={<Test />} />
 
         {/* 결제 */}
 
@@ -124,7 +124,7 @@ function App() {
           element={<ReservePayment />}
         />
 
-        <Route path="/test" element={<Home2 />} />
+        <Route path="/test" element={<SelectSeat />} />
       </Routes>
       {/* 꼬리말 */}
       <Footer />
