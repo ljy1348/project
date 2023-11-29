@@ -397,6 +397,8 @@ const decreaseCount = () => {
                     <p>추가 수화물 1인당 2개씩 추가가능 </p>
     
               <table className="table">
+
+                
                 <thead className="test1">
                   <tr>
                     <th scope="col">예약자</th>
@@ -404,7 +406,11 @@ const decreaseCount = () => {
                     <th scope="col">금액</th>
                   </tr>
                 </thead>
-                <tbody>
+                {/* <tbody> */}
+                {array &&
+                  array.map((val, idx) => {
+                    return (
+
                   <tr>
                     <td className="passengername"></td>
                     <td className="bagcount">
@@ -444,6 +450,15 @@ const decreaseCount = () => {
                   </tr>
 
 
+
+);
+              })}
+
+
+
+
+
+
                  
                   <tr>
                     <td></td>
@@ -466,8 +481,10 @@ const decreaseCount = () => {
                   </tr>
                   
                   
-                </tbody>
+                {/* </tbody> */}
               </table>
+
+              
               <div className="toboardingpass">
                 <Link to={"/boardingpass"}>
                   <button type="button" className="btn btn-outline-dark">
