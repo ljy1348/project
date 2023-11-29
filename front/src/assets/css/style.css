@@ -495,7 +495,6 @@ h4,
   position: relative;
   padding-right: 20px;
 }
-
 .site-nav .site-navigation .site-menu .has-children > a:before {
   position: absolute;
   content: "\e313";
@@ -1975,9 +1974,149 @@ h4,
 .site-footer {
   font-size: 14px;
   color: #777;
-  /* dev */
+}
+.customer-1 {
+  height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+/* 고객센터 사진 */
+.hero.hero-customer {
+  padding: 5rem 0 5rem ;
+  margin-bottom: auto;
+  background: #8facc0;
+  background-image: url("../images/customer_center.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
+/* 자주 찾는 질문 */
+.test1 {
+  font-size: 15px;
+  width: 1000px;
+  margin: 0px auto;
+  background: rgb(255, 255, 255);
+}
+
+.page-title {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding-right: 30%;
+}
+
+
+/* 공지사항 조회 css */
+.notice-container {
+  padding: 20px;
+  background-color: #f2f2f2;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+  color: rgb(151, 20, 20)737;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+}
+
+.notice-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #004489;
+}
+
+.notice-writer {
+  color: #666;
+}
+
+.notice-content {
+  margin-top: 20px;
   line-height: 1.6;
 }
+/* 공지사항 조회 css 끝*/
+
+
+/* 1:1 문의 */
+.gray_box {
+  margin-top: 50px;
+  padding: 40px;
+}
+
+.gray_box1 {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgb(245, 246, 248);
+  border-radius: 10;
+}
+
+.gray_box1 _ h3 {
+  margin-bottom: 20px;
+}
+
+.gray_box2 .list_type2 {
+  background-color: #1402020c;
+  font-size: 15px;
+  margin-top: 10px;
+  padding: 40px;
+}
+
+.list_type2 > li {
+  padding-left: 13px;
+  line-height: 24px;
+  font-weight: normal;
+  text-align: left;
+}
+
+.gray box3 {
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+}
+
+.form_group{
+  display: flex;
+  justify-content: space-between;
+}
+
+.k_box {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.button1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.k_title {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.k_id {
+  flex: 1;
+/* dev */
+line-height: 1.6; }
 .site-footer .inner {
   padding-top: 0px;
   padding-bottom: 70px;

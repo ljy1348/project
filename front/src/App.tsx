@@ -1,3 +1,11 @@
+import CuCenter from "./pages/customerCenter/CuCenter";
+import NoticeListPage from "./pages/customerCenter/notice/NoticeListPage";
+
+import QuestionPage from "./pages/customerCenter/question/QuestionPage";
+import QuestionBoardPage from "./pages/customerCenter/board/QuestionBoardPage";
+
+import NoticeContentPage from "./pages/customerCenter/notice/NoticeContentPage";
+import AddboardList from "./pages/customerCenter/board/AddboardList";
 import React, { useEffect } from "react";
 
 // todo: 외부 lib import
@@ -6,15 +14,9 @@ import "aos/dist/aos.css";
 // 개발자가 직접 만든 css
 import "./assets/css/style.css";
 
-
-
-import CheckInStateModal from './pages/modal/CheckInStateModal';
-import Boardingpass from './pages/checkIn/Boardingpass';
-import PassengerInfo from './pages/checkIn/PassengerInfo';
-
-
-
-
+import CheckInStateModal from "./pages/modal/CheckInStateModal";
+import Boardingpass from "./pages/checkIn/Boardingpass";
+import PassengerInfo from "./pages/checkIn/PassengerInfo";
 
 // todo: 리액트 import
 import Nav from "./components/common/Nav";
@@ -36,40 +38,49 @@ import AdminPage from "./pages/auth/user/AdminPage";
 import AdminMemberList from "./pages/auth/admin/AdminMemberList";
 // import CustomerPage from './pages/customer/CustomerPage';
 
-import CheckIn from './pages/checkIn/CheckIn';
-import Reserve from './pages/reserve/Reserve';
-import ForiareaModal from './pages/modal/ForiareaModal';
-import Passport from './pages/checkIn/Passport';
-import ReserveChoose from './pages/reserve/ReserveChoose';
-import ReservePayment from './pages/reserve/ReservePayment';
-import PaymentResult from './pages/payment/PaymentResult';
-import PaymentSuccess from './pages/payment/PaymentSuccess';
-import PaymentFail from './pages/payment/PaymentFail';
+import CheckIn from "./pages/checkIn/CheckIn";
+import Reserve from "./pages/reserve/Reserve";
+import ForiareaModal from "./pages/modal/ForiareaModal";
+import Passport from "./pages/checkIn/Passport";
+import ReserveChoose from "./pages/reserve/ReserveChoose";
+import ReservePayment from "./pages/reserve/ReservePayment";
+import PaymentResult from "./pages/payment/PaymentResult";
+import PaymentSuccess from "./pages/payment/PaymentSuccess";
+import PaymentFail from "./pages/payment/PaymentFail";
 import Home2 from "./pages/Home2";
 // todo: 리액트 import
 
 function App() {
   return (
     <div className="App">
-
-
-
-
-      {/* 머리말 */}                 
-      <Nav/>
+      {/* 머리말 */}
+      <Nav />
 
       {/* 본문 */}
       <Routes>
+        {/* 고객센터 */}
+        <Route path="/cucenter" element={<CuCenter />} />
+
+        {/* 공지사항 */}
+        <Route path="/notice" element={<NoticeListPage />} />
+        <Route path="/notice/:noticeId" element={<NoticeContentPage />} />
+
+        {/* 자주 찾는 질문 */}
+        <Route path="/question" element={<QuestionPage />} />
+
+        {/* 1:1 문의 게시판 */}
+        <Route path="/question-board" element={<QuestionBoardPage />} />
+        <Route path="/addquestion-board" element={<AddboardList />} />
+
         <Route path="/" element={<Home />}></Route>
 
-          {/* 체크인 */}
-          <Route path="/checkin" element={<CheckIn/>} />   
-          <Route path="/passengerinfo" element={<PassengerInfo/>} />   
-          <Route path="/passport" element={<Passport/>} />   
-          <Route path="/boardingpass" element={<Boardingpass/>} />   
-          <Route path="/checkinstate" element={<CheckInStateModal/>} />   
-       
-          
+        {/* 체크인 */}
+        <Route path="/checkin" element={<CheckIn />} />
+        <Route path="/passengerinfo" element={<PassengerInfo />} />
+        <Route path="/passport" element={<Passport />} />
+        <Route path="/boardingpass" element={<Boardingpass />} />
+        <Route path="/checkinstate" element={<CheckInStateModal />} />
+
         {/* 체크인 */}
         <Route path="/checkin" element={<CheckIn />} />
         <Route path="/passport" element={<Passport />} />
@@ -89,17 +100,19 @@ function App() {
         <Route path="/user-info" element={<UserInfo />} />
         <Route path="/admin/*" element={<AdminPage />} />
 
-          {/* 예약 조회 */}
+        {/* 예약 조회 */}
         <Route path="/search-reservation" element={<ReservationListPage />} />
-        <Route path="/search-reservation/seeReservation/:airlineReservationNumber" element={<SearchReservationPage />} />
+        <Route
+          path="/search-reservation/seeReservation/:airlineReservationNumber"
+          element={<SearchReservationPage />}
+        />
         <Route path="/write-notice" element={<WriteNoticePage />} />
         <Route path="/test" element={<Test />} />
 
         {/* 결제 */}
 
-        <Route path="/payment/success" element={<PaymentSuccess/>} />
-        <Route path="/aa/fail" element={<PaymentFail/>} />
-
+        <Route path="/payment/success" element={<PaymentSuccess />} />
+        <Route path="/aa/fail" element={<PaymentFail />} />
 
         <Route path="/reserve" element={<Reserve />} />
         <Route
