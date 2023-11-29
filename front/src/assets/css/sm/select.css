@@ -1,0 +1,46 @@
+#app {
+	width: 400px;
+	margin: 0 auto;
+}
+#bottom {
+	width: 500px;
+	margin: 15px auto;
+}
+#confirmButton {
+	width: 470px;
+	height: 37px;
+	border: 1px solid lightblue;
+	background: #fff;
+	color: blue;
+}
+.line {
+	overflow: hidden;
+}
+.seat {
+	margin: 2px;
+	float: left;
+	width: 50px;
+	height: 50px;
+	border-radius: 3px;
+}
+.seat:hover {
+	opacity: 0.5;
+	cursor: pointer;
+}
+.load{
+    background-color:white ;
+}
+.enable {
+    background:lightgreen;
+  }
+
+  /* 선택한 좌석 */
+  .disable{
+    background:orangered; 
+  }
+  
+  /* 선택불가 좌석 */
+  .soldout{
+    background:blue;
+    /* opacity: .5; */
+  }
