@@ -27,21 +27,16 @@ function Passport() {
     // 비회원ID
     userNumber: 0,
 
-    userName: "",
-    userSex: "",
-    userCountry: "",
-    userDate: "",
-
-    memberEname: "",
-    memberSex: "",
-    memberCountry: "",
-    memberDate : ""
+  
 
   };
 
 
   // 여권 객체
   const [passport, setPassport] = useState<IPassport>(initialPassport);
+
+   // 저장버튼 클릭후 submitted = true 변경됨
+   const [submitted, setSubmitted] = useState<boolean>(false);
  
 
   // 저장버튼 클릭후 submitted = true 변경됨
@@ -58,20 +53,10 @@ function Passport() {
       // 임시 객체
       var data = {
         passportId: passport.passportId,
-        memberId: passport.memberId,
         passportCounrty: passport.passportCounrty,
         passportDate: passport.passportDate,
         userNumber: passport.userNumber,
-
-        memberEname: passport.memberEname ,
-        memberSex: passport.memberSex,
-        memberDate: passport.memberDate,
-        memberCountry: passport.memberCountry,
-
-        userName: passport.userName,
-        userSex: passport.userSex,
-        userDate: passport.userDate,
-        userCountry: passport.userCountry
+        memberId: passport.memberId,
       
       };
   
@@ -105,9 +90,9 @@ function Passport() {
   const onClickAdd = (idx: number) => {
     setArray([...array, "a"]);
   };
-  const onClickRemove = (idx:number) => {
+  const onClickRemove = (idx: number) => {
     if (array.length > 1) {
-      setArray(array.slice(0, -1));
+      setArray((prevArray) => prevArray.filter((_, i) => i !== idx));
     }
    
   };
@@ -198,7 +183,7 @@ function Passport() {
                               name=""
                               id=""
                               className="form-control custom-select"
-                              value={passport.memberCountry || passport.userCountry}
+                
                               required
                               aria-label="select example"
                             >
@@ -221,7 +206,7 @@ function Passport() {
                               name=""
                               id=""
                               className="form-control custom-select"
-                              value={passport.memberSex || passport.userSex}
+                       
                               required
                               aria-label="select example"
                             >
@@ -239,7 +224,7 @@ function Passport() {
                               className="form-control"
                               id="validation Input"
                               placeholder="YYYYMMDD"
-                             value={(passport?.memberDate || passport?.userDate)?.toString()}
+          
                               required
                             ></input>
                           </div>
@@ -252,17 +237,16 @@ function Passport() {
                               name=""
                               id=""
                               className="form-control custom-select"
-                              value={passport.passportCounrty}
                               required
                             >
                               <option value="">여권발급국가</option>
-                              <option value="">페루</option>
-                              <option value="">일본</option>
-                              <option value="">태국</option>
-                              <option value="">브라질</option>
-                              <option value="">미국</option>
-                              <option value="">일본</option>
-                              <option value="">한국</option>
+                              <option value={passport.passportCounrty}>페루</option>
+                              <option value={passport.passportCounrty}>일본</option>
+                              <option value={passport.passportCounrty}>태국</option>
+                              <option value={passport.passportCounrty}>브라질</option>
+                              <option value={passport.passportCounrty}>미국</option>
+                              <option value={passport.passportCounrty}>일본</option>
+                              <option value={passport.passportCounrty}>대한민국</option>
                             </select>
                           </div>
                         </div>
@@ -286,15 +270,17 @@ function Passport() {
                           <div className="was-validated">
                             <h6>여권만료일</h6>
                             <input
+                              name=""
                               type="type"
-                              className="form-control"
-                              value={passport.passportDate as string}
-                              placeholder="YYYY-MM-DD"
                               id="validation Input"
+                              className="form-control"
+                              value={passport.passportDate}
+                              placeholder="YYYY-MM-DD"
                               required
                             />
-                          </div>   
+                          </div>
                         </div>
+
 
                         <div className="passengerbutton">
                             <button
@@ -341,7 +327,7 @@ function Passport() {
             <p>기본 수화물 : 휴대수화물 1 (5kg) + 위탁수화물 1(20kg)  
                     추가없이는 위탁 1 + 휴대 1</p>
                     <p>추가 수화물 1인당 2개씩 추가가능 </p>
-              <h5> 예약 번호 : </h5>
+    
               <table className="table">
                 <thead className="test1">
                   <tr>

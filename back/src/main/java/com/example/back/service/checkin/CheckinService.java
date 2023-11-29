@@ -1,10 +1,15 @@
 package com.example.back.service.checkin;
 
+import com.example.back.model.checkin.Checkin;
 import com.example.back.model.dto.checkindto;
+import com.example.back.model.entity.checkin.Checkin;
 import com.example.back.repository.checkin.CheckinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -26,11 +31,17 @@ public class CheckinService {
     CheckinRepository checkinRepository; // DI
 
     //    전체 조회 + 페이징
-    public Optional<checkindto> airnumber(int airlineReservationNumber) {
-        Optional <checkindto> optional = checkinRepository.airnumber(airlineReservationNumber);
-
+    public Optional<checkindto> checkresnum(int airlineReservationNumber) {
+        Optional <checkindto> optional = checkinRepository.checkresnum(airlineReservationNumber);
         return optional;
     }
 
+    //    저장함수(수정함수)
+    public Checkin save(Checkin checkin) {
+
+        Checkin checkin2 = checkinRepository.save(checkin);
+
+        return checkin2;
+    }
 
 }

@@ -25,11 +25,12 @@ function PassengerInfo() {
   };
   const onClickRemove = (idx: number) => {
     if (array.length > 1) {
-      setArray(array.slice(0, -1));
+      setArray((prevArray) => prevArray.filter((_, i) => i !== idx));
     }
   };
 
-  //  todo: 증가 함수
+  //  todo: 수화물 
+
   const increaseCount3 = () => {
     if (bagCount3 < 2) {
       // bagCount1을 1 증가시킵니다.
@@ -41,13 +42,13 @@ function PassengerInfo() {
       alert("1인당 초과수화물은 2개까지 가능합니다");
     }
   };
-  // 수화물
+
 
   //  todo: 감소 함수
   const decreaseCount3 = () => {
-    if (bagCount3 > 0) {
+     if (bagCount3 > 0) {
       bagCount3 -= 1;
-      setBagCount3(bagCount3); // 현재 감소값 저장
+      setBagCount4(bagCount3); // 현재 감소값 저장
     }
   };
 
@@ -94,121 +95,20 @@ function PassengerInfo() {
 
       <Accordion className="testtttttttt1" defaultActiveKey={["0"]} alwaysOpen>
         <Accordion.Item eventKey="0">
-          <Accordion.Header>탑승자 정보 #1</Accordion.Header>
+          <Accordion.Header>좌석선택 #1</Accordion.Header>
           <Accordion.Body>
-            {/* 탑승자 정보 입력    */}
-            {array &&
-              array.map((val, idx) => {
-                return (
-                  <form className="form" id="domesticpassengerForm">
-                    <div className="row mb-2">
-                      {/* <div className="col-10"> */}
-                      <div>승객 </div>
-                      <div className="input-group">
-                        
-
-                        <div className="col-sm-10 col-md-6 mb-3 mb-lg-2 col-lg-2">
-                          <div className="was-validated">
-                            <h6>Full Name</h6>
-                            <input
-                              name=""
-                              type="type"
-                              id="validation Input"
-                              className="form-control"
-                              required
-                            />
-                          </div>
-                        </div>
-
-                        <div className="col-sm-10 col-md-3 mb-3 mb-lg-2 col-lg-2">
-                          <div className="was-validated">
-                            <h6>성별</h6>
-                            <select
-                              name=""
-                              id=""
-                              className="form-control custom-select"
-                              required
-                              aria-label="select example"
-                            >
-                              <option value="">성별</option>
-                              <option value="">여성</option>
-                              <option value="">남성</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div className="col-sm-10 col-md-6 mb-3 mb-lg-2 col-lg-2 passengernameinfo">
-                          <div className="was-validated">
-                            <h6>주민등록번호</h6>
-                            <input
-                              type="type"
-                              className="form-control"
-                              id="validation Input"
-                              required
-                            />
-                          </div>
-                        </div>
-
-                        <div className="col-sm-10 col-md-6 mb-3 mb-lg-2 col-lg-3 passengernameinfo">
-                          <div className="was-validated">
-                            <h6>주소</h6>
-                            <input
-                              type="type"
-                              className="form-control"
-                              id="validation Input"
-                              required
-                            />
-                          </div>
-                        </div>
-
-
-                      
-                        <div className="pluspassenger">
-                          <button
-                            type="button"
-                            className="btn btn-outline-dark"
-                            onClick={() => onClickAdd(idx)}
-                          >
-                            승객 추가
-                          </button>
-                        </div>
-                        <div className="minuspassenger">
-                          <button
-                            type="button"
-                            className="btn btn-dark"
-                            onClick={() => onClickRemove(idx)}
-                          >
-                            제거
-                          </button>
-                        </div>
-                        </div>
-                      </div>
-                
-                  </form>
-                );
-              })}
-            {/* </div> */}
-            {/* 여권정보입력  */}
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           </Accordion.Body>
         </Accordion.Item>
-
-        {/* 좌석지정 */}
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>좌석 선택 #2</Accordion.Header>
-          <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          </Accordion.Body>
-        </Accordion.Item>
-        {/* 좌석지정 */}
 
         {/* 수화물 사전 구매  */}
-        <Accordion.Item eventKey="2">
+        <Accordion.Item eventKey="1">
           <Accordion.Header>수화물추가 (선택사항) #3</Accordion.Header>
           <Accordion.Body>
             <div className="bagage">
               <p>
-                기본 수화물 : 휴대수화물 1 (5kg) + 위탁수화물 1(20kg) 추가없이는
-                위탁 1 + 휴대 1
+                기본 수화물 : 휴대수화물 1 (5kg) + 위탁수화물 1(20kg) 가능 
+                추가수화물 기준 : 캐리어당 20kg
               </p>
               <p>추가 수화물 1인당 2개씩 추가가능 </p>
               <h5> 예약 번호 : </h5>

@@ -1,4 +1,4 @@
-package com.example.back.model.entity.checkin;
+package com.example.back.model.checkin;
 
 import com.example.back.model.common.BaseTimeEntity;
 import lombok.*;
@@ -24,10 +24,10 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name="TB_CHECKIN")
+@Table(name="TB_RESERVATION")
 @SequenceGenerator(
-        name = "SQ_CHECKIN_GENERATOR"
-        , sequenceName = "SQ_CHECKIN"
+        name = "SQ_RESERVATION_GENERATOR"
+        , sequenceName = "SQ_RESERVATION"
         , initialValue = 1
         , allocationSize = 1
 )
@@ -40,15 +40,24 @@ import javax.persistence.*;
 @DynamicInsert
 @DynamicUpdate
 @Where(clause = "DELETE_YN = 'N'")
-@SQLDelete(sql = "UPDATE TB_CHECKIN SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE CHECK_ID = ?")
+@SQLDelete(sql = "UPDATE TB_RESERVATION SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE AIRLINE_RESERVATION_NUMBER = ?")
 public class Checkin extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE
-            , generator = "SQ_CHECKIN_GENERATOR"
+            , generator = "SQ_RESERVATION_GENERATOR"
     )
-    private String checkId;
+
     private Integer airlineReservationNumber;
+    private String adultCount;
+    private String childCount;
+    private String mileUseYn;
     private String seatType;
-    private String passportId;
     private String memberYn;
+    private String checkYn;
+    private String memberId;
+    private String userNumber;
+    private Integer operationId;
+
+    private String startAirport;
+    private String finalAirport;
 }
