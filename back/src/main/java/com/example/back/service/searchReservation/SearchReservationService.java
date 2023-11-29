@@ -1,11 +1,10 @@
 package com.example.back.service.searchReservation;
 
 
-import com.example.back.model.dto.OprResDto;
+import com.example.back.model.dto.searchReservation.OprResDto;
 import com.example.back.model.dto.reserve.ReservationDto;
 import com.example.back.model.entity.reserve.Reservation;
 
-import com.example.back.model.entity.searchReservation.SearchReservation;
 import com.example.back.repository.searchReservation.SearchReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

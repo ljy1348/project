@@ -1,15 +1,15 @@
 // 예약 조회 페이지
 import { useEffect, useState } from "react";
 import ReservationService from "../../services/reservation/ReservationService";
-import IReservation from "../../types/tour/IReservation";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { useNavigate } from "react-router-dom";
+import ISearchReservation from "../../types/searchReservation/ISearchReservation";
 
 function ReservationList() {
   // 변수 정의
   // reservation 배열 변수
-  const [reservation, setReservation] = useState<Array<IReservation>>([]);
+  const [reservation, setReservation] = useState<Array<ISearchReservation>>([]);
 
   // 유저 정보 가져오기 함수
   const { user: currentUser } = useSelector((state:RootState)=> state.auth);

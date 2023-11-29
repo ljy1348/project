@@ -1,7 +1,7 @@
 package com.example.back.controller.searchReservation;
 
 
-import com.example.back.model.dto.OprResDto;
+import com.example.back.model.dto.searchReservation.OprResDto;
 import com.example.back.model.dto.reserve.ReservationDto;
 import com.example.back.model.entity.reserve.Reservation;
 

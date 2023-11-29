@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * packageName : com.example.back.service.notice
@@ -31,44 +32,60 @@ public class NoticeService {
     @Autowired
     NoticeRepository noticeRepository;
 
-//    noticeId 내림차순 전체 조회
+    //    noticeId 내림차순 전체 조회
     public List<Notice> noticeIdDesc() {
         List<Notice> list = noticeRepository.noticeIdDesc();
 
         return list;
     }
 
-//    관리자 페이지 공지사항 전체 조회 + like 검색
+    //    관리자 페이지 공지사항 전체 조회 + like 검색
     public Page<NoticeDto> adminNoticeIdDesc(String noticeTitle, Pageable pageable) {
         Page<NoticeDto> page = noticeRepository.adminNoticeIdDesc(noticeTitle, pageable);
 
         return page;
     }
 
-//    noticeTitle like 검색
-    public List<Notice> findAllByNoticeTitleContaining(String noticeTitle) {
-        List<Notice> list = noticeRepository.findAllByNoticeTitleContaining(noticeTitle);
-
-        return list;
-    }
-
-
-//    저장(수정)
+    //    저장(수정)
     public Notice save(Notice notice) {
         Notice notice2 = noticeRepository.save(notice);
 
         return notice2;
     }
 
-//    삭제
-public boolean removeById(Integer noticeId) {
+    //    삭제
+    public boolean removeById(Integer noticeId) {
 
 //      existsById : jpa 함수 - 리턴값: 있으면 true, 없으면 false
-    if(noticeRepository.existsById(noticeId)) {
-        noticeRepository.deleteById(noticeId); // DB 삭제(dno)
-        return true;
+        if (noticeRepository.existsById(noticeId)) {
+            noticeRepository.deleteById(noticeId); // DB 삭제(dno)
+            return true;
+        }
+        return false;
     }
-    return false;
-}
 
+    /// title 검색
+    public Page<NoticeDto> noticeIdDescTitle(String noticeTitle, Pageable pageable) {
+        Page<NoticeDto> page
+                = noticeRepository.noticeIdDescTitle(noticeTitle, pageable);
+
+        return page;
+    }
+
+    // content like 검색
+    public Page<NoticeDto> noticeIdDescContent(String noticeContent, Pageable pageable) {
+        Page<NoticeDto> page
+                = noticeRepository.noticeIdDescContent(noticeContent, pageable);
+
+        return page;
+    }
+
+
+    //    상세조회(1건조회)
+    public Optional<Notice> findById(int noticeId) {
+        Optional<Notice> optionalNotice
+                = noticeRepository.findById(noticeId);
+
+        return optionalNotice;
+    }
 }

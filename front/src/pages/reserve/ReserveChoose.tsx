@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import IReservation from "../../types/reserve/IReservation";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import MyareaModal from "../modal/MyareaModal";
 import ForiareaModal from "../modal/ForiareaModal";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import IOperationinfo from "../../types/IOperationinfo";
-import ReserveService from "../../services/OperationService";
-import OperationService from "../../services/OperationService";
+
 import { Pagination } from "@mui/material";
+import IOperationinfo from "../../types/operationInfo/IOperationinfo";
+import OperationService from "../../services/operation/OperationService";
 
 function ReserveChoose(props: any) {
   // todo: 공통 페이징 변수 4개

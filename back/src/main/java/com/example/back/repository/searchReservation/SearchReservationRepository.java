@@ -1,11 +1,10 @@
 package com.example.back.repository.searchReservation;
 
 
-import com.example.back.model.dto.OprResDto;
+import com.example.back.model.dto.searchReservation.OprResDto;
 import com.example.back.model.dto.reserve.ReservationDto;
 import com.example.back.model.entity.reserve.Reservation;
 
-import com.example.back.model.entity.searchReservation.SearchReservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -57,10 +56,6 @@ public interface SearchReservationRepository extends JpaRepository<Reservation, 
 
 //    전체 조회 + = 검색
 
-    List<SearchReservation> findAllByAirlineReservationNumber(int airlineReservationNumber);
-
-    List<SearchReservation> findAllByAirlineReservationNumberAndMemberId2(int airlineReservationNumber, String memberId);
-
 
 
 //    상세 조회
@@ -85,10 +80,10 @@ public interface SearchReservationRepository extends JpaRepository<Reservation, 
             "     , OPR.DOMESTIC_INTERNATIONAL as domesticInternational " +
             "     , OPR.PRICE as price " +
             "     , MEM.MEMBER_NAME as memberName " +
-            "FROM TB_RESERVATION RES, TB_OPERATION_INFO OPR, TB_MEMBERS_INFO MEM " +
+            "FROM TB_RESERVATION RES, OPERATION_INFO OPR, TB_MEMBERS_INFO MEM " +
             "WHERE RES.OPERATION_ID = OPR.OPERATION_ID AND RES.MEMBER_ID = MEM.MEMBER_ID " +
             "AND RES.AIRLINE_RESERVATION_NUMBER LIKE '%' || :airlineReservationNumber || '%' ", countQuery = "SELECT COUNT(*)" +
-            "FROM TB_RESERVATION RES, TB_OPERATION_INFO OPR, TB_MEMBERS_INFO MEM " +
+            "FROM TB_RESERVATION RES, OPERATION_INFO OPR, TB_MEMBERS_INFO MEM " +
             "WHERE RES.OPERATION_ID = OPR.OPERATION_ID AND RES.MEMBER_ID = MEM.MEMBER_ID " +
             "AND RES.AIRLINE_RESERVATION_NUMBER LIKE '%' || :airlineReservationNumber || '%' ", nativeQuery = true)
     Optional<OprResDto> searchReservation(@Param("airlineReservationNumber") int airlineReservationNumber);

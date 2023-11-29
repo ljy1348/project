@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * packageName : com.example.back.controller.notice
@@ -42,19 +43,39 @@ public class NoticeController {
 
     //    전체 조회 + like 검색
     @GetMapping("/notice")
-    public ResponseEntity<Object> getNoticeAll(){
+    public ResponseEntity<Object> getNoticeAll(
+            @RequestParam(defaultValue = "noticeTitle") String searchSelect,
+            @RequestParam(defaultValue = "") String searchKeyword,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size
+    ) {
         try {
-//            전체 조회 + like 검색
-            List<Notice> list = noticeService.noticeIdDesc();
+            Pageable pageable = PageRequest.of(page, size);
 
-            if (list.isEmpty() == false) {
+            Page<NoticeDto> noticePage; // customer 페이지 정의
+
+            if(searchSelect.equals("noticeTitle")) {
+                //            fullName like 검색
+                noticePage = noticeService.noticeIdDescTitle(searchKeyword, pageable);
+            } else {
+                //            email like 검색
+                noticePage = noticeService.noticeIdDescContent(searchKeyword, pageable);
+            }
+
+//          리액트 전송 : 부서배열 , 페이징정보 [자료구조 : Map<키이름, 값>]
+            Map<String, Object> response = new HashMap<>();
+            response.put("notice", noticePage.getContent()); // 부서배열
+            response.put("currentPage", noticePage.getNumber()); // 현재페이지번호
+            response.put("totalItems", noticePage.getTotalElements()); // 총건수(개수)
+            response.put("totalPages", noticePage.getTotalPages()); // 총페이지수
+
+            if (noticePage.isEmpty() == false) {
 //                성공
-                return new ResponseEntity<>(list, HttpStatus.OK);
+                return new ResponseEntity<>(response, HttpStatus.OK);
             } else {
 //                데이터 없음
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-
         } catch (Exception e) {
             log.debug(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -142,6 +163,26 @@ public class NoticeController {
             }
 
         } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/notice/{noticeId}")
+    public ResponseEntity<Object> findById(@PathVariable int noticeId) {
+
+        try {
+//            상세조회 실행
+            Optional<Notice> optionalNotice = noticeService.findById(noticeId);
+
+            if (optionalNotice.isPresent()) {
+//                성공
+                return new ResponseEntity<>(optionalNotice.get(), HttpStatus.OK);
+            } else {
+//                데이터 없음
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+//            서버 에러
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

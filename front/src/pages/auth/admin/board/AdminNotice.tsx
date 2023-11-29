@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import IWriteNotice from '../../../../types/tour/IWriteNotice';
 import WriteNoticeService from '../../../../services/notice/WriteNoticeService';
 import { Pagination } from "@mui/material";
 import { Link } from "react-router-dom";
+import IWriteNotice from "../../../../types/writeNotice/IWriteNotice";
 
 function AdminNotice() {
 

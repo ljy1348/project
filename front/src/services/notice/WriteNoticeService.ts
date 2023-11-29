@@ -1,5 +1,6 @@
 // axios 공통함수 : 벡엔드 연동
-import IWriteNotice from "../../types/tour/IWriteNotice";
+
+import IWriteNotice from "../../types/writeNotice/IWriteNotice";
 import http from "../../utils/http-common";
 
 // 전체 조회 + like 검색(paging 기능 : page(현재페이지), size(1페이지당개수))

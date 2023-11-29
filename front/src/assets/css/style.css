@@ -3053,3 +3053,6 @@ input {
   border-radius: 5px;
 }
 
+.line-sorting > td > a {
+  text-decoration-line: none;
+}

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
-import ICheckin from "../../types/checkin/ICheckin";
+
 import CheckinService from "../../services/checkin/CheckinService";
-import IReservation from "../../types/reservation/ISearchReservation";
-import ISearchReservation from "../../types/reservation/ISearchReservation";
+
 
 function CheckInStateModal( props: any) {
   const initChckStt = {
