@@ -12,7 +12,7 @@ import IMemberInfo from "../../types/memberInfo/IMemberInfo";
 import INonMemberInfo from "../../types/nonmemberInfo/INonMembersInfo";
 import IBaggage from "../../types/baggage/IBaggage";
 import BaggageService from "../../services/checkin/BaggageService";
-import ReservationService from "../../services/ReservationService";
+import ReservationService from "../../services/reservation/ReservationService";
 
 function Passport() {
 const{airlinereservationnumber}= useParams();
