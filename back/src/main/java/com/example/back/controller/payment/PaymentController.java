@@ -114,4 +114,36 @@ public class PaymentController {
 
 
     }
+
+    @DeleteMapping("/{payId}")
+    public ResponseEntity<?> deleteByPayId(@PathVariable int payId) {
+        try {
+            log.info("페이 아이디 : "+String.valueOf(payId));
+            boolean check = paymentService.deleteById(payId);
+            if (check) {
+
+            return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/{memberId}/{payId}")
+    public ResponseEntity<?> selectAllMemberIdAndPayId (@PathVariable String memberId, @PathVariable int payId, Pageable pageable) {
+        try {
+
+            Page<Payment> payments = paymentService.selectAllByMemberIdAndPayId(memberId, payId, pageable);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("content", payments.getContent());
+            map.put("totalPages", payments.getTotalPages());
+            return new ResponseEntity<>(map, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

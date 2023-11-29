@@ -324,13 +324,17 @@ function ReservePayment() {
 
   const handlePayment = async () => {
     const userNumbersArray = await saveNonmemberinfo();
-    if (userNumbersArray.length > 0) {
+
+
+
+    if (userNumbersArray.length >= Number(adultCount)+Number(childCount)) {
       await saveReservation(userNumbersArray, operationinfo);
       // 여정 2에 대한 예약 저장
       await saveReservation(userNumbersArray, operationinfo2);
 
       setModalShow(true);
     } else {
+    alert("정보를 모두 입력해주세요");
       console.log("비회원 정보 저장에 실패했습니다.");
     }
   };

@@ -41,6 +41,31 @@ function UserPaymentList() {
       });
   };
 
+  const searchPayment = () => { 
+    if (currentUser?.memberId)
+    PaymentService.SearchPayMember(currentUser.memberId, airlinePaymentNumber, page-1, pageSize)
+    .then((response: any) => {
+      const {content, totalPages} = response.data;
+      setPayment(content);
+      setTotalPages(totalPages);
+      setPage(1);
+      console.log("response", response.data);
+    })
+    .catch((e: Error) => {
+      console.log(e);
+    });
+   }
+
+  const deletePay = (payId:number) => { 
+    PaymentService.deletePay(payId)
+    .then((response: any) => {
+      retrievePayment()
+    })
+    .catch((e: Error) => {
+      console.log(e);
+    });
+   }
+
   //   input 태그 수동바인딩
   const onChangeSearchKeyword = (e: any) => {
     setAirlinePaymentNumber(e.target.value); // 화면값 -> 변수저장
@@ -52,12 +77,12 @@ function UserPaymentList() {
         <div className="col-md-8 offset-2">
               <div className="col-12 input-group mb-3">
               <div>
-                <p className="input-group-text">예약 번호</p>
+                <p className="input-group-text">결제 번호</p>
               </div>
                 <input
                   type="text"
                   className="searchNumber"
-                  placeholder="예약번호 6자리"
+                  placeholder="결제 번호"
                   value={airlinePaymentNumber}
                   onChange={onChangeSearchKeyword}
                 />
@@ -70,7 +95,7 @@ function UserPaymentList() {
                   type="button"
                   className="btn btn-primary btn-block"
                   value="조회하기"
-                  onClick={retrievePayment}
+                  onClick={searchPayment}
                 />
               </div>
         </div>
@@ -106,6 +131,7 @@ function UserPaymentList() {
               <th scope="col">도착 예약 번호</th>
               <th scope="col">마일리지 사용 여부</th>
               <th scope="col">결제 금액</th>
+              <th scope="col">예약 취소</th>
             </tr>
           </thead>
           <tbody className="tabText">
@@ -126,6 +152,7 @@ function UserPaymentList() {
                     </td>
                   <td>{data.milePrice}</td>
                   <td>{data.productPrice}</td>
+                  <td><a href='#'><span className='badge text-bg-danger' onClick={()=>{deletePay(data.payId)}}>취소</span></a></td>
                 </tr>
               ))}
           </tbody>

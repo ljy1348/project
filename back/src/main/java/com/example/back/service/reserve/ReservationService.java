@@ -49,5 +49,14 @@ public class ReservationService {
         return reservation2;
     }
 
+    public boolean delete(int id) {
+        if (reservationRepository.existsById(id)) {
+            reservationRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }

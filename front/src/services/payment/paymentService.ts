@@ -17,11 +17,23 @@ const getPayMember = (memberId:string, page:number, size:number) => {
     return http.get(`/payment/${memberId}?page=${page}&size=${size}`)
 }
 
+const deletePay = (payId:number) => {
+    return http.delete(`/payment/${payId}`, {headers : authHeader()})
+}
+
+const SearchPayMember = (memberId:string,payId:number, page:number, size:number) => {
+    return http.get(`/payment/${memberId}/${payId}?page=${page}&size=${size}`)
+}
+
+
+
 const PaymentService = {
     paymentMember,
     paymentNonMember,
     getPayMember,
-    paymentMile
+    paymentMile,
+    deletePay,
+    SearchPayMember
 }
 
 export default PaymentService;
