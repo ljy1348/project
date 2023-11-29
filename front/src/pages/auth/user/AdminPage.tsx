@@ -10,6 +10,7 @@ import { RootState } from '../../../store/store';
 import { Link, useNavigate } from 'react-router-dom';
 import BoardMain from '../admin/board/BoardMain';
 import '../../../assets/css/jy/style_jy.css';
+import AdminPayment from '../admin/AdminPayment';
 
 function AdminPage() {
 
@@ -31,8 +32,9 @@ function AdminPage() {
     else if (selectTab==="회원상세") return <AdminMember setSelectTab={setSelectTab} dataId={dataId}/>
     else if (selectTab==="항공기 추가") return <AddOperationInfo setSelectTab={setSelectTab}/>
     else if (selectTab==="항공기 상세") return <OperationInfo setSelectTab={setSelectTab} dataId={dataId}/>
-    else if (selectTab==="게시판") return <BoardMain />
-    else return <>예약</>
+    else if (selectTab==="게시판") return <BoardMain/>
+    else return <><AdminPayment/></>
+
   }
 
   return (

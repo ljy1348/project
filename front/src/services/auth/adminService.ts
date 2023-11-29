@@ -36,6 +36,14 @@ const editUser = (user:IUser) => {
    return http.get(`/admin/board/notice`, {headers : authHeader()});
 }
 
+const getPayAll = (page:number, size:number) => {
+   return http.get(`/admin/payment?page=${page}&size=${size}`, {headers : authHeader()})
+}
+
+const SearchPayAdmin = (payId:number, page:number, size:number) => {
+   return http.get(`/admin/payment/${payId}?page=${page}&size=${size}`, {headers : authHeader()})
+}
+
 
 const AdminService = {
     getMemberAll,
@@ -45,7 +53,9 @@ const AdminService = {
     createOperationInfo,
     getOperationInfo,
     deleteOperationInfo,
-    getNociceAll
+    getNociceAll,
+    getPayAll,
+    SearchPayAdmin
 }
 
 export default AdminService;

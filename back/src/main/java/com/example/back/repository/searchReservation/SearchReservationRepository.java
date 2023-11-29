@@ -88,6 +88,29 @@ public interface SearchReservationRepository extends JpaRepository<Reservation, 
             "AND RES.AIRLINE_RESERVATION_NUMBER LIKE '%' || :airlineReservationNumber || '%' ", nativeQuery = true)
     Optional<OprResDto> searchReservation(@Param("airlineReservationNumber") int airlineReservationNumber);
 
-
+    @Query(value = "SELECT RES.AIRLINE_RESERVATION_NUMBER as airlineReservationNumber " +
+            "     , RES.ADULT_COUNT as adultCount " +
+            "     , RES.CHILD_COUNT as childCount " +
+            "     , RES.MILE_USE_YN as mileUseYn " +
+            "     , RES.SEAT_TYPE as seatType " +
+            "     , RES.MEMBER_YN as memberYn " +
+            "     , RES.CHECK_YN as checkYn " +
+            "     , RES.MEMBER_ID as memberId " +
+            "     , RES.USER_NUMBER as userNumber " +
+            "     , RES.OPERATION_ID as operationId " +
+            "     , OPR.AIRLINE as airline " +
+            "     , OPR.FLIGHT_NAME as flightName " +
+            "     , OPR.START_AIRPORT as startAirport " +
+            "     , OPR.FINAL_AIRPORT as finalAirport " +
+            "     , OPR.START_TIME as startTime " +
+            "     , OPR.FINAL_TIME as finalTime " +
+            "     , OPR.START_DATE as startDate " +
+            "     , OPR.FINAL_DATE as finalDate " +
+            "     , OPR.DOMESTIC_INTERNATIONAL as domesticInternational " +
+            "     , OPR.PRICE as price " +
+            "FROM TB_RESERVATION RES, OPERATION_INFO OPR " +
+            "WHERE RES.OPERATION_ID = OPR.OPERATION_ID " +
+            "AND RES.AIRLINE_RESERVATION_NUMBER LIKE '%' || :airlineReservationNumber || '%' ", nativeQuery = true)
+    Optional<OprResDto> searchById(@Param("airlineReservationNumber") int airlineReservationNumber);
 
 }

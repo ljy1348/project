@@ -51,6 +51,16 @@ public class ReservationService {
         return reservation2;
     }
 
+
+    public boolean delete(int id) {
+        if (reservationRepository.existsById(id)) {
+            reservationRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //    상세조회(1건조회)
     public Optional<Reservation> findById(int airlineReservaitonNumber) {
         Optional<Reservation> optionalDept
