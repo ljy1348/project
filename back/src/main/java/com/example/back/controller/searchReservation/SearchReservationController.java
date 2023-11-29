@@ -1,5 +1,6 @@
 package com.example.back.controller.searchReservation;
 
+
 import com.example.back.model.dto.OprResDto;
 import com.example.back.model.entity.searchReservation.SearchReservation;
 
@@ -33,6 +34,30 @@ public class SearchReservationController {
 
     @Autowired
     SearchReservationService searchReservationService; // DI
+
+    //    전체 조회 + like 검색
+    @GetMapping("/search-reservation2")
+    public ResponseEntity<Object> getSearchReservation(
+            @RequestParam(defaultValue = "0") int airlineReservationNumber
+
+    ){
+        try {
+//            전체 조회 + like 검색
+            List<SearchReservation> list = searchReservationService.findAllByAirlineReservationNumber(airlineReservationNumber);
+                        if (list.isEmpty() == false) {
+//                성공
+                return new ResponseEntity<>(list, HttpStatus.OK);
+            } else {
+//                데이터 없음
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+        } catch (Exception e) {
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     
 //    전체 조회 + like 검색
     @GetMapping("/search-reservation")
@@ -57,6 +82,7 @@ public class SearchReservationController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
 
 
