@@ -1,7 +1,6 @@
 package com.example.back.controller.checkin;
 
 import com.example.back.model.entity.checkin.Baggage;
-import com.example.back.model.entity.checkin.Passport;
 import com.example.back.service.checkin.BaggageService;
 import com.example.back.service.checkin.CheckinService;
 import lombok.extern.slf4j.Slf4j;

@@ -1,16 +1,15 @@
 // 1:1 문의 화면
-
 import React, { useEffect, useState } from "react";
-import ICenter from "../../../types/Center/IQboard";
 
 import { Link } from "react-router-dom";
-import QuestionBoardService from "../../../services/center/QuestionBoardService";
-import IQboard from "../../../types/Center/IQboard";
+import ICustomer from "../../../types/customer/ICustomer";
+import CustomerService from "../../../services/customer/CustomerService";
+
 
 function QuestionBoardPage() {
   // 변수 정의
   // qna 배열 변수
-  const [question, setQuestion] = useState<Array<IQboard>>([]);
+  const [question, setQuestion] = useState<Array<ICustomer>>([]);
   // select 태그에 선택된 값을 저장할 변수 : 기본 (question)
   const [searchSelect, setSearchSelect] = useState<string>("question");
 
@@ -29,7 +28,7 @@ function QuestionBoardPage() {
   // 전체조회
   const retrieveQuestion = () => {
     // 벡엔드 매개변수 전송 : + 현재페이지(page), 1페이지당개수(pageSize)
-    QuestionBoardService.getAll(
+    CustomerService.getAll(
       searchSelect,
 
       page - 1,

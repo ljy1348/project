@@ -1,15 +1,12 @@
 package com.example.back.service.checkin;
 
 import com.example.back.model.checkin.Checkin;
-import com.example.back.model.dto.checkindto;
-
+import com.example.back.model.dto.checkin.checkindto;
+// import com.example.back.model.dto.checkindto;
 import com.example.back.repository.checkin.CheckinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 /**

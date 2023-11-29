@@ -1,21 +1,15 @@
 package com.example.back.controller;
 
-import com.example.back.model.checkin.Checkin;
-import com.example.back.model.dto.checkindto;
-import com.example.back.model.entity.checkin.Passport;
+import com.example.back.model.dto.checkin.checkindto;
+import com.example.back.model.entity.passport.Passport;
 import com.example.back.service.checkin.CheckinService;
+import com.example.back.service.passport.PassportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -33,10 +27,13 @@ import java.util.Optional;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/tour")
 public class CheckinController {
     @Autowired
     CheckinService checkinService; // DI
+
+    @Autowired
+    PassportService passportService;
 
     //   전체 조회 + dname like 검색
     @GetMapping("/checkin/{airlineReservationNumber}")
@@ -61,7 +58,5 @@ public class CheckinController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 
 }

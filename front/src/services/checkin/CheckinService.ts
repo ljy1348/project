@@ -2,7 +2,7 @@
 
 import ICheckin from "../../types/checkin/ICheckin";
 import IPassport from "../../types/passport/IPassport";
-import ISearchReservation from "../../types/reservation/ISearchReservation";
+import IReservation from "../../types/reservation/IReservation";
 import http from "../../utils/http-common";
 
 
@@ -11,12 +11,12 @@ import http from "../../utils/http-common";
 const getAll = (airlinereservationnumber: any) => { 
     // 조회요청 : .get("/url")
     // 사용법 : http.get<리턴타입>("url")
-    return http.get<Array<ISearchReservation>>(`/checkin/${airlinereservationnumber}`);
+    return http.get<Array<IReservation>>(`/tour/checkin/${airlinereservationnumber}`);
  }
 
 // 상세 조회
 const get = (checkYn:string) => {
-  return http.get<ISearchReservation>(`/checkin/${checkYn}`);
+  return http.get<IReservation>(`/tour/checkin/${checkYn}`);
 };
 
 

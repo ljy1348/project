@@ -31,7 +31,7 @@ function AdminPage() {
     else if (selectTab==="회원상세") return <AdminMember setSelectTab={setSelectTab} dataId={dataId}/>
     else if (selectTab==="항공기 추가") return <AddOperationInfo setSelectTab={setSelectTab}/>
     else if (selectTab==="항공기 상세") return <OperationInfo setSelectTab={setSelectTab} dataId={dataId}/>
-    else if (selectTab==="게시판") return <BoardMain/>
+    else if (selectTab==="게시판") return <BoardMain />
     else return <>예약</>
   }
 
