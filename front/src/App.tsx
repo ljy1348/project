@@ -81,10 +81,6 @@ function App() {
         <Route path="/boardingpass" element={<Boardingpass />} />
         <Route path="/checkinstate" element={<CheckInStateModal />} />
 
-        {/* 체크인 */}
-        <Route path="/checkin" element={<CheckIn />} />
-        <Route path="/passport" element={<Passport />} />
-        <Route path="/foriareamodal" element={<ForiareaModal />} />
 
         {/* 회원 */}
         <Route path="/register" element={<Register />} />

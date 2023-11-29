@@ -10,9 +10,12 @@ import IPassport from "../../types/passport/IPassport";
 import PassportService from "../../services/checkin/PassportService";
 import IMemberInfo from "../../types/memberInfo/IMemberInfo";
 import INonMemberInfo from "../../types/nonmemberInfo/INonMembersInfo";
+import IBaggage from "../../types/baggage/IBaggage";
+import BaggageService from "../../services/checkin/BaggageService";
 import ReservationService from "../../services/ReservationService";
 
 function Passport() {
+const{airlinereservationnumber}= useParams();
 
   // 예약번호를 받아옴
   const {
@@ -56,14 +59,24 @@ function Passport() {
     passportDate: "",
     // 비회원ID
     userNumber: 0,
-
-  
-
   };
+  
+  const initialBaggage = {
+ 
+    bagNumber: null,
+    bagCount: 0,
+    bagArea: 0,
+    bagWeight: 0,
+    bagPrice: 0,
+    checkId: "",
+    bagYn: ""
+
+  }
 
 
   // 여권 객체
   const [passport, setPassport] = useState<IPassport>(initialPassport);
+  const [baggage, setBaggage] = useState<IBaggage>(initialBaggage);
 
    // 저장버튼 클릭후 submitted = true 변경됨
   //  const [submitted, setSubmitted] = useState<boolean>(false);
@@ -112,9 +125,32 @@ function Passport() {
     };
 
 
+
+    const saveBaggage = () => { 
+      var data = {
+  
+   bagNumber: baggage.bagNumber,
+   bagCount: baggage.bagCount,
+   bagArea: baggage.bagArea,
+   bagWeight: baggage.bagWeight,
+   bagPrice: baggage.bagPrice,
+   checkId: baggage.checkId,
+   bagYn: baggage.bagYn
+      };
+
+      BaggageService.create(data)
+      .then((response: any) => {
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
+    
+
+
   // todo: 수화물 저장할 변수
   let [bagCount1, setBagCount1] = useState<number>(0);
-  let [bagCount2, setBagCount2] = useState<number>(0);
 
   const [array, setArray] = useState<Array<string>>(["a"]);
 
@@ -135,64 +171,43 @@ function Passport() {
 
 
 
-// todo : 승객추가,삭제 버튼
 
-  // todo : 여권 정보
-  const onClickAdd = (idx: number) => {
-    setArray([...array, "a"]);
-  };
-  const onClickRemove = (idx: number) => {
-    if (array.length > 1) {
-      setArray((prevArray) => prevArray.filter((_, i) => i !== idx));
-    }
-   
-  };
 
 
   //  todo: 증가 함수
-  const increaseCount = () => {
-    if (bagCount1 < 2) {
-      // bagCount1을 1 증가시킵니다.
-      const updatedCount = bagCount1 + 1;
-  
-      setBagCount1(updatedCount);
-    
-  }else {
+//  todo: 증가 함수
+const increaseCount = () => {
+  if (bagCount1 < 2) {
+    // bagCount1을 1 증가시킵니다.
+    const updatedCount = bagCount1 + 1;
+    setBagCount1(updatedCount);
+
+    // baggage.bagCount 값을 업데이트합니다.
+    setBaggage((prevBaggage) => ({
+      ...prevBaggage,
+      bagCount: updatedCount,
+    }));
+  } else {
     // 이미 2 이상이면 경고 메시지를 표시합니다.
     alert("1인당 초과수화물은 2개까지 가능합니다");
-}
+  }
 };
 // 수화물
 
-  //  todo: 감소 함수
-  const decreaseCount = () => {
-    if (bagCount1 > 0) {
-      bagCount1 -= 1;
-      setBagCount1(bagCount1); // 현재 감소값 저장
-    }
-  };
+//  todo: 감소 함수
+const decreaseCount = () => {
+  if (bagCount1 > 0) {
+    bagCount1 -= 1;
+    setBagCount1(bagCount1);
 
-  //  todo: 증가 함수
-  const increaseCount2 = () => {
-    if (bagCount2 < 2) {
-      // bagCount1을 1 증가시킵니다.
-      const updatedCount2 = bagCount2 + 1;
-  
-      // 상태를 업데이트합니다.
-      setBagCount2(updatedCount2);
-  }else {
-    // 이미 2 이상이면 경고 메시지를 표시합니다.
-    alert("1인당 초과수화물은 2개까지 가능합니다");
-}
+    // baggage.bagCount 값을 업데이트합니다.
+    setBaggage((prevBaggage) => ({
+      ...prevBaggage,
+      bagCount: bagCount1,
+    }));
+  }
 };
 
-  //  todo: 감소 함수
-  const decreaseCount2 = () => {
-    if (bagCount2 > 0) {
-      bagCount2 -= 1;
-      setBagCount2(bagCount2); // 현재 감소값 저장
-    }
-  };
 
 
   return (
@@ -333,6 +348,26 @@ function Passport() {
                           </div>
                         </div>
 
+{/* 
+                        <div className="passengerbutton">
+                            <button
+                              type="button"
+                              className="btn btn-outline-dark"
+                              onClick={() => onClickAdd(idx)}
+                            >
+                              승객 추가
+                            </button>
+
+                            <button
+                              type="button"
+                              className="btn btn-dark"
+                              onClick={() => onClickRemove(idx)}
+                            >
+                              제거
+                            </button>                            
+                          </div>                      */}
+
+
                       </div>
                     </div>
                   </form>
@@ -362,6 +397,8 @@ function Passport() {
                     <p>추가 수화물 1인당 2개씩 추가가능 </p>
     
               <table className="table">
+
+                
                 <thead className="test1">
                   <tr>
                     <th scope="col">예약자</th>
@@ -369,9 +406,13 @@ function Passport() {
                     <th scope="col">금액</th>
                   </tr>
                 </thead>
-                <tbody>
+                {/* <tbody> */}
+                {array &&
+                  array.map((val, idx) => {
+                    return (
+
                   <tr>
-                    <td className="passengername">박유빈</td>
+                    <td className="passengername"></td>
                     <td className="bagcount">
                       <div
                         className="btn-group-col"
@@ -381,6 +422,7 @@ function Passport() {
                         <button
                           type="button"
                           className="btn btn-outline-secondary opacity-50"
+                          value={baggage.bagCount}
                           onClick={decreaseCount}
                         >
                           -
@@ -397,68 +439,52 @@ function Passport() {
                         <button
                           type="button"
                           className="btn btn-outline-secondary opacity-50"
+                          value={baggage.bagCount}
                           onClick={increaseCount}
                         >
                           +
                         </button>
                       </div>
                     </td>
-                    <td className="bagprice">ㅇ</td>
+                    <td className="bagprice">{new Intl.NumberFormat('ko-KR').format(bagCount1 * 100000)}</td>
                   </tr>
 
-                  <tr>
-                    <td scope="col">승객1 </td>
-                    <td scope="col">수화물 추가</td>
-                    <td scope="col">금액</td>
-                  </tr>
 
-                  <tr className="trbutton">
-                    <td scope="col"></td>
-                    <td scope="col">
-                      <div
-                        className="btn-group-col"
-                        role="group"
-                        aria-label="Basic outlined example"
-                      >
-                        <button
-                          type="button"
-                          className="btn btn-outline-secondary opacity-50"
-                          onClick={decreaseCount2}
-                        >
-                          -
-                        </button>
 
-                        <button
-                          type="button"
-                          className="btn btn-outline-dark"
-                          disabled
-                        >
-                          {bagCount2}
-                        </button>
+);
+              })}
 
-                        <button
-                          type="button"
-                          className="btn btn-outline-secondary opacity-50"
-                          onClick={increaseCount2}
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
-                    <td scope="col">ㅇ</td>
-                  </tr>
+
+
+
+
+
+                 
                   <tr>
                     <td></td>
                     <td>
-                      <strong>총수량</strong>
+                      <strong>총 수량</strong>
                     </td>
                     <td>
-                      <strong>금액</strong>
+                      <strong>총 금액</strong>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td></td>
+                    <td>
+                      <strong>{bagCount1}</strong>
+                    </td>
+                    <td>
+                      <strong>{new Intl.NumberFormat('ko-KR').format(bagCount1 * 100000)}</strong>
                     </td>
                   </tr>
                   
-                </tbody>
+                  
+                {/* </tbody> */}
               </table>
+
+              
               <div className="toboardingpass">
                 <Link to={"/boardingpass"}>
                   <button type="button" className="btn btn-outline-dark">
@@ -473,6 +499,6 @@ function Passport() {
       </Accordion>
     </>
   );
-}
+            }
 
 export default Passport;

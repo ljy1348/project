@@ -37,7 +37,7 @@ public class CuCenterController {
             Pageable pageable = PageRequest.of(page, size);
 
 //          전체조회(dname="") + like 검색(dname="S")
-            Page<CuCenter> cuCenterPage = cuCenterService.findAllByCuCenterTitleContaining(title, pageable);
+            Page<CuCenter> cuCenterPage = cuCenterService.findAllByTitleContaining(title, pageable);
 
 //          리엑트 전송 : 부서배열, 페이징 정보[자료구조 : Map<키이름, 값>]
             Map<String, Object> response = new HashMap<>();
