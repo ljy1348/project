@@ -5,7 +5,7 @@ import { Button, Modal } from "react-bootstrap";
 import CheckinService from "../../services/checkin/CheckinService";
 
 
-function CheckInStateModal( props: any) {
+function CheckInStateModal(props: any) {
   const initChckStt = {
 
      // 예약 번호
@@ -63,7 +63,7 @@ function CheckInStateModal( props: any) {
       alert("체크인 상태를 다시 확인해주시길 바랍니다.");
     }else {
       // checkYn이 'N'일 때, 이동할 URL 설정
-      const targetUrl = '/passport'; // 또는 '/passengerinfo'
+      const targetUrl = `/passport/${props.searchAirlinereservationnumber}`; // 또는 '/passengerinfo'
   
       // 실제로 페이지를 이동
       window.location.href = targetUrl;
