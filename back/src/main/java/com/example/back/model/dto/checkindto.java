@@ -16,10 +16,17 @@ package com.example.back.model.dto;
 public interface checkindto {
     String getCheckId();
     String getSeatNumber();
+
+    Integer getAirlineReservationNumber();
     String getAdultCount();
     String getChildCount();
-    Integer getAirlineReservationNumber();
     String getCheckYn();
-    String getMemberYn();
+
+    Integer getOperationId();
+    String getStartAirport();
+    String getFinalAirport();
+
+
+
 
 }

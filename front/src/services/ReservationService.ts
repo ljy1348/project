@@ -14,8 +14,15 @@ const create = (data:IReservation) => {
   return http.post<IReservation>("/ksm/reservation", data);
 };
 
+// 상세 조회
+const get = (airlineReservationNumber: any) => {
+  return http.get<IReservation>(`/ksm/reservation/${airlineReservationNumber}`);
+};
+// 상세 조회
+
 const ReservationService = {
   getAll,
+  get,
   create,
 };
 
