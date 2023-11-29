@@ -1,9 +1,12 @@
 package com.example.back.service.notice;
 
+import com.example.back.model.dto.notice.NoticeDto;
 import com.example.back.model.entity.notice.Notice;
 
 import com.example.back.repository.notice.NoticeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -33,6 +36,13 @@ public class NoticeService {
         List<Notice> list = noticeRepository.noticeIdDesc();
 
         return list;
+    }
+
+//    관리자 페이지 공지사항 전체 조회 + like 검색
+    public Page<NoticeDto> adminNoticeIdDesc(String noticeTitle, Pageable pageable) {
+        Page<NoticeDto> page = noticeRepository.adminNoticeIdDesc(noticeTitle, pageable);
+
+        return page;
     }
 
 //    noticeTitle like 검색

@@ -12,8 +12,6 @@ import Home from "./pages/Home";
 import Footer from "./components/common/Footer";
 import ReservationListPage from "./pages/ReservationListPage";
 import SearchReservationPage from "./pages/SearchReservation/SearchReservationPage";
-import WriteNoticePage from "./pages/writeNotice/WriteNoticePage";
-import Test from "./pages/Test";
 
 import { Routes, Route, useLocation } from "react-router-dom";
 import Register from "./pages/auth/Register";
@@ -36,6 +34,7 @@ import PaymentResult from './pages/payment/PaymentResult';
 import PaymentSuccess from './pages/payment/PaymentSuccess';
 import PaymentFail from './pages/payment/PaymentFail';
 import Home2 from "./pages/Home2";
+import AdminNotice from "./pages/auth/admin/board/AdminNotice";
 // todo: 리액트 import
 
 function App() {
@@ -74,8 +73,9 @@ function App() {
           {/* 예약 조회 */}
         <Route path="/search-reservation" element={<ReservationListPage />} />
         <Route path="/search-reservation/seeReservation/:airlineReservationNumber" element={<SearchReservationPage />} />
-        <Route path="/write-notice" element={<WriteNoticePage />} />
-        <Route path="/test" element={<Test />} />
+
+        {/* 관리자 */}
+        <Route path="/admin/notice" element={<AdminNotice />} />
 
         {/* 결제 */}
 
