@@ -57,6 +57,23 @@ function QuestionBoardPage() {
 
   return (
     <div>
+
+
+      {/* 테마 */}
+      <div className="hero hero-customer">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-6 mx-auto text-center">
+              <div className="intro-wrap">
+                <h1 className="mb-0">1:1 문의</h1>
+                <p className="text-white">문의해주세요.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* 테마 끝 */}
+
       <div className="row mb-5 justify-content-center">
         {/* w-50 : 크기 조정, mx-auto : 중앙정렬(margin: 0 auto), justify-content-center */}
         <div className="col-12 w-50 input-group mb-3">
@@ -78,21 +95,6 @@ function QuestionBoardPage() {
           </div>
         </div>
       </div>
-
-      {/* 테마 */}
-      <div className="hero hero-customer">
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-6 mx-auto text-center">
-              <div className="intro-wrap">
-                <h1 className="mb-0">1:1 문의</h1>
-                <p className="text-white">문의해주세요.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* 테마 끝 */}
 
       {/* 본문 시작 */}
       <div className="untree_co-section">
