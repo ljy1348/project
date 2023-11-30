@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/tour")
 public class PassportController {
     @Autowired
     PassportService passportService; // DI

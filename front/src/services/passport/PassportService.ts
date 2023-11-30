@@ -3,7 +3,7 @@ import http from "../../utils/http-common";
 
 // 전체 조회 + like 검색(paging 기능 : page(현재페이지), size(1페이지당개수))
 const getAll = (passportId : any) => {
-  return http.get<Array<IPassport>>(`/passport/${passportId}`);
+  return http.get<Array<IPassport>>(`/tour/passport/${passportId}`);
 };
 
 
@@ -11,6 +11,7 @@ const getAll = (passportId : any) => {
 // 저장함수
 const create = (data:Array<IPassport>) => {
     return http.post<Array<IPassport>>("/passport", data);
+
   };
 
   const PassportService = {

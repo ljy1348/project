@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Notice from '../../../components/center/notice/Notice'
+import Notice from '../../../components/notice/Notice'
 import initScripts from '../../../assets/js/scripts';
 import initCustom from '../../../assets/js/custom';
 

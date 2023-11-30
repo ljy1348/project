@@ -2790,11 +2790,102 @@ input {
 
 /* 공지사항 작성 페이지 */
 
-#editor {
-  height: 100px;
-  width: 1070px;
+#editor1 {
   font-size: 18px;
+  margin-left: 235px;
+  margin-top: 100px;
+  height: 60px;
+  width: 800px;
 }
+
+
+#editor2 {
+  font-size: 18px;
+  margin-left: 235px;
+  height: 500px;
+  width: 800px;
+}
+
+.adminEditBtn {
+  margin-bottom: 30px;
+  margin-left: 958px;
+  width: 80px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #1A374D;
+  color: white;
+}
+
+.adminEditSubmitText {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.adminEditSubmitBtn {
+  margin-top: 10px;
+  height: 35px;
+  width: 80px;
+  border-radius: 10px;
+  background-color:#1A374D;
+  color: white;
+}
+
+#adminTh1 {
+  width: 700px;
+  text-align: center;
+}
+
+#adminTh2 {
+  text-align: center;
+}
+
+#adminTh3 {
+  text-align: center;
+}
+
+#adminTh4 {
+  text-align: center;
+}
+
+#adminTd1 {
+  width: 700px;
+  text-align: center;
+}
+
+#adminTd2 {
+  text-align: center;
+}
+
+#adminTd3 {
+  text-align: center;
+}
+
+#adminTd4 {
+  text-align: center;
+}
+
+.adminForm {
+  height: 45px;
+  margin-top: 30px;
+  width: 450px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.adminNoticeBtn {
+  margin-top: 30px;
+  height: 45px;
+  width: 80px;
+  border-radius: 10px;
+  background-color: #1A374D;
+  color: white;
+}
+
+.adminNoticePageBtn {
+  margin-top: 50px;
+  margin-left: 43%;
+}
+
 
 /*****************체크인*****************/
 
@@ -2960,4 +3051,8 @@ input {
   height: 38px;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 5px;
+}
+
+.line-sorting > td > a {
+  text-decoration-line: none;
 }

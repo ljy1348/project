@@ -3,7 +3,7 @@ import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import MyareaModal from "../modal/MyareaModal";
 import ForiareaModal from "../modal/ForiareaModal";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Reserve(props: any) {
   // 출도착 설정

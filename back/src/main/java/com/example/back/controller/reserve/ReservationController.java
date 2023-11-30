@@ -30,7 +30,7 @@ import java.util.Optional;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/ksm")
+@RequestMapping("/api/tour")
 public class ReservationController {
 
     @Autowired

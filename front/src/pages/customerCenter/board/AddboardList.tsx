@@ -1,9 +1,8 @@
 // 작성화면
 
 import React, { useState } from "react";
-import CustomerCenterSerivce from "../../../services/center/QuestionBoardService";
-
-import IQboard from "../../../types/Center/IQboard";
+import ICustomer from "../../../types/customer/ICustomer";
+import CustomerService from "../../../services/customer/CustomerService";
 
 function AddboardList() {
   const initialQuestion = {
@@ -15,7 +14,7 @@ function AddboardList() {
     answerYn: ""
   };
 
-  const [question, setQuestion] = useState<IQboard>(initialQuestion);
+  const [question, setQuestion] = useState<ICustomer>(initialQuestion);
   const [submitted, setSubmitted] = useState<boolean>(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +32,7 @@ function AddboardList() {
 
     };
 
-    CustomerCenterSerivce.create(data) // 저장 요청
+    CustomerService.create(data) // 저장 요청
       .then((response: any) => {
         setSubmitted(true);
         console.log(response.data);
