@@ -22,7 +22,7 @@ function AdminPage() {
 
   useEffect(()=>{
     if (currentUser?.memberAuth !="ROLE_ADMIN") navi("/");
-  },[])
+  },[currentUser])
 
   const tabView = () => {
     if (selectTab==="항공") return <OperationInfoManager setSelectTab={setSelectTab} setDataId={setDataId}/>

@@ -4,6 +4,7 @@ import com.example.back.model.entity.auth.Member;
 import com.example.back.model.entity.payment.Payment;
 import com.example.back.model.entity.reserve.Reservation;
 import com.example.back.model.entity.searchReservation.SearchReservation;
+import com.example.back.service.EmailService;
 import com.example.back.service.auth.UserService;
 import com.example.back.service.payment.PaymentService;
 import com.example.back.service.reserve.ReservationService;
@@ -34,6 +35,9 @@ public class PaymentController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    EmailService emailService;
+
     @PostMapping("")
     public ResponseEntity<?> create(
             @RequestParam String orderId,
@@ -50,12 +54,14 @@ public class PaymentController {
             payment.setFinalReservationNumber(tempStr[1]);
 
             Optional<Reservation> searchReservation1 = searchReservationService.findById(Integer.parseInt(tempStr[1]));
+            if (searchReservation1.get().getMemberYn().equals("Y")) {
 
             Optional<Member> member = userService.findById(searchReservation1.get().getMemberId());
             member.get().setMemberMile(member.get().getMemberMile() + (int)Math.floor(amount/10));
+            }
 
-            paymentService.create(payment);
-            return new ResponseEntity<>(HttpStatus.OK);
+            Payment payment1 = paymentService.create(payment);
+            return new ResponseEntity<>(payment1, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -90,8 +96,8 @@ public class PaymentController {
             searchReservation1.get().setMileUseYn("Y");
             searchReservation2.get().setMileUseYn("Y");
 
-            paymentService.create(payment);
-            return new ResponseEntity<>(HttpStatus.OK);
+            Payment payment1 = paymentService.create(payment);
+            return new ResponseEntity<>(payment1, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -146,5 +152,11 @@ public class PaymentController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<?> test() {
+        emailService.sendSimpleMessage("jy1348@naver.com","GreenAir 결제 및 예약 내역입니다.", "안녕" );
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

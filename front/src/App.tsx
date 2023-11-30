@@ -46,9 +46,8 @@ import QuestionContent from "./pages/customerCenter/board/QuestionContent";
 import SelectSeat from "./pages/modal/SelectSeat";
 import AdminNotice from "./pages/auth/admin/board/AdminNotice";
 import ReservationListPage from "./pages/SearchReservation/ReservationListPage";
-
+import ForgotPassword from "./pages/auth/ForgotPassword";
 import AdminNoticeFixPage from "./pages/auth/admin/board/AdminNoticeFixPage";
-
 // todo: 리액트 import
 
 function App() {
@@ -101,6 +100,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/user-info" element={<UserInfo />} />
         <Route path="/admin/*" element={<AdminPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
 
         {/* 예약 조회 */}
         <Route path="/search-reservation" element={<ReservationListPage />} />

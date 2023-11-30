@@ -8,6 +8,7 @@ import com.example.back.security.jwt.JwtUtils;
 import com.example.back.security.services.UserDetailsImpl;
 import com.example.back.service.auth.UserService;
 import lombok.extern.slf4j.Slf4j;
+import oracle.ucp.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -211,6 +212,18 @@ public class AuthController {
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
+    }
+
+    @PostMapping("/forgot")
+    public ResponseEntity<?> forgotPassword(@RequestBody Member member) {
+        try {
+            member.setMemberPw(passwordEncoder.encode(member.getMemberPw()));
+        userService.forgot(member);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 

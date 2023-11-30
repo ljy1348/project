@@ -15,6 +15,10 @@ import { Button, Modal, Nav } from "react-bootstrap";
 import Airport from "../../components/airport/Airport";
 import Isotope from "isotope-layout";
 import MyareaModal from "../modal/MyareaModal";
+import ReservationService from "../../services/reservation/ReservationService";
+import SearchNonMember from "../modal/SearchNonMember";
+import IReservation from "../../types/reservation/IReservation";
+import ISearchReservation from "../../types/searchReservation/ISearchReservation";
 
 // 1) 로그인 로직
 // 2) 유효성 체크 lib 사용 : Yup & Formik 
@@ -42,6 +46,7 @@ function Login() {
   const [isModal, setIsModal] = useState(false);
   const [isAirPort, setIsAirPort] = useState("");
   const [selectAirport, setSelectAirport] = useState({cname:"", abbr:""})
+  const [nonMemberModalShow, setNonMemberModalShow] = useState(false);
 
   const tagSelect = (data:string) => {
     if (data==="login") setTag("login");
@@ -86,10 +91,10 @@ function Login() {
   const initNonMember = {
       domesticInternational:"국내",
       airlineReservationNumber:"",
-      memberEname:"",
+      memberName:"",
       departure: selectedDate,       
-      departureAirPort:"",       
-      arrivalAirPort:"",      
+      startAirport:"",       
+      finalAirport:"",      
   }
 
   // todo: 함수 정의
@@ -109,7 +114,7 @@ function Login() {
     // string() : 자료형이 문자열인가? 체크
     airlineReservationNumber: Yup.string().required("필수 입력입니다."),
     // password 유효성 규칙 : required(에러메세지) => 필수필드
-    memberEname: Yup.string().required("필수 입력입니다.")
+    memberName: Yup.string().required("필수 입력입니다.")
   });
 
   // isLoggedIn = true (로그인 상태변수(true/false))
@@ -166,10 +171,16 @@ function Login() {
       });
    }
 
+   const [reservation, setReservation] = useState<ISearchReservation>();
+
    const handleNonMember = (formValue: any) => { 
-    formValue.arrivalAirPort = arrivalAirPort
-    formValue.departureAirPort = departureAirPort
-    console.log(formValue) 
+    formValue.finalAirport = arrivalAirPort
+    formValue.startAirport = departureAirPort
+    console.log("a")
+    ReservationService.findNonMember(formValue)
+    .then((response:any)=>{console.log(response); setReservation(response.data); setNonMemberModalShow(true)})
+    .catch((e:Error)=>{console.log(e)})
+
 
   }
 
@@ -290,6 +301,7 @@ function Login() {
         <Form className="user col-11 mx-auto">
           <br></br><br></br>
           <div className="form-group">
+            예약 번호
             <Field
               type="text"
               name="airlineReservationNumber"
@@ -304,44 +316,34 @@ function Login() {
             />
           </div>
           <div className="row">
-          <div className="form-group col-4">
-          <DatePicker
-                                showIcon
-                                dateFormat="yyyy-MM-dd" // 날짜 형태
-                                shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
-                                minDate={new Date("2000-01-01")} // minDate 이전 날짜 선택 불가
-                                maxDate={new Date()} // maxDate 이후 날짜 선택 불가
-                                selected={selectedDate}
-                                onChange={(data) => {
-                                  if (data)
-                                  onChangeDate(data);
-                                }}
-                                // customInput={<div></div>}
-                                className="form-control form-control-select mb-3"
-                              />
-          </div>
-          <div className="form-group col-4">
+          <div className="form-group col-6">
+            출발 공항
             <input
               type="text"
-              name="departureAirPort"
+              name="startAirport"
               className={
-                "form-control form-control-user mb-3" 
+                "form-control form-control-user mb-3" + (!departureAirPort
+                  ? " is-invalid"
+                  : "") 
               }
               onClick={()=>{setIsModal(true); setIsAirPort("departure");}}
-              id="departureAirPort"
+              id="startAirport"
               placeholder="출발 공항"
               value={departureAirPort}
             />
           </div>
-          <div className="form-group col-4">
+          <div className="form-group col-6">
+            도착 공항
             <input
               type="text"
-              name="arrivalAirPort"
+              name="finalAirport"
               className={
-                "form-control form-control-user mb-3"
+                "form-control form-control-user mb-3" + (!departureAirPort
+                  ? " is-invalid"
+                  : "") 
                 }
               onClick={()=>{setIsModal(true); setIsAirPort("arrival");}}
-              id="arrivalAirPort"
+              id="finalAirport"
               placeholder="도착 공항"
               value={arrivalAirPort}
             />
@@ -352,36 +354,20 @@ function Login() {
           <div className="row">
             
 
-          <div className="form-group col-3">
-            <Field
-              as="select"
-              name="domesticInternational"
-              className={
-                "form-control form-control-select mb-3" +
-                // password 필드에 클릭되고 동시에 에러가 있으면 화면에 빨간색을 표시
-                (errors.domesticInternational && touched.domesticInternational
-                  ? " is-invalid"
-                  : "")
-              }
-              id="exampleInputPassword"
-              placeholder="국내">
-                <option value={"국내"}>국내</option>
-                <option value={"국제"}>국제</option>
-              </Field>
-            
-          </div>
-          <div className="form-group col-9">
+
+          <div className="form-group col-12">
+            예약자 이름
             <Field
               type="text"
-              name="memberEname"
+              name="memberName"
               className={
                 "form-control form-control-user mb-3" +
                 // password 필드에 클릭되고 동시에 에러가 있으면 화면에 빨간색을 표시
-                (errors.memberEname && touched.memberEname
+                (errors.memberName && touched.memberName
                   ? " is-invalid"
                   : "")
               }
-              id="memberEname"
+              id="memberName"
               placeholder="예약시 입력한 영문 이름"
             />
           </div>
@@ -472,6 +458,13 @@ function Login() {
             show={isModal}
             onHide={() => setIsModal(false)}
             onAbbrSelect={setAirport}
+          />
+                <SearchNonMember
+            show={nonMemberModalShow}
+            onHide={() => {setNonMemberModalShow(false);
+          
+            }}
+            reservation={reservation}
           />
             </div>
     </div>    
