@@ -428,7 +428,7 @@ function ReservePayment() {
   ) => {
     if (adultCount !== undefined && childCount !== undefined) {
       return (
-        (basePrice * adultCount + basePrice * 0.9 * childCount) * multiplier
+        (basePrice * adultCount + Math.floor(basePrice * 0.9 * childCount)) * multiplier
       );
     }
     return 0;
@@ -775,7 +775,7 @@ function ReservePayment() {
                           </div>
                           {/* 전화번호 입력창 */}
                           <input
-                            type="text"
+                            type="number"
                             id="userPhone"
                             required
                             className="form-control"

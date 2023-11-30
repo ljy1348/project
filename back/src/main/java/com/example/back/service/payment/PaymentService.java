@@ -2,9 +2,12 @@ package com.example.back.service.payment;
 
 import com.example.back.model.dto.payment.PaymentAdminDto;
 import com.example.back.model.dto.payment.TossPaymentDto;
+import com.example.back.model.entity.auth.Member;
 import com.example.back.model.entity.payment.Payment;
+import com.example.back.model.entity.reserve.Reservation;
 import com.example.back.repository.payment.PaymentRepository;
 import com.example.back.repository.reserve.ReservationRepository;
+import com.example.back.service.auth.UserService;
 import com.example.back.service.reserve.ReservationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +31,9 @@ public class PaymentService {
 
     @Autowired
     ReservationService reservationService;
+
+    @Autowired
+    UserService userService;
 
     public Payment create(Payment payment) {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -70,9 +76,17 @@ public class PaymentService {
                 String startNumber = payment.getStartReservationNumber();
                 String finalNumber = payment.getFinalReservationNumber();
                 log.info("항공정보 : "+startNumber + " - "+finalNumber);
-                boolean isDeleteStart = reservationService.delete(Integer.parseInt(startNumber));
+                Optional<Reservation> reservation = reservationService.findById(Integer.parseInt(startNumber));
+                if (reservation.get().getMemberYn().equals("Y")) {
+                Optional<Member> member = userService.findById(reservation.get().getMemberId());
+                if (payment.getMilePrice() > 0) member.get().setMemberMile(member.get().getMemberMile() + payment.getMilePrice());
+                else member.get().setMemberMile(member.get().getMemberMile() - (int)Math.floor(payment.getProductPrice()/10));
+
+                }
                 boolean isDeletefinal = reservationService.delete(Integer.parseInt(finalNumber));
+                boolean isDeleteStart = reservationService.delete(Integer.parseInt(startNumber));
                 log.info("삭제 정보 : "+ isDeletefinal + " - " + isDeleteStart);
+
                 if (isDeletefinal && isDeleteStart) {
 
                     paymentRepository.deleteById(payId);

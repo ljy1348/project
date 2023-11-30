@@ -44,13 +44,18 @@ const deleteRoundTrip = (start:number|string, final:number|string) => {
   return http.delete(`/tour/deleteRoundTrip/${start}/${final}`);
 }
 
+const findNonMember = (data:any) => {
+  return http.post(`/tour/search-reservation/non-member`, data);
+}
+
 const ReservationService = {
   getAll,
   gett,
   get,
   create,
   getAllSeat,
-  deleteRoundTrip
+  deleteRoundTrip,
+  findNonMember
 };
   
 export default ReservationService;

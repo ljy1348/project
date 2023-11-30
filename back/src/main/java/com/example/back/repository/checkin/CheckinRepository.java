@@ -35,7 +35,7 @@ public interface CheckinRepository extends JpaRepository<Checkin, String> {
             "      ,OPR.START_AIRPORT as startAirport " +
             "      ,OPR.FINAL_AIRPORT as finalAirport " +
             "      FROM TB_RESERVATION RES, " +
-            "           TB_OPERATION_INFO OPR " +
+            "           OPERATION_INFO OPR " +
             "     WHERE RES.OPERATION_ID = OPR.OPERATION_ID " +
             "     AND RES.AIRLINE_RESERVATION_NUMBER = :airlineReservationNumber "
             , nativeQuery = true)

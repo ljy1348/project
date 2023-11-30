@@ -43,6 +43,7 @@ import PaymentFail from "./pages/payment/PaymentFail";
 import Home2 from "./pages/Home2";
 import AdminNotice from "./pages/auth/admin/board/AdminNotice";
 import ReservationListPage from "./pages/SearchReservation/ReservationListPage";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 // todo: 리액트 import
 
 function App() {
@@ -90,6 +91,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/user-info" element={<UserInfo />} />
         <Route path="/admin/*" element={<AdminPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
 
         {/* 예약 조회 */}
         <Route path="/search-reservation" element={<ReservationListPage />} />
