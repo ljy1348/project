@@ -1,5 +1,6 @@
 // axios 공통함수 : 벡엔드 연동
 
+import ICheckin from "../../types/checkin/IResOperation";
 import IResOperation from "../../types/checkin/IResOperation";
 import IPassport from "../../types/passport/IPassport";
 import IReservation from "../../types/reservation/IReservation";

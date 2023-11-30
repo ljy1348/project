@@ -41,7 +41,6 @@ public class CheckinService {
 
     public List<CheckinDto> getSheat (int operationId) {
         return checkinRepository.getSeats(operationId);
-        return listchk;
     }
 
 
