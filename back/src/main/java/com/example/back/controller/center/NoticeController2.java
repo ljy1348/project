@@ -3,6 +3,7 @@ package com.example.back.controller.center;
 
 //import com.example.back.model.entity.center.Notice2;
 
+import com.example.back.model.dto.notice.NoticeDto;
 import com.example.back.model.entity.notice.Notice;
 import com.example.back.service.center.NoticeService2;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +39,7 @@ public class NoticeController2 {
         try {
             Pageable pageable = PageRequest.of(page, size);
 
-            Page<Notice> noticePage;
+            Page<NoticeDto> noticePage;
 
             if (searchSelect.equals("title")) {
                 //            title like 검색
@@ -72,25 +73,25 @@ public class NoticeController2 {
 
 
     // 상세조회
-    @GetMapping("/notice2/{noticeId}")
-    public ResponseEntity<Object> findById(@PathVariable int noticeId) {
-
-        try {
-//            상세조회 실행
-            Optional<Notice> optionalNotice = noticeService.findById(noticeId);
-
-            if (optionalNotice.isPresent()) {
-//                성공
-                return new ResponseEntity<>(optionalNotice.get(), HttpStatus.OK);
-            } else {
-//                데이터 없음
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-        } catch (Exception e) {
-//            서버 에러
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @GetMapping("/notice2/{noticeId}")
+//    public ResponseEntity<Object> findById(@PathVariable int noticeId) {
+//
+//        try {
+////            상세조회 실행
+//            Optional<NoticeDto> optionalNotice = noticeService.findById(noticeId);
+//
+//            if (optionalNotice.isPresent()) {
+////                성공
+//                return new ResponseEntity<>(optionalNotice.get(), HttpStatus.OK);
+//            } else {
+////                데이터 없음
+//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            }
+//        } catch (Exception e) {
+////            서버 에러
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
 
 }
