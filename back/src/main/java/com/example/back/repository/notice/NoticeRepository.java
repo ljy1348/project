@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * packageName : com.example.back.repository.notice
@@ -31,8 +32,10 @@ public interface NoticeRepository extends JpaRepository<Notice, Integer> {
 //    전체 조회 내림차순
     @Query(value = "SELECT * " +
             "FROM TB_NOTICE " +
+            "WHERE DELETE_YN = 'N' " +
             "ORDER BY NOTICE_ID DESC ", countQuery = "SELECT COUNT(*) " +
             "FROM TB_NOTICE " +
+            "WHERE DELETE_YN = 'N' " +
             "ORDER BY NOTICE_ID DESC ", nativeQuery = true)
     List<Notice> noticeIdDesc();
 
@@ -48,11 +51,13 @@ public interface NoticeRepository extends JpaRepository<Notice, Integer> {
             "FROM TB_NOTICE NTC, TB_MEMBERS_INFO MEM " +
             "WHERE NTC.MEMBER_ID = MEM.MEMBER_ID " +
             "AND NOTICE_TITLE LIKE '%' || :noticeTitle || '%' " +
+            "AND NTC.DELETE_YN = 'N' " +
             "ORDER BY NOTICE_ID DESC "
             , countQuery = "SELECT COUNT(*) " +
             "FROM TB_NOTICE NTC, TB_MEMBERS_INFO MEM " +
             "WHERE NTC.MEMBER_ID = MEM.MEMBER_ID " +
             "AND NOTICE_TITLE LIKE '%' || :noticeTitle || '%' " +
+            "AND NTC.DELETE_YN = 'N' " +
             "ORDER BY NOTICE_ID DESC ", nativeQuery = true)
     Page<NoticeDto> adminNoticeIdDesc(@Param("noticeTitle") String noticeTitle, Pageable pageable);
 
@@ -68,10 +73,12 @@ public interface NoticeRepository extends JpaRepository<Notice, Integer> {
             "FROM TB_NOTICE NTC, TB_MEMBERS_INFO MEM " +
             "WHERE NTC.MEMBER_ID = MEM.MEMBER_ID " +
             "AND NOTICE_TITLE LIKE '%' || :noticeTitle || '%' " +
+            "AND NTC.DELETE_YN = 'N' " +
             "ORDER BY NOTICE_ID DESC ", countQuery = "SELECT COUNT(*)" +
             "FROM TB_NOTICE NTC, TB_MEMBERS_INFO MEM " +
             "WHERE NTC.MEMBER_ID = MEM.MEMBER_ID " +
             "AND NOTICE_TITLE LIKE '%' || :noticeTitle || '%' " +
+            "AND NTC.DELETE_YN = 'N' " +
             "ORDER BY NOTICE_ID DESC ", nativeQuery = true)
     Page<NoticeDto> noticeIdDescTitle(@Param("noticeTitle") String noticeTitle, Pageable pageable);
 
@@ -87,12 +94,27 @@ public interface NoticeRepository extends JpaRepository<Notice, Integer> {
             "FROM TB_NOTICE NTC, TB_MEMBERS_INFO MEM " +
             "WHERE NTC.MEMBER_ID = MEM.MEMBER_ID " +
             "AND NOTICE_CONTENT LIKE '%' || :noticeContent || '%' " +
+            "AND NTC.DELETE_YN = 'N' " +
             "ORDER BY NOTICE_ID DESC ", countQuery = "SELECT COUNT(*)" +
             "FROM TB_NOTICE NTC, TB_MEMBERS_INFO MEM " +
             "WHERE NTC.MEMBER_ID = MEM.MEMBER_ID " +
             "AND NOTICE_CONTENT LIKE '%' || :noticeContent || '%' " +
+            "AND NTC.DELETE_YN = 'N' " +
             "ORDER BY NOTICE_ID DESC ", nativeQuery = true)
     Page<NoticeDto> noticeIdDescContent(@Param("noticeContent") String noticeContent, Pageable pageable);
 
-
+    @Query(value = "SELECT NTC.NOTICE_ID as noticeId " +
+            "     , NTC.NOTICE_TITLE as noticeTitle " +
+            "     , NTC.NOTICE_CONTENT as noticeContent " +
+            "     , NTC.NOTICE_WRITER as noticeWriter " +
+            "     , NTC.MEMBER_ID as memberId " +
+            "     , NTC.INSERT_TIME as insertTime " +
+            "     , MEM.MEMBER_NAME as memberName " +
+            "FROM TB_NOTICE NTC, TB_MEMBERS_INFO MEM " +
+            "WHERE NTC.MEMBER_ID = MEM.MEMBER_ID " +
+            "AND NTC.NOTICE_ID LIKE '%' || :noticeId || '%' ", countQuery = "SELECT COUNT(*) " +
+            "FROM TB_NOTICE NTC, TB_MEMBERS_INFO MEM " +
+            "WHERE NTC.MEMBER_ID = MEM.MEMBER_ID " +
+            "AND NTC.NOTICE_ID LIKE '%' || :noticeId || '%' ", nativeQuery = true)
+    Optional<NoticeDto> seeNoticeId(@Param("noticeId") int noticeId);
 }

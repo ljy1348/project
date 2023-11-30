@@ -3,19 +3,11 @@ import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import { Accordion } from "react-bootstrap";
 import PassportService from "../../services/passport/PassportService";
-// import PassportService from "../../services/passport/PassportService";
 
-import { Button } from "@mui/material";
 import { Form, Link, useParams } from "react-router-dom";
-import { ClassNames } from "@emotion/react";
-// import About from './../About';
 import IPassport from "../../types/passport/IPassport";
-
-
-import IMemberInfo from "../../types/memberInfo/IMemberInfo";
-import INonMemberInfo from "../../types/nonmemberInfo/INonMembersInfo";
 import IBaggage from "../../types/baggage/IBaggage";
-import BaggageService from "../../services/checkin/BaggageService";
+import BaggageService from "../../services/baggage/BaggageService";
 import ReservationService from "../../services/reservation/ReservationService";
 
 function Passport() {

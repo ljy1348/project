@@ -131,7 +131,7 @@ public class NoticeController {
     }
 
 //    수정
-    @PutMapping("/admin/write-notice/edit/{noticeId}")
+    @PutMapping("/admin/notice/{noticeId}")
     public ResponseEntity<Object> updateNotice(
             @PathVariable int noticeId,
             @RequestBody Notice notice
@@ -150,7 +150,7 @@ public class NoticeController {
     }
 
 //    삭제
-    @DeleteMapping("/admin/write-notice/delete/{noticeId}")
+    @DeleteMapping("/admin/notice/deletion/{noticeId}")
     public ResponseEntity<Object> deleteNotice(
             @PathVariable int noticeId
     ) {
@@ -166,13 +166,14 @@ public class NoticeController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @GetMapping("/notice/{noticeId}")
-    public ResponseEntity<Object> findById(@PathVariable int noticeId) {
+    
+//    관리자 공지사항 상세 조회
+    @GetMapping("/admin/notice/{noticeId}")
+    public ResponseEntity<Object> findByIdAdmin(@PathVariable int noticeId) {
 
         try {
 //            상세조회 실행
-            Optional<Notice> optionalNotice = noticeService.findById(noticeId);
+            Optional<NoticeDto> optionalNotice = noticeService.seeNoticeId(noticeId);
 
             if (optionalNotice.isPresent()) {
 //                성공
@@ -186,4 +187,26 @@ public class NoticeController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+//    유저 공지사항 상세 조회
+    @GetMapping("/notice/{noticeId}")
+    public ResponseEntity<Object> findByNoticeId(@PathVariable int noticeId) {
+
+        try {
+//            상세조회 실행
+            Optional<NoticeDto> optionalNotice = noticeService.seeNoticeId(noticeId);
+
+            if (optionalNotice.isPresent()) {
+//                성공
+                return new ResponseEntity<>(optionalNotice.get(), HttpStatus.OK);
+            } else {
+//                데이터 없음
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+//            서버 에러
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
 }

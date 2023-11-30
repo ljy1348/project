@@ -1,4 +1,5 @@
-// NoticeList.tsx : rfce
+// 공지사항 첫화면
+
 import { useEffect, useState } from "react";
 import { Pagination } from "@mui/material";
 import IWriteNotice from "../../types/writeNotice/IWriteNotice";
@@ -19,6 +20,7 @@ function NoticeList() {
   const [page, setPage] = useState<number>(1);
   const [count, setCount] = useState<number>(1);
   const [size, setSize] = useState<number>(10); // 1페이지당개수
+
 
   // todo: 함수 정의
   useEffect(() => {
@@ -64,7 +66,7 @@ function NoticeList() {
       <div className="col-md-8 offset-2">
         <div className="col-12 input-group mb-3">
           <select
-            className="form-select"
+            className="form-select title-content-select"
             onChange={onChangeSearchSelect}
             value={searchSelect}
           >
@@ -89,7 +91,7 @@ function NoticeList() {
 
           <div className="input-group-append">
             <button
-              className="btn btn-danger"
+              className="notice-search-word-button"
               type="button"
               onClick={retrieveNotice}
             >
@@ -103,10 +105,10 @@ function NoticeList() {
 
       {/* 내용 */}
 
-      <div className="row mb-3">
-      </div>
+      <div className="row mb-3"></div>
 
       <div className="container" id="notice-bottom-gap">
+
       <div className="col-md-12 row">
         <table className="table" id="table-bottom-gap">
           <thead>
@@ -132,11 +134,9 @@ function NoticeList() {
         
         {/* table end */}
       </div>
-      </div>
-      {/* table end */}
 
       {/* 페이지네이션 시작 */}
-      <div className="col-md-4 offset-5">
+      <div className="noticePageBtn">
         <Pagination
           className="my-3"
           count={count}
@@ -149,6 +149,9 @@ function NoticeList() {
         />
       </div>
       {/* 페이지네이션 끝 */}
+      </div>
+      {/* table end */}
+
     </div>
   );
 }

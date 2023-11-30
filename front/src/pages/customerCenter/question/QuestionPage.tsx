@@ -1,3 +1,5 @@
+// 자주 찾는 질문
+
 import React, { useEffect } from "react";
 import { Accordion } from "react-bootstrap";
 import initScripts from "../../../assets/js/scripts";
@@ -29,13 +31,13 @@ function QuestionPage() {
       {/* 테마 제목 끝 */}
 
       {/* 질문 List */}
-      <Accordion className="test1">
+      <Accordion className="often-question-list-gap">
         
         <Accordion.Item eventKey="0">
           <Accordion.Header>
             항공권 구매 후 탑승날짜 또는 노선 변경이 가능한가요?
           </Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="often-question-list-content">
             구매하신 항공권은 탑승날짜 변경만 가능하며, 이용구간(노선) 변경은 할
             수 없습니다. <br />
             제주항공 홈페이지 및 모바일앱에서 구매하신 항공권은 홈페이지와
@@ -64,7 +66,7 @@ function QuestionPage() {
             태풍, 지진 등 천재지변이나 스케줄 변경으로 인한 항공기 지연 또는
             결항 시 항공권 변경(취소)는 어떻게 하나요?
           </Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="often-question-list-content">
             천재지변(태풍, 지진, 폭우, 폭설 등)이나 스케줄 변경으로 인한 항공편
             지연 또는 결항 관련하여 문자, 이메일 등을 통해 고객 안내를 실시하고
             있습니다.
@@ -97,7 +99,7 @@ function QuestionPage() {
           <Accordion.Header>
             기내반입 수하물 허용량은 어떻게 되나요?
           </Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="often-question-list-content">
             기내반입 수하물 허용량은 1인당 10kg 이하 1개 입니다.
             <br />
             반입 가능 사이즈는 세변의 합이 115cm(가로 55cm+세로 40cm+높이
@@ -114,7 +116,7 @@ function QuestionPage() {
         </Accordion.Item>
         <Accordion.Item eventKey="3">
           <Accordion.Header>국내선의 성수기는 언제인가요?</Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="often-question-list-content">
             2023년 기준
             <br />
             1월 ~ 3월 : 1.1 , 1.19 ~ 1.26 , 2.19 ~ 3.1
@@ -128,7 +130,7 @@ function QuestionPage() {
           <Accordion.Header>
             가족 간의(동승객) 수하물 합산이 가능한가요?
           </Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="often-question-list-content">
             동일 카운터에서 2인 이상 같이 수속하고, 출/도착지 공항이 같은경우
             함께 탑승하시는 동승자간 위탁수하물 합산이 가능합니다.
             <br />
@@ -148,7 +150,7 @@ function QuestionPage() {
           <Accordion.Header>
             해외 공항에서 출발하는 국제선은 모바일 탑승권 발금이 안 되나요?
           </Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="often-question-list-content">
             해외 공항에서 출발하는 국제선의 경우 일부 일본 노선을 제외하고
             모바일 탑승권 발급이 제한되며, 공항 카운터에서 탑승권을 발급
             받으셔야 합니다.
@@ -169,7 +171,7 @@ function QuestionPage() {
           <Accordion.Header>
             위탁 수하물(캐리어)이 파손 되었는데 어떻게 하나요?
           </Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="often-question-list-content">
             그린항공을 이용하시면서 위탁하신 수하물(캐리어)이 파손된 경우에는
             공항에서 바로 확인하신 경우에는 주변 그린항공 직원에게 문의하여 파손
             접수를 하시기 바랍니다. 현장에서 바로 확인을 하지 못하고
