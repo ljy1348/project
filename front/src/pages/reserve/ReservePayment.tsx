@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import { useParams } from "react-router-dom";
-import IOperationinfo from "../../types/IOperationinfo";
-import OperationService from "../../services/OperationService";
-import ICount from "./../../types/reserve/ICount";
-import NonmemberService from "../../services/NonmemberService";
-import { info } from "console";
-import ReservationService from "../../services/ReservationService";
+import ICount from "../../types/reserve/ICount";
 import IRdata from "../../types/reserve/IRdata";
 import OperationInfo from "./../auth/admin/OperationInfo/OperationInfo";
+import PaymentModal from "../modal/PaymentModal";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import IOperationinfo from "../../types/operationInfo/IOperationinfo";
+import OperationService from "../../services/operation/OperationService";
+import NonmemberService from "../../services/nonmemberinfo/NonmemberService";
+import ReservationService from "../../services/reservation/ReservationService";
 
 function ReservePayment() {
   // 기본키
@@ -26,11 +28,13 @@ function ReservePayment() {
   } = useParams();
   // 사용 X?
   // const [icount, setICount] = useState<ICount>();
-
+  
   const initICount = {
     adult: false,
     name: "",
   };
+
+  const { user: currentUser } = useSelector((state:RootState)=> state.auth);
 
   const [temp, setTemp] = useState<ICount[]>([initICount]);
   const [reInfo, setReInfo] = useState<IRdata[]>([]);
@@ -284,8 +288,10 @@ function ReservePayment() {
       memberId: reservation.memberId,
       userNumber: userNumbersArray.join(","), // 배열을 쉼표로 구분된 문자열로 변환
       operationId: operation.operationId, // 여정에 해당하는 operationId 사용
-      checkYn: reservation.checkYn,
+      checkYn: reservation.checkYn
     };
+
+    if (currentUser?.memberId) {data.memberId=currentUser.memberId; data.memberYn="Y";}
 
     const totalPrice = calculateTotalPrice(data.seatType, operation);
 
@@ -299,28 +305,35 @@ function ReservePayment() {
 
       // reInfo 업데이트
       setReInfo((prevReInfo) => {
-        const updatedReInfo = [...prevReInfo];
-        updatedReInfo[0] = {
-          ...updatedReInfo[0],
-          reservenum: response.data.airlineReservationNumber, // 수정 필요
-          price: totalPrice.toString(),
-        };
-        console.log()
+        const updatedReInfo = [...prevReInfo, {reservenum: response.data.airlineReservationNumber, // 수정 필요
+        price: totalPrice.toString()}];
+        // updatedReInfo[0] = {
+        //   ...updatedReInfo[0],
+        //   reservenum: response.data.airlineReservationNumber, // 수정 필요
+        //   price: totalPrice.toString(),
+        // };
+        // console.log(updatedReInfo);
         return updatedReInfo;
       });
     });
   };
 
+  let payInfo1;
+  let payInfo2;
 
   const handlePayment = async () => {
     const userNumbersArray = await saveNonmemberinfo();
-    if (userNumbersArray.length > 0) {
+
+
+
+    if (userNumbersArray.length >= Number(adultCount)+Number(childCount)) {
       await saveReservation(userNumbersArray, operationinfo);
       // 여정 2에 대한 예약 저장
       await saveReservation(userNumbersArray, operationinfo2);
 
       setModalShow(true);
     } else {
+    alert("정보를 모두 입력해주세요");
       console.log("비회원 정보 저장에 실패했습니다.");
     }
   };
@@ -817,6 +830,11 @@ function ReservePayment() {
       </div>
 
       {/* 모달 불러오기 */}
+      <PaymentModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            reInfo={reInfo}
+          />
     </>
   );
 }

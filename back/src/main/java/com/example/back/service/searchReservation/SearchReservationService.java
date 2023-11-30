@@ -1,9 +1,10 @@
 package com.example.back.service.searchReservation;
 
 
-import com.example.back.model.dto.OprResDto;
+import com.example.back.model.dto.searchReservation.OprResDto;
+import com.example.back.model.dto.reserve.ReservationDto;
+import com.example.back.model.entity.reserve.Reservation;
 
-import com.example.back.model.entity.searchReservation.SearchReservation;
 import com.example.back.repository.searchReservation.SearchReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,14 +33,17 @@ public class SearchReservationService {
     @Autowired
     SearchReservationRepository searchReservationRepository; // DI
     
-//    전체 조회 + like 검색
-    public List<SearchReservation> findAllByAirlineReservationNumber(int airlineReservationNumber) {
-        List<SearchReservation> list = searchReservationRepository.findAllByAirlineReservationNumber(airlineReservationNumber);
-            return list;
-    }
+    
+//    ID 검색
+    public List<ReservationDto> getAll(String memberId) {
+        List<ReservationDto> list = searchReservationRepository.getAll(memberId);
 
-    public List<SearchReservation> findAllByAirlineReservationNumberAndMemberId(int airlineReservationNumber, String memberId) {
-        List<SearchReservation> list = searchReservationRepository.findAllByAirlineReservationNumberAndMemberId(airlineReservationNumber, memberId);
+        return list;
+    }
+    
+//    예약번호 검색
+    public List<Reservation> findAllByAirlineReservationNumberAndMemberId(int airlineReservationNumber, String memberId) {
+        List<Reservation> list = searchReservationRepository.findAllByAirlineReservationNumberAndMemberId(airlineReservationNumber, memberId);
 
         return list;
     }
@@ -50,6 +54,17 @@ public class SearchReservationService {
         Optional<OprResDto> optionalOprResDto = searchReservationRepository.searchReservation(airlineReservationNumber);
 
         return optionalOprResDto;
+    }
+
+    public Optional<OprResDto> jySearchReservation(int airlineReservationNumber) {
+        Optional<OprResDto> optionalOprResDto = searchReservationRepository.searchById(airlineReservationNumber);
+
+        return optionalOprResDto;
+    }
+
+    // 아이디로 단건 찾기 - 주영
+    public Optional<Reservation> findById(int id) {
+        return searchReservationRepository.findById(id);
     }
 
 

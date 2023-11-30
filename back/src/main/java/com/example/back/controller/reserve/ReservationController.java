@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * packageName : com.example.back.controller.reserve
@@ -29,7 +30,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/ksm")
+@RequestMapping("/api/tour")
 public class ReservationController {
 
     @Autowired
@@ -80,6 +81,27 @@ public class ReservationController {
             return new ResponseEntity<>(reservation2, HttpStatus.OK);
         } catch (Exception e) {
 //            DB 에러가 났을경우 : INTERNAL_SERVER_ERROR 프론트엔드로 전송
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // 상세조회
+    @GetMapping("/reservation/{airlineReservaitonNumber}")
+    public ResponseEntity<Object> findById(@PathVariable int airlineReservaitonNumber) {
+
+        try {
+//            상세조회 실행
+            Optional<Reservation> optionalDept = reservationService.findById(airlineReservaitonNumber);
+
+            if (optionalDept.isPresent()) {
+//                성공
+                return new ResponseEntity<>(optionalDept.get(), HttpStatus.OK);
+            } else {
+//                데이터 없음
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+//            서버 에러
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * packageName : com.example.back.service.reserve
  * fileName : ReservationService
@@ -47,6 +49,24 @@ public class ReservationService {
         Reservation reservation2 = reservationRepository.save(reservation);
 
         return reservation2;
+    }
+
+
+    public boolean delete(int id) {
+        if (reservationRepository.existsById(id)) {
+            reservationRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //    상세조회(1건조회)
+    public Optional<Reservation> findById(int airlineReservaitonNumber) {
+        Optional<Reservation> optionalDept
+                = reservationRepository.findById(airlineReservaitonNumber);
+
+        return optionalDept;
     }
 
 

@@ -6,6 +6,7 @@ import IQboard from "../../../types/Center/IQboard";
 import { useNavigate } from "react-router-dom";
 import QuestionBoardService from "../../../services/center/QuestionBoardService";
 
+
 function AddboardList() {
   const initialQuestion = {
     titleId: null,
@@ -18,7 +19,9 @@ function AddboardList() {
     paraentBid: 0,
   };
 
+
   const [question, setQuestion] = useState<IQboard>(initialQuestion);
+
 
   // todo: input 태그에 수동 바인딩
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +41,9 @@ function AddboardList() {
       paraentBid: question.paraentBid,
     };
 
+
     QuestionBoardService.create(data) // 저장 요청
+
       .then((response: any) => {
         console.log(response.data);
       })

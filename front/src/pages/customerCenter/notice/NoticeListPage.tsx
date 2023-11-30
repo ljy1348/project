@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import initScripts from "../../../assets/js/scripts";
 import initCustom from "../../../assets/js/custom";
-import NoticeList from "../../../components/center/notice/NoticeList";
+import NoticeList from "../../../components/notice/NoticeList";
 
 function NoticeListPage() {
   useEffect(() => {

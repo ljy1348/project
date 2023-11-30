@@ -25,12 +25,12 @@ function CheckIn() {
    const [checkInState, setCheckinstate] = useState(false);
   //  const [show, setShow] = useState(false);
 
-
  
 
 // todo : 함수 정의 
 const onChangeSearchAirlinereservationnumber = (e: any) => {
   setSearchAirlinereservationnumber(e.target.value);
+  console.log()
 };
 
 
@@ -54,7 +54,6 @@ const onChangeSearchAirlinereservationnumber = (e: any) => {
 
 
 
-
   return (
     <>
     <div className="hero hero-inner">
@@ -64,9 +63,7 @@ const onChangeSearchAirlinereservationnumber = (e: any) => {
             <div className="intro-wrap">
               <h1 className="mb-5">
                 <span className="d-block text-center">체크인</span>
-                <h3 className="mb-5" color="white">
-                  조회
-                </h3>
+                
               </h1>
 
               
@@ -167,7 +164,6 @@ const onChangeSearchAirlinereservationnumber = (e: any) => {
         show={checkInState}
         onHide={() => setCheckinstate(false)}
         searchAirlinereservationnumber={searchAirlinereservationnumber}
-
       />
     
   </>

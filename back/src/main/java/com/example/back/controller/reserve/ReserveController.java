@@ -31,7 +31,7 @@ import java.util.*;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/ksm")
+@RequestMapping("/api/tour")
 public class ReserveController {
 
     @Autowired
