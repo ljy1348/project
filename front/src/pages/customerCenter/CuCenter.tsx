@@ -1,5 +1,5 @@
-// CuCenter.tsx : rfce
-import React from "react";
+// CuCenter.tsx : 고객센터 홈화면
+
 import { useEffect } from "react";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
@@ -78,21 +78,6 @@ function CuCenter() {
                 </Link>
               </div>
               {/* 자주 찾는 질문 끝 */}
-
-              {/* 1:1 문의 목록 */}
-              <div className="feature-1 d-md-flex">
-                <Link to={"/other-service"}>
-                  <div className="align-self-center">
-                    <span className="flaticon-phone-call display-4 text-primary"></span>
-                    <h3>1:1 문의목록</h3>
-                    <p className="mb-0">
-                      Even the all-powerful Pointing has no control about the
-                      blind texts.
-                    </p>
-                  </div>
-                </Link>
-              </div>
-              {/* 1:1 문의 목록 끝 */}
             </div>
           </div>
         </div>
