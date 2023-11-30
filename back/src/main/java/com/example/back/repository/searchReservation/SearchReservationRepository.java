@@ -44,10 +44,13 @@ public interface SearchReservationRepository extends JpaRepository<Reservation, 
             "     , MEM.MEMBER_ENAME as memberEname " +
             "FROM TB_RESERVATION RES, TB_MEMBERS_INFO MEM " +
             "WHERE RES.MEMBER_ID = MEM.MEMBER_ID  " +
+            "AND RES.DELETE_YN = 'N' " +
             "AND RES.MEMBER_ID = :memberId "
             , countQuery = "SELECT COUNT(*) " +
-            "FROM TB_RESERVATION " +
-            "WHERE MEMBER_ID =  :memberId ", nativeQuery = true)
+            "FROM TB_RESERVATION RES, TB_MEMBERS_INFO MEM " +
+            "WHERE RES.MEMBER_ID = MEM.MEMBER_ID  " +
+            "AND RES.DELETE_YN = 'N' " +
+            "AND RES.MEMBER_ID = :memberId ", nativeQuery = true)
     List<ReservationDto> getAll(@Param("memberId")String memberId);
 
 
@@ -82,9 +85,11 @@ public interface SearchReservationRepository extends JpaRepository<Reservation, 
             "     , MEM.MEMBER_NAME as memberName " +
             "FROM TB_RESERVATION RES, OPERATION_INFO OPR, TB_MEMBERS_INFO MEM " +
             "WHERE RES.OPERATION_ID = OPR.OPERATION_ID AND RES.MEMBER_ID = MEM.MEMBER_ID " +
+            "AND RES.DELETE_YN = 'N' " +
             "AND RES.AIRLINE_RESERVATION_NUMBER LIKE '%' || :airlineReservationNumber || '%' ", countQuery = "SELECT COUNT(*)" +
             "FROM TB_RESERVATION RES, OPERATION_INFO OPR, TB_MEMBERS_INFO MEM " +
             "WHERE RES.OPERATION_ID = OPR.OPERATION_ID AND RES.MEMBER_ID = MEM.MEMBER_ID " +
+            "AND RES.DELETE_YN = 'N' " +
             "AND RES.AIRLINE_RESERVATION_NUMBER LIKE '%' || :airlineReservationNumber || '%' ", nativeQuery = true)
     Optional<OprResDto> searchReservation(@Param("airlineReservationNumber") int airlineReservationNumber);
 

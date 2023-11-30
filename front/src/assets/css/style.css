@@ -334,14 +334,8 @@ h4,
   /* border: 1px solid rgb(190, 190, 190); */
 }
 
-/* 공지사항 */
-.notice-title {
-  text-align: center;
-  font-size: 35px;
-  font-family: "Noto Sans KR", sans-serif;
-  font-weight: bold;
-  padding-right: 70px;
-}
+/* 공지사항 페이지 */
+
 
 /* 공지사항 위에 줄 진하게 */
 .top-line-bold > th {
@@ -352,18 +346,88 @@ h4,
 
 .line-sorting > td {
   padding-left: 70px;
-  font-size: 20px;
+  font-size: 15px;
+  text-align: center;
 }
 
 /* 공지사항 제목 기준 위치 이동 */
 .line-sorting > #notice-title-location {
-  padding-right: 300px;
+  padding-right: 115px;
+  padding-left: 185px;
 }
 
 /* 공지사항, footer 사이 공백 */
 #notice-bottom-gap {
   margin-bottom: 150px;
 }
+
+/* 공지사항 뒤로가기(목록으로) 버튼 */
+.noticeBackBtn {
+  background-color: #1A374D;
+  color: white;
+  width: 300px;
+  height: 40px;
+  border-radius: 10px;
+  margin-left: 860px;
+  margin-top: 20px;
+}
+
+/* 공지사항 페이지 버튼 */
+.noticePageBtn {
+  margin-left: 550px;
+}
+
+/* 공지사항 상세보기 */
+
+.noticeTitle {
+  text-align: center;
+  font-size: 35px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: bold;
+  padding-right: 70px;
+  color: #004489;
+  margin-top: 15px;
+}
+
+.noticeContainer {
+  padding: 20px;
+  background-color: #f2f2f223;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  margin-top: 20px;
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.noticeDiv {
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 70px;
+}
+
+.noticeInsertTime {
+  float: left;
+  font-size: 16px;
+}
+
+.noticeMemberName {
+  float: right;
+  font-size: 16px;
+}
+
+.noticeContent1{
+  width: 100%;
+  float: left;
+}
+
+.noticeContent2{
+  margin:0 auto;
+  margin-top: 70px;
+  margin-bottom: 50px;
+  width: 90%;
+  font-size: 14px;
+}
+
 
 /* ============================================ */
 
@@ -1979,17 +2043,9 @@ h4,
   height: auto;
 }
 
-
-
-
-
-
-
-
-
-
 /* 고객센터 사진 */
 .hero.hero-customer {
+  margin-top: 80px;
   padding: 5rem 0 5rem ;
   margin-bottom: auto;
   background: #8facc0;
@@ -2041,6 +2097,12 @@ h4,
   font-size: 24px;
   font-weight: bold;
   color: #004489;
+}
+
+.notice-title > a{
+  text-decoration: none;
+  color: #004489;
+  font-weight: bold;
 }
 
 .notice-writer {
@@ -2709,7 +2771,7 @@ input {
 .searchRow {
   display: inline-block;
   width: 100%;
-  margin-top: 30px;
+  /* margin-top: 30px; */
 }
 
 .input-group-text {
@@ -2731,7 +2793,6 @@ input {
   width: 70%;
   border-radius: 6px;
   margin-left: 10px;
-  margin-bottom: 10px;
   justify-content: center;
 }
 
@@ -2742,12 +2803,12 @@ input {
   box-shadow: none;
 }
 
+/* 조회 / 검색 초기화 버튼 */
 .searchButton {
-  margin: 0 auto;
-  margin-bottom: 50px;
+  display: flex;
+  padding-left: 400px;
   margin-top: 30px;
-  width: 300px;
-  justify-content: center;
+  margin-bottom: 50px;
 }
 
 .tableText {
@@ -2787,6 +2848,26 @@ input {
   margin: 0 auto;
   margin-top: 30px;
 }
+
+.searchReservationBtn {
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #1a374d;
+  color: white;
+}
+
+.searchReservationBtn:hover {
+  background-color: #004489;
+  color: white;
+}
+
+.reservation-under-line-none a {
+  text-decoration-line: none;
+  text-align: center;
+  padding: 5px;
+}
+
 
 /* 공지사항 작성 페이지 */
 
@@ -3051,6 +3132,23 @@ input {
   height: 38px;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 5px;
+}
+
+
+
+
+/* 관리자 공지사항 수정 / 삭제 페이지 */
+
+.adminNoticeFix1 {
+  width: 650px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.adminNoticeFix2 {
+  width: 650px;
+  height: 600px;
+  font-size: 18px;
 }
 
 .line-sorting > td > a {

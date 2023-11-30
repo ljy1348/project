@@ -1,6 +1,4 @@
 import IBaggage from "../../types/baggage/IBaggage";
-import ICheckin from "../../types/checkin/ICheckin";
-import IPassport from "../../types/passport/IPassport";
 import http from "../../utils/http-common";
 
 

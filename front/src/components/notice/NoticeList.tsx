@@ -132,11 +132,8 @@ function NoticeList() {
         
         {/* table end */}
       </div>
-      </div>
-      {/* table end */}
-
       {/* 페이지네이션 시작 */}
-      <div className="col-md-4 offset-5">
+      <div className="noticePageBtn">
         <Pagination
           className="my-3"
           count={count}
@@ -149,6 +146,9 @@ function NoticeList() {
         />
       </div>
       {/* 페이지네이션 끝 */}
+      </div>
+      {/* table end */}
+
     </div>
   );
 }
