@@ -8,10 +8,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * packageName : com.example.back.model.entity.checkin
@@ -28,6 +25,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="TB_BAGGAGE")
+@SequenceGenerator(
+        name = "SQ_BAGGAGE_GENERATOR"
+        , sequenceName = "SQ_BAGGAGE"
+        , initialValue = 1
+        , allocationSize = 1
+)
 @Getter
 @Setter
 @ToString
@@ -40,13 +43,10 @@ import javax.persistence.Table;
 @SQLDelete(sql = "UPDATE TB_BAGGAGE SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE BAG_NUMBER = ?")
 public class Baggage extends BaseTimeEntity  {
     @Id
-//    BAG_NUMBER	NUMBER(10,0)
-//    BAG_COUNT	NUMBER(10,0)
-//    BAG_AREA	NUMBER(10,0)
-//    BAG_WEIGHT	NUMBER(10,0)
-//    BAG_PRICE	NUMBER(10,0)
-//    CHECK_ID	VARCHAR2(50 BYTE)
-//    BAG_YN	CHAR(1 BYTE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE
+            , generator = "SQ_BAGGAGE_GENERATOR"
+    )
+
     private Integer bagNumber;
     private Integer bagCount;
     private Integer bagArea;

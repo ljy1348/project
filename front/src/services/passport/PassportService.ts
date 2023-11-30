@@ -9,8 +9,8 @@ const getAll = (passportId : any) => {
 
 
 // 저장함수
-const create = (data:IPassport) => {
-    return http.post<IPassport>("/passport", data);
+const create = (data:Array<IPassport>) => {
+    return http.post<Array<IPassport>>("/passport", data);
   };
 
   const PassportService = {

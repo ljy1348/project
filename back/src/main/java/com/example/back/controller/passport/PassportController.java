@@ -1,19 +1,16 @@
-package com.example.back.controller.checkin;
+package com.example.back.controller.passport;
 
-import com.example.back.model.entity.checkin.Passport;
+import com.example.back.model.entity.passport.Passport;
 
-import com.example.back.service.checkin.PassportService;
+import com.example.back.service.passport.PassportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * packageName : com.example.back.controller.checkin

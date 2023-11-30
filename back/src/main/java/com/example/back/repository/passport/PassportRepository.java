@@ -1,6 +1,6 @@
-package com.example.back.repository.checkin;
+package com.example.back.repository.passport;
 
-import com.example.back.model.entity.checkin.Passport;
+import com.example.back.model.entity.passport.Passport;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

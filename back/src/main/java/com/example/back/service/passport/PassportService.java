@@ -1,10 +1,8 @@
-package com.example.back.service.checkin;
+package com.example.back.service.passport;
 
-import com.example.back.model.entity.checkin.Passport;
-import com.example.back.repository.checkin.PassportRepository;
+import com.example.back.model.entity.passport.Passport;
+import com.example.back.repository.passport.PassportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

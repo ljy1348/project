@@ -1,4 +1,4 @@
-package com.example.back.model.entity.checkin;
+package com.example.back.model.entity.passport;
 
 import com.example.back.model.common.BaseTimeEntity;
 import lombok.*;
