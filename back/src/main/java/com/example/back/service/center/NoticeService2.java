@@ -31,13 +31,6 @@ public class NoticeService2 {
         return page;
     }
 
-    //    저장함수(수정함수)
-    public Notice save(Notice notice) {
-
-        Notice notice2 = noticeRepository.save(notice);
-
-        return notice2;
-    }
 
     //    상세조회(1건조회)
     public Optional<Notice> findById(int noticeId) {
@@ -47,12 +40,5 @@ public class NoticeService2 {
         return optionalNotice;
     }
 
-    //    삭제함수
-    public boolean removeById(int noticeId) {
-        if(noticeRepository.existsById(noticeId)) { // noticeId 있는지 확인
-            noticeRepository.deleteById(noticeId); // 삭제 진행
-            return true;
-        }
-        return false;
-    }
+
 }

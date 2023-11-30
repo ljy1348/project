@@ -30,7 +30,7 @@ public class CheckinController {
     @Autowired
     CheckinService checkinService; // DI
 
-    //   전체 조회 + dname like 검색
+
     @GetMapping("/checkin/{airlineReservationNumber}")
     public ResponseEntity<Object>  airnumber(
             @PathVariable int airlineReservationNumber
@@ -38,7 +38,7 @@ public class CheckinController {
         try {
             log.info("aaaaaaaaaaaaaaaaaaaa : "+airlineReservationNumber);
 
-//          전체조회(dname="") + like 검색(dname="S")
+
             Optional<checkindto> checkinOptional
                     = checkinService.airnumber(airlineReservationNumber);
 
