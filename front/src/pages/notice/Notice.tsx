@@ -4,10 +4,11 @@ import NoticeService from "../../services/notice/NoticeService";
 
 
 function Notice() {
+  
   const [notice, setNotice] = useState<Array<INotice>>([]);
 
   const [noticeTitle, setNoticeTitle] = useState<string>("");
-  // 검색어 변수
+
 
   // 함수 정의
   // TODO: 1) 컴포넌트가 mounted 될때 한번만 실행됨 : useEffect(() => {실행문},[])
@@ -33,37 +34,35 @@ function Notice() {
   return (
     // 여기
     <>
-     
-     {/* 추천 여행지, 공지사항 사이 공간 */}
-      <div className="row mb-3">
-      </div>
+      {/* 추천 여행지, 공지사항 사이 공간 */}
+      <div className="row mb-3"></div>
 
       <div className="container" id="notice-bottom-gap">
-      <div className="col-md-12 row">
-        <table className="table" id="table-bottom-gap">
-          <thead>
-            <tr className="top-line-bold">
-              <th scope="col">No</th>
-              <th scope="col">제목</th>
-              <th scope="col">날짜</th>
-              <th scope="col">작성자</th>
-            </tr>
-          </thead>
-          <tbody>
-            {notice &&
-              notice.map((data) => (
-                <tr className="line-sorting" key={data.noticeId}>
-                  <td id="notice-id-location">{data.noticeId}</td>
-                  <td id="notice-title-location">{data.noticeTitle}</td>
-                  <td id="notice-insertTime-location">{data.insertTime}</td>
-                  <td id="notice-writer-location">{data.noticeWriter}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-        
-        {/* table end */}
-      </div>
+        <div className="col-md-12 row">
+          <table className="table" id="table-bottom-gap">
+            <thead>
+              <tr className="top-line-bold">
+                <th scope="col">No</th>
+                <th scope="col">제목</th>
+                <th scope="col">날짜</th>
+                <th scope="col">작성자</th>
+              </tr>
+            </thead>
+            <tbody>
+              {notice &&
+                notice.map((data) => (
+                  <tr className="line-sorting" key={data.noticeId}>
+                    <td id="notice-id-location">{data.noticeId}</td>
+                    <td id="notice-title-location">{data.noticeTitle}</td>
+                    <td id="notice-insertTime-location">{data.insertTime}</td>
+                    <td id="notice-writer-location">{data.noticeWriter}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+
+          {/* table end */}
+        </div>
       </div>
       {/* table end */}
     </>

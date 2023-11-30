@@ -34,7 +34,6 @@ public class CheckinController {
     CheckinService checkinService; // DI
 
 
-    //   전체 조회 + dname like 검색
     @GetMapping("/checkin/{airlineReservationNumber}")
     public ResponseEntity<Object>  checkresnum(
             @PathVariable int airlineReservationNumber
@@ -43,6 +42,8 @@ public class CheckinController {
             log.info("aaaaaaaaaaaaaaaaaaaa : "+airlineReservationNumber);
 
             Optional<CheckinDto> checkinOptional
+
+            // Optional<checkindto> checkinOptional
                     = checkinService.checkresnum(airlineReservationNumber);
 
             if (checkinOptional.isEmpty() == false) {

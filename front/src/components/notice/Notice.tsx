@@ -1,8 +1,9 @@
+// 공지사항 내용
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import INotice from "../../types/notice/INotice";
 import NoticeService from "../../services/notice/NoticeService";
-
 
 function Notice() {
   const { noticeId } = useParams();
@@ -33,21 +34,14 @@ function Notice() {
   }, [noticeId]);
 
   return (
-    <div className="notice-container">
-      {notice ? (
-        <div className="notice-content-container">
-          <h1 className="notice-title">{notice.noticeTitle}</h1>
-          <div className="notice-info">
-            <p className="insert-time">작성일: {notice.insertTime}</p>
-          </div>
-          <div className="notice-content">{notice.noticeContent}</div>
-        </div>
-      ) : (
-        <div className="col-6 mx-auto">
-          <br />
-          <p>Loading...</p>
-        </div>
-      )}
+    <div>
+      <hr />
+      <div>
+        <h2 className="notice-content-title">{notice.noticeTitle}</h2>
+      </div>
+      <hr />
+      <p className="notice-content-date">{notice.insertTime}</p>
+      <div className="notice-content-content">{notice.noticeContent}</div>
     </div>
   );
 }
