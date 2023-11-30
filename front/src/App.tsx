@@ -98,7 +98,7 @@ function App() {
           path="/search-reservation/seeReservation/:airlineReservationNumber"
           element={<SearchReservationPage />}
         />
-        <Route path="/write-notice" element={<WriteNoticePage />} />
+        {/* <Route path="/write-notice" element={<WriteNoticePage />} /> */}
         <Route path="/search-reservation/seeReservation/:airlineReservationNumber" element={<SearchReservationPage />} />
 
         {/* 관리자 */}
