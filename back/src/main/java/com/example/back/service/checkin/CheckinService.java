@@ -33,6 +33,10 @@ public class CheckinService {
         return optional;
     }
 
+    public List<checkindto> getSheat (int operationId) {
+        return checkinRepository.getSeats(operationId);
+    }
+
 
 
 }

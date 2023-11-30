@@ -3,6 +3,7 @@ import "../../assets/css/sm/select.css";
 import axios from "axios";
 
 const SelectSeat = () => {
+
   const initialSeats: number[][] = [
     [1, 1, 1, 0, 1, 1, 1],
     [1, 1, 1, 0, 1, 1, 1],
@@ -96,7 +97,27 @@ const SelectSeat = () => {
   };
 
   useEffect(()=>{
-    axios.get("http://localhost:8000/api/test")
+    axios.get("http://localhost:8000/api/checkin/sheat/1")
+    .then((response)=>{
+      const data = response.data;
+
+      data.map((val:any, idx:number)=>{
+        const str:string = val.seatNumber
+
+        let x = Number(str.charCodeAt(0));
+        let y = Number(str.charAt(1));
+
+
+
+        setSeats((prevSeats) => {
+          const updatedSeats = [...prevSeats];
+          updatedSeats[x-65][y] = 3;
+          return updatedSeats;
+        });
+      })
+
+    })
+    .catch(()=>{})
   },[])
 
   return (
