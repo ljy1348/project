@@ -56,5 +56,16 @@ public class SearchReservationService {
         return optionalOprResDto;
     }
 
+    public Optional<OprResDto> jySearchReservation(int airlineReservationNumber) {
+        Optional<OprResDto> optionalOprResDto = searchReservationRepository.searchById(airlineReservationNumber);
+
+        return optionalOprResDto;
+    }
+
+    // 아이디로 단건 찾기 - 주영
+    public Optional<Reservation> findById(int id) {
+        return searchReservationRepository.findById(id);
+    }
+
 
 }

@@ -40,9 +40,15 @@ import ReservePayment from "./pages/reserve/ReservePayment";
 import PaymentSuccess from "./pages/payment/PaymentSuccess";
 import PaymentFail from "./pages/payment/PaymentFail";
 import Home2 from "./pages/Home2";
+
+import QuestionContent from "./pages/customerCenter/board/QuestionContent";
+
+import SelectSeat from "./pages/modal/SelectSeat";
 import AdminNotice from "./pages/auth/admin/board/AdminNotice";
 import ReservationListPage from "./pages/SearchReservation/ReservationListPage";
+
 import AdminNoticeFixPage from "./pages/auth/admin/board/AdminNoticeFixPage";
+
 // todo: 리액트 import
 
 function App() {
@@ -64,8 +70,12 @@ function App() {
         <Route path="/question" element={<QuestionPage />} />
 
         {/* 1:1 문의 게시판 */}
+        {/* 1:1 문의 홈화면 */}
         <Route path="/question-board" element={<QuestionBoardPage />} />
+        {/* 작성 양식 */}
         <Route path="/addquestion-board" element={<AddboardList />} />
+        {/* 작성 내용 */}
+        <Route path="/question-board/:titleId" element={<QuestionContent />} />
 
         <Route path="/" element={<Home />}></Route>
 
@@ -93,6 +103,11 @@ function App() {
 
         {/* 예약 조회 */}
         <Route path="/search-reservation" element={<ReservationListPage />} />
+        <Route
+          path="/search-reservation/seeReservation/:airlineReservationNumber"
+          element={<SearchReservationPage />}
+        />
+        {/* <Route path="/write-notice" element={<WriteNoticePage />} /> */}
         <Route path="/search-reservation/seeReservation/:airlineReservationNumber" element={<SearchReservationPage />} />
 
         {/* 관리자 */}
@@ -114,7 +129,7 @@ function App() {
           element={<ReservePayment />}
         />
 
-        <Route path="/test" element={<Home2 />} />
+        <Route path="/test" element={<SelectSeat />} />
       </Routes>
       {/* 꼬리말 */}
       <Footer />

@@ -1,3 +1,5 @@
+// 공지사항 내용
+
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import INotice from "../../types/notice/INotice";
@@ -44,6 +46,7 @@ function Notice() {
   };
 
   return (
+
     <>
       <div className="noticeContainer">
         {notice ? (
@@ -76,6 +79,7 @@ function Notice() {
         목록으로
       </button>
     </>
+
   );
 }
 

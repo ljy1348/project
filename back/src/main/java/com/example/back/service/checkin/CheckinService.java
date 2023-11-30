@@ -5,6 +5,7 @@ import com.example.back.repository.checkin.CheckinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -29,6 +30,10 @@ public class CheckinService {
     public Optional<checkindto> checkresnum(int airlineReservationNumber) {
         Optional <checkindto> optional = checkinRepository.checkresnum(airlineReservationNumber);
         return optional;
+    }
+
+    public List<checkindto> getSheat (int operationId) {
+        return checkinRepository.getSeats(operationId);
     }
 
 
