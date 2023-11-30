@@ -1,12 +1,11 @@
 package com.example.back.controller.checkin;
 
 
-import com.example.back.model.dto.checkin.checkindto;
+import com.example.back.model.dto.checkin.CheckinDto;
 import com.example.back.model.entity.checkin.Checkin;
 
 import com.example.back.model.entity.passport.Passport;
 import com.example.back.service.checkin.CheckinService;
-import com.example.back.service.passport.PassportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,8 +41,6 @@ public class CheckinController {
     @Autowired
     CheckinService checkinService; // DI
 
-    @Autowired
-    PassportService passportService;
 
     @GetMapping("/checkin/{airlineReservationNumber}")
     public ResponseEntity<Object>  checkresnum(
@@ -52,8 +49,9 @@ public class CheckinController {
         try {
             log.info("aaaaaaaaaaaaaaaaaaaa : "+airlineReservationNumber);
 
+            Optional<CheckinDto> checkinOptional
 
-            Optional<checkindto> checkinOptional
+            // Optional<checkindto> checkinOptional
                     = checkinService.checkresnum(airlineReservationNumber);
 
             if (checkinOptional.isEmpty() == false) {
@@ -75,7 +73,7 @@ public class CheckinController {
     @GetMapping("/checkin/sheat/{operaionId}")
     public ResponseEntity<?> getSheat(@PathVariable int operaionId) {
         try {
-            List<checkindto> list = checkinService.getSheat(operaionId);
+            List<CheckinDto> list = checkinService.getSheat(operaionId);
             return new ResponseEntity<>(list, HttpStatus.OK);
 
         } catch (Exception e) {

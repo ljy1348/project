@@ -1,6 +1,6 @@
-package com.example.back.repository.checkin;
+package com.example.back.repository.baggage;
 
-import com.example.back.model.entity.checkin.Baggage;
+import com.example.back.model.entity.baggage.Baggage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

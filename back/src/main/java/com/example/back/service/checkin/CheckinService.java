@@ -1,7 +1,7 @@
 package com.example.back.service.checkin;
 
 import com.example.back.model.entity.checkin.Checkin;
-import com.example.back.model.dto.checkin.checkindto;
+import com.example.back.model.dto.checkin.CheckinDto;
 // import com.example.back.model.dto.checkindto;
 import com.example.back.model.entity.passport.Passport;
 import com.example.back.repository.checkin.CheckinRepository;
@@ -34,14 +34,13 @@ public class CheckinService {
     CheckinRepository checkinRepository; // DI
 
     //    전체 조회 + 페이징
-    public Optional<checkindto> checkresnum(int airlineReservationNumber) {
-        Optional <checkindto> optional = checkinRepository.checkresnum(airlineReservationNumber);
+    public Optional<CheckinDto> checkresnum(int airlineReservationNumber) {
+        Optional <CheckinDto> optional = checkinRepository.checkresnum(airlineReservationNumber);
         return optional;
     }
 
-    public List<checkindto> getSheat (int operationId) {
-        List<checkindto> listchk = checkinRepository.getSeats(operationId);
-        return listchk;
+    public List<CheckinDto> getSheat (int operationId) {
+        return checkinRepository.getSeats(operationId);
     }
 
 
