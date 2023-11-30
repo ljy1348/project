@@ -15,7 +15,7 @@ import IPassport from "../../types/passport/IPassport";
 import IMemberInfo from "../../types/memberInfo/IMemberInfo";
 import INonMemberInfo from "../../types/nonmemberInfo/INonMembersInfo";
 import IBaggage from "../../types/baggage/IBaggage";
-import BaggageService from "../../services/checkin/BaggageService";
+import BaggageService from "../../services/baggage/BaggageService";
 import ReservationService from "../../services/reservation/ReservationService";
 
 function Passport() {
@@ -327,24 +327,7 @@ function Passport() {
                             />
                           </div>
                         </div>
-                        {/* 
-                        <div className="passengerbutton">
-                            <button
-                              type="button"
-                              className="btn btn-outline-dark"
-                              onClick={() => onClickAdd(idx)}
-                            >
-                              승객 추가
-                            </button>
-
-                            <button
-                              type="button"
-                              className="btn btn-dark"
-                              onClick={() => onClickRemove(idx)}
-                            >
-                              제거
-                            </button>                            
-                          </div>                      */}
+                     
                       </div>
                     </div>
                   </form>

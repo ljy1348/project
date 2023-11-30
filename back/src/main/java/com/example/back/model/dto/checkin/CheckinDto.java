@@ -13,7 +13,7 @@ package com.example.back.model.dto.checkin;
  * —————————————————————————————
  * 2023-11-27         GGG          최초 생성
  */
-public interface checkindto {
+public interface CheckinDto {
     String getCheckId();
     String getSeatNumber();
 

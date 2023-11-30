@@ -7,7 +7,7 @@ import { Button } from "react-bootstrap";
 
 import CheckInState from "../modal/CheckInStateModal";
 
-import ICheckin from "../../types/checkin/ICheckin";
+import IResOperation from "../../types/checkin/IResOperation";
 import CheckinService from "../../services/checkin/CheckinService";
 
 function CheckIn() {
@@ -16,7 +16,7 @@ function CheckIn() {
 
 
    // 부서 배열 변수
-  const [checkIn, setCheckIn] = useState<Array<ICheckin>>([]);
+  const [checkIn, setCheckIn] = useState<Array<IResOperation>>([]);
   // 검색어 변수
   const [searchAirlinereservationnumber, setSearchAirlinereservationnumber] = useState<number>(0);
 
@@ -88,7 +88,7 @@ const onChangeSearchAirlinereservationnumber = (e: any) => {
                           name=""
                           type="type"
                           className="form-control"  
-                          placeholder="영문/숫자 조합 6자리 또는 숫자 6자리"
+                          placeholder="숫자 6자리"
                           value={searchAirlinereservationnumber}
                           onChange={onChangeSearchAirlinereservationnumber}
                         />

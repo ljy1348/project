@@ -1,8 +1,7 @@
 // axios 공통함수 : 벡엔드 연동
 
-import IResOperation from "../../types/checkin/IResOperation";
-import IPassport from "../../types/passport/IPassport";
-import IReservation from "../../types/reservation/IReservation";
+
+import IBoardingPass from "../../types/boardingPass/IBoardingPass";
 import http from "../../utils/http-common";
 
 
@@ -11,19 +10,14 @@ import http from "../../utils/http-common";
 const getAll = (airlinereservationnumber: any) => { 
     // 조회요청 : .get("/url")
     // 사용법 : http.get<리턴타입>("url")
-    return http.get<Array<IReservation>>(`/tour/checkin/${airlinereservationnumber}`);
+    return http.get<Array<IBoardingPass>>(`/tour/boardingpass/${airlinereservationnumber}`);
  }
 
-// 상세 조회
-const get = (checkYn:string) => {
-  return http.get<IReservation>(`/tour/checkin/${checkYn}`);
-};
 
 
 
 const CheckinService = {
   getAll,
-  get,
 
 };
 

@@ -1,10 +1,8 @@
 package com.example.back.controller;
 
 
-import com.example.back.model.dto.checkin.checkindto;
-import com.example.back.model.entity.passport.Passport;
+import com.example.back.model.dto.checkin.CheckinDto;
 import com.example.back.service.checkin.CheckinService;
-import com.example.back.service.passport.PassportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,8 +33,6 @@ public class CheckinController {
     @Autowired
     CheckinService checkinService; // DI
 
-    @Autowired
-    PassportService passportService;
 
     //   전체 조회 + dname like 검색
     @GetMapping("/checkin/{airlineReservationNumber}")
@@ -46,7 +42,7 @@ public class CheckinController {
         try {
             log.info("aaaaaaaaaaaaaaaaaaaa : "+airlineReservationNumber);
 
-            Optional<checkindto> checkinOptional
+            Optional<CheckinDto> checkinOptional
                     = checkinService.checkresnum(airlineReservationNumber);
 
             if (checkinOptional.isEmpty() == false) {
@@ -65,7 +61,7 @@ public class CheckinController {
     @GetMapping("/checkin/sheat/{operaionId}")
     public ResponseEntity<?> getSheat(@PathVariable int operaionId) {
         try {
-            List<checkindto> list = checkinService.getSheat(operaionId);
+            List<CheckinDto> list = checkinService.getSheat(operaionId);
             return new ResponseEntity<>(list, HttpStatus.OK);
 
         } catch (Exception e) {

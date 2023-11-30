@@ -14,7 +14,7 @@ import "aos/dist/aos.css";
 import "./assets/css/style.css";
 
 import CheckInStateModal from "./pages/modal/CheckInStateModal";
-import Boardingpass from "./pages/checkIn/Boardingpass";
+import Boardingpass from "./pages/checkIn/BoardingPass";
 import PassengerInfo from "./pages/checkIn/PassengerInfo";
 
 // todo: 리액트 import
