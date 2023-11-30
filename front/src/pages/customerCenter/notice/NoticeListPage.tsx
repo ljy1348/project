@@ -1,11 +1,11 @@
-// NoticeListPage.tsx
+// 공지사항 리스트
+
 import React, { useEffect, useState } from "react";
 import initScripts from "../../../assets/js/scripts";
 import initCustom from "../../../assets/js/custom";
 import NoticeList from "../../../components/notice/NoticeList";
 
 function NoticeListPage() {
-  
   useEffect(() => {
     initScripts();
     initCustom();
@@ -19,7 +19,7 @@ function NoticeListPage() {
             <div className="col-lg-6 mx-auto text-center">
               <div className="intro-wrap">
                 <h1 className="mb-0">공지 사항</h1>
-                <p className="text-white">새소식과 운임 공지를 확인해보세요.</p>
+                <p className="text-white">공지사항을 확인해보세요.</p>
               </div>
             </div>
           </div>

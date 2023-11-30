@@ -43,8 +43,6 @@ function SeeReservation() {
     ReservationService.get(airlineReservationNumber) // 벡엔드로 상세조회 요청
       .then((response: any) => {
         setReservation(response.data);
-        console.log(reservation.airlineReservationNumber);
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);

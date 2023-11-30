@@ -45,12 +45,6 @@ const onChangeSearchTitle = (e: any) => {
   setSearchTitle(searchTitle);
 };
 
-// todo: handlePageSizeChange(공통) : pageSize 값 변경시 실행되는 함수
-//  select 태그 수동 바인딩 : 화면값 -> 변수에 저장
-const handlePageSizeChange = (event: any) => { 
-    setPageSize(event.target.value); // 1페이지당 개수저장(3,6,9)
-    setPage(1); // 현재페이지번호 : 1로 강제설정
- }
 
 //  todo: Pagination 수동 바인딩(공통)
 //  페이지 번호를 누르면 => page 변수에 값 저장
@@ -107,7 +101,7 @@ return (
                 <td id="adminTd2">{data.memberName}</td>
                 <td id="adminTd3">{data.insertTime}</td>
                 <td id="adminTd4">
-                  <Link to={"/notice/edit/" + data.noticeId}>
+                  <Link to={"/admin/notice/" + data.noticeId}>
                     <span className="badge bg-success">Edit</span>
                   </Link>
                 </td>

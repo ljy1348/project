@@ -3,7 +3,6 @@ import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import { Accordion } from "react-bootstrap";
 import PassportService from "../../services/passport/PassportService";
-// import PassportService from "../../services/passport/PassportService";
 
 import { Button } from "@mui/material";
 import { Form, Link, useNavigate, useParams } from "react-router-dom";
@@ -14,7 +13,7 @@ import IPassport from "../../types/passport/IPassport";
 import IMemberInfo from "../../types/memberInfo/IMemberInfo";
 import INonMemberInfo from "../../types/nonmemberInfo/INonMembersInfo";
 import IBaggage from "../../types/baggage/IBaggage";
-import BaggageService from "../../services/checkin/BaggageService";
+import BaggageService from "../../services/baggage/BaggageService";
 import ReservationService from "../../services/reservation/ReservationService";
 import SelectSeat from "../modal/SelectSeat";
 import ICheckin from "../../types/checkin/ICheckin";
