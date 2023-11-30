@@ -3,23 +3,25 @@ import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import { Accordion } from "react-bootstrap";
 import PassportService from "../../services/passport/PassportService";
-// import PassportService from "../../services/passport/PassportService";
 
 import { Button } from "@mui/material";
-import { Form, Link, useParams } from "react-router-dom";
+import { Form, Link, useNavigate, useParams } from "react-router-dom";
 import { ClassNames } from "@emotion/react";
 // import About from './../About';
 import IPassport from "../../types/passport/IPassport";
-
 
 import IMemberInfo from "../../types/memberInfo/IMemberInfo";
 import INonMemberInfo from "../../types/nonmemberInfo/INonMembersInfo";
 import IBaggage from "../../types/baggage/IBaggage";
 import BaggageService from "../../services/baggage/BaggageService";
 import ReservationService from "../../services/reservation/ReservationService";
+import SelectSeat from "../modal/SelectSeat";
+import ICheckin from "../../types/checkin/ICheckin";
+import CheckinService from "../../services/checkin/CheckinService";
 
 function Passport() {
- 
+  // 모달 창
+  const [modalShow, setModalShow] = useState(false);
 
   // 예약번호를 받아옴
   const { searchAirlinereservationnumber } = useParams();
@@ -37,10 +39,15 @@ function Passport() {
     operationId: 0,
     checkYn: "N",
   };
-
   // 예약 변수 생성
   const [reservation, setReservation] = useState(initialReservation);
   const [totalpeople, setTotalPeople] = useState<number>(0);
+  // 예약좌석
+  const [selectedSeatsInfo, setSelectedSeatsInfo] = useState([]);
+  // console.log(selectedSeatsInfo)
+  const operID = reservation.operationId;
+  const adcount = reservation.adultCount;
+  const chcount = reservation.childCount;
 
   console.log("총인원수", reservation.userNumber);
 
@@ -56,22 +63,28 @@ function Passport() {
     // 여권만료일
     passportDate: "",
     // 비회원ID
-    userNumber: 0
+    userNumber: 0,
   };
 
   const initialBaggage = {
     bagNumber: null,
     bagCount: 0,
-    bagArea: 0,
-    bagWeight: 0,
     bagPrice: 0,
-    checkId: "",
-    bagYn: "",
+    airlineReservationNumber: Number(searchAirlinereservationnumber)
+  };
+
+  const initialCheckin = {
+    // 여권번호
+    checkId: null,
+    seatNumber : "",
+    airlineReservationNumber: Number(searchAirlinereservationnumber),
+    passportId : "0123"
   };
 
   // 여권 객체
   const [passport, setPassport] = useState<IPassport[]>([initialPassport]);
   const [baggage, setBaggage] = useState<IBaggage>(initialBaggage);
+  const [checkin, setCheckin] = useState<ICheckin[]>([initialCheckin]);
 
   // 저장버튼 클릭후 submitted = true 변경됨
   //  const [submitted, setSubmitted] = useState<boolean>(false);
@@ -85,27 +98,28 @@ function Passport() {
     fieldName: keyof IPassport
   ) => {
     const { value } = event.target;
-    console.log(fieldName,passportIndex,value)
+    console.log(fieldName, passportIndex, value);
 
     setPassport((prevPassport) => {
       const updatedPassports = [...prevPassport];
       updatedPassports[passportIndex] = {
         ...updatedPassports[passportIndex],
         [fieldName]: value,
+        // passportIndex에 해당하는 위치의 userNumber를 할당
+        userNumber:
+          parseInt(reservation.userNumber.split(",")[passportIndex]) || 0,
       };
       return updatedPassports;
     });
-
   };
-  // const handleInputChange = (event, index) => {
-  //   const { name, value } = event.target;
-  //   setFormArray((prevForms) => {
-  //     const updatedForms = [...prevForms];
-  //     updatedForms[index][name] = value;
-  //     return updatedForms;
-  //   });
-  // };
-  // 예약정보 상세조회 함수
+
+   // input 태그에 수동 바인딩
+   const handleInputChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target; // 화면 값
+    setBaggage({ ...baggage, [name]: value });  // 변수 저장
+  };
+
+
   const getReservation = (airlineReservationNumber: string) => {
     ReservationService.get(airlineReservationNumber) // 벡엔드로 상세조회 요청
       .then((response: any) => {
@@ -116,9 +130,7 @@ function Passport() {
         console.log(e);
       });
   };
-
-
-  // 저장 함수
+  //  저장 함수
   const savePassport = () => {
     // 임시 객체
     var data = passport;
@@ -137,18 +149,16 @@ function Passport() {
         console.log(e);
       });
   };
-  
 
   const saveBaggage = () => {
     var data = {
-      bagNumber: baggage.bagNumber,
+      bagNumber: null,
       bagCount: baggage.bagCount,
-      bagArea: baggage.bagArea,
-      bagWeight: baggage.bagWeight,
-      bagPrice: baggage.bagPrice,
-      checkId: baggage.checkId,
-      bagYn: baggage.bagYn,
+      bagPrice: baggage.bagCount * 100000,
+      airlineReservationNumber: Number(searchAirlinereservationnumber)
     };
+
+    console.log(data);
 
     BaggageService.create(data)
       .then((response: any) => {
@@ -159,9 +169,40 @@ function Passport() {
       });
   };
 
+  const saveCheckin = () => {
+    // selectedSeatsInfo와 passport 배열이 동일한 길이를 가정합니다.
+    console.log(checkin);
+    let arr = [];
+    for (let i = 0; i < selectedSeatsInfo.length; i++) {
+
+      let initData:ICheckin = {
+        checkId: null,
+        seatNumber : "",
+        airlineReservationNumber: 0,
+        passportId : "0123"
+      }
+      initData.seatNumber = selectedSeatsInfo[i];
+      initData.passportId = passport[i].passportId;
+      initData.airlineReservationNumber = Number(searchAirlinereservationnumber);
+      arr.push(initData);
+    }
+    CheckinService.create(arr)
+      .then((response: any) => {
+        console.log(response.data);
+        // 여기에서 필요한 네비게이션 처리를 추가하세요.
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
+  const navi = useNavigate();
   const handleSave = () => {
+  
     savePassport();
+    saveCheckin();
     saveBaggage();
+
+    navi(`/boardingpass/${operID}/${searchAirlinereservationnumber}/${adcount}/${chcount}/${bagCount1}`)
   };
 
   // todo: 수화물 저장할 변수
@@ -183,20 +224,23 @@ function Passport() {
       Number(reservation.adultCount) + Number(reservation.childCount)
     );
 
-    const tempArray = new Array
+    const tempArray = new Array();
 
-    for (let i = 0; i < Number(reservation.adultCount) + Number(reservation.childCount); i++) {
+    for (
+      let i = 0;
+      i < Number(reservation.adultCount) + Number(reservation.childCount);
+      i++
+    ) {
       tempArray.push(initialPassport);
     }
-    
-    setPassport(tempArray);
 
+    setPassport(tempArray);
   }, [reservation, totalpeople]); // reservation이 변경될 때마다 useEffect가 실행
 
   //  todo: 증가 함수
   //  todo: 증가 함수
   const increaseCount = () => {
-    if (bagCount1 < totalpeople*2) {
+    if (bagCount1 < totalpeople * 2) {
       // bagCount1을 1 증가시킵니다.
       const updatedCount = bagCount1 + 1;
       setBagCount1(updatedCount);
@@ -227,6 +271,12 @@ function Passport() {
     }
   };
 
+  // 좌석 저장함수
+  const handleSeatsSelected = (selectedSeats: any) => {
+    setSelectedSeatsInfo(selectedSeats);
+    console.log("Passport에서 선택된 좌석:", selectedSeats);
+  };
+
   return (
     <>
       <div className="hero hero-inner">
@@ -236,7 +286,6 @@ function Passport() {
               <div className="intro-wrap">
                 <h1 className="mb-5">
                   <span className="d-block text-center">체크인</span>
-                  
                 </h1>
               </div>
             </div>
@@ -340,13 +389,10 @@ function Passport() {
 
         {/* 좌석지정 */}
         <Accordion.Item eventKey="1">
-          <Accordion.Header>좌석 선택 #2</Accordion.Header>
-          <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          </Accordion.Body>
+          <Accordion.Header onClick={() => setModalShow(true)}>
+            좌석 선택 선택된 좌석: {selectedSeatsInfo.join(" ")}
+          </Accordion.Header>
         </Accordion.Item>
-        {/* 좌석지정 */}
-
         {/* 수화물 사전 구매  */}
         <Accordion.Item eventKey="2">
           <Accordion.Header>수화물추가 (선택사항) #3</Accordion.Header>
@@ -367,50 +413,49 @@ function Passport() {
                   </tr>
                 </thead>
                 {/* <tbody> */}
-               
-                  
-                      <tr>
-                        <td className="passengername">{searchAirlinereservationnumber}</td>
-                        <td className="bagcount">
-                          <div
-                            className="btn-group-col"
-                            role="group"
-                            aria-label="Basic outlined example"
-                          >
-                            <button
-                              type="button"
-                              className="btn btn-outline-secondary opacity-50"
-                              value={baggage.bagCount}
-                              onClick={decreaseCount}
-                            >
-                              -
-                            </button>
 
-                            <button
-                              type="button"
-                              className="btn btn-outline-dark"
-                              disabled
-                            >
-                              {bagCount1}
-                            </button>
+                <tr>
+                  <td className="passengername">
+                    {searchAirlinereservationnumber}
+                  </td>
+                  <td className="bagcount">
+                    <div
+                      className="btn-group-col"
+                      role="group"
+                      aria-label="Basic outlined example"
+                    >
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary opacity-50"
+                        value={baggage.bagCount}
+                        onClick={decreaseCount}
+                      >
+                        -
+                      </button>
 
-                            <button
-                              type="button"
-                              className="btn btn-outline-secondary opacity-50"
-                              value={baggage.bagCount}
-                              onClick={increaseCount}
-                            >
-                              +
-                            </button>
-                          </div>
-                        </td>
-                        <td className="bagprice">
-                          {new Intl.NumberFormat("ko-KR").format(
-                            bagCount1 * 100000
-                          )}
-                        </td>
-                      </tr>
-                  
+                      <button
+                        type="button"
+                        className="btn btn-outline-dark"
+                        disabled
+                      >
+                        {bagCount1}
+                      </button>
+
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary opacity-50"
+                        value={baggage.bagCount}
+                        onClick={increaseCount}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </td>
+                  <td className="bagprice">
+
+                    {new Intl.NumberFormat("ko-KR").format(bagCount1 * 100000)}
+                  </td>
+                </tr>
 
                 <tr>
                   <td></td>
@@ -440,11 +485,14 @@ function Passport() {
               </table>
 
               <div className="toboardingpass">
-                {/* <Link to={"/boardingpass"}> */}
-                  <button type="button" className="btn btn-outline-dark"
-                  onClick={handleSave}>
-                    완료
-                  </button>
+                {/* <Link to={"/boardingpass/"}> */}
+                <button
+                  type="button"
+                  className="btn btn-outline-dark"
+                  onClick={handleSave}
+                >
+                  완료
+                </button>
                 {/* </Link> */}
               </div>
             </div>
@@ -452,6 +500,14 @@ function Passport() {
         </Accordion.Item>
         {/* 수화물 사전 구매  */}
       </Accordion>
+
+      <SelectSeat
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        onSeatsSelected={handleSeatsSelected}
+        totalpeople={totalpeople}
+        modalShow={modalShow}
+      />
     </>
   );
 }

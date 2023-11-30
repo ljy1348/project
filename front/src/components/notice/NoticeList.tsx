@@ -109,41 +109,34 @@ function NoticeList() {
 
       <div className="container" id="notice-bottom-gap">
 
-        <div className="col-md-12 row">
-          <table className="table" id="table-bottom-gap">
-            <thead>
-              <tr className="top-line-bold">
-                <th scope="col">No</th>
-                <th scope="col">제목</th>
-                <th scope="col">날짜</th>
-                <th scope="col">작성자</th>
-              </tr>
-            </thead>
-            <tbody>
-              {notice &&
-                notice.map((data) => (
-                  <tr className="line-sorting" key={data.noticeId}>
-                    <td id="notice-id-location">{data.noticeId}</td>
-                    <td id="notice-title-location">
-                      <a href={`/notice/${data.noticeId}`} className="k_jull">
-                        {data.noticeTitle}
-                      </a>
-                    </td>
-                    <td id="notice-insertTime-location">{data.insertTime}</td>
-                    <td id="notice-writer-location">{data.noticeWriter}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-
-          {/* table end */}
-        </div>
-
+      <div className="col-md-12 row">
+        <table className="table" id="table-bottom-gap">
+          <thead>
+            <tr className="top-line-bold">
+              <th scope="col">No</th>
+              <th scope="col">제목</th>
+              <th scope="col">날짜</th>
+              <th scope="col">작성자</th>
+            </tr>
+          </thead>
+          <tbody>
+            {notice &&
+              notice.map((data) => (
+                <tr className="line-sorting" key={data.noticeId}>
+                  <td id="notice-id-location">{data.noticeId}</td>      
+                  <td id="notice-title-location"><a href={`/notice/${data.noticeId}`}>{data.noticeTitle}</a></td>
+                  <td id="notice-insertTime-location">{data.insertTime}</td>
+                  <td id="notice-writer-location">{data.memberName}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+        
+        {/* table end */}
       </div>
-      {/* table end */}
 
       {/* 페이지네이션 시작 */}
-      <div className="col-md-4 offset-5">
+      <div className="noticePageBtn">
         <Pagination
           className="my-3"
           count={count}
@@ -156,6 +149,9 @@ function NoticeList() {
         />
       </div>
       {/* 페이지네이션 끝 */}
+      </div>
+      {/* table end */}
+
     </div>
   );
 }

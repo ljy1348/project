@@ -82,9 +82,9 @@ public class NoticeService {
 
 
     //    상세조회(1건조회)
-    public Optional<Notice> findById(int noticeId) {
-        Optional<Notice> optionalNotice
-                = noticeRepository.findById(noticeId);
+    public Optional<NoticeDto> seeNoticeId(int noticeId) {
+        Optional<NoticeDto> optionalNotice
+                = noticeRepository.seeNoticeId(noticeId);
 
         return optionalNotice;
     }

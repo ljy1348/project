@@ -53,7 +53,7 @@ public class BaggageController {
     //    저장 함수
     @PostMapping("/baggage")
     public ResponseEntity<Object> create(@RequestBody Baggage baggage) {
-
+            log.info("aaaaaaaaaaaaaaa : "+baggage.getAirlineReservationNumber());
         try {
             Baggage baggage2 = baggageService.save(baggage); // db 저장
 
