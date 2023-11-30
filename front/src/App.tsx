@@ -14,7 +14,7 @@ import "aos/dist/aos.css";
 import "./assets/css/style.css";
 
 import CheckInStateModal from "./pages/modal/CheckInStateModal";
-import Boardingpass from "./pages/checkIn/BoardingPass";
+// import Boardingpass from "./pages/checkIn/BoardingPass";
 import PassengerInfo from "./pages/checkIn/PassengerInfo";
 
 // todo: 리액트 import
@@ -48,6 +48,7 @@ import AdminNotice from "./pages/auth/admin/board/AdminNotice";
 import ReservationListPage from "./pages/SearchReservation/ReservationListPage";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import AdminNoticeFixPage from "./pages/auth/admin/board/AdminNoticeFixPage";
+import Boardingpass from "./pages/checkIn/Boardingpass";
 // todo: 리액트 import
 
 function App() {

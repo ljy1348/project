@@ -61,6 +61,8 @@ public class PaymentController {
             }
 
             Payment payment1 = paymentService.create(payment);
+            emailService.sendSimpleMessage("jy1348@naver.com","GreenAir 결제 및 예약 내역입니다.",
+                    "출발 예약 번호 : "+tempStr[0]+"\n도착 예약 번호 : "+tempStr[1]+"\n결제 번호 : "+payment1.getPayId());
             return new ResponseEntity<>(payment1, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -152,11 +154,5 @@ public class PaymentController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    @GetMapping("/test")
-    public ResponseEntity<?> test() {
-        emailService.sendSimpleMessage("jy1348@naver.com","GreenAir 결제 및 예약 내역입니다.", "안녕" );
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -87,7 +87,7 @@ function PaymentModal(props: any) {
       })
       .catch((e:Error)=>{console.log(e)})
 
-    }, [props,price]) 
+    }, [props, price]) 
   
     useEffect(() => {
       const paymentMethodsWidget = paymentMethodsWidgetRef.current 
