@@ -1,25 +1,17 @@
-// 공지사항 리스트
+import React from "react";
+import AdminNoticeFix from "./AdminNoticeFix";
 
-import React, { useEffect, useState } from "react";
-import initScripts from "../../../assets/js/scripts";
-import initCustom from "../../../assets/js/custom";
-import NoticeList from "../../../components/notice/NoticeList";
-
-function NoticeListPage() {
-  useEffect(() => {
-    initScripts();
-    initCustom();
-  }, []);
+function AdminNoticeFixPage() {
   return (
     <>
+      {/* 테마 디자인 적용 : 컨택트 소스 */}
       {/* 테마 제목 시작 */}
-      <div className="hero hero-customer">
+      <div className="hero hero-inner">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6 mx-auto text-center">
               <div className="intro-wrap">
-                <h1 className="mb-0">공지 사항</h1>
-                <p className="text-white">공지사항을 확인해보세요.</p>
+                <h1 className="mb-0">공지사항 수정 / 삭제</h1>
               </div>
             </div>
           </div>
@@ -32,7 +24,7 @@ function NoticeListPage() {
         <div className="container">
           <div className="row">
             {/* 여기 */}
-            <NoticeList />
+            <AdminNoticeFix />
           </div>
         </div>
       </div>
@@ -40,4 +32,5 @@ function NoticeListPage() {
     </>
   );
 }
-export default NoticeListPage;
+
+export default AdminNoticeFixPage;

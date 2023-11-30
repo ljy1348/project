@@ -11,5 +11,4 @@ export default interface IOperationinfo {
     finalDate?: any | string,
     domesticInternational : string,
     price : string
-
 }

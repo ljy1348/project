@@ -7,5 +7,6 @@ export default interface INotice {
     noticeContent: string,
     noticeTitle: string,
     memberId: string,
-    insertTime: string
+    insertTime: string,
+    memberName: string
 }

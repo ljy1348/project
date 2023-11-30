@@ -23,7 +23,7 @@ import Home from "./pages/Home";
 import Footer from "./components/common/Footer";
 import SearchReservationPage from "./pages/SearchReservation/SearchReservationPage";
 
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import KakaoLogin from "./pages/auth/KakaoLogin";
@@ -34,7 +34,6 @@ import AdminPage from "./pages/auth/user/AdminPage";
 
 import CheckIn from "./pages/checkIn/CheckIn";
 import Reserve from "./pages/reserve/Reserve";
-import ForiareaModal from "./pages/modal/ForiareaModal";
 import Passport from "./pages/checkIn/Passport";
 import ReserveChoose from "./pages/reserve/ReserveChoose";
 import ReservePayment from "./pages/reserve/ReservePayment";
@@ -47,6 +46,8 @@ import QuestionContent from "./pages/customerCenter/board/QuestionContent";
 import SelectSeat from "./pages/modal/SelectSeat";
 import AdminNotice from "./pages/auth/admin/board/AdminNotice";
 import ReservationListPage from "./pages/SearchReservation/ReservationListPage";
+
+import AdminNoticeFixPage from "./pages/auth/admin/board/AdminNoticeFixPage";
 
 // todo: 리액트 import
 
@@ -111,6 +112,7 @@ function App() {
 
         {/* 관리자 */}
         <Route path="/admin/notice" element={<AdminNotice />} />
+        <Route path="/admin/notice/:noticeId" element={<AdminNoticeFixPage />} />
 
         {/* 결제 */}
 
