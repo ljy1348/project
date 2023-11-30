@@ -56,10 +56,10 @@ public class PassportController {
 
     //    저장 함수
     @PostMapping("/passport")
-    public ResponseEntity<Object> create(@RequestBody Passport passport) {
+    public ResponseEntity<Object> create(@RequestBody List<Passport> passport) {
 
         try {
-            Passport passport2 = passportService.save(passport); // db 저장
+            List<Passport> passport2 = passportService.save(passport); // db 저장
 
             return new ResponseEntity<>(passport2, HttpStatus.OK);
         } catch (Exception e) {
