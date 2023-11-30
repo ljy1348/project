@@ -1,7 +1,7 @@
-package com.example.back.controller.checkin;
+package com.example.back.controller.baggage;
 
-import com.example.back.model.entity.checkin.Baggage;
-import com.example.back.service.checkin.BaggageService;
+import com.example.back.model.entity.baggage.Baggage;
+import com.example.back.service.baggage.BaggageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,7 @@ public class BaggageController {
     @Autowired
     BaggageService baggageService; // DI
     // 전체 조회 + bagNumber like 검색
-    @GetMapping("/baggage")
+    @GetMapping("/baggage/{airlineReservationPassport}")
     public ResponseEntity<Object> findAllByBagNumberContaining(
             @RequestParam(defaultValue = "") String bagNumber
     ) {

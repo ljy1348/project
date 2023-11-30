@@ -16,8 +16,9 @@ import IBaggage from "../../types/baggage/IBaggage";
 import BaggageService from "../../services/baggage/BaggageService";
 import ReservationService from "../../services/reservation/ReservationService";
 import SelectSeat from "../modal/SelectSeat";
-import ICheckin from "../../types/checkin/ICheckin";
+// import ICheckin from "../../types/checkin/ICheckin";
 import CheckinService from "../../services/checkin/CheckinService";
+import ICheckin from "../../types/checkin/IResOperation";
 
 function Passport() {
   // 모달 창
@@ -376,24 +377,7 @@ function Passport() {
                             />
                           </div>
                         </div>
-                        {/* 
-                        <div className="passengerbutton">
-                            <button
-                              type="button"
-                              className="btn btn-outline-dark"
-                              onClick={() => onClickAdd(idx)}
-                            >
-                              승객 추가
-                            </button>
-
-                            <button
-                              type="button"
-                              className="btn btn-dark"
-                              onClick={() => onClickRemove(idx)}
-                            >
-                              제거
-                            </button>                            
-                          </div>                      */}
+                     
                       </div>
                     </div>
                   </form>

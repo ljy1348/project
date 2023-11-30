@@ -1,109 +1,158 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import BoardingPassService from "../../services/boardingPass/BoardingPassService";
+import initScripts from "../../assets/js/scripts";
+import initCustom from "../../assets/js/custom";
+import IOperationinfo from "../../types/operationInfo/IOperationinfo";
+import OperationService from "../../services/operation/OperationService";
+import IReservation from "../../types/reservation/IReservation";
 
 function Boardingpass() {
+  const {seatNumber} = useParams();
+  const {bagCount1} = useParams();
+
+   // 객체 초기화(상세조회 : 기본키 있음)
+   const initialOperation = {
+    operationId: null,
+    airline: "",
+    flightName: "",
+    startAirport: "",
+    finalAirport: "",
+    startTime: "",
+    finalTime: "",
+    operationDate: "",
+    startDate: "",
+    finalDate: "",
+    domesticInternational: "",
+    price: "",
+  };
+ 
+  
+
+  
+   const[operation, setOperation] = useState<IOperationinfo>(initialOperation);
+
+ 
+
+  // todo: 함수 정의
+  // 상세조회 함수
+  const getOperation = (operationId: string) => {
+    OperationService.get(operationId)    
+      .then((response: any) => {
+        setOperation(response.data);
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+
+      
+  };
+  useEffect(() => {
+    getOperation("85");
+    initScripts();
+    initCustom();
+  }, []);
+
+
   return (
     <>
-       <div className="hero hero-inner">
+      <div className="hero hero-inner">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-12">
               <div className="intro-wrap">
-                <h1 className="mb-5">
-                </h1>
+                <h1 className="mb-5"></h1>
               </div>
             </div>
           </div>
         </div>
       </div>
-     
-    
+
       <div className="untree_co-section">
-      <div className="container">
-        <h1>GreenAir</h1>
-        <div className="underline"></div>
-        <div className="line_row_wrap">
-          <dl className="line_row">
-            <dt>
-              <h4>
-                 고객님의 체크인이 확정되었습니다!
-              </h4>
-            </dt>
-            <div>
-              <h6 className="tit">
-                예약 정보
-              </h6>
-              <p>예약자명</p> 
-              <div className="finalboadingpass">
-              <table className="table">
-           
-                {/* 항공편정보 */}
-                <tr className="finalInfo">
-                  <td scope="col">항공편 정보</td>
-                  <td scope="col">여정</td>
-                  <td scope="col">출국일자</td>
-                </tr>
-                <tr>
-                  <td scope="col"></td>
-                  <td scope="col"></td>
-                  <td scope="col"></td>
-                </tr>
-                {/* 항공편정보 */}
+        <div className="container">
+          <h1>GreenAir</h1>
+          <div className="underline"></div>
+          <div className="line_row_wrap">
+            <dl className="line_row">
+              <dt>
+                <h4>고객님의 체크인이 확정되었습니다!</h4>
+              </dt>
 
-                {/* 좌석 정보 */}
-                <tr className="finalInfo">
-                  <td scope="col">좌석번호</td>
-                  <td scope="col">좌석등급</td>
-                  <td scope="col"> </td>
-                </tr>
-                <tr>
-                  <td scope="col"></td>
-                  <td scope="col"></td>
-                  <td scope="col"></td>
-                </tr>
-                 {/* 좌석 정보 */}
-
-
-               {/* 수화물 정보 */}
-                <tr className="finalInfo">
-                  <td scope="col">수화물 </td>
-                  <td scope="col">휴대수화물</td>
-                  <td scope="col">위탁수화물</td>
-                </tr>
-                <tr>
-                  <td scope="col"></td>
-                  <td scope="col"></td>
-                  <td scope="col"></td>
-                </tr>
-                {/* 수화물 정보 */}
-                
-              </table>
+              <div className="container">
+                <h3 className="sangmin_reserve_choose_subTitle d-flex justify-content-center mt-5">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="air_icon bi bi-airplane-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z" />
+                  </svg>
+                  첫 번째 여정
+                </h3>
+              </div>
+              <div className="sangmin_choose_airport d-flex justify-content-center mt-5">
+                <span>{operation.startAirport}</span>
+                <span> &gt; </span>
+                <span>{operation.finalAirport}</span>
               </div>
 
+              <div>
+                <h6 className="tit">
+                  예약 번호 : 
+                </h6>
 
-            </div>
-          </dl>
-          <dl className="line_row">
-            <dt>
-              <span className="tit">결제까지 완료해주시기 바랍니다.<br/> (결제 다음 이메일 전송)</span>
-            </dt>
-            <div>
-            <button type="button" className="btn btn-primary">
-               결제
-                 </button>
-            </div>
-          </dl>
+                <div className="finalboadingpass">
+                  <table className="table">
+                    {/* 좌석 정보 */}
+                    <tr className="finalInfo">
+                      <td scope="col">예약인원</td>
+                      <td scope="col">좌석번호</td>
+                      <td scope="col">좌석등급</td>
+                    </tr>
+                    <tr>
+                      <td scope="col"></td>
+                      <td scope="col">{seatNumber}</td>
+                      <td scope="col"></td>
+                    </tr>
+                    {/* 좌석 정보 */}
+
+                    {/* 수화물 정보 */}
+                    <tr className="finalInfo">
+                     
+                      <td scope="col">항공편명</td>
+                      <td scope="col">추가수화물개수</td>
+                      <td scope="col">금액</td>
+                    </tr>
+                    <tr>
+                      <td scope="col">{operation.flightName}</td>
+                      <td scope="col">{bagCount1}</td>
+                      {/* <td scope="col">{bagCount1 * 100000} </td> */}
+                    </tr>
+                    {/* 수화물 정보 */}
+                  </table>
+                </div>
+              </div>
+            </dl>
+            <dl className="line_row">
+              <dt>
+                <span className="tit">
+                  결제까지 완료해주시기 바랍니다.
+                  <br />
+                </span>
+              </dt>
+              <div>
+                <button type="button" className="btn btn-primary">
+                  결제
+                </button>
+              </div>
+            </dl>
+          </div>
         </div>
       </div>
-
-     
-       
-    </div>
-
-     
-     
-     
-
     </>
   );
 }
