@@ -1,17 +1,11 @@
-// NoticeListPage.tsx
+// 공지사항 리스트
+
 import React, { useEffect, useState } from "react";
-import CustomerService from "../../../services/basic/CustomerService";
-import { Pagination } from "@mui/material";
-import { Link } from "react-router-dom";
-import { Accordion } from "react-bootstrap";
-import INotice from "../../../types/Center/INotice";
-import NoticeService from "../../../services/center/NoticeService";
 import initScripts from "../../../assets/js/scripts";
 import initCustom from "../../../assets/js/custom";
 import NoticeList from "../../../components/center/notice/NoticeList";
 
 function NoticeListPage() {
-  
   useEffect(() => {
     initScripts();
     initCustom();

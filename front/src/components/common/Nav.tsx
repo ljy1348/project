@@ -63,9 +63,6 @@ function Nav() {
                   <li>
                     <Link to="/question-board">1:1 문의</Link>
                   </li>
-                  <li>
-                    <Link to="/elements">1:1 문의목록</Link>
-                  </li>
                 </ul>
               </li>
               {/* 드롭다운 메뉴 끝 */}

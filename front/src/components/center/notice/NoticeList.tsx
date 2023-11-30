@@ -1,4 +1,5 @@
-// NoticeList.tsx : rfce
+// 공지사항 첫화면
+
 import { useEffect, useState } from "react";
 import { Pagination } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -18,7 +19,7 @@ function NoticeList() {
   // todo: 공통 변수 : page(현재페이지번호), count(총페이지건수), pageSize(3,6,9 배열)
   const [page, setPage] = useState<number>(1);
   const [count, setCount] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(10); // 1페이지당개수
+  const [pageSize] = useState<number>(10); // 1페이지당개수
 
   // todo: 함수 정의
   useEffect(() => {
@@ -64,7 +65,7 @@ function NoticeList() {
       <div className="col-md-8 offset-2">
         <div className="col-12 input-group mb-3">
           <select
-            className="form-select"
+            className="form-select title-content-select"
             onChange={onChangeSearchSelect}
             value={searchSelect}
           >
@@ -89,7 +90,7 @@ function NoticeList() {
 
           <div className="input-group-append">
             <button
-              className="btn btn-danger"
+              className="notice-search-word-button"
               type="button"
               onClick={retrieveNotice}
             >
@@ -103,35 +104,38 @@ function NoticeList() {
 
       {/* 내용 */}
 
-      <div className="row mb-3">
-      </div>
+      <div className="row mb-3"></div>
 
       <div className="container" id="notice-bottom-gap">
-      <div className="col-md-12 row">
-        <table className="table" id="table-bottom-gap">
-          <thead>
-            <tr className="top-line-bold">
-              <th scope="col">No</th>
-              <th scope="col">제목</th>
-              <th scope="col">날짜</th>
-              <th scope="col">작성자</th>
-            </tr>
-          </thead>
-          <tbody>
-            {notice &&
-              notice.map((data) => (
-                <tr className="line-sorting" key={data.noticeId}>
-                  <td id="notice-id-location">{data.noticeId}</td>      
-                  <td id="notice-title-location"><a href={`/notice/${data.noticeId}`}>{data.noticeTitle}</a></td>
-                  <td id="notice-insertTime-location">{data.insertTime}</td>
-                  <td id="notice-writer-location">{data.noticeWriter}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-        
-        {/* table end */}
-      </div>
+        <div className="col-md-12 row">
+          <table className="table" id="table-bottom-gap">
+            <thead>
+              <tr className="top-line-bold">
+                <th scope="col">No</th>
+                <th scope="col">제목</th>
+                <th scope="col">날짜</th>
+                <th scope="col">작성자</th>
+              </tr>
+            </thead>
+            <tbody>
+              {notice &&
+                notice.map((data) => (
+                  <tr className="line-sorting" key={data.noticeId}>
+                    <td id="notice-id-location">{data.noticeId}</td>
+                    <td id="notice-title-location">
+                      <a href={`/notice/${data.noticeId}`} className="k_jull">
+                        {data.noticeTitle}
+                      </a>
+                    </td>
+                    <td id="notice-insertTime-location">{data.insertTime}</td>
+                    <td id="notice-writer-location">{data.noticeWriter}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+
+          {/* table end */}
+        </div>
       </div>
       {/* table end */}
 

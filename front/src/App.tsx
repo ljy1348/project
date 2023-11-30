@@ -48,6 +48,7 @@ import PaymentResult from "./pages/payment/PaymentResult";
 import PaymentSuccess from "./pages/payment/PaymentSuccess";
 import PaymentFail from "./pages/payment/PaymentFail";
 import Home2 from "./pages/Home2";
+import QuestionContent from "./pages/customerCenter/board/QuestionContent";
 // todo: 리액트 import
 
 function App() {
@@ -69,8 +70,12 @@ function App() {
         <Route path="/question" element={<QuestionPage />} />
 
         {/* 1:1 문의 게시판 */}
+        {/* 1:1 문의 홈화면 */}
         <Route path="/question-board" element={<QuestionBoardPage />} />
+        {/* 작성 양식 */}
         <Route path="/addquestion-board" element={<AddboardList />} />
+        {/* 작성 내용 */}
+        <Route path="/question-board/:titleId" element={<QuestionContent />} />
 
         <Route path="/" element={<Home />}></Route>
 

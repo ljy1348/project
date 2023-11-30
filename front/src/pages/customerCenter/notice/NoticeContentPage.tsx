@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react'
-import Notice from '../../../components/center/notice/Notice'
-import initScripts from '../../../assets/js/scripts';
-import initCustom from '../../../assets/js/custom';
+// 공지사항 내용
+
+import React, { useEffect } from "react";
+import Notice from "../../../components/center/notice/Notice";
+import initScripts from "../../../assets/js/scripts";
+import initCustom from "../../../assets/js/custom";
 
 function NoticeContentPage() {
   useEffect(() => {
@@ -36,7 +38,7 @@ function NoticeContentPage() {
       </div>
       {/* 본문 끝 */}
     </>
-  )
+  );
 }
 
-export default NoticeContentPage
+export default NoticeContentPage;

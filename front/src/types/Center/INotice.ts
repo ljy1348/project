@@ -1,4 +1,4 @@
-// INotice.tsx
+// 공지사항 고객입장
 export default interface INotice {
     noticeId?: any | null,
     noticeWriter: string,

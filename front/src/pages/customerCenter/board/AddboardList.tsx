@@ -1,58 +1,62 @@
-// 작성화면
+// 1:1 문의작성양식
 
 import React, { useState } from "react";
-import CustomerCenterSerivce from "../../../services/center/QuestionBoardService";
 
 import IQboard from "../../../types/Center/IQboard";
+import { useNavigate } from "react-router-dom";
+import QuestionBoardService from "../../../services/center/QuestionBoardService";
 
 function AddboardList() {
   const initialQuestion = {
     titleId: null,
     title: "",
     content: "",
-    memberId: "",
-    insertTime: "",
-    answerYn: ""
+    memberId: "11",
+    insertTime: "11",
+    answerYn: "N",
+    answer: "",
+    paraentBid: 0,
   };
 
   const [question, setQuestion] = useState<IQboard>(initialQuestion);
-  const [submitted, setSubmitted] = useState<boolean>(false);
 
+  // todo: input 태그에 수동 바인딩
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setQuestion({ ...question, [name]: value });
   };
 
+  // 저장 함수
   const saveQuestion = () => {
     var data = {
       title: question.title,
       content: question.content,
       memberId: question.memberId,
       insertTime: question.insertTime,
-      answerYn: question.answerYn
-
+      answerYn: question.answerYn,
+      answer: question.answer,
+      paraentBid: question.paraentBid,
     };
 
-    CustomerCenterSerivce.create(data) // 저장 요청
+    QuestionBoardService.create(data) // 저장 요청
       .then((response: any) => {
-        setSubmitted(true);
         console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
       });
   };
-  // 새폼 보여주기 함수 : 변수값 변경 -> 화면 자동 갱신(리액트 특징)
-  const newQuestion = () => {
-    setQuestion(initialQuestion); // Qna 초기화
-    setSubmitted(false); // submitted 변수 초기화
+
+  const navi = useNavigate();
+
+  const Onclinkev = () => {
+    saveQuestion();
+    navi(`/question-board`);
   };
-
-
 
   return (
     <>
-    {/* 테마 */}
+      {/* 테마 */}
       <div className="hero hero-customer">
         <div className="container">
           <div className="row align-items-center">
@@ -67,13 +71,12 @@ function AddboardList() {
       </div>
       {/* 테마 */}
 
-      <div
-        className="gray_box">
+      <div className="gray_box">
         {/* 폼 표시 */}
         <form className="k_box">
           <div className="form_group">
             <div className="k_title">
-              <label htmlFor="title">제목</label>
+              <label className="add-answer-title-gap">제목</label>
               <input
                 type="text"
                 className="form-control"
@@ -84,8 +87,8 @@ function AddboardList() {
                 placeholder="문의 제목을 입력하세요"
               />
             </div>
-            <div className="k_id">
-              <label htmlFor="memberId">회원 ID</label>
+            {/* <div className="k_id">
+              <label className="add-answer-id-gap">회원 ID</label>
               <input
                 type="text"
                 className="form-control"
@@ -95,10 +98,10 @@ function AddboardList() {
                 onChange={handleInputChange}
                 placeholder="회원 ID를 입력하세요"
               />
-            </div>
+            </div> */}
           </div>
           <div className="form-group">
-            <label htmlFor="content">내용</label>
+            <label className="add-answer-content-gap">내용</label>
             <input
               className="form-control"
               id="content"
@@ -106,21 +109,22 @@ function AddboardList() {
               value={question.content}
               onChange={handleInputChange}
               placeholder="문의 내용을 입력하세요"
-              style={{ height: "200px" }} 
+              style={{ height: "200px" }}
             />
           </div>
         </form>
+
         <div className="button1">
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={saveQuestion}
-          style={{ width: "10%", padding: "10px", borderRadius: "5px" }}
-        >
-          작성
-        </button>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={Onclinkev}
+            style={{ width: "10%", padding: "10px", borderRadius: "5px" }}
+          >
+            작성
+          </button>
         </div>
-        
+
         <div className="gray_box1">
           <h3>작성 시 유의사항</h3>
           <ul className="list_type2">
