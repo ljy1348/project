@@ -20,10 +20,20 @@ const get = (checkYn:string) => {
 };
 
 
+// 저장 함수
+const create = (data:Array<ICheckin>) => {
+  return http.post<Array<ICheckin>>("/tour/checkin", data);
+};
+
+
+
+
+
 
 const CheckinService = {
   getAll,
   get,
+  create,
 
 };
 

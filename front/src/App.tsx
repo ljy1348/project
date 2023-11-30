@@ -74,9 +74,10 @@ function App() {
         <Route path="/checkin" element={<CheckIn />} />
         <Route path="/passengerinfo" element={<PassengerInfo />} />
         <Route path="/passport/:searchAirlinereservationnumber" element={<Passport />} />
-        <Route path="/boardingpass" element={<Boardingpass />} />
+        <Route path="/boardingpass/:operID/:searchAirlinereservationnumber/:adcount/:chcount/:bagCount1" element={<Boardingpass />} />
         <Route path="/checkinstate" element={<CheckInStateModal />} />
 
+      
 
         {/* 회원 */}
         <Route path="/register" element={<Register />} />

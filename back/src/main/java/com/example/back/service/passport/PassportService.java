@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * packageName : com.example.back.service.checkin
@@ -32,9 +33,8 @@ public class PassportService {
 
 
     //    저장함수(수정함수)
-    public Passport save(Passport passport) {
-
-        Passport passport2 = passportRepository.save(passport);
+    public List<Passport> save(List<Passport> passport) {
+        List<Passport> passport2 = passportRepository.saveAll(passport);
 
         return passport2;
     }
