@@ -63,9 +63,7 @@ const onChangeSearchAirlinereservationnumber = (e: any) => {
             <div className="intro-wrap">
               <h1 className="mb-5">
                 <span className="d-block text-center">체크인</span>
-                <h3 className="mb-5" color="white">
-                  조회
-                </h3>
+                
               </h1>
 
               

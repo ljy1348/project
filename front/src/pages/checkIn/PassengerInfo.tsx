@@ -9,8 +9,8 @@ import { ClassNames } from "@emotion/react";
 
 function PassengerInfo() {
   // todo: 장바구니 물품 개수를 저장할 변수
-  let [bagCount3, setBagCount3] = useState<number>(0);
-  let [bagCount4, setBagCount4] = useState<number>(0);
+  let [bagCount2, setBagCount2] = useState<number>(0);
+  
 
   const [array, setArray] = useState<Array<string>>(["a"]);
 
@@ -31,12 +31,12 @@ function PassengerInfo() {
 
   //  todo: 수화물 
 
-  const increaseCount3 = () => {
-    if (bagCount3 < 2) {
+  const increaseCount2 = () => {
+    if (bagCount2 < 2) {
       // bagCount1을 1 증가시킵니다.
-      const updatedCount3 = bagCount3 + 1;
+      const updatedCount2 = bagCount2 + 1;
 
-      setBagCount3(updatedCount3);
+      setBagCount2(updatedCount2);
     } else {
       // 이미 2 이상이면 경고 메시지를 표시합니다.
       alert("1인당 초과수화물은 2개까지 가능합니다");
@@ -45,34 +45,14 @@ function PassengerInfo() {
 
 
   //  todo: 감소 함수
-  const decreaseCount3 = () => {
-     if (bagCount3 > 0) {
-      bagCount3 -= 1;
-      setBagCount4(bagCount3); // 현재 감소값 저장
+  const decreaseCount2 = () => {
+     if (bagCount2 > 0) {
+      bagCount2 -= 1;
+      setBagCount2(bagCount2); // 현재 감소값 저장
     }
   };
 
-  //  todo: 증가 함수
-  const increaseCount4 = () => {
-    if (bagCount4 < 2) {
-      // bagCount1을 1 증가시킵니다.
-      const updatedCount4 = bagCount4 + 1;
-
-      // 상태를 업데이트합니다.
-      setBagCount4(updatedCount4);
-    } else {
-      // 이미 2 이상이면 경고 메시지를 표시합니다.
-      alert("1인당 초과수화물은 2개까지 가능합니다");
-    }
-  };
-
-  //  todo: 감소 함수
-  const decreaseCount4 = () => {
-    if (bagCount4 > 0) {
-      bagCount4 -= 1;
-      setBagCount4(bagCount4); // 현재 감소값 저장
-    }
-  };
+  
 
   return (
     <>
@@ -111,18 +91,17 @@ function PassengerInfo() {
                 추가수화물 기준 : 캐리어당 20kg
               </p>
               <p>추가 수화물 1인당 2개씩 추가가능 </p>
-              <h5> 예약 번호 : </h5>
               <table className="table">
                 <thead className="test1">
                   <tr>
-                    <th scope="col">예약자</th>
+                    <th scope="col">예약번호</th>
                     <th scope="col">수화물 추가</th>
                     <th scope="col">금액</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="passengername">박유빈</td>
+                    <td className="passengername"></td>
                     <td className="bagcount">
                       <div
                         className="btn-group-col"
@@ -132,7 +111,7 @@ function PassengerInfo() {
                         <button
                           type="button"
                           className="btn btn-outline-secondary opacity-50"
-                          onClick={decreaseCount3}
+                          onClick={decreaseCount2}
                         >
                           -
                         </button>
@@ -142,13 +121,13 @@ function PassengerInfo() {
                           className="btn btn-outline-dark"
                           disabled
                         >
-                          {bagCount3}
+                          {bagCount2}
                         </button>
 
                         <button
                           type="button"
                           className="btn btn-outline-secondary opacity-50"
-                          onClick={increaseCount3}
+                          onClick={increaseCount2}
                         >
                           +
                         </button>
@@ -156,48 +135,7 @@ function PassengerInfo() {
                     </td>
                     <td className="bagprice">ㅇ</td>
                   </tr>
-
-                  <tr>
-                    <td scope="col">승객1 </td>
-                    <td scope="col">수화물 추가</td>
-                    <td scope="col">금액</td>
-                  </tr>
-
-                  <tr className="trbutton">
-                    <td scope="col"></td>
-                    <td scope="col">
-                      <div
-                        className="btn-group-col"
-                        role="group"
-                        aria-label="Basic outlined example"
-                      >
-                        <button
-                          type="button"
-                          className="btn btn-outline-secondary opacity-50"
-                          onClick={decreaseCount4}
-                        >
-                          -
-                        </button>
-
-                        <button
-                          type="button"
-                          className="btn btn-outline-dark"
-                          disabled
-                        >
-                          {bagCount4}
-                        </button>
-
-                        <button
-                          type="button"
-                          className="btn btn-outline-secondary opacity-50"
-                          onClick={increaseCount4}
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
-                    <td scope="col">ㅇ</td>
-                  </tr>
+                 
                   <tr>
                     <td></td>
                     <td>
