@@ -37,6 +37,8 @@ const create = (data:Array<ICheckin>) => {
 
 
 
+
+
 const CheckinService = {
   dtogetAll,
   getAll,

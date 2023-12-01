@@ -149,7 +149,7 @@ function Airport({setAirport}:{setAirport:any}) {
               </div>
               <div className="list_airport">
                 <div className="international_listbox" ref={listBox}>
-                  <ul className="city_list col-12 mx-auto">
+                  <ul className="city_list col-4 mx-auto">
                     {airportList.map((val, idx) => {
                       return (
                         <li key={idx} onClick={() => selectedAirport(val.abbr)}>
