@@ -3016,22 +3016,6 @@ input {
   padding-bottom: 30px;
 }
 
-.test1 {
-  padding-top: 10px;
-  margin-left: 50px;
-}
-
-.test2 {
-  padding-top: 10px;
-  margin-left: 110px;
-}
-
-.btn1 {
-  width: 365px;
-  margin: 0 auto;
-  margin-top: 30px;
-}
-
 .searchReservationBtn {
   width: 200px;
   height: 40px;
@@ -3743,4 +3727,58 @@ input {
 }
 
 /* 관리자 공지사항 수정 / 삭제 끝 */
+
+
+
+/* 예약 상세 조회 페이지 - 지우 시작 */
+
+.seeReservationForm {
+  width: 1000px;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.seeReservationNo1 {
+  width: 450px;
+  height: 50px;
+  float: left;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.seeReservationNo2 {
+  width: 450px;
+  height: 50px;
+  float: right;
+  margin-top: 10px;
+}
+
+.seeReservationNo3 {
+  float:right;
+}
+
+.seeReservationNo4 {
+  float: left;
+}
+
+.seeReservationNo5 {
+  width: 500px;
+  height: 50px;
+  margin-left: 280px;
+  margin-top: 50px;
+}
+
+.seeReservationInput {
+  height: 35px;
+  width: 300px;
+  border-radius: 10px;
+  padding-left: 10px;
+}
+
+
+/* 예약 상세 조회 페이지 - 지우 끝 */
 
