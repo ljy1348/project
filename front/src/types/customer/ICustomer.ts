@@ -4,6 +4,9 @@ export default interface ICustomer {
     title: string,
     content: string,
     answerYn: string,
-    memberId: string,
+    memberId?: any | null,
     insertTime: string,
+    answer: string,
+    parentBid: number,
+    memberName?: null | string,
 }

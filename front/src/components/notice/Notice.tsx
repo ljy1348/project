@@ -30,7 +30,6 @@ function Notice() {
     NoticeService.getOne(noticeId)
       .then((response: any) => {
         setNotice(response.data);
-        setA(response.data.noticeContent);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -59,7 +58,7 @@ function Notice() {
               <p className="noticeMemberName">작성자: {notice.memberName}</p>
             </div>
             <div className="noticeContent1">
-            <div className="noticeContent2"><p dangerouslySetInnerHTML={{ __html:a.replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;")}}></p></div>
+            <div className="noticeContent2"><p dangerouslySetInnerHTML={{ __html:notice.noticeContent.replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;")}}></p></div>
             </div>
             </div>
             </div>

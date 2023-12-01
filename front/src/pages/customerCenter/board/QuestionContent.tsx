@@ -1,26 +1,39 @@
 // 1:1 문의 내용
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import IQboard from "../../../types/Center/IQboard";
-import QuestionBoardService from "../../../services/center/QuestionBoardService";
+import { useNavigate, useParams } from "react-router-dom";
+import CustomerService from "../../../services/customer/CustomerService";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
+import ICustomer from "../../../types/customer/ICustomer";
 
 function QuestionContent() {
   const { titleId } = useParams();
+
+  const navigate = useNavigate();
+
+  // 유저 정보 가져오기 함수
+  const { user: currentUser } = useSelector((state: RootState) => state.auth);
+
   const initialQuestion = {
-    titleId: "",
+    titleId: null,
     title: "",
     content: "",
     answerYn: "",
-    memberId: "",
+    memberId: currentUser?.memberId,
     insertTime: "",
-    paraentBid: 0,
+    parentBid: 0,
     answer: "",
+    memberName: "",
   };
-  const [question, setQuestion] = useState<IQboard>(initialQuestion);
+
+
+
+  const [question, setQuestion] = useState<ICustomer>(initialQuestion);
+
 
   const getQuestion = (titleId: string) => {
-    QuestionBoardService.get(titleId)
+    CustomerService.get(titleId)
       .then((response: any) => {
         setQuestion(response.data);
       })
@@ -33,6 +46,33 @@ function QuestionContent() {
       getQuestion(titleId);
     }
   }, [titleId]);
+
+  useEffect(() => {
+    if (!currentUser) navigate("/login");
+  }, [currentUser])
+
+  const answerTextSave = () => {
+
+    const data = question;
+    data.answerYn="Y";
+    data.memberName = "관리자";
+
+    CustomerService.create(data)
+    .then((response:any) => {
+      setQuestion(question);
+      console.log("response", response.data);
+      navigate(-1);
+    })
+    .catch((e: Error) => {
+      console.log(e);
+    });
+  }
+
+  const adminTextSave = (e:any) => {
+    setQuestion({...question, answer:e.target.value})
+    console.log(e.target.value);
+  }
+
   return (
     <>
       <div className="hero hero-customer">
@@ -49,30 +89,28 @@ function QuestionContent() {
       </div>
 
       <div className="untree_co-section">
-        {/* <div className="col-md-12">
-          <div>
-            <p className="answer-text-big">1대1 문의하기</p>
-            <p className="answer-text-small">나의 문의/답변 내역</p>
-          </div>
-          </div> */}
-          <div className="container">
+          <div  className="userQuestionContentContainer">
             <div className="row">
               <div>
                 <hr />
                 <div>
-                  <h2 className="notice-content-title">
-                    [문의 내역] {question.title}
-                  </h2>
+                  <h2 className="userQuestionTitle">{question.title}</h2>
                 </div>
                 <hr />
-                <p className="notice-content-date">{question.insertTime}</p>
-                <div className="notice-content-content">{question.content}</div>
+                <div className="userQuestionDiv2"><div className="userQuestionDiv3"><p className="userQuestionP1">[질문]</p><p className="userQuestionTime">{question.insertTime}</p></div> <br/><br/><p className="userQuestionContent" dangerouslySetInnerHTML={{ __html:question.content.replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;")}}></p></div>
                 <hr />
-                <div>
-                  <h2 className="notice-content-answer">
-                    [답변] {question.answer}
-                  </h2>
-                </div>
+                {currentUser?.memberAuth === "ROLE_ADMIN" && question.answerYn==="N" ?
+                <div className="adminQuestionDiv2">
+                  <div className="adminQuestionDiv3">
+                <h2 className="adminQuestionAnswer">
+                  [답변]</h2></div> <br/><br/><textarea className="adminTextInput" onChange={adminTextSave} value={question.answer}></textarea>
+                
+                
+                <button className="userQuestionDeleteBtn" onClick={answerTextSave}>저장</button>
+              </div>
+                :
+                question.answerYn === "N" ?  <p className="adminNoAnswer">관리자가 확인 중입니다.....</p>:
+                <div className="adminQuestionDiv2"><div className="adminQuestionDiv3"><p className="adminQuestionP1">[답변]</p><p className="adminAnswerName">&nbsp;답변자 : 관리자&nbsp;</p></div> <br/><br/><p className="adminAnswer" dangerouslySetInnerHTML={{ __html:question.answer.replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;")}}></p></div>}
               </div>
             </div>
           </div>

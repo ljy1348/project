@@ -14,7 +14,6 @@ import "aos/dist/aos.css";
 import "./assets/css/style.css";
 
 import CheckInStateModal from "./pages/modal/CheckInStateModal";
-import Boardingpass from "./pages/checkIn/BoardingPass";
 import PassengerInfo from "./pages/checkIn/PassengerInfo";
 
 // todo: 리액트 import
@@ -46,9 +45,10 @@ import QuestionContent from "./pages/customerCenter/board/QuestionContent";
 import SelectSeat from "./pages/modal/SelectSeat";
 import AdminNotice from "./pages/auth/admin/board/AdminNotice";
 import ReservationListPage from "./pages/SearchReservation/ReservationListPage";
-
+import ForgotPassword from "./pages/auth/ForgotPassword";
 import AdminNoticeFixPage from "./pages/auth/admin/board/AdminNoticeFixPage";
-
+import Boardingpass from "./pages/checkIn/Boardingpass";
+import BaggagePaymentSuccess from "./pages/payment/BaggagePaymentSuccess";
 // todo: 리액트 import
 
 function App() {
@@ -101,6 +101,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/user-info" element={<UserInfo />} />
         <Route path="/admin/*" element={<AdminPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
 
         {/* 예약 조회 */}
         <Route path="/search-reservation" element={<ReservationListPage />} />
@@ -118,7 +119,9 @@ function App() {
         {/* 결제 */}
 
         <Route path="/payment/success" element={<PaymentSuccess />} />
-        <Route path="/aa/fail" element={<PaymentFail />} />
+        <Route path="/payment/fail" element={<PaymentFail />} />
+        <Route path="/baggage/payment/success" element={<BaggagePaymentSuccess />} />
+
 
         <Route path="/reserve" element={<Reserve />} />
         <Route
@@ -130,8 +133,8 @@ function App() {
           element={<ReservePayment />}
         />
 
-        <Route path="/test" element={<SelectSeat />} />
       </Routes>
+
       {/* 꼬리말 */}
       <Footer />
     </div>

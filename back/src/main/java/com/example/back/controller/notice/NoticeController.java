@@ -41,7 +41,7 @@ public class NoticeController {
     @Autowired
     NoticeService noticeService;
 
-    //    전체 조회 + like 검색
+//    회원 전체 조회 + like 검색
     @GetMapping("/notice")
     public ResponseEntity<Object> getNoticeAll(
             @RequestParam(defaultValue = "noticeTitle") String searchSelect,

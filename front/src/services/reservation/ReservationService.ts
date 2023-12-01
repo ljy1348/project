@@ -38,12 +38,24 @@ const create = (data:IReserve) => {
   return http.post<IReserve>("/tour/reservation", data);
 };
 
+// 주영
+// 삭제 함수
+const deleteRoundTrip = (start:number|string, final:number|string) => {
+  return http.delete(`/tour/deleteRoundTrip/${start}/${final}`);
+}
+
+const findNonMember = (data:any) => {
+  return http.post(`/tour/search-reservation/non-member`, data);
+}
+
 const ReservationService = {
   getAll,
   gett,
   get,
   create,
-  getAllSeat
+  getAllSeat,
+  deleteRoundTrip,
+  findNonMember
 };
   
 export default ReservationService;

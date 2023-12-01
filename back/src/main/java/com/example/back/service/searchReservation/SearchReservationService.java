@@ -3,9 +3,11 @@ package com.example.back.service.searchReservation;
 
 import com.example.back.model.dto.searchReservation.OprResDto;
 import com.example.back.model.dto.reserve.ReservationDto;
+import com.example.back.model.dto.searchReservation.SearchNonMemberDto;
 import com.example.back.model.entity.reserve.Reservation;
 
 import com.example.back.repository.searchReservation.SearchReservationRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,7 @@ import java.util.Optional;
  * —————————————————————————————
  * 2023-11-17         GGG          최초 생성
  */
+@Slf4j
 @Service
 public class SearchReservationService {
 
@@ -65,6 +68,13 @@ public class SearchReservationService {
     // 아이디로 단건 찾기 - 주영
     public Optional<Reservation> findById(int id) {
         return searchReservationRepository.findById(id);
+    }
+
+    // 비회원 조회
+    public Optional<OprResDto> findNonmember(SearchNonMemberDto oprResDto) {
+        log.info("여기?");
+        return searchReservationRepository.searchNonmember(oprResDto.getStartAirport(), oprResDto.getFinalAirport(),
+                oprResDto.getAirlineReservationNumber(), oprResDto.getMemberName());
     }
 
 

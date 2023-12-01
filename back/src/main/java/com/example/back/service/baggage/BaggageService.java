@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * packageName : com.example.back.service.checkin
@@ -36,6 +37,10 @@ public class BaggageService {
         Baggage baggage2 = baggageRepository.save(baggage);
 
         return baggage2;
+    }
+
+    public Optional<Baggage> findById(int id) {
+        return baggageRepository.findById(id);
     }
 
 }

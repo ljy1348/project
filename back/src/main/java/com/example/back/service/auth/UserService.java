@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 /**
@@ -75,5 +76,17 @@ public class UserService {
     public boolean existsById(String email) {
         boolean bResult = memberRepository.existsById(email);
         return bResult;
+    }
+
+    @Transactional
+    public Member forgot(Member member) {
+        Optional<Member> member1 = memberRepository.findByMemberIdAndMemberEmail(member.getMemberId(),member.getMemberEmail());
+
+        if (member1.isPresent()) {
+            member1.get().setMemberPw(member.getMemberPw());
+        }
+
+        return member1.get();
+
     }
 }
