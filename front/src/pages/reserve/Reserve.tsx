@@ -182,45 +182,7 @@ function Reserve(props: any) {
           {/* trip_type */}
           <div className="mt-3 d-flex justify-content-left">
             {/* 왕복 편도 버튼 시작 */}
-            <div
-              className="btn-group d-flex justify-content-left"
-              role="group"
-              aria-label="Basic radio toggle button group"
-            >
-              <input
-                type="radio"
-                className="trip_type btn-check "
-                name="trip_type btnradio"
-                id="trip_type btnradio1"
-                autoComplete="off"
-                value="round-trip"
-                checked={tripType === "round-trip"} // 현재 선택된 값에 따라 checked 속성 설정
-                onChange={handleTripTypeChange}
-              />
-              <label
-                className="btn btn-outline-primary rounded-0"
-                htmlFor="trip_type btnradio1"
-              >
-                왕복
-              </label>
 
-              <input
-                type="radio"
-                className="trip_type btn-check"
-                name="trip_type btnradio"
-                id="trip_type btnradio2"
-                autoComplete="off"
-                value="one-way"
-                checked={tripType === "one-way"} // 현재 선택된 값에 따라 checked 속성 설정
-                onChange={handleTripTypeChange} //
-              />
-              <label
-                className="btn btn-outline-primary rounded-0"
-                htmlFor="trip_type btnradio2"
-              >
-                편도
-              </label>
-            </div>
             {/* 왕복 편도 버튼 끝 */}
           </div>
 

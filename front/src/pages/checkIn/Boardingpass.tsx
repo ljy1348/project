@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-// import BoardingPassService from "../../services/boardingPass/BoardingPassService";
+import BoardingPassService from "../../services/boardingPass/BoardingPassService";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import IOperationinfo from "../../types/operationInfo/IOperationinfo";
