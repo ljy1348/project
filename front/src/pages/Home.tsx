@@ -703,10 +703,10 @@ function Home() {
       </div>
 
       <div className="container">
-        <div className="home-notice-title col-md-12 row">
-          <h3>공지사항</h3>
+        <div className="col-md-12 row">
+        <h3 className="homeNoticeTitle"><a href={`/notice`}>공지사항</a></h3>
           <div className="home-notice-link">
-            <Link to={"/"}>+</Link>
+            <Link to={"/notice"}>+</Link>
           </div>
         </div>
       </div>

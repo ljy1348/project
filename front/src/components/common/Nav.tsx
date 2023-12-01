@@ -74,7 +74,7 @@ function Nav() {
               {/* <ul className="js-clone-nav d-none d-lg-inline-block site-menu"> */}
                 {/* home 메뉴 시작 */}
 
-                <ul className="login_menubar">
+                <ul className="login_menubar" style={{width:"160px"}}>
                   {!currentUser&&<>
                     <li>
                   <Link to="/login">로그인</Link>
