@@ -3000,4 +3000,267 @@ h4,
 .k_id {
   flex: 1;
   line-height: 1.6; 
+<<<<<<< Updated upstream
+=======
+}
+
+/* 진욱 끝 */
+#editor2 {
+  font-size: 18px;
+  margin-left: 235px;
+  height: 500px;
+  width: 800px;
+}
+
+.adminEditBtn {
+  margin-bottom: 30px;
+  margin-left: 958px;
+  width: 80px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #1A374D;
+  color: white;
+}
+
+.adminEditSubmitText {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.adminEditSubmitBtn {
+  margin-top: 10px;
+  height: 35px;
+  width: 80px;
+  border-radius: 10px;
+  background-color:#1A374D;
+  color: white;
+}
+
+#adminTh1 {
+  width: 700px;
+  text-align: center;
+}
+
+#adminTh2 {
+  text-align: center;
+}
+
+#adminTh3 {
+  text-align: center;
+}
+
+#adminTh4 {
+  text-align: center;
+}
+
+#adminTd1 {
+  width: 700px;
+  text-align: center;
+}
+
+#adminTd2 {
+  text-align: center;
+}
+
+#adminTd3 {
+  text-align: center;
+}
+
+#adminTd4 {
+  text-align: center;
+}
+
+.adminForm {
+  height: 45px;
+  margin-top: 30px;
+  width: 450px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.adminNoticeBtn {
+  margin-top: 30px;
+  height: 45px;
+  width: 80px;
+  border-radius: 10px;
+  background-color: #1A374D;
+  color: white;
+}
+
+.adminNoticePageBtn {
+  margin-top: 50px;
+  margin-left: 43%;
+}
+
+
+/*****************체크인*****************/
+
+/* 모달 */
+.modal-title {
+  color: white;
+}
+.modal-header {
+  background-color: #1f425c;
+}
+
+.checkinbutton {
+  padding-left: 700px;
+  font-size: 15px;
+  color: white;
+  height: 25px;
+}
+.table {
+  text-align: center;
+}
+
+.td {
+  text-align: center;
+}
+
+/* 아코디언 */
+
+.testtttttttt1 {
+  font-size: 13px;
+  width: 1350px;
+  margin: 20px auto;
+}
+
+/* 탑승자정보 */
+#domesticpassengerForm {
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.passengernameinfo {
+  margin-right: 20px;
+}
+.passengerinfobutton {
+  float: right;
+}
+
+.pluspassenger {
+  margin-right: 20px;
+  margin-top: 30px;
+}
+.minuspassenger {
+  margin-top: 20px;
+}
+
+/* 여권정보 */
+.input-group {
+  margin-top: 40px;
+}
+
+#passengerForm {
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/* passport 버튼 공간 */
+.passport-button {
+  padding-left: 880px;
+  padding-top: 20px;
+}
+
+/* 승객 추가 버튼 */
+.passport-add-button {
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  border-radius: 30px;
+  font-size: 14px;
+  margin-right: 10px;
+  background-color: rgba(236, 236, 236, 0.356);
+  border: 1px solid rgb(190, 190, 190);
+  font-weight: bold;
+}
+
+/* 승객 제거 버튼 */
+.passport-delete-button {
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  border-radius: 30px;
+  font-size: 14px;
+  background-color: rgba(236, 236, 236, 0.356);
+  border: 1px solid rgb(190, 190, 190);
+  font-weight: bold;
+}
+
+.passport-add-button:hover,
+.passport-delete-button:hover {
+  background-color: rgb(231, 234, 248);
+  border: 1px solid rgb(165, 187, 219);
+}
+
+/* 수화물 */
+
+.toboardingpass {
+  padding-left: 1200px;
+}
+
+.boardingpass {
+  width: 1350px;
+}
+
+.boardingpass.h3 {
+  float: right;
+}
+
+/* 수화물 목록 내용 사이 */
+.btn-group-col {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+/* 예약자 */
+.passengername {
+  width: 436px;
+}
+
+/* 예약자 공간 */
+.passengername-gap {
+  padding-top: 42px;
+}
+
+.bagcount-button {
+  width: 436px;
+}
+
+/* 수화물 금액 */
+.bagprice {
+  width: 436px;
+}
+
+/* 쓰면 안됨 */
+/* .container{
+  width: 800px;
+} */
+
+.finalInfo {
+  background-color: #f5f7fa;
+}
+
+.payyybutton {
+  margin-top: 50px;
+}
+.line_row {
+  margin-top: 30px;
+}
+
+/* 예약번호 div */
+.reservation-number {
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  padding-top: 10px;
+  height: 38px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 5px;
+}
+
+.line-sorting > td > a {
+  text-decoration-line: none;
+
+>>>>>>> Stashed changes
 }
