@@ -1,5 +1,6 @@
 package com.example.back.controller.boardingPass;
 import com.example.back.model.dto.boardingPass.BoardingPassDto;
+import com.example.back.model.entity.boardingPass.BoardingPass;
 import com.example.back.service.boardingpPass.BoardingPassService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * packageName : com.example.back.controller.boardingPass
@@ -38,8 +40,6 @@ public class BoardingPassController {
             @PathVariable int airlineReservationNumber
     ) {
         try {
-
-
             List<BoardingPassDto> boardingpassList
                     = boardingpassService.boardingpass(airlineReservationNumber);
 
@@ -55,4 +55,27 @@ public class BoardingPassController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+//    상세조회
+//@GetMapping("/boardingpass/{airlineReservationNumber}")
+//public ResponseEntity<Object> findById(@PathVariable int airlineReservationNumber) {
+//
+//    try {
+////            상세조회 실행
+//        List<BoardingPass> listBoardingPass = BoardingPassService.findByAirlineReservationNumber(airlineReservationNumber);
+//
+//        if (!listBoardingPass.isEmpty()) {
+////                성공
+//            return new ResponseEntity<>(listBoardingPass, HttpStatus.OK);
+//        } else {
+////                데이터 없음
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//    } catch (Exception e) {
+////            서버 에러
+//        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+//}
+
 }

@@ -18,7 +18,7 @@ import ReservationService from "../../services/reservation/ReservationService";
 import SelectSeat from "../modal/SelectSeat";
 // import ICheckin from "../../types/checkin/ICheckin";
 import CheckinService from "../../services/checkin/CheckinService";
-import ICheckin from "../../types/checkin/IResOperation";
+import ICheckin from "../../types/checkin/ICheckin";
 
 function Passport() {
   // 모달 창
@@ -411,7 +411,7 @@ function Passport() {
         {/* 좌석지정 */}
         <Accordion.Item eventKey="1">
           <Accordion.Header onClick={() => setModalShow(true)}>
-            좌석 선택 선택된 좌석: {selectedSeatsInfo.join(" ")}
+            좌석 선택 / 선택된 좌석: {selectedSeatsInfo.join(" ")}
           </Accordion.Header>
         </Accordion.Item>
         {/* 수화물 사전 구매  */}
@@ -420,8 +420,7 @@ function Passport() {
           <Accordion.Body>
             <div className="bagage">
               <p>
-                기본 수화물 : 휴대수화물 1 (5kg) + 위탁수화물 1(20kg) 추가없이는
-                위탁 1 + 휴대 1
+                기본 수화물 : 휴대수화물 1 (5kg) + 위탁수화물 1(20kg) 
               </p>
               <p>추가 수화물 1인당 2개씩 추가가능 </p>
 

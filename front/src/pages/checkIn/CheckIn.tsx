@@ -7,7 +7,7 @@ import { Button } from "react-bootstrap";
 
 import CheckInState from "../modal/CheckInStateModal";
 
-import IResOperation from "../../types/checkin/IResOperation";
+import IResOperation from "../../types/checkin/ICheckin";
 import CheckinService from "../../services/checkin/CheckinService";
 import IReservation from "../../types/reservation/IReservation";
 import ReservationService from "../../services/reservation/ReservationService";
