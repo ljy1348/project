@@ -283,60 +283,7 @@ export default function initCustom() {
     //   $('input[name="daterange"]').daterangepicker();
     // }
 
-    if ($('input[name="daterange"]').length) {
-      $('input[name="daterange"]').daterangepicker({
-        // singleDatePicker: true,
-        locale: {
-			format: "YYYY-MM-DD",
-			separator: " - ",
-			applyLabel: "Apply",
-			cancelLabel: "Cancel",
-			fromLabel: "From",
-			toLabel: "To",
-			customRangeLabel: "Custom",
-			weekLabel: "W",
-			daysOfWeek: [
-				"Su",
-				"Mo",
-				"Tu",
-				"We",
-				"Th",
-				"Fr",
-				"Sa"
-			],
-			monthNames: [
-				"January",
-				"February",
-				"March",
-				"April",
-				"May",
-				"June",
-				"July",
-				"August",
-				"September",
-				"October",
-				"November",
-				"December"
-			],
-			firstDay: 1
-		},
-		// startDate: "2023-11-16",
-		// endDate: "2023-11-22",
-        // function(start, end, label) {
-        // //   console.log(
-        // //     "New date range selected: " +
-        // //       start.format("YYYY-MM-DD") +
-        // //       " to " +
-        // //       end.format("YYYY-MM-DD") +
-        // //       " (predefined range: " +
-        // //       label +
-        // //       ")"
-        // //   );
-        // },
 
-        // singleDatePicker: true, // 달력 1개 사용
-      });
-    }
     
 
 	

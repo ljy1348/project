@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import "../../assets/css/Airport.css";
 import AirportList from "../../utils/AirportList";
 
-function Airport() {
+function Airport({setAirport}:{setAirport:any}) {
   const initAirport = {
     cname: "",
     abbr: "",
@@ -31,6 +31,7 @@ function Airport() {
   };
 
   const selectedAirport = (data: string) => {
+    setAirport(data);
     console.log(data);
   };
 
@@ -148,7 +149,7 @@ function Airport() {
               </div>
               <div className="list_airport">
                 <div className="international_listbox" ref={listBox}>
-                  <ul className="city_list col-12 mx-auto">
+                  <ul className="city_list col-4 mx-auto">
                     {airportList.map((val, idx) => {
                       return (
                         <li key={idx} onClick={() => selectedAirport(val.abbr)}>

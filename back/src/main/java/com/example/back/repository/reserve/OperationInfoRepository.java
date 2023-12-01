@@ -40,12 +40,12 @@ public interface OperationInfoRepository extends JpaRepository<OperationInfo, In
                                             Pageable pageable
     );
 
-    Page<OperationInfo> findAllByStartAirportContaining(String startAirport, Pageable pageable);
-    Page<OperationInfo> findAllByFinalAirportContaining(String finalAirport, Pageable pageable);
-    Page<OperationInfo> findAllByAirlineContaining(String airline, Pageable pageable);
-    Page<OperationInfo> findAllByFlightNameContaining(String flightName, Pageable pageable);
-    Page<OperationInfo> findAllByOperationIdEquals(Integer operationId, Pageable pageable);
-    Page<OperationInfo> findAllBy(Pageable pageable);
+    Page<OperationInfo> findAllByStartAirportContainingOrderByOperationId(String startAirport, Pageable pageable);
+    Page<OperationInfo> findAllByFinalAirportContainingOrderByOperationId(String finalAirport, Pageable pageable);
+    Page<OperationInfo> findAllByAirlineContainingOrderByOperationId(String airline, Pageable pageable);
+    Page<OperationInfo> findAllByFlightNameContainingOrderByOperationId(String flightName, Pageable pageable);
+    Page<OperationInfo> findAllByOperationIdEqualsOrderByOperationId(Integer operationId, Pageable pageable);
+    Page<OperationInfo> findAllByOrderByOperationId(Pageable pageable);
 
 
 }

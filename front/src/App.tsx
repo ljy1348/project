@@ -76,8 +76,8 @@ function App() {
           element={<ReservePayment />}
         />
 
-        {/* <Route path="/test" element={<Test />} /> */}
       </Routes>
+
       {/* 꼬리말 */}
       <Footer />
     </div>

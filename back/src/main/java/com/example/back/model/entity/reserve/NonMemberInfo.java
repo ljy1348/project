@@ -24,10 +24,10 @@ import java.util.Date;
  * 2023-11-27         rkdtk          최초 생성
  */
 @Entity
-@Table(name="TB_NON_MEMBER_INFO")
+@Table(name="TB_NON_MEMBERS_INFO")
 @SequenceGenerator(
-        name = "SQ_NON_MEMBER_INFO_GENERATOR"
-        , sequenceName = "SQ_NON_MEMBER_INFO"
+        name = "SQ_NON_MEMBERS_INFO_GENERATOR"
+        , sequenceName = "SQ_NON_MEMBERS_INFO"
         , initialValue = 1
         , allocationSize = 1
 )

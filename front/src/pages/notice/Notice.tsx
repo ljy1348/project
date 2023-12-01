@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NoticeService from "../../services/NoticeService";
 import INotice from "../../types/INotice";
-import { Link } from "react-router-dom";
 
 function Notice() {
   const [notice, setNotice] = useState<Array<INotice>>([]);
@@ -38,24 +37,27 @@ function Notice() {
 
       <div className="container" id="notice-bottom-gap">
       <div className="col-md-12 row">
-        <table className="table" id="table-bottom-gap">
+        <table className="table">
           <thead>
             <tr className="top-line-bold">
               <th scope="col">No</th>
-              <th scope="col">제목</th>
+              <th scope="col" id="home-notice-title">제목</th>
               <th scope="col">날짜</th>
               <th scope="col">작성자</th>
             </tr>
           </thead>
           <tbody>
             {notice &&
-              notice.map((data) => (
-                <tr className="line-sorting" key={data.noticeId}>
-                  <td id="notice-id-location">{data.noticeId}</td>
-                  <td id="notice-title-location">{data.noticeTitle}</td>
-                  <td id="notice-insertTime-location">{data.insertTime}</td>
-                  <td id="notice-writer-location">{data.noticeWriter}</td>
+              notice.map((data, index) => (
+                // 리스트 3개만 나올 수 있게 조건문 걸기
+                index < 5 &&(
+                <tr key={data.noticeId}>
+                  <td id="home-noticeId">{data.noticeId}</td>
+                  <td id="home-notice-title-location">{data.noticeTitle}</td>
+                  <td>{data.insertTime}</td>
+                  <td>{data.noticeWriter}</td>
                 </tr>
+                )
               ))}
           </tbody>
         </table>

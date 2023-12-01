@@ -20,13 +20,13 @@ function PaymentSuccess() {
 
   useEffect(()=>{
     // alert(orderId+"\n"+paymentKey+"\n"+amount)
-    if (orderId === null) {navi("/payment/fail"); orderId=""}
-    if (paymentKey === null) {navi("/payment/fail"); paymentKey=""}
-    if (amount === null) {navi("/payment/fail"); amount=""}
-    PaymentService.paymentMember(orderId, paymentKey, amount)
-    .then((response:any)=>{console.log(response);
-    })
-    .catch((e:Error)=>{console.log(e)})
+    // if (orderId === null) {navi("/payment/fail"); orderId=""}
+    // if (paymentKey === null) {navi("/payment/fail"); paymentKey=""}
+    // if (amount === null) {navi("/payment/fail"); amount=""}
+    // PaymentService.paymentMember(orderId, paymentKey, amount)
+    // .then((response:any)=>{console.log(response);
+    // })
+    // .catch((e:Error)=>{console.log(e)})
   },[])
 
 return (

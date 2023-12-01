@@ -11,7 +11,7 @@ import { login } from "../../store/slices/auth";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import DatePicker from "react-datepicker";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Nav } from "react-bootstrap";
 import Airport from "../../components/airport/Airport";
 import Isotope from "isotope-layout";
 import MyareaModal from "../modal/MyareaModal";
@@ -115,7 +115,7 @@ function Login() {
   // isLoggedIn = true (로그인 상태변수(true/false))
   // 강제로 /home 이동
   if(isLoggedIn) {
-    navigate("/home"); // 강제 페이지 이동
+    navigate("/"); // 강제 페이지 이동
   }
 
   // 로그인 버튼 클릭시 실행되는 함수 : submit(Formit)
@@ -423,14 +423,17 @@ function Login() {
               <div className="">
                 <div className="">
                   <div>
-                  <ul className="nav nav-tabs">
-  <li className="nav-item col-6">
-    <a className={"nav-link " + (tag==="login"?"active":"")} onClick={()=>{tagSelect("login")}} ><h3 className="container text-center" >로그인</h3></a>
-  </li>
-  <li className="nav-item col-6">
-    <a className={"nav-link " + (tag==="non-member"?"active":"")} onClick={()=>{tagSelect("non-member")}}><h3 className="container text-center" >비회원 조회</h3></a>
-  </li>
-</ul>
+<Nav fill variant="tabs" defaultActiveKey="link-0">
+      <Nav.Item>
+
+        <Nav.Link eventKey="link-0" onClick={()=>{tagSelect("login")}}><h3 className="container text-center" >로그인</h3></Nav.Link>
+
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link-1" onClick={()=>{tagSelect("non-member")}}><h3 className="container text-center" >비회원 조회</h3></Nav.Link>
+
+      </Nav.Item>
+    </Nav>
                   </div>
                   <div className="col-11 mx-auto">
 

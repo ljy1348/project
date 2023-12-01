@@ -86,14 +86,6 @@ h4,
 }
 
 
-/* 부가서비스 폰트 굵기 */
-.text-center h2{
-  font-size: 30px;
-  font-weight: bold;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-
-
 /* 메뉴 active 효과 */
 .btn:active,
 .btn:focus {
@@ -120,47 +112,6 @@ h4,
 .text-white-opacity {
   opacity: 0.7;
 }
-
-
-/* .form-destination {
-  width: 80px;
-  border: 2px solid #e9ecef;
-  font-size: 16px;
-  height: 45px; 
-  text-align: center;
-  
-} */
-
-/* 검색버튼 */
-.form-search-control {
-  border: 1px solid rgb(206, 206, 206);
-  background-color: rgb(188, 220, 250);
-  border-radius: 5px;
-  font-size: 16px;
-  height: 60px; 
-  width: 100px;
-  margin-top: 20px;
-  color: #000000;
-}
-
-.form-search-control:hover {
-  background-color: rgba(167, 209, 248, 0.548);
-}
-
-.form-control,
-.custom-select {
-  border: 3px solid #e8eaec;
-  font-size: 14px;
-  height: 45px; 
-  margin-top: 30px;
-  color: #979797;
-}
-
-  .form-control:active, .form-control:focus, .custom-select:active, .custom-select:focus {
-    border-color: #1A374D;
-    -webkit-box-shadow: none;
-    box-shadow: none; 
-  }
 
 .gutter-v1 {
   margin-right: -20px;
@@ -239,129 +190,11 @@ h4,
   position: relative;
 }
 
-/* 로고 글자 설정 */
-.logo {
-  font-size: 30px;
-  color: #2fdf87;
-  font-weight: 700;
-  text-decoration-line: none;
-  /* 로고 메뉴 텍스트 간격 */
-  margin-right: 200px;
-}
-.logo:hover {
-  color: #1fab65;
-}
-
-.main-logo-image {
-  width: 60px;
-  height: 40px;
-  margin-bottom: 10px;
-  margin-right: 10px;
-}
 
 
-/* ------------------------------------------------------------- */
-/* ------------------------------------------------------------- */
-/* ------------------------------------------------------------- */
-/* ------------------------------------------------------------- */
-/* ------------------------------------------------------------- */
-
-/* 메인 메뉴 */
-#menu_bar {
-  margin-left: 100px;
-}
-
-.main-menu {
-  list-style: none;
-}
-
-.main-menu > li {
-  display: inline-block;
-}
-
-/* 로그인 메뉴 */
-.login_menubar {
-  list-style: none;
-  float: right;
-  padding-top: 15px;
-  width: 140px;
-  height: 50px;
-}
-
-/* 로그인 리스트 */
-.login_menubar > li {
-  display: inline-block;
-  list-style: none;
-  padding-left: 13px;
-  padding-top: 10px;
-}
-
-.login_menubar > li > a {
-  color: rgb(180, 180, 180);
-  font-size: 11px;
-  list-style: none;
-  font-weight: bold;
-}
-
-.login_menubar > li :hover {
-  color: #878787;
-  text-decoration-line: underline;
-}
-
-/* 예약바 */
-#sub_menu {
-  /* list-style: none; */
-  /* margin:0;  */
-  /* padding:0; */
-  margin-top: 50px;
-}
 
 
-/* 예약바 위에 있는거 */
-#submenu {
-  height: 50px;
-  padding-top: 10px;
-  text-align: center;
-  /* background-color: #1c85fc; */
-  /* background: linear-gradient(rgb(180, 234, 255), rgb(33, 182, 246)); */
-  background: linear-gradient( to right, rgb(60, 167, 209), rgb(27, 157, 212),  rgb(65, 65, 243) );
-  border-radius: 15px 15px 0px 0px;
-  font-weight: bold;
-  box-shadow: none;
-  font-size: 19px;
-  /* border: 1px solid rgb(190, 190, 190); */
-}
 
-/* 공지사항 */
-.notice-title {
-  text-align: center;
-  font-size: 35px;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: bold;
-  padding-right: 70px;
-}
-
-/* 공지사항 위에 줄 진하게 */
-.top-line-bold > th{
-  border-top: 2px solid #000;
-  padding-left: 70px;
-  font-size: 20px;
-}
-
-.line-sorting > td{
-  padding-left: 70px;
-  font-size: 20px;
-}
-
-/* 공지사항 제목 기준 위치 이동 */
-.line-sorting > #notice-title-location {
-  padding-right: 300px;
-}
-
-/* 공지사항, footer 사이 공백 */
-#notice-bottom-gap {
-  margin-bottom: 150px;
-}
 
 /* ============================================ */
 
@@ -371,53 +204,23 @@ h4,
   margin-bottom: 20px;
 }
 
-/* 탑승객 보드 popover */
-.boader_passenger {
-  background-color: rgb(255, 255, 255);
-  z-index: 100;
-  border: 1px solid rgb(215, 215, 215);
+
+
+.hnn_none_deco_a {
+  text-decoration-line: none;
 }
 
 
-.hnn_none_deco_a{
-  text-decoration-line:none
+
+.radio-search-gap {
+  margin-top: 10px;
 }
 
-/* 인원 리스트 */
-.style-personel {
-  padding-bottom: 10px;
-}
 
-.style-personel-button {
-  border: none;
-  width: 30px;
-  height: 30px;
-  background-color: rgb(226, 226, 226);
-  border-radius: 5px;
-}
 
-/* 좌석등급 버튼 */
-.seat-rating {
-  border: 1px solid rgb(189, 189, 189);
-  border-radius: 10px;
-  width: 150px;
-  height: 30px;
-}
 
-.seat-rating:hover {
-  background-color: rgb(210, 224, 235);
-}
 
-.person-choice {
-  width: 110px;
-  border: 1px solid rgb(223, 222, 222);
-  border-radius: 10px;
-  background-color: #f8f7f7;
-}
 
-.person-choice:hover {
-  background-color: #e0f7ff;
-}
 
 /* ------------------------------------------------------------- */
 /* ------------------------------------------------------------- */
@@ -644,7 +447,6 @@ h4,
   > a {
   color: #1a374d;
 }
-
 
 /* 드롭다운 메뉴 hover 색상 */
 
@@ -1018,13 +820,9 @@ h4,
 }
 
 
-/* 메뉴 뒷배경 */
+
 .hero {
-  /* 크기 */
-  padding: 200px 0 10rem 0;
-  background-image: url("../images/구름.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+
 }
 .hero.hero-inner {
   padding: 9rem 0 7rem 0;
@@ -1098,7 +896,7 @@ h4,
   cursor: pointer;
   overflow: hidden;
   border-radius: 20px;
-  text-decoration-line:none;
+  text-decoration-line: none;
 }
 .media-thumb:after {
   position: absolute;
@@ -1154,7 +952,7 @@ h4,
   -webkit-transition: 0.3s all ease;
   -o-transition: 0.3s all ease;
   transition: 0.3s all ease;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 .media-thumb:hover {
   z-index: 3;
@@ -1182,9 +980,7 @@ h4,
   visibility: visible;
 }
 
-
 /* 지역 아이콘 */
-
 .media-1 {
   text-align: left;
   padding-left: 20px;
@@ -1198,12 +994,6 @@ h4,
 .media-1 .loc .icon-room {
   position: relative;
   font-size: 18px;
-}
-
-/* 지역 글자 크기 */
-.location-font-size {
-  font-size: 16px;
-  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .media-1 .loc .icon-room:after {
@@ -1228,7 +1018,7 @@ h4,
 /* 여행지 명 글자 크기 */
 .media-1 > .attraction {
   font-size: 27px;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .owl-3-slider .owl-nav {
@@ -1318,41 +1108,12 @@ h4,
   }
 }
 
-.feature-1-wrap {
-  position: relative;
-}
-
-
-/* 부가서비스 */
-.feature-1 {
-  padding: 30px;
-  /* 부가서비스 틀 색상 */
-  background: rgba(54, 117, 162, 0.164);
-  border-radius: 20px;
-  min-height: calc(50% - 15px);
-  top: 0;
-  margin-bottom: 30px !important;
-}
-@media (max-width: 991.98px) {
-  .feature-1 {
-    display: block !important;
-  }
-}
-.feature-1 h3 {
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
 /* 큰 예약바 전체 */
 .form {
   position: relative;
   -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.3);
   box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.3);
-
   border-radius: 0px 0px 10px 10px;
-
-
-
   z-index: 9;
   padding: 30px;
   background: rgb(255, 255, 255);
@@ -1958,131 +1719,151 @@ h4,
 .site-footer {
   font-size: 14px;
   color: #777;
-line-height: 1.6; }
+  line-height: 1.6;
+}
 .site-footer .inner {
   padding-top: 0px;
   padding-bottom: 70px;
-  background: #f8f9fa; }
-  .site-footer .inner.first {
-    padding-top: 80px; }
+  background: #f8f9fa;
+}
+.site-footer .inner.first {
+  padding-top: 80px;
+}
 @media (max-width: 991.98px) {
   .site-footer {
-    padding-top: 30px; } }
+    padding-top: 30px;
+  }
+}
 .site-footer a {
-  color: #000000; }
-  .site-footer a:hover {
-    color: #000000;
-    text-decoration: underline; }
+  color: #000000;
+}
+.site-footer a:hover {
+  color: #000000;
+  text-decoration: underline;
+}
 .site-footer .widget {
-  margin-bottom: 30px; }
-  .site-footer .widget h3 {
-    font-size: 14px;
-    margin-bottom: 20px;
-    color: #000000;
-    font-family: "Inter", sans-serif; }
-  .site-footer .widget .social li {
-    display: inline-block; }
-    .site-footer .widget .social li a {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: #1A374D;
-      display: inline-block;
-      position: relative;
-      color: #ffffff;
-      -webkit-box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.2);
-      box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.2); }
-      .site-footer .widget .social li a span {
-        font-size: 16px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%); }
-      .site-footer .widget .social li a:hover {
-        background-color: #1A374D;
-        color: #ffffff; }
-  .site-footer .widget .links li {
-    display: block;
-    margin-bottom: 10px; }
-    .site-footer .widget .links li a {
-      color: #000000; }
-      .site-footer .widget .links li a:hover {
-        color: #000000;
-        text-decoration: underline; }
+  margin-bottom: 30px;
+}
+.site-footer .widget h3 {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #000000;
+  font-family: "Inter", sans-serif;
+}
+.site-footer .widget .social li {
+  display: inline-block;
+}
+.site-footer .widget .social li a {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #1a374d;
+  display: inline-block;
+  position: relative;
+  color: #ffffff;
+  -webkit-box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.2);
+}
+.site-footer .widget .social li a span {
+  font-size: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.site-footer .widget .social li a:hover {
+  background-color: #1a374d;
+  color: #ffffff;
+}
+.site-footer .widget .links li {
+  display: block;
+  margin-bottom: 10px;
+}
+.site-footer .widget .links li a {
+  color: #000000;
+}
+.site-footer .widget .links li a:hover {
+  color: #000000;
+  text-decoration: underline;
+}
 .site-footer ul.quick-info li {
   position: relative;
-  padding-left: 30px; }
-  .site-footer ul.quick-info li:before {
-    left: 0;
-    position: absolute;
-    content: "";
-    font-family: 'icomoon';
-    color: #6998AB; }
-  .site-footer ul.quick-info li.email:before {
-    content: "\f0e0"; }
-  .site-footer ul.quick-info li.phone:before {
-    content: "\f095"; }
-  .site-footer ul.quick-info li.address:before {
-    content: "\e8b4"; }
+  padding-left: 30px;
+}
+.site-footer ul.quick-info li:before {
+  left: 0;
+  position: absolute;
+  content: "";
+  font-family: "icomoon";
+  color: #6998ab;
+}
+.site-footer ul.quick-info li.email:before {
+  content: "\f0e0";
+}
+.site-footer ul.quick-info li.phone:before {
+  content: "\f095";
+}
+.site-footer ul.quick-info li.address:before {
+  content: "\e8b4";
+}
 
-
-    .table-blue{
-      background-color: #1A374D;
-      color: white;
-    }
-    .modal-title{
-     color: white;
-    }
-    .modal-header{
-      background-color: #1f425c;
-    }
-   .foriareaButton{
-      padding-right: 100px;
-   }
- .form{
+.table-blue {
+  background-color: #1a374d;
+  color: white;
+}
+.modal-title {
+  color: white;
+}
+.modal-header {
+  background-color: #1f425c;
+}
+.foriareaButton {
+  padding-right: 100px;
+}
+.form {
   padding-left: 100px;
   padding-right: 100px;
-  ;
- }
- .checkInButton{
+}
+.checkInButton {
   padding-left: 10px;
-  
- }
- 
- .recordlocator{
+}
+
+.recordlocator {
   padding-right: 30px;
   padding-left: 30px;
- }
+}
 
 .jy-user-info-ul {
-    /* display: block;
+  /* display: block;
     list-style-type: disc;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 40px; */
-    width: 880px;
-    font-size: 10px;
-    background: #834b4b;
+  width: 880px;
+  font-size: 10px;
+  background: #834b4b;
 }
 
 .nav-hero {
   padding: 7rem 0 10rem 0;
-  margin-bottom: 100px; }
-  .nav-hero.hero-inner {
-    padding: 8rem 0 0rem 0;
-    margin-bottom: auto;
-    background-color: white; }
+  margin-bottom: 100px;
+}
+.nav-hero.hero-inner {
+  padding: 8rem 0 0rem 0;
+  margin-bottom: auto;
+  background-color: white;
+}
 
-    .logo:hover{
-      color: #000;
-    }
-    .site-menu a:hover {
-      color: black !important;
-    }
+.logo:hover {
+  color: #000;
+}
+.site-menu a:hover {
+  color: black !important;
+}
 
 /* sangmin css start */
 
@@ -2261,7 +2042,6 @@ line-height: 1.6; }
   width: 100%;
 }
 
-
 /* 모달 공통*/
 .modal-header {
   background-color: #6d6e71;
@@ -2301,9 +2081,9 @@ line-height: 1.6; }
   background-color: #f3f3f3;
   /* border: 1px solid white; */
 }
-.table tr td {
+/* .table tr td {
   border: 1px solid #f3f3f3;
-}
+} */
 
 /* 항공권 선택 */
 .sangmin_choose_top {
@@ -2458,10 +2238,10 @@ line-height: 1.6; }
   background-color: #f7f7f7;
   padding: 30px;
 }
-.ksm_airline_flightname{
+.ksm_airline_flightname {
   text-align: left;
 }
-.ksm_airline_flightname{
+.ksm_airline_flightname {
   padding: 0;
   margin: 0;
 }
@@ -2492,7 +2272,7 @@ line-height: 1.6; }
 .sangmin_payment_reserve_info div {
   align-items: center;
 }
-.sangmin_payment_reserve_two_info div{
+.sangmin_payment_reserve_two_info div {
   align-items: center;
 }
 .sangmin_payment_reserve_info_first {
@@ -2515,7 +2295,8 @@ line-height: 1.6; }
   margin-right: 8px;
 }
 
-.sangmin_gender label,input{
+.sangmin_gender label,
+input {
   margin-right: 10px;
 }
 
@@ -2526,5 +2307,283 @@ line-height: 1.6; }
 } */
 
 
- 
 
+
+/* !홈화면 시작 */
+/******** nav바 ********/
+/* 로고 글자 설정 */
+.logo {
+  font-size: 30px;
+  color: #2fdf87;
+  font-weight: 700;
+  text-decoration-line: none;
+  /* 로고 메뉴 텍스트 간격 */
+  margin-right: 200px;
+}
+.logo:hover {
+  color: #1fab65;
+}
+
+.main-logo-image {
+  width: 60px;
+  height: 40px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+/* 로그인 메뉴 */
+.login_menubar {
+  list-style: none;
+  float: right;
+  padding-top: 15px;
+  width: 140px;
+  height: 50px;
+}
+
+/* 로그인 리스트 */
+.login_menubar > li {
+  display: inline-block;
+  list-style: none;
+  padding-left: 13px;
+  padding-top: 10px;
+}
+
+.login_menubar > li > a {
+  color: rgb(180, 180, 180);
+  font-size: 11px;
+  list-style: none;
+  font-weight: bold;
+}
+
+.login_menubar > li :hover {
+  color: #878787;
+  text-decoration-line: underline;
+}
+/******** nav바 끝********/
+
+
+/********예약바 시작********/
+/* home - 큰 예약바 - form */
+.home-big-reservation-form {
+  position: relative;
+  -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 0px 0px 10px 10px;
+  z-index: 9;
+  padding: 30px;
+  background: rgb(255, 255, 255);
+}
+
+/* 예약바 뒷배경 */
+#home-reservation-backimage {
+  padding: 200px 0 10rem 0;
+  background-image: url("../images/구름.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* 예약바 위에 있는거 */
+#submenu {
+  margin-top: 50px;
+  height: 50px;
+  padding-top: 10px;
+  text-align: center;
+  background: linear-gradient(
+    to right,
+    rgb(60, 167, 209),
+    rgb(27, 157, 212),
+    rgb(65, 65, 243)
+  );
+  border-radius: 15px 15px 0px 0px;
+  font-weight: bold;
+  box-shadow: none;
+  font-size: 19px;
+  /* border: 1px solid rgb(190, 190, 190); */
+}
+
+/* 출발공항 도착공항 탑승일 탑승자 좌석등급 */
+.form-control-nhh {
+  border: 2px solid #e8eaec;
+  font-size: 16px;
+  height: 45px;
+  margin-top: 20px;
+  color: #5e5e5e;
+}
+
+
+/* 편도 / 왕복 버튼 */
+.trip-button {
+  width: 75px;
+  height: 45px;
+  padding-top: 8px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.trip-button:hover{
+  cursor: pointer;
+}
+
+/* 왕복 편도 버튼 선택 될 때 */
+.nhhLabelTag input[type=radio]:checked+label{
+  border: 3px solid rgb(118, 164, 252);
+  border-radius: 5px;
+}
+
+/* 검색버튼 */
+.form-search-control {
+  border: 1px solid rgb(207, 206, 206);
+  background-color: rgba(223, 227, 231, 0.829);
+  border-radius: 5px;
+  font-size: 16px;
+  height: 50px;
+  width: 130px;
+  color: #000000;
+  float: right;
+}
+
+.form-search-control:hover {
+  background-color: rgba(193, 212, 231, 0.829);
+  border: 1px solid rgb(146, 144, 144);
+}
+
+
+/* 탑승객 보드 popover */
+.boader_passenger {
+  background-color: rgb(255, 255, 255);
+  z-index: 100;
+  border: 1px solid rgb(215, 215, 215);
+}
+
+/* 탑승 인원 리스트 */
+.style-personel {
+  padding-bottom: 10px;
+}
+
+.style-personel-button {
+  border: none;
+  width: 30px;
+  height: 30px;
+  background-color: rgb(226, 226, 226);
+  border-radius: 5px;
+}
+
+.person-choice {
+  width: 110px;
+  border: 1px solid rgb(223, 222, 222);
+  border-radius: 10px;
+  background-color: #f8f7f7;
+}
+
+.person-choice:hover {
+  background-color: #e0f7ff;
+}
+
+/* 좌석등급 버튼 */
+.seat-rating {
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+}
+
+.seat-rating:hover {
+  background-color: rgb(210, 224, 235);
+}
+
+
+/********예약바 끝********/
+
+/********여행 추천지 시작********/
+.travel-recommendations-text h2 {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "Noto Sans KR", sans-serif;
+  padding-left: 285px;
+  margin-top: 30px;
+}
+
+/* 지역 글자 크기 */
+.location-font-size {
+  font-size: 16px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+/* 지역 아이콘 */
+/* media-1 위에 있음 */
+
+/********여행 추천지 끝********/
+
+/********home 공지사항 시작********/
+.home-notice-title > h3 {
+  /* text-align: center; */
+  font-size: 35px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: bold;
+  padding-left: 530px;
+  width: 1060px;
+}
+
+/* 공지사항 이동 버튼 */
+.home-notice-link > a {
+  float: right;
+  font-size: 35px;
+  font-weight: bold;
+  text-decoration-line: none;
+  padding-right: 30px;
+}
+
+.home-notice-link > a:hover {
+  color: #328bff;
+}
+
+/* 공지사항 위에 줄 진하게 */
+.top-line-bold > th {
+  border-top: 2px solid #000;
+  padding-left: 70px;
+  font-size: 20px;
+}
+
+/* 공지사항, footer 사이 공백 */
+#notice-bottom-gap {
+  margin-bottom: 150px;
+}
+
+#home-noticeId {
+  padding-left: 70px;
+}
+
+#home-notice-title-location {
+  padding-left: 70px;
+}
+
+#home-notice-title {
+  margin-right: 30px;
+}
+
+
+/********home 공지사항 끝********/
+
+/********공통 footer 시작********/
+/* Top Button 버튼 누르면 위로 올라가는 css */
+.button-click-top-move {
+  font-weight: bold;
+  font-size: 20px;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.scroll-top-move {
+  position: fixed;
+  right: 2%;
+  bottom: 5%;
+  z-index: 1;
+}
+/********공통 footer 끝********/
+
+
+/* !홈화면 끝 */
