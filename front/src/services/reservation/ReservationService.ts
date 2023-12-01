@@ -1,5 +1,6 @@
 // ReservationService.ts : axios 공통 crud 함수
 
+import IReservation from "../../types/reservation/IReservation";
 import IReserve from "../../types/reserve/IReserve";
 import ISearchReservation from "../../types/searchReservation/ISearchReservation";
 import http from "../../utils/http-common";
@@ -24,6 +25,11 @@ const get = (airlineReservationNumber: any) => {
 
   return http.get<ISearchReservation>(`/tour/search-reservation/seeReservation/${airlineReservationNumber}`);
 };
+
+// 유빈 
+const getChseat = (airlineReservationNumber: any) => {
+  return http.get<IReservation>(`/tour/boardingpass/${airlineReservationNumber}`);
+}
 
 
 // 상민
@@ -56,6 +62,7 @@ const findNonMember = (data:any) => {
 const ReservationService = {
   getAll,
   gett,
+  getChseat,
   get,
   create,
   getAllSeat,

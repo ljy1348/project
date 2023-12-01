@@ -61,9 +61,11 @@ public class CheckinService {
         return checkin2;
     }
 
-    public  List<CheckgetDto> searchCheckin(int airlineReservationNumber){
+    public  List<CheckgetDto> searchCheckin(int airlineReservationNumber) {
         List<CheckgetDto> checkinDtoList = checkinRepository.check(airlineReservationNumber);
         return checkinDtoList;
+    }
+
     // 관리자 전체 조회
     public Page<Checkin> findAllAdmin(String searchTitle, String searchText, Pageable pageable) {
         if (searchTitle.equals("checkinId")) {
