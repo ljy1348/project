@@ -193,7 +193,7 @@ function ReservePayment() {
     const endYear = currentYear; // 18세까지 허용
 
     const yearOptions = [];
-    for (let year = startYear; year <= endYear; year++) {
+    for (let year = endYear; year >= startYear; year--) {
       yearOptions.push(
         <option key={year} value={year}>
           {year}

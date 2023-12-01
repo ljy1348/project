@@ -166,15 +166,19 @@ function CheckIn() {
     </div>
 
     <div className="row mb-5">
-      {checkDto.map((item, index) => (
-        <React.Fragment key={index}>
-          <div className="col-3">{item.userName || ""}</div>
-          <div className="col-3">{reservation.seatType}</div>
-          <div className="col-3">{item.seatNumber || ""}</div>
-          <div className="col-3">{reservation.checkYn}</div>
-        </React.Fragment>
-      ))}
-    </div>
+  {checkDto ? (
+    checkDto.map((item, index) => (
+      <React.Fragment key={index}>
+        <div className="col-3">{item.userName || ""}</div>
+        <div className="col-3">{reservation.seatType}</div>
+        <div className="col-3">{item.seatNumber || ""}</div>
+        <div className="col-3">{reservation.checkYn}</div>
+      </React.Fragment>
+    ))
+  ) : (
+    <div>No data available</div>
+  )}
+</div>
 
     {reservation.checkYn === 'N' && (
   <div className="d-flex justify-content-end mt-5 mb-5 no-gutters">
