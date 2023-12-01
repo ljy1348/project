@@ -5,7 +5,6 @@ import { Pagination } from "@mui/material";
 import IWriteNotice from "../../types/writeNotice/IWriteNotice";
 import NoticeService from "../../services/notice/NoticeService";
 
-
 function NoticeList() {
   // 변수 정의
   // customer 배열 변수
@@ -20,7 +19,6 @@ function NoticeList() {
   const [page, setPage] = useState<number>(1);
   const [count, setCount] = useState<number>(1);
   const [size, setSize] = useState<number>(10); // 1페이지당개수
-
 
   // todo: 함수 정의
   useEffect(() => {
@@ -54,19 +52,18 @@ function NoticeList() {
   };
 
   //  todo: Pagination 수동 바인딩(공통)
-  //  페이지 번호를 누르면 => page 변수에 값 저장
   const handlePageChange = (event: any, value: number) => {
-    // value == 화면의 페이지번호
     setPage(value);
   };
+  
   return (
     <div>
       {/* 테마 디자인 적용 : 컨택트 소스 */}
       {/* 테마 제목 시작 */}
-      <div className="col-md-8 offset-2">
-        <div className="col-12 input-group mb-3">
+      <div>
+        <div className="userNoticeDiv1">
           <select
-            className="form-select title-content-select"
+            className="userNoticeSelectBox"
             onChange={onChangeSearchSelect}
             value={searchSelect}
           >
@@ -83,21 +80,18 @@ function NoticeList() {
 
           <input
             type="text"
-            className="form-control"
+            className="userNoticeTextInput"
             placeholder="검색어를 입력하세요."
             value={searchKeyword}
             onChange={onChangeSearchKeyword}
           />
-
-          <div className="input-group-append">
-            <button
-              className="notice-search-word-button"
-              type="button"
-              onClick={retrieveNotice}
-            >
-              검색
-            </button>
-          </div>
+          <button
+            className="userNoticeSearchBtn"
+            type="button"
+            onClick={retrieveNotice}
+          >
+            검색
+          </button>
         </div>
       </div>
 
@@ -108,50 +102,52 @@ function NoticeList() {
       <div className="row mb-3"></div>
 
       <div className="container" id="notice-bottom-gap">
+        <div className="col-md-12 row">
+          <table className="table" id="table-bottom-gap">
+            <thead>
+              <tr className="top-line-bold">
+                <th scope="col">No</th>
+                <th scope="col">제목</th>
+                <th scope="col">날짜</th>
+                <th scope="col">작성자</th>
+              </tr>
+            </thead>
+            <tbody>
+              {notice &&
+                notice.map((data) => (
+                  <tr className="line-sorting" key={data.noticeId}>
+                    <td id="notice-id-location">{data.noticeId}</td>
+                    <td id="notice-title-location">
+                      <a href={`/notice/${data.noticeId}`}>
+                        {data.noticeTitle}
+                      </a>
+                    </td>
+                    <td id="notice-insertTime-location">{data.insertTime}</td>
+                    <td id="notice-writer-location">{data.memberName}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
 
-      <div className="col-md-12 row">
-        <table className="table" id="table-bottom-gap">
-          <thead>
-            <tr className="top-line-bold">
-              <th scope="col">No</th>
-              <th scope="col">제목</th>
-              <th scope="col">날짜</th>
-              <th scope="col">작성자</th>
-            </tr>
-          </thead>
-          <tbody>
-            {notice &&
-              notice.map((data) => (
-                <tr className="line-sorting" key={data.noticeId}>
-                  <td id="notice-id-location">{data.noticeId}</td>      
-                  <td id="notice-title-location"><a href={`/notice/${data.noticeId}`}>{data.noticeTitle}</a></td>
-                  <td id="notice-insertTime-location">{data.insertTime}</td>
-                  <td id="notice-writer-location">{data.memberName}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-        
-        {/* table end */}
-      </div>
+          {/* table end */}
+        </div>
 
-      {/* 페이지네이션 시작 */}
-      <div className="noticePageBtn">
-        <Pagination
-          className="my-3"
-          count={count}
-          page={page}
-          siblingCount={1}
-          boundaryCount={1}
-          variant="outlined"
-          shape="rounded"
-          onChange={handlePageChange}
-        />
-      </div>
-      {/* 페이지네이션 끝 */}
+        {/* 페이지네이션 시작 */}
+        <div className="noticePageBtn">
+          <Pagination
+            className="my-3"
+            count={count}
+            page={page}
+            siblingCount={1}
+            boundaryCount={1}
+            variant="outlined"
+            shape="rounded"
+            onChange={handlePageChange}
+          />
+        </div>
+        {/* 페이지네이션 끝 */}
       </div>
       {/* table end */}
-
     </div>
   );
 }

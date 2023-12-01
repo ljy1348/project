@@ -1,7 +1,7 @@
-package com.example.back.service.checkin;
+package com.example.back.service.baggage;
 
-import com.example.back.model.entity.checkin.Baggage;
-import com.example.back.repository.checkin.BaggageRepository;
+import com.example.back.model.entity.baggage.Baggage;
+import com.example.back.repository.baggage.BaggageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

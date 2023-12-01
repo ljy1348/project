@@ -4,10 +4,11 @@ export default interface IQboard {
   title: string;
   content: string;
   answerYn: string;
-  memberId: string;
+  memberId?: any | string;
   insertTime: string;
   answer: string
   paraentBid: number
+  memberAuth: string,
   // titleCodeNumber: number,
 
     // updateTime: string,

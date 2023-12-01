@@ -1,7 +1,7 @@
-package com.example.back.controller.checkin;
+package com.example.back.controller.baggage;
 
-import com.example.back.model.entity.checkin.Baggage;
-import com.example.back.service.checkin.BaggageService;
+import com.example.back.model.entity.baggage.Baggage;
+import com.example.back.service.baggage.BaggageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
