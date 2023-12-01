@@ -40,7 +40,7 @@ function AdminCheckin() {
         const {content, totalPages} = response.data;
         setCheckin(content);
         setTotalPages(totalPages);
-        setPage(1);
+        // setPage(1);
         console.log("response", response);
       })
       .catch((e: Error) => {
@@ -77,7 +77,7 @@ function AdminCheckin() {
                   type="button"
                   className="btn btn-primary btn-block"
                   value="조회하기"
-                  onClick={searchCheckin}
+                  onClick={()=>{retrievePayment(); setPage(1)}}
                 />
               </div>
         </div>
