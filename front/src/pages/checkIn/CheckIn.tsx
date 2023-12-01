@@ -7,7 +7,7 @@ import { Button } from "react-bootstrap";
 
 import CheckInState from "../modal/CheckInStateModal";
 
-import IResOperation from "../../types/checkin/IResOperation";
+import IResOperation from "../../types/checkin/ICheckin";
 import CheckinService from "../../services/checkin/CheckinService";
 
 function CheckIn() {
@@ -18,7 +18,7 @@ function CheckIn() {
    // 부서 배열 변수
   const [checkIn, setCheckIn] = useState<Array<IResOperation>>([]);
   // 검색어 변수
-  const [searchAirlinereservationnumber, setSearchAirlinereservationnumber] = useState<number>(0);
+  const [searchAirlinereservationnumber, setSearchAirlinereservationnumber] = useState<string>("");
 
   // 객체초기화 이니셜 기본키 
   //  모달이동
