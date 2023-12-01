@@ -1,5 +1,6 @@
 package com.example.back.service.checkin;
 
+import com.example.back.model.dto.checkin.CheckgetDto;
 import com.example.back.model.entity.checkin.Checkin;
 import com.example.back.model.dto.checkin.CheckinDto;
 // import com.example.back.model.dto.checkindto;
@@ -60,6 +61,9 @@ public class CheckinService {
         return checkin2;
     }
 
+    public  List<CheckgetDto> searchCheckin(int airlineReservationNumber){
+        List<CheckgetDto> checkinDtoList = checkinRepository.check(airlineReservationNumber);
+        return checkinDtoList;
     // 관리자 전체 조회
     public Page<Checkin> findAllAdmin(String searchTitle, String searchText, Pageable pageable) {
         if (searchTitle.equals("checkinId")) {

@@ -136,11 +136,11 @@ function Reserve(props: any) {
       <div className="container">
         <div className="col-12">
           {/* 마일리지 항공권 예약 버튼 */}
-          <div className="d-flex justify-content-end mt-5 no-gutters">
+          {/* <div className="d-flex justify-content-end mt-5 no-gutters">
             <button className="sangmin_reserve_btn">
               마일리지 항공권 예약하기
             </button>
-          </div>
+          </div> */}
 
           {/* step bedge */}
           <div className="d-flex justify-content-center mt-5 col-12">
