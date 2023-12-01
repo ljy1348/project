@@ -62,4 +62,9 @@ public interface CheckinRepository extends JpaRepository<Checkin, String> {
             "     AND RES.AIRLINE_RESERVATION_NUMBER = :airlineReservationNumber "
             , nativeQuery = true)
     Optional<CheckinDto> checkresnum(@Param("airlineReservationNumber")int airlineReservationNumber);
+
+    Page<Checkin> findAllByCheckId(int checkId, Pageable pageable);
+    Page<Checkin> findAllByAirlineReservationNumber(int airlineReservationNumber, Pageable pageable);
+    Page<Checkin> findAllByPassportId(int passportId, Pageable pageable);
+    Page<Checkin> findAllBy(Pageable pageable);
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * packageName : com.example.back.controller.checkin
@@ -61,6 +62,23 @@ public class BaggageController {
         } catch (Exception e) {
 //            DB 에러가 났을경우 : INTERNAL_SERVER_ERROR 프론트엔드로 전송
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/baggage/get/{id}")
+    public ResponseEntity<?> findById(@PathVariable int id) {
+        log.info("수화물 점검 : "+id);
+        try {
+        Optional<Baggage> optional = baggageService.findById(id);
+        if (optional.isPresent()) {
+            return new ResponseEntity<>(optional.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
         }
     }
 }
