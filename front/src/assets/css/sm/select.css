@@ -44,3 +44,7 @@
     background:blue;
     /* opacity: .5; */
   }
+
+  .sangmin_choose_table_content {
+	--bs-table-bg: none !important;
+  }

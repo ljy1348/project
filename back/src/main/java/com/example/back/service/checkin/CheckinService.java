@@ -1,5 +1,6 @@
 package com.example.back.service.checkin;
 
+import com.example.back.model.dto.checkin.CheckgetDto;
 import com.example.back.model.entity.checkin.Checkin;
 import com.example.back.model.dto.checkin.CheckinDto;
 // import com.example.back.model.dto.checkindto;
@@ -58,6 +59,11 @@ public class CheckinService {
         List<Checkin> checkin2 = checkinRepository.saveAll(checkin);
 
         return checkin2;
+    }
+
+    public  List<CheckgetDto> searchCheckin(int airlineReservationNumber){
+        List<CheckgetDto> checkinDtoList = checkinRepository.check(airlineReservationNumber);
+        return checkinDtoList;
     }
 
 

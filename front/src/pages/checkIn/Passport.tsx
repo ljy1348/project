@@ -33,7 +33,7 @@ function Passport() {
     adultCount: 0,
     childCount: 0,
     mileUseYn: "N",
-    seatType: "이코노미",
+    seatType: "",
     memberYn: "N",
     memberId: "",
     userNumber: "",
@@ -79,7 +79,7 @@ function Passport() {
     checkId: null,
     seatNumber : "",
     airlineReservationNumber: Number(searchAirlinereservationnumber),
-    passportId : "0123"
+    passportId : ""
   };
 
   // 여권 객체
@@ -125,6 +125,21 @@ function Passport() {
     ReservationService.get(airlineReservationNumber) // 벡엔드로 상세조회 요청
       .then((response: any) => {
         setReservation(response.data);
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
+
+  const updateCheckYn = () => { 
+    const updatedReservation = {
+      ...reservation,
+      checkYn: "Y",
+    };
+  
+    ReservationService.update(reservation.airlineReservationNumber, updatedReservation)
+      .then((response: any) => {
         console.log(response.data);
       })
       .catch((e: Error) => {
@@ -202,7 +217,7 @@ function Passport() {
     savePassport();
     saveCheckin();
     saveBaggage();
-
+    updateCheckYn();
     navi(`/boardingpass/${operID}/${searchAirlinereservationnumber}/${adcount}/${chcount}/${bagCount1}`)
   };
 
@@ -271,6 +286,9 @@ function Passport() {
       }));
     }
   };
+ 
+
+  
 
   // 좌석 저장함수
   const handleSeatsSelected = (selectedSeats: any) => {

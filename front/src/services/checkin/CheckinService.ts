@@ -15,11 +15,17 @@ const getAll = (airlinereservationnumber: any) => {
     return http.get<Array<IReservation>>(`/tour/checkin/${airlinereservationnumber}`);
  }
 
+
+
 // 상세 조회
 const get = (checkYn:string) => {
   return http.get<IReservation>(`/tour/checkin/${checkYn}`);
 };
 
+// 상세 조회
+const dtogetAll = (airlinereservationnumber:number) => {
+  return http.get(`/tour/checkin2/${airlinereservationnumber}`);
+};
 
 // 저장 함수
 const create = (data:Array<ICheckin>) => {
@@ -32,6 +38,7 @@ const create = (data:Array<ICheckin>) => {
 
 
 const CheckinService = {
+  dtogetAll,
   getAll,
   get,
   create,

@@ -38,6 +38,11 @@ const create = (data:IReserve) => {
   return http.post<IReserve>("/tour/reservation", data);
 };
 
+// 수정 함수
+const update = (airlineReservationNumber:any, data:IReserve) => {
+  return http.put<any>(`/tour/reservation/${airlineReservationNumber}`, data);
+};
+
 // 주영
 // 삭제 함수
 const deleteRoundTrip = (start:number|string, final:number|string) => {
@@ -55,7 +60,8 @@ const ReservationService = {
   create,
   getAllSeat,
   deleteRoundTrip,
-  findNonMember
+  findNonMember,
+  update
 };
   
 export default ReservationService;
