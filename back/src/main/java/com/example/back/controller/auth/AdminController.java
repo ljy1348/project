@@ -1,11 +1,17 @@
 package com.example.back.controller.auth;
 
+import com.example.back.model.dto.payment.PaymentAdminDto;
 import com.example.back.model.entity.auth.ERole;
 import com.example.back.model.entity.auth.Member;
+import com.example.back.model.entity.notice.Notice;
+import com.example.back.model.entity.payment.Payment;
 import com.example.back.model.entity.reserve.OperationInfo;
 import com.example.back.security.services.UserDetailsImpl;
 import com.example.back.service.auth.UserService;
+import com.example.back.service.notice.NoticeService;
+import com.example.back.service.payment.PaymentService;
 import com.example.back.service.reserve.OperationInfoService;
+import com.fasterxml.jackson.databind.annotation.NoClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,6 +49,12 @@ public class AdminController {
 
     @Autowired
     OperationInfoService operationInfoService;
+
+    @Autowired
+    NoticeService noticeService;
+
+    @Autowired
+    PaymentService paymentService;
 
 
 //    회원 관리
@@ -157,12 +169,74 @@ public class AdminController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-//    } catch(Exception e) {
-//    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
     }
 
+    @DeleteMapping("/operation/{dataId}")
+    public ResponseEntity<?> deleteOperation(@PathVariable int dataId) {
+        try {
 
+        boolean result = operationInfoService.delete(dataId);
+        if (result) return new ResponseEntity<>(HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
+    // 고객센터
+    // 공지사항
+    @GetMapping("/board/notice")
+    public ResponseEntity<?> noticeIdDesc() {
+        try {
+            List<Notice> list = noticeService.noticeIdDesc();
+
+            return new ResponseEntity<>(list, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/board/notice")
+    public ResponseEntity<?> save(@RequestBody Notice notice) {
+        try {
+            Notice notice1 = noticeService.save(notice);
+
+            return new ResponseEntity<>(notice1, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+//    결제 조회
+    @GetMapping("/payment")
+    public ResponseEntity<?> paymentGetAll(Pageable pageable) {
+        try {
+            Page<PaymentAdminDto> page = paymentService.getAll(pageable);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("content", page.getContent());
+            map.put("totalPages", page.getTotalPages());
+
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/payment/{payId}")
+    public ResponseEntity<?> paymentGetAll(@PathVariable int payId ,Pageable pageable) {
+        try {
+            Page<PaymentAdminDto> page = paymentService.selectAllAndPayId(payId, pageable);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("content", page.getContent());
+            map.put("totalPages", page.getTotalPages());
+
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import { useParams } from "react-router-dom";
-import IOperationinfo from "../../types/IOperationinfo";
-import OperationService from "../../services/OperationService";
-import ICount from "./../../types/reserve/ICount";
-import INonmemberinfo from "../../types/INonmemberinfo";
-import NonmemberService from "../../services/NonmemberService";
+import ICount from "../../types/reserve/ICount";
+import IRdata from "../../types/reserve/IRdata";
+import OperationInfo from "./../auth/admin/OperationInfo/OperationInfo";
+import PaymentModal from "../modal/PaymentModal";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import IOperationinfo from "../../types/operationInfo/IOperationinfo";
+import OperationService from "../../services/operation/OperationService";
+import NonmemberService from "../../services/nonmemberinfo/NonmemberService";
+import ReservationService from "../../services/reservation/ReservationService";
 
 function ReservePayment() {
   // 기본키
@@ -23,13 +28,16 @@ function ReservePayment() {
   } = useParams();
   // 사용 X?
   // const [icount, setICount] = useState<ICount>();
-
+  
   const initICount = {
     adult: false,
     name: "",
   };
-  const [temp, setTemp] = useState<ICount[]>([initICount]);
 
+  const { user: currentUser } = useSelector((state:RootState)=> state.auth);
+
+  const [temp, setTemp] = useState<ICount[]>([initICount]);
+  const [reInfo, setReInfo] = useState<IRdata[]>([]);
   // operationinfo 객체 초기화
 
   const initialOperationinfo = {
@@ -67,10 +75,24 @@ function ReservePayment() {
     userName: "",
     userSex: "",
     userCountry: "",
-    userDate: "",
+    userDate: "1983-1-1",
     userPhone: "",
     userEmail: "",
   }));
+
+  // 저장 : 예약 객체 초기화
+  const initialReservation = {
+    airlineReservationNumber: null,
+    adultCount: adultCount,
+    childCount: childCount,
+    mileUseYn: "N",
+    seatType: seatClass,
+    memberYn: "N",
+    memberId: "",
+    userNumber: "",
+    operationId: 0,
+    checkYn: "N",
+  };
 
   // operationinfo 객체 정의
 
@@ -79,12 +101,20 @@ function ReservePayment() {
   const [operationinfo2, setOperationinfo2] = useState<IOperationinfo>(
     initialOperationinfo2
   );
-
-  // 비회원 객체
-  // const [nonmemberinfo, setNonmemberinfo] = useState<Array<INonmemberinfo>>([
-  //   initialNonmemberinfo,
-  // ]);
+  // 저장 : 비회원 객체정의
   const [nonmemberinfo, setNonmemberinfo] = useState(initialNonmemberinfo);
+
+  // 저장 : 예약 객체 정의
+  const [reservation, setReservation] = useState(initialReservation);
+
+  // todo: input 태그에 수동 바인딩
+  const handleInputChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target; // 화면값
+    setReservation({ ...reservation, [name]: value }); // 변수저장
+  };
+
+  // 사용자 번호 배열
+  const [userNumbers, setUserNumbers] = useState<number[]>([]);
   // 도착 날짜 저장 함수
   const [day, setDay] = useState<string>("");
   const [day2, setDay2] = useState<string>("");
@@ -109,43 +139,12 @@ function ReservePayment() {
   // modalcontrol
   const [modalShow, setModalShow] = useState(false);
 
-  // 비회원 정보를 추가하는 함수
-  const addNonmember = () => {
-    setNonmemberinfo((prevNonmemberinfo) => [
-      ...prevNonmemberinfo,
-      ...temp.map(() => ({
-        userNumber: null,
-        userName: "",
-        userSex: "",
-        userCountry: "",
-        userDate: "",
-        userPhone: "",
-        userEmail: "",
-      })),
-    ]);
-  };
-
-  // 비회원 정보를 업데이트하는 함수
-  // const handleInputChange = (
-  //   event: React.ChangeEvent<HTMLInputElement>,
-  //   index: number
-  // ) => {
-  //   const { name, value } = event.target;
-  //   setNonmemberinfo((prevNonmemberinfo) => {
-  //     const updatedNonmemberinfo = [...prevNonmemberinfo];
-  //     updatedNonmemberinfo[index] = {
-  //       ...updatedNonmemberinfo[index],
-  //       [name]: value,
-  //     };
-  //     return updatedNonmemberinfo;
-  //   });
-  // };
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
     let { name, value } = event.target;
-    if (name === "radio+"+index) name = "userSex";
+    if (name === "radio+" + index) name = "userSex";
     setNonmemberinfo((prevNonmemberinfo) => {
       const updatedNonmemberinfo = [...prevNonmemberinfo];
       updatedNonmemberinfo[index] = {
@@ -155,18 +154,17 @@ function ReservePayment() {
       return updatedNonmemberinfo;
     });
   };
-  // 생년월일 바인딩
-  // 생년월일 바인딩 관련 오류 수정
+
   const handleBirthdateChange = (idx: number) => {
     // 선택된 년도, 월, 일 값을 가져옵니다.
     const selectedYear = (
-      document.getElementById("birth-year") as HTMLSelectElement
+      document.getElementById(`birth-year${idx}`) as HTMLSelectElement
     ).value;
     const selectedMonth = (
-      document.getElementById("birth-month") as HTMLSelectElement
+      document.getElementById(`birth-month${idx}`) as HTMLSelectElement
     ).value;
     const selectedDay = (
-      document.getElementById("birth-day") as HTMLSelectElement
+      document.getElementById(`birth-day${idx}`) as HTMLSelectElement
     ).value;
 
     // 이 값을 nonmemberinfo.userDate에 저장합니다.
@@ -179,6 +177,52 @@ function ReservePayment() {
       };
       return updatedInfo;
     });
+  };
+
+  // 년도 옵션들 생성
+  const renderYearOptions = () => {
+    const currentYear = new Date().getFullYear();
+    const startYear = currentYear - 150; // 100년 전부터
+    const endYear = currentYear; // 18세까지 허용
+
+    const yearOptions = [];
+    for (let year = startYear; year <= endYear; year++) {
+      yearOptions.push(
+        <option key={year} value={year}>
+          {year}
+        </option>
+      );
+    }
+
+    return yearOptions;
+  };
+
+  // 월 옵션들 생성
+  const renderMonthOptions = () => {
+    const monthOptions = [];
+    for (let month = 1; month <= 12; month++) {
+      monthOptions.push(
+        <option key={month} value={month}>
+          {month}
+        </option>
+      );
+    }
+
+    return monthOptions;
+  };
+
+  // 일 옵션들 생성
+  const renderDayOptions = () => {
+    const dayOptions = [];
+    for (let day = 1; day <= 31; day++) {
+      dayOptions.push(
+        <option key={day} value={day}>
+          {day}
+        </option>
+      );
+    }
+
+    return dayOptions;
   };
 
   // 상세조회 함수
@@ -201,35 +245,13 @@ function ReservePayment() {
       })
       .catch((e: Error) => {
         console.log(e);
+        setNonmemberinfo(initialNonmemberinfo);
       });
   };
-
-  // 비회원 저장 함수
-  // const saveNonmemberinfo = () => {
-  //   // 비회원 정보 배열을 반복하면서 저장 요청
-  //   nonmemberinfo.forEach((info) => {
-  //     var data = {
-  //       userName: info.userName,
-  //       userSex: info.userSex,
-  //       userCountry: info.userCountry,
-  //       userDate: info.userDate,
-  //       userPhone: info.userPhone,
-  //       userEmail: info.userEmail,
-  //     };
-
-  //     NonmemberService.create(data) // 저장 요청
-  //       .then((response: any) => {
-  //         console.log(response.data);
-  //       })
-  //       .catch((e: Error) => {
-  //         console.log(e);
-  //       });
-  //   });
-  // };
-  const saveNonmemberinfo = () => {
-    // 비회원 정보 배열을 반복하면서 저장 요청
-    nonmemberinfo.forEach((info) => {
-      var data = {
+  // 저장 비회원
+  const saveNonmemberinfo = async () => {
+    const promises = nonmemberinfo.map((info) => {
+      const data = {
         userName: info.userName,
         userSex: info.userSex,
         userCountry: info.userCountry,
@@ -238,29 +260,91 @@ function ReservePayment() {
         userEmail: info.userEmail,
       };
 
-      console.log(nonmemberinfo);
+      return NonmemberService.create(data)
+        .then((response) => response.data.userNumber)
+        .catch((e) => {
+          console.error(e);
+          return null; // 오류가 발생한 경우 null 반환
+        });
+    });
 
-      // NonmemberService.create(data) // 저장 요청
-      //   .then((response: any) => {
-      //     console.log(response.data);
-      //   })
-      //   .catch((e: Error) => {
-      //     console.log(e);
-      //   });
+    const userNumbersArray = await Promise.all(promises);
+    return userNumbersArray.filter((number) => number !== null); // null이 아닌 번호들만 반환
+  };
+
+  // 저장 예약
+  const saveReservation = (
+    userNumbersArray: any,
+    operation: IOperationinfo
+  ) => {
+    // 임시 부서 객체
+
+    const data = {
+      adultCount: adultCount ?? 0,
+      childCount: childCount ?? 0,
+      mileUseYn: reservation.mileUseYn,
+      seatType: seatClass ?? "이코노미",
+      memberYn: reservation.memberYn,
+      memberId: reservation.memberId,
+      userNumber: userNumbersArray.join(","), // 배열을 쉼표로 구분된 문자열로 변환
+      operationId: operation.operationId, // 여정에 해당하는 operationId 사용
+      checkYn: reservation.checkYn
+    };
+
+    if (currentUser?.memberId) {data.memberId=currentUser.memberId; data.memberYn="Y";}
+
+    const totalPrice = calculateTotalPrice(data.seatType, operation);
+
+    ReservationService.create(data).then((response: any) => {
+      console.log(response.data);
+      // 가격 정보를 활용할 수 있도록 원하는 작업 수행
+      console.log("가격:", totalPrice);
+
+      // ReservationService.create가 성공한 경우에만 실행
+      // response.data에서 필요한 정보를 추출하여 reInfo 업데이트
+
+      // reInfo 업데이트
+      setReInfo((prevReInfo) => {
+        const updatedReInfo = [...prevReInfo, {reservenum: response.data.airlineReservationNumber, // 수정 필요
+        price: totalPrice.toString()}];
+        // updatedReInfo[0] = {
+        //   ...updatedReInfo[0],
+        //   reservenum: response.data.airlineReservationNumber, // 수정 필요
+        //   price: totalPrice.toString(),
+        // };
+        // console.log(updatedReInfo);
+        return updatedReInfo;
+      });
     });
   };
 
-  const handlePayment = () => {
-    // 여기서 다른 필요한 작업을 수행하고
-    // 비회원 정보 저장 함수 호출
-    saveNonmemberinfo();
-    setModalShow(true);
-    addNonmember();
-  };
+  let payInfo1;
+  let payInfo2;
 
+  const handlePayment = async () => {
+    const userNumbersArray = await saveNonmemberinfo();
+
+
+
+    if (userNumbersArray.length >= Number(adultCount)+Number(childCount)) {
+      await saveReservation(userNumbersArray, operationinfo);
+      // 여정 2에 대한 예약 저장
+      await saveReservation(userNumbersArray, operationinfo2);
+
+      setModalShow(true);
+    } else {
+    alert("정보를 모두 입력해주세요");
+      console.log("비회원 정보 저장에 실패했습니다.");
+    }
+  };
   useEffect(() => {
     initScripts();
     initCustom();
+
+    // 로그인이 되어있는지 판단하고
+    // 로그인이 안되어있으면, 비회원으로 진행할지, 로그인페이지로 이동할지 선택창 뜸,
+    // 로그인이 되어 있으면 결제 진행
+
     if (firstId) {
       getoperationinfo(firstId);
       inputdays(startDate2);
@@ -344,44 +428,42 @@ function ReservePayment() {
   ) => {
     if (adultCount !== undefined && childCount !== undefined) {
       return (
-        (basePrice * adultCount + basePrice * 0.9 * childCount) * multiplier
+        (basePrice * adultCount + Math.floor(basePrice * 0.9 * childCount)) * multiplier
       );
     }
     return 0;
   };
 
   // 총 가격 계산 함수
-  const calculateTotalPrice = (seatClass: string) => {
+  const calculateTotalPrice = (
+    seatClass: string,
+    OperationInfo: IOperationinfo
+  ) => {
     const multiplier =
       seatClass === "비지니스" ? 3 : seatClass === "퍼스트" ? 9 : 1;
-    return (
-      calculatePrice(
-        Number(operationinfo.price),
-        Number(adultCount),
-        Number(childCount),
-        multiplier
-      ) +
-      calculatePrice(
-        Number(operationinfo2.price),
-        Number(adultCount),
-        Number(childCount),
-        multiplier
-      )
+
+    const price = calculatePrice(
+      Number(OperationInfo.price),
+      Number(adultCount),
+      Number(childCount),
+      multiplier
     );
+    return price;
   };
+  console.log(reInfo)
+  // useEffect(() => {
+  //   const price = calculateTotalPrice(seatClass || "이코노미");
+  //   setTotalPrice(price);
+  //   // console.log(price);
+  // }, [
+  //   seatClass,
+  //   adultCount,
+  //   childCount,
+  //   operationinfo.price,
+  //   operationinfo2.price,
+  // ]);
 
-
-  useEffect(() => {
-    const price = calculateTotalPrice(seatClass || "이코노미");
-    setTotalPrice(price);
-    // console.log(price);
-  }, [
-    seatClass,
-    adultCount,
-    childCount,
-    operationinfo.price,
-    operationinfo2.price,
-  ]);
+  console.log(totalPrice);
 
   // 다른 부분에서 totalPrice를 참조해야 할 때
   // console.log(totalPrice);
@@ -555,26 +637,29 @@ function ReservePayment() {
                         <div className="row g-3 align-items-center mb-3">
                           {/* 성별 라벨 시작 */}
                           <div className="col-3">
-                            <label htmlFor="userSex" className="col-form-label">
+                            <label
+                              htmlFor={`userSex-${idx}`}
+                              className="col-form-label"
+                            >
                               성별
                             </label>
                           </div>
                           <div className="col-9">
-                            <label htmlFor={"radio+"+idx}>남성</label>
+                            <label htmlFor={"radio+" + idx}>남성</label>
                             <input
                               className="sangmin_gender_check"
                               type="radio"
-                              name={"radio+"+idx}
+                              name={"radio+" + idx}
                               value={"male"}
-                              id={"radio+"+idx}
+                              id={"radio+" + idx}
                               onChange={(e) => handleInputChange(e, idx)}
                             />
 
-                            <label htmlFor={"radio+"+idx}>여성</label>
+                            <label htmlFor={"radio+" + idx}>여성</label>
                             <input
                               className="sangmin_gender_check"
                               type="radio"
-                              name={"radio+"+idx}
+                              name={"radio+" + idx}
                               value={"female"}
                               onChange={(e) => handleInputChange(e, idx)}
                             />
@@ -648,24 +733,30 @@ function ReservePayment() {
                             <div className="info" id="info__birth">
                               <select
                                 className="box"
-                                id="birth-year"
-                                onChange={() => handleBirthdateChange(idx)}
+                                id={`birth-year${idx}`}
+                                onChange={(e) => {
+                                  handleBirthdateChange(idx);
+                                }}
                               >
-                                {/* 년도 옵션들 */}
+                                {renderYearOptions()}
                               </select>
                               <select
                                 className="box"
-                                id="birth-month"
-                                onChange={() => handleBirthdateChange(idx)}
+                                id={`birth-month${idx}`}
+                                onChange={(e) => {
+                                  handleBirthdateChange(idx);
+                                }}
                               >
-                                {/* 월 옵션들 */}
+                                {renderMonthOptions()}
                               </select>
                               <select
                                 className="box"
-                                id="birth-day"
-                                onChange={() => handleBirthdateChange(idx)}
+                                id={`birth-day${idx}`}
+                                onChange={(e) => {
+                                  handleBirthdateChange(idx);
+                                }}
                               >
-                                {/* 일 옵션들 */}
+                                {renderDayOptions()}
                               </select>
                             </div>
                           </div>
@@ -684,7 +775,7 @@ function ReservePayment() {
                           </div>
                           {/* 전화번호 입력창 */}
                           <input
-                            type="text"
+                            type="number"
                             id="userPhone"
                             required
                             className="form-control"
@@ -739,6 +830,17 @@ function ReservePayment() {
       </div>
 
       {/* 모달 불러오기 */}
+      <PaymentModal
+            show={modalShow}
+            onHide={() => {setModalShow(false);
+            ReservationService.deleteRoundTrip(reInfo[0].reservenum, reInfo[1].reservenum)
+            .then((response)=>{console.log(response)})
+            .catch((e)=>{console.log(e)}
+            )
+            setReInfo([])
+            }}
+            reInfo={reInfo}
+          />
     </>
   );
 }

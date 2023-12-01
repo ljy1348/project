@@ -1,4 +1,3 @@
-// components/common/Nav.tsx : rfce
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -28,7 +27,7 @@ function Nav() {
               className="js-clone-nav d-none d-lg-inline-block text-left site-menu"
             >
               <Link to="/" className="logo">
-                <img src="images/그린에어로고.png" className="main-logo-image" />
+                <img src="/images/그린에어로고.png" className="main-logo-image" />
                 GreanAir
               </Link>
               
@@ -41,7 +40,7 @@ function Nav() {
 
               {/* 예약 조회 메뉴 시작 */}
               <li>
-                <Link to="/">예약 조회</Link>
+                <Link to="/search-reservation">예약 조회</Link>
               </li>
               {/* 예약 조회 메뉴 끝 */}
 
@@ -53,19 +52,16 @@ function Nav() {
 
               {/* 드롭다운 메뉴 시작 */}
               <li className="has-children">
-                <Link to="#">고객센터</Link>
+                <Link to="cucenter">고객센터</Link>
                 <ul className="dropdown">
                   <li>
-                    <Link to="/elements">공지사항</Link>
+                    <Link to="/notice">공지사항</Link>
                   </li>
                   <li>
-                    <Link to="/elements">자주 찾는 질문</Link>
+                    <Link to="/question">자주 찾는 질문</Link>
                   </li>
                   <li>
-                    <Link to="/elements">1:1 문의</Link>
-                  </li>
-                  <li>
-                    <Link to="/elements">1:1 문의목록</Link>
+                    <Link to="/question-board">1:1 문의</Link>
                   </li>
                 </ul>
               </li>
@@ -127,6 +123,5 @@ function Nav() {
     </>
   );
 }
-
 
 export default Nav;

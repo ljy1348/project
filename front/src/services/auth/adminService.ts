@@ -1,5 +1,6 @@
-import IOperationinfo from "../../types/IOperationinfo";
+
 import IUser from "../../types/auth/IMember";
+import IOperationinfo from "../../types/operationInfo/IOperationinfo";
 import http from "../../utils/http-common";
 import authHeader from "./authHeader";
 
@@ -27,6 +28,22 @@ const editUser = (user:IUser) => {
     return http.get(`/admin/operation/${data}`, {headers : authHeader()});
  }
 
+ const deleteOperationInfo = (id:number) => {
+    return http.delete(`/admin/operation/`+id, {headers : authHeader()})
+ }
+
+ const getNociceAll = () => {
+   return http.get(`/admin/board/notice`, {headers : authHeader()});
+}
+
+const getPayAll = (page:number, size:number) => {
+   return http.get(`/admin/payment?page=${page}&size=${size}`, {headers : authHeader()})
+}
+
+const SearchPayAdmin = (payId:number, page:number, size:number) => {
+   return http.get(`/admin/payment/${payId}?page=${page}&size=${size}`, {headers : authHeader()})
+}
+
 
 const AdminService = {
     getMemberAll,
@@ -34,7 +51,11 @@ const AdminService = {
     editUser,
     getOperationAll,
     createOperationInfo,
-    getOperationInfo
+    getOperationInfo,
+    deleteOperationInfo,
+    getNociceAll,
+    getPayAll,
+    SearchPayAdmin
 }
 
 export default AdminService;

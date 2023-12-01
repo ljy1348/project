@@ -7,8 +7,8 @@ import AuthService from '../../../services/auth/authService';
 import { RootState, useAppDispatch } from '../../../store/store';
 import { useSelector } from 'react-redux';
 import UserInfoList from './UserInfoList';
-import ReservationList from './ReservationList';
-import MileList from './MileList';
+import UserReservationList from './UserReservationList';
+import UserPaymentList from './UserPaymentList';
 import { ErrorMessage, Field, Formik } from 'formik';
 import DaumPostcode from "react-daum-postcode";
 import DatePicker from "react-datepicker";
@@ -26,8 +26,8 @@ function UserInfo() {
 
   const viewTab = () => { 
     
-    if (selectedTab === "reservation") return <><ReservationList></ReservationList></>
-    else if (selectedTab === "mile") return <><MileList/></>
+    if (selectedTab === "reservation") return <><UserReservationList></UserReservationList></>
+    else if (selectedTab === "payment") return <><UserPaymentList/></>
     else if (selectedTab ==="userInfo") return <><UserInfoList user={user!} setMessage={setMessage}/></>
     else if (selectedTab ==="password") return <><PasswordChage/></>
     else return <></>
@@ -108,8 +108,8 @@ function UserInfo() {
       </Nav.Item>
       
       <Nav.Item>
-        <Nav.Link eventKey="link-3" className='user-info-nav' onClick={()=>setSelectedTab("mile")}>
-          마일리지 내역
+        <Nav.Link eventKey="link-3" className='user-info-nav' onClick={()=>setSelectedTab("payment")}>
+          결제 내역
         </Nav.Link>
       </Nav.Item>
     </Nav>

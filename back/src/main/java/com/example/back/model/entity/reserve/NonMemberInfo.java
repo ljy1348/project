@@ -26,8 +26,9 @@ import java.util.Date;
 @Entity
 @Table(name="TB_NON_MEMBERS_INFO")
 @SequenceGenerator(
-        name = "SQ_NON_MEMBERS_INFO_GENERATOR"
-        , sequenceName = "SQ_NON_MEMBERS_INFO"
+
+        name = "SQ_NON_MEMBER_INFO"
+        , sequenceName = "SQ_NON_MEMBER_INFO"
         , initialValue = 1
         , allocationSize = 1
 )
@@ -41,20 +42,20 @@ import java.util.Date;
 @DynamicUpdate
 // soft delete
 @Where(clause = "DELETE_YN = 'N'")
-@SQLDelete(sql = "UPDATE TB_NON_MEMBER_INFO SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE userNumber = ?")
+@SQLDelete(sql = "UPDATE TB_NON_MEMBERS_INFO SET DELETE_YN = 'Y', DELETE_TIME=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') WHERE userNumber = ?")
 public class NonMemberInfo extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "SQ_NON_MEMBER_INFO_GENERATOR")
+            generator = "SQ_NON_MEMBER_INFO")
 
     private Integer userNumber;
     private String userName;
     private String userSex;
     private String userCountry;
-    private Date userDate; //datetime
+    private String userDate;
     private String userPhone;
-    private String ueseEmail;
+    private String userEmail;
 }
 
 

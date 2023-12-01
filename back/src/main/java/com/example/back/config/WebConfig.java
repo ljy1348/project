@@ -6,17 +6,15 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * packageName : config
+ * packageName : com.example.dongsungsi.controller
  * fileName : WebConfig
- * author : GGG
- * date : 2023-11-24
+ * author : kangtaegyung
+ * date : 2022/06/14
  * description :
- * 요약 :
- * <p>
  * ===========================================================
  * DATE            AUTHOR             NOTE
- * —————————————————————————————
- * 2023-11-24         GGG          최초 생성
+ * -----------------------------------------------------------
+ * 2022/06/14         kangtaegyung          최초 생성
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -25,7 +23,10 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
 //                아래 url 허용
+
+                // .allowedOrigins("http://localhost:3000")
                 .allowedOrigins("*")
+
 //                .allowedOrigins("http://192.168.35.192:3000/")
 //                Todo: 아래 추가해야 update, delete, insert, select 가 cors 문제가 안생김
                 .allowedMethods(

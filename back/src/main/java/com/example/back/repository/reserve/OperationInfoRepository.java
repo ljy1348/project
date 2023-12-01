@@ -31,7 +31,7 @@ public interface OperationInfoRepository extends JpaRepository<OperationInfo, In
             "and Start_Airport LIKE '%' || :startAirport || '%' " +
             "and Final_Airport LIKE '%' || :finalAirport || '%' " +
             "and start_date < :sysdate " +
-            "and final_date > :sysdate",
+            "and final_date > :sysdate and delete_yn = 'N'",
             nativeQuery = true)
     Page<OperationInfo> selectOperationInfo(@Param("operationDate") String operationDate,
                                             @Param("startAirport") String startAirport,

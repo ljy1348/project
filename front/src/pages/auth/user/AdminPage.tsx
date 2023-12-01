@@ -5,14 +5,24 @@ import AdminMember from '../admin/AdminMember';
 import OperationInfoManager from '../admin/OperationInfo/OperationInfoManager';
 import AddOperationInfo from '../admin/OperationInfo/AddOperationInfo';
 import OperationInfo from '../admin/OperationInfo/OperationInfo';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
+import { Link, useNavigate } from 'react-router-dom';
+import BoardMain from '../admin/board/BoardMain';
+import '../../../assets/css/jy/style_jy.css';
+import AdminPayment from '../admin/AdminPayment';
 
 function AdminPage() {
 
+  const { user: currentUser } = useSelector((state:RootState)=> state.auth);
+
   const [selectTab, setSelectTab] = useState("");
   const [dataId, setDataId] = useState("");
+  const navi = useNavigate();
 
   useEffect(()=>{
-  },[])
+    if (currentUser?.memberAuth !="ROLE_ADMIN") navi("/");
+  },[currentUser])
 
   const tabView = () => {
     if (selectTab==="항공") return <OperationInfoManager setSelectTab={setSelectTab} setDataId={setDataId}/>
@@ -22,7 +32,9 @@ function AdminPage() {
     else if (selectTab==="회원상세") return <AdminMember setSelectTab={setSelectTab} dataId={dataId}/>
     else if (selectTab==="항공기 추가") return <AddOperationInfo setSelectTab={setSelectTab}/>
     else if (selectTab==="항공기 상세") return <OperationInfo setSelectTab={setSelectTab} dataId={dataId}/>
-    else return <>예약</>
+    else if (selectTab==="게시판") return <BoardMain/>
+    else return <><AdminPayment/></>
+
   }
 
   return (
@@ -63,7 +75,7 @@ function AdminPage() {
         </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-        <Nav.Link eventKey="link-4" onClick={()=>{setSelectTab("게시물")}}>
+        <Nav.Link eventKey="link-4"  onClick={()=>{setSelectTab("게시판")}}>
           게시판 관리
         </Nav.Link>
       </Nav.Item>

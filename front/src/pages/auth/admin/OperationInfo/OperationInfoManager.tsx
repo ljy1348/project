@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import IUser from '../../../../types/auth/IMember';
 import { Pagination } from '@mui/material';
-import IOperationinfo from '../../../../types/IOperationinfo';
 import AdminService from '../../../../services/auth/adminService';
 import { Link } from 'react-router-dom';
+import IOperationinfo from '../../../../types/operationInfo/IOperationinfo';
 
 function OperationInfoManager({setSelectTab, setDataId}:{setSelectTab:any, setDataId:any}) {
   // 부서 배열 변수

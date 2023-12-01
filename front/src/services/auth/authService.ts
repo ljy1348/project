@@ -3,6 +3,7 @@
 import IUser from "../../types/auth/IMember"
 import http from "../../utils/http-common"
 import authHeader from "./authHeader";
+import ForgotPassword from './../../pages/auth/ForgotPassword';
 
 // 회원가입(register, signup) 함수(insert)
 const register = (user: IUser) => { 
@@ -81,6 +82,10 @@ const login = (user:IUser) => {
     return http.put("/auth/pchange", data, {headers : authHeader()});
  }
 
+ const forgotPassword = (data:{memberId:string,memberPw:string,memberEmail:string,repassword:string}) => {
+    return http.post("/auth/forgot", data);
+ }
+
  const AuthService = {
     register,
     login,
@@ -90,6 +95,7 @@ const login = (user:IUser) => {
     googleLogin,
     getUserInfo,
     editUser,
-    changePw
+    changePw,
+    forgotPassword
  }
  export default AuthService;

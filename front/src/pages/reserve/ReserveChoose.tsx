@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import IReservation from "../../types/reserve/IReservation";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import MyareaModal from "../modal/MyareaModal";
 import ForiareaModal from "../modal/ForiareaModal";
-import { Link, useParams } from "react-router-dom";
-import IOperationinfo from "../../types/IOperationinfo";
-import ReserveService from "../../services/OperationService";
-import OperationService from "../../services/OperationService";
+import { Link, useNavigate, useParams } from "react-router-dom";
+
 import { Pagination } from "@mui/material";
+import IOperationinfo from "../../types/operationInfo/IOperationinfo";
+import OperationService from "../../services/operation/OperationService";
 
 function ReserveChoose(props: any) {
   // todo: 공통 페이징 변수 4개
@@ -240,7 +239,17 @@ function ReserveChoose(props: any) {
     console.log("firstID" + fisrtId + "SecoundID" + secoundId);
   };
 
-  
+  const navi = useNavigate();
+  const onclickpage = () => { 
+    if (fisrtId !== 0 && secoundId !== 0) {
+      // fisrtId와 secoundId가 모두 0이 아닌 경우에 실행할 코드
+      navi(`/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount}/${childCount}/${seatClass}`)
+    } else {
+      // 아니면 0인 경우에 실행할 코드
+      alert("여정을 선택해주세요")
+
+    }
+   }
   return (
     <>
       <div className="hero hero-inner">
@@ -602,10 +611,18 @@ function ReserveChoose(props: any) {
         </div>
 
         <div className="d-flex justify-content-end mt-5 mb-5 no-gutters">
-          <button className="sangmin_choose_btn">
-            <Link to="/reserve-payment">비회원 결제</Link>
-          </button>
-          <Link className="sangmin_choose_btn" to={`/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount}/${childCount}`}>
+        <div className="d-flex justify-content-end mt-5 no-gutters">
+            <button
+              className="sangmin_reserve_btn mb-5"
+              onClick={onclickpage}
+              // disabled={!areAllOptionsSelected()} // 선택 여부에 따라 버튼 활성화/비활성화
+            >
+              항공권 조회
+            </button>
+          </div>
+
+          
+          <Link className="sangmin_choose_btn" to={`/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount}/${childCount}/${seatClass}`}>
             회원 결제
           </Link>
         </div>

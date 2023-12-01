@@ -40,6 +40,8 @@ public class Payment extends BaseTimeEntity {
     private int productPrice;
     private int productCount;
     private int operationId;
-    private int airlineReservationNumber;
+    private int milePrice;
+    private String startReservationNumber;
+    private String finalReservationNumber;
 
 }

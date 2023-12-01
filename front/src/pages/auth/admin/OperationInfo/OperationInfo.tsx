@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import IOperationinfo from '../../../../types/IOperationinfo';
 import AdminService from '../../../../services/auth/adminService';
+import IOperationinfo from '../../../../types/operationInfo/IOperationinfo';
 
 function OperationInfo({setSelectTab, dataId}:{setSelectTab:any, dataId:any}) {
     const initOperationInfo = {
@@ -25,6 +25,14 @@ function OperationInfo({setSelectTab, dataId}:{setSelectTab:any, dataId:any}) {
     const [operationInfo, setOperationInfo] = useState<IOperationinfo>(initOperationInfo);
     const [isModal, setIsModal] = useState(false);
 
+    const onDelete = () => { 
+      AdminService.deleteOperationInfo(dataId)
+      .then((response)=>{console.log(response)
+        setSelectTab("항공");
+      })
+      .catch((e:Error)=>{console.log(e)})
+     }
+
     const onchangeInput = (e:any) => {
         const {name, value} = e.target;
 
@@ -48,7 +56,7 @@ function OperationInfo({setSelectTab, dataId}:{setSelectTab:any, dataId:any}) {
       if (operationInfo)
       AdminService.createOperationInfo(operationInfo)
       .then((response:any)=>{console.log(response);
-        // setSelectTab("항공");
+        setSelectTab("항공");
       })
       .catch((error:Error)=>{console.log(error)})
     }
@@ -67,7 +75,7 @@ function OperationInfo({setSelectTab, dataId}:{setSelectTab:any, dataId:any}) {
 
   return (
     <div>
-    <form className='col-6 container mt-4' onSubmit={onSubmit}>
+    <form className='col-6 container mt-4'>
     <label htmlFor="Full Name">항공사</label>
     <input type='text' id='airline' className='form-control form-control-user mb-3' placeholder='airline' value={operationInfo?.airline} name="airline" onChange={onchangeInput}></input>
     <label htmlFor="flightName">항공기</label>
@@ -91,11 +99,12 @@ function OperationInfo({setSelectTab, dataId}:{setSelectTab:any, dataId:any}) {
     <label htmlFor="price">운임</label>
     <input type='text' className='form-control form-control-user mb-3' placeholder='price' value={operationInfo.price} name="price" onChange={onchangeInput}></input>
 
-    <div className='row'>
-    </div>
-
     </form>
-    <button className='btn btn-primary btn-user mx-auto col-4' onClick={onSubmit}>운행 정보 추가</button>
+    <div className='row col-6 container mx-auto'>
+
+    <button className='btn btn-danger btn-user mx-auto col-4' onClick={onDelete}>운행 정보 삭제</button>
+    <button className='btn btn-primary btn-user mx-auto col-4' onClick={onSubmit}>운행 정보 수정</button>
+    </div>
     </div>
   )
 }

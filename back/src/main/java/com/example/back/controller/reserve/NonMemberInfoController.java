@@ -30,7 +30,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/ksm")
+@RequestMapping("/api/tour")
 public class NonMemberInfoController {
 
     @Autowired
@@ -73,7 +73,7 @@ public class NonMemberInfoController {
 
     @PostMapping("/nonmemberinfo")
     public ResponseEntity<Object> create(@RequestBody NonMemberInfo nonMemberInfo) {
-
+        log.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa : " + nonMemberInfo.toString());
         try {
             NonMemberInfo nonMemberInfo2 = nonMemberInfoService.save(nonMemberInfo);
 

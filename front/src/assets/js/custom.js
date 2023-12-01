@@ -4,13 +4,16 @@ import AOS from "aos";
 /* eslint-disable */
 export default function initCustom() {
   // 여기
-  // aos(MIT) == wow(상용, GNU)
-  // npm 설치
+
+//   aos(MIT) == wow(상용, GNU)
+// npm 설치
+
   AOS.init({
     duration: 800,
     easing: "slide",
     once: true,
   });
+
 
   // sangmin
   $(document).ready(function () {
@@ -24,7 +27,7 @@ export default function initCustom() {
       $("#birth-day").append('<option value="' + i + '">' + i + "</option>");
     }
   });
-  출처: //interestingjinjin.tistory.com/7 [흥미진진한 개발:티스토리]
+
 
   // sangmin
 
@@ -252,6 +255,7 @@ export default function initCustom() {
     };
     owlPlugin();
 
+
     // var counter = function () {
     //   $(".count-numbers").waypoint(
     //     function (direction) {
@@ -344,4 +348,5 @@ export default function initCustom() {
 	// 	$('input[name="daterange"]').daterangepicker();
 	// }
 })
+
 }
