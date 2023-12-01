@@ -1,0 +1,8 @@
+.admin_board_main {
+    height: 500px;
+    
+}
+
+.admin_board_main tr td {
+    vertical-align: top;
+}

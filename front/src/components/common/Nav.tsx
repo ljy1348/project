@@ -1,120 +1,113 @@
-// components/common/Nav.tsx : rfce
-import React from "react";
+import React, { useCallback } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState, useAppDispatch } from "../../store/store";
+import { logout } from "../../store/slices/auth";
 
 function Nav() {
+
+  const { user: currentUser } = useSelector((state:RootState)=> state.auth);
+
+  const dispatch = useAppDispatch();
+
+  // 리액트 성능개선을 위한 함수 : useCallback() : 캐싱됨
+  const logOut = useCallback(() => { 
+    dispatch(logout());
+   },[dispatch]);
+  
+
   return (
     <>
-      {/* 여기 */}
-      {/* <!-- 머리말 시작 --> */}
-      <div className="site-mobile-menu site-navbar-target">
-        <div className="site-mobile-menu-header">
-          <div className="site-mobile-menu-close">
-            <span className="icofont-close js-menu-toggle"></span>
-          </div>
-        </div>
-        <div className="site-mobile-menu-body"></div>
-      </div>
-      {/* <!-- 머리말 끝 --> */}
-
       {/* <!-- 메뉴 시작 --> */}
       <nav className="site-nav">
         <div className="container">
           <div className="site-navigation">
-            <Link to="/" className="logo m-0">
-              Tour <span className="text-primary">.</span>
-            </Link>
             {/* 메뉴들 시작 */}
-            <ul className="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
-              {/* home 메뉴 시작 */}
-              <li className="active">
-                <Link to="/">Home</Link>
+            <ul
+              className="js-clone-nav d-none d-lg-inline-block text-left site-menu"
+            >
+              <Link to="/" className="logo">
+                <img src="/images/그린에어로고.png" className="main-logo-image" />
+                GreanAir
+              </Link>
+              
+
+              {/* 예약 메뉴 시작 */}
+              <li>
+                <Link to="/reserve">예약</Link>
               </li>
-              {/* home 메뉴 끝 */}
+              {/* 예약 메뉴 끝 */}
+
+              {/* 예약 조회 메뉴 시작 */}
+              <li>
+                <Link to="/search-reservation">예약 조회</Link>
+              </li>
+              {/* 예약 조회 메뉴 끝 */}
+
+              {/* 체크인 메뉴 시작 */}
+              <li>
+                <Link to="/checkin">체크인</Link>
+              </li>
+              {/* 체크인 메뉴 끝 */}
 
               {/* 드롭다운 메뉴 시작 */}
               <li className="has-children">
-                <a href="#">Dropdown</a>
+                <Link to="cucenter">고객센터</Link>
                 <ul className="dropdown">
                   <li>
-                    <Link to="/elements">Elements</Link>
+                    <Link to="/notice">공지사항</Link>
                   </li>
                   <li>
-                    <a href="#">Menu One</a>
-                  </li>
-                  <li className="has-children">
-                    <a href="#">Menu Two</a>
-                    <ul className="dropdown">
-                      <li>
-                        <a href="#">Sub Menu One</a>
-                      </li>
-                      <li>
-                        <a href="#">Sub Menu Two</a>
-                      </li>
-                      <li>
-                        <a href="#">Sub Menu Three</a>
-                      </li>
-                    </ul>
+                    <Link to="/question">자주 찾는 질문</Link>
                   </li>
                   <li>
-                    <a href="#">Menu Three</a>
+                    <Link to="/question-board">1:1 문의</Link>
                   </li>
                 </ul>
               </li>
               {/* 드롭다운 메뉴 끝 */}
 
-              {/* 고객 시작 */}
-              <li className="has-children">
-                <Link to="#">고객</Link>
-                <ul className="dropdown">
-                  {/* 1st 드롭 메뉴 */}
-                  <li>
-                    <Link to="/customer">고객 조회</Link>
-                  </li>
-                  {/* 2nd 드롭 메뉴 */}
-                  <li>
-                    <Link to="/add-customer">고객 추가</Link>
-                  </li>
-                </ul>
-              </li>
-              {/* 고객 끝 */}
+              {/* <ul className="js-clone-nav d-none d-lg-inline-block site-menu"> */}
+              {/* home 메뉴 시작 */}
 
-              {/* Q & A 시작 */}
-              <li className="has-children">
-                <Link to="#">Q & A</Link>
-                <ul className="dropdown">
-                  {/* 1st 드롭 메뉴 */}
-                  <li>
-                    <Link to="/qna">Q & A 조회</Link>
-                  </li>
-                  {/* 2nd 드롭 메뉴 */}
-                  <li>
-                    <Link to="/add-qna">Q & A 추가</Link>
-                  </li>
-                </ul>
-              </li>
-              {/* Q & A 끝 */}
 
-              {/* 서비스 메뉴 시작 */}
-              <li>
-                <Link to="/services">Services</Link>
-              </li>
-              {/* 서비스 메뉴 끝 */}
+              {/* <ul className="js-clone-nav d-none d-lg-inline-block site-menu"> */}
+                {/* home 메뉴 시작 */}
 
-              {/* 어바웃 메뉴 시작 */}
-              <li>
-                <Link to="/about">About</Link>
+                <ul className="login_menubar">
+                  {!currentUser&&<>
+                    <li>
+                  <Link to="/login">로그인</Link>
+                </li>
+                <li>
+                  <Link to="/register">
+                    <p>회원가입</p></Link>
+                </li>
+                  </>
+                }
+                {currentUser&&<>
+                    <li>
+                  <Link to="#"onClick={logOut}>로그아웃</Link>
+                </li>
+                { currentUser.memberAuth ==="ROLE_USER" ?
+                <li>
+                  <Link to="/user-info">
+                    <p>마이페이지</p></Link>
+                </li> :
+                <li>
+                <Link to="/admin">
+                  <p>관리자</p></Link>
               </li>
-              {/* 어바웃 메뉴 끝 */}
+                }
+                  </>
+                }
 
-              {/* 컨택트 메뉴 시작 */}
-              <li>
-                <Link to="/contact">Contact Us</Link>
-              </li>
-              {/* 컨택트 메뉴 끝 */}
+                {/* home 메뉴 끝 */}
+              </ul>
             </ul>
-            {/* 메뉴들 끝 */}
+            {/* </ul> */}
 
+            {/* 메뉴들 끝 */}
             <a
               href="#"
               className="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light"
