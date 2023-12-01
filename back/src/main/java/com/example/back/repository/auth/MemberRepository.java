@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 /**
  * packageName : com.example.simpledms.repository.auth
  * fileName : UserRepository
@@ -26,5 +28,7 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 
     Page<Member> findAllByMemberEmailContaining(String memberEmail, Pageable pageable);
     Page<Member> findAllByMemberEnameContaining(String memberEname, Pageable pageable);
+
+    Optional<Member> findByMemberIdAndMemberEmail(String memberId, String memberEmail);
 
 }

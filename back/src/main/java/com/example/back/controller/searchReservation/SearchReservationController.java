@@ -3,6 +3,7 @@ package com.example.back.controller.searchReservation;
 
 import com.example.back.model.dto.searchReservation.OprResDto;
 import com.example.back.model.dto.reserve.ReservationDto;
+import com.example.back.model.dto.searchReservation.SearchNonMemberDto;
 import com.example.back.model.entity.reserve.Reservation;
 
 
@@ -113,6 +114,24 @@ public class SearchReservationController {
     ) {
         try {
             Optional<OprResDto> optionalOprResDto = searchReservationService.jySearchReservation(airlineReservationNumber);
+
+            if(optionalOprResDto.isEmpty() == false) {
+                return new ResponseEntity<>(optionalOprResDto.get(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/search-reservation/non-member")
+    public ResponseEntity<Object> jySearchNonmember(
+            @RequestBody SearchNonMemberDto oprResDto
+    ) {
+        log.info("여기2");
+        try {
+            Optional<OprResDto> optionalOprResDto = searchReservationService.findNonmember(oprResDto);
 
             if(optionalOprResDto.isEmpty() == false) {
                 return new ResponseEntity<>(optionalOprResDto.get(), HttpStatus.OK);

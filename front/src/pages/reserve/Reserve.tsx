@@ -40,9 +40,6 @@ function Reserve(props: any) {
   useEffect(() => {
     initScripts();
     initCustom();
-
-
-
   }, []);
 
   // 인원수 증가 감소 설정

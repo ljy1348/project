@@ -14,7 +14,6 @@ import "aos/dist/aos.css";
 import "./assets/css/style.css";
 
 import CheckInStateModal from "./pages/modal/CheckInStateModal";
-import Boardingpass from "./pages/checkIn/Boardingpass";
 import PassengerInfo from "./pages/checkIn/PassengerInfo";
 
 // todo: 리액트 import
@@ -46,9 +45,9 @@ import QuestionContent from "./pages/customerCenter/board/QuestionContent";
 import SelectSeat from "./pages/modal/SelectSeat";
 import AdminNotice from "./pages/auth/admin/board/AdminNotice";
 import ReservationListPage from "./pages/SearchReservation/ReservationListPage";
-
+import ForgotPassword from "./pages/auth/ForgotPassword";
 import AdminNoticeFixPage from "./pages/auth/admin/board/AdminNoticeFixPage";
-
+import Boardingpass from "./pages/checkIn/Boardingpass";
 // todo: 리액트 import
 
 function App() {
@@ -83,9 +82,10 @@ function App() {
         <Route path="/checkin" element={<CheckIn />} />
         <Route path="/passengerinfo" element={<PassengerInfo />} />
         <Route path="/passport/:searchAirlinereservationnumber" element={<Passport />} />
-        <Route path="/boardingpass" element={<Boardingpass />} />
+        <Route path="/boardingpass/:operID/:searchAirlinereservationnumber/:adcount/:chcount/:bagCount1" element={<Boardingpass />} />
         <Route path="/checkinstate" element={<CheckInStateModal />} />
 
+      
 
         {/* 회원 */}
         <Route path="/register" element={<Register />} />
@@ -100,6 +100,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/user-info" element={<UserInfo />} />
         <Route path="/admin/*" element={<AdminPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
 
         {/* 예약 조회 */}
         <Route path="/search-reservation" element={<ReservationListPage />} />

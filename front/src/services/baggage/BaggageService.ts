@@ -7,16 +7,16 @@ import http from "../../utils/http-common";
 const getAll = (bagNumber: number) => { 
     // 조회요청 : .get("/url")
     // 사용법 : http.get<리턴타입>("url")
-    return http.get<IBaggage>(`/passport?bagNumber=${bagNumber}`);
+    return http.get<IBaggage>(`/passport/tour?bagNumber=${bagNumber}`);
  }
 
 // 상세 조회
 const get = (bagYn:string) => {
-  return http.get<IBaggage>(`/passport/${bagYn}`);
+  return http.get<IBaggage>(`/tour/passport/${bagYn}`);
 };
 
 const create = (data:IBaggage) => {
-    return http.post<IBaggage>(`/passport`, data);
+    return http.post<IBaggage>(`/tour/baggage`, data);
 }
 
 const BaggageService = {
