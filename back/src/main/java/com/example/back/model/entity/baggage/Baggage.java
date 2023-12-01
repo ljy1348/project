@@ -51,4 +51,5 @@ public class Baggage extends BaseTimeEntity  {
     private Integer bagPrice;
     private Integer bagCount;
     private String airlineReservationNumber;
+    private String paymentYn;
 }

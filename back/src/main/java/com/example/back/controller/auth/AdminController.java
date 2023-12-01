@@ -3,11 +3,13 @@ package com.example.back.controller.auth;
 import com.example.back.model.dto.payment.PaymentAdminDto;
 import com.example.back.model.entity.auth.ERole;
 import com.example.back.model.entity.auth.Member;
+import com.example.back.model.entity.checkin.Checkin;
 import com.example.back.model.entity.notice.Notice;
 import com.example.back.model.entity.payment.Payment;
 import com.example.back.model.entity.reserve.OperationInfo;
 import com.example.back.security.services.UserDetailsImpl;
 import com.example.back.service.auth.UserService;
+import com.example.back.service.checkin.CheckinService;
 import com.example.back.service.notice.NoticeService;
 import com.example.back.service.payment.PaymentService;
 import com.example.back.service.reserve.OperationInfoService;
@@ -55,6 +57,9 @@ public class AdminController {
 
     @Autowired
     PaymentService paymentService;
+
+    @Autowired
+    CheckinService checkinService;
 
 
 //    회원 관리
@@ -238,5 +243,24 @@ public class AdminController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/checkin")
+    public ResponseEntity<?> checkinGetAll(String searchTitle, String searchText, Pageable pageable) {
+        try {
+        Page<Checkin> checkinPage = checkinService.findAllAdmin(searchTitle, searchText, pageable);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("content", checkinPage.getContent());
+        map.put("totalPages", checkinPage.getTotalPages());
+
+        return new ResponseEntity<>(map, HttpStatus.OK);
+
+        } catch (Exception e) {
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+
+
     }
 }
