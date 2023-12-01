@@ -119,3 +119,125 @@ li > .abbr {
     background-color: #1A374D;
     color: white !important;
 }
+
+
+
+
+/* 희현 추가 시작 */
+
+
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* 국내선 국제선 사이의 공간 */
+/* 리스트 글자 */
+.home_international_listbox > li > .cname {
+    display: block;
+    color: #222;
+    font-size: 14px;
+    width: 70%;
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.home_international_listbox > li > .abbr {
+    display: block;
+    color: #747474;
+    font-size: 15px;
+    font-family: 'latofont', sans-serif;
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* 국제선 왼쪽 리스트 */
+.home_list_nation {
+    margin-left: 10px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    overflow-y: auto;
+    width: 220px;
+    height: 230px;
+    background: #f3f3f3;
+    text-align: start;
+    float: left;
+    border: 1px solid black;
+}
+
+.home_list_nation > ul {
+    padding: 0;
+}
+
+/* airport 리스트 넓이 */
+.home_select_airport {
+    width: 490px;
+    height: auto;
+}
+
+.home_list_nation > ul > li {
+    cursor:pointer;
+    margin: 1px;
+    padding-top: 5px;
+    padding-left: 10px;
+    background-color: hsl(0, 0%, 94%);
+    height: 40px;
+    font-size: 15px;
+}
+
+/* 국제선 리스트 오른쪽 */
+.home_international_listbox > .home_city_list > li {
+    width: calc(100% - px);
+    height: 50px;
+    background: #f3f3f3;
+    margin: 5px 1px;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* 국제선 오른쪽 리스트 */
+.home_international_listbox {
+    width: 250px;
+    height: 230px;
+    border: 1px solid black;
+    overflow: hidden;
+    overflow-y: auto;
+    float: right;
+}
+
+.home_international_listbox > ul {
+    padding: 0;
+}
+
+.home_international_list.active {
+    background-color: #1A374D;
+    color: white;
+}
+
+.home_international_listbox > .home_city_list > li:hover, .home_list_nation > ul > li:hover,
+.home_city_list > li:hover > .home_city_list > li:hover .cname,
+.home_international_listbox > .home_city_list > li:hover .cname{
+    background-color: #1A374D;
+    color: white !important;
+}
+
+
+
+.homeTotalDiv {
+    width: 505px;
+    height: 250px;
+    border: 1px solid rgb(29, 29, 29);
+    padding-top: 7px;
+    background-color: #e4e4e462;
+}
+
+
+
+/* 희현 추가 끝 */
