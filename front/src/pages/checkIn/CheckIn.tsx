@@ -103,18 +103,12 @@ function CheckIn() {
                 {/* 조회 */}
                 <div className="row">
                   <div className="col-12">
-                    <form className="form">
-                      <div className="row mb-2">
+                    <form className="form-checkin">
+                      <div className="row">
                         <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-                          <select
-                            name=""
-                            id=""
-                            className="form-control custom-select"
-                            aria-label="Disabled select example"
-                            disabled
-                          >
-                            <option value="">예약번호</option>
-                          </select>
+                        <div className="reservation-number">
+                            예약번호
+                          </div>
                         </div>
 
                         <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-5">
