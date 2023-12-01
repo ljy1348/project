@@ -14,11 +14,9 @@ const getAll = (airlinereservationnumber: any) => {
  }
 
 
-
-
-const CheckinService = {
-  getAll,
+const BoardingPassService = {
+  getAll
 
 };
 
-export default CheckinService;
+export default BoardingPassService;

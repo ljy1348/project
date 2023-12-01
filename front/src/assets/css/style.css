@@ -3782,3 +3782,15 @@ input {
 
 /* 예약 상세 조회 페이지 - 지우 끝 */
 
+
+
+/* boardingpass */
+.checkinlog {
+  font-size: 25px;
+  color: #2fdf87;
+  font-weight: 700;
+  text-decoration-line: none;
+  /* 로고 메뉴 텍스트 간격 */
+  margin-right: 200px;
+}
+

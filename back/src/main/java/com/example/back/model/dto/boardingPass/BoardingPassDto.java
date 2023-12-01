@@ -16,8 +16,6 @@ package com.example.back.model.dto.boardingPass;
 public interface BoardingPassDto {
      String getSeatNumber();
      String getSeatType();
-     String getCheckYn();
      String getAirlineReservationNumber();
-     String getBagCount();
-     String getBagYn();
+
 }
