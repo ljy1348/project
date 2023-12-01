@@ -5,13 +5,19 @@ import com.example.back.model.entity.checkin.Checkin;
 import com.example.back.model.dto.checkin.CheckinDto;
 // import com.example.back.model.dto.checkindto;
 import com.example.back.model.entity.passport.Passport;
+import com.example.back.model.entity.reserve.NonMemberInfo;
+import com.example.back.model.entity.reserve.Reservation;
 import com.example.back.repository.checkin.CheckinRepository;
+import com.example.back.service.reserve.NonMemberInfoService;
+import com.example.back.service.reserve.ReservationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +39,12 @@ import java.util.Optional;
 public class CheckinService {
     @Autowired
     CheckinRepository checkinRepository; // DI
+
+    @Autowired
+    NonMemberInfoService nonMemberInfoService;
+
+    @Autowired
+    ReservationService reservationService;
 
     //    전체 조회 + 페이징
     public Optional<CheckinDto> checkresnum(int airlineReservationNumber) {
@@ -61,9 +73,51 @@ public class CheckinService {
         return checkin2;
     }
 
+
+    @Transactional
     public  List<CheckgetDto> searchCheckin(int airlineReservationNumber) {
-        List<CheckgetDto> checkinDtoList = checkinRepository.check(airlineReservationNumber);
-        return checkinDtoList;
+//        List<CheckgetDto> checkinDtoList = checkinRepository.check(airlineReservationNumber);
+
+        log.info("aaaaaaaaaaaaaaaaaaaaaaaaaa : "+airlineReservationNumber);
+
+        Optional<Reservation> reservation = reservationService.findById(airlineReservationNumber);
+        log.info("aaaaaaaaaaaaaaaaaaaaaaaaaa2 : "+airlineReservationNumber);
+
+        String userNumber = reservation.get().getUserNumber();
+        String[] userArr = userNumber.split(",");
+        List<Integer> list = new ArrayList<>();
+        log.info("aaaaaaaaaaaaaaaaaaaaaaaaaa3 : "+airlineReservationNumber);
+
+        for (int i = 0; i < userArr.length; i++) {
+            list.add(Integer.parseInt(userArr[i]));
+        }
+
+        List<NonMemberInfo> nonMemberInfoList = nonMemberInfoService.findAllByUserNameIn(list);
+        List<Checkin> checkinList = checkinRepository.findAllByAirlineReservationNumber(airlineReservationNumber);
+        List<CheckgetDto> list2 = new ArrayList<>();
+
+        if (checkinList.size() < userArr.length) {
+            for (int i = 0; i < userArr.length; i++) {
+                CheckgetDto checkgetDto = new CheckgetDto();
+                checkgetDto.setUserName(nonMemberInfoList.get(i).getUserName());
+                checkgetDto.setUserNumber(nonMemberInfoList.get(i).getUserNumber());
+                checkgetDto.setAirlineReservationNumber(airlineReservationNumber);
+                list2.add(checkgetDto);
+            }
+        } else {
+            for (int i = 0; i < userArr.length; i++) {
+                CheckgetDto checkgetDto = new CheckgetDto();
+                checkgetDto.setUserName(nonMemberInfoList.get(i).getUserName());
+                checkgetDto.setUserNumber(nonMemberInfoList.get(i).getUserNumber());
+                checkgetDto.setAirlineReservationNumber(airlineReservationNumber);
+                checkgetDto.setSeatNumber(checkinList.get(i).getSeatNumber());
+                list2.add(checkgetDto);
+            }
+        }
+
+
+
+        return list2;
     }
 
     // 관리자 전체 조회

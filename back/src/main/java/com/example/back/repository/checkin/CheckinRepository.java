@@ -101,4 +101,6 @@ public interface CheckinRepository extends JpaRepository<Checkin, String> {
     Page<Checkin> findAllByAirlineReservationNumber(int airlineReservationNumber, Pageable pageable);
     Page<Checkin> findAllByPassportId(int passportId, Pageable pageable);
     Page<Checkin> findAllBy(Pageable pageable);
+
+    List<Checkin> findAllByAirlineReservationNumber(int airlineReservationNumber);
 }

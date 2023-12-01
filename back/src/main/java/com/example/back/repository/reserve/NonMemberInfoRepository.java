@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * packageName : com.example.back.repository.reserve
  * fileName : NonMemberInfoRepository
@@ -24,4 +26,6 @@ import org.springframework.stereotype.Repository;
 public interface NonMemberInfoRepository extends JpaRepository<NonMemberInfo, Integer> {
 
     Page<NonMemberInfo> findAllByuserNameContaining(String userName, Pageable pageable);
+
+    List<NonMemberInfo> findAllByUserNumberIn(List<Integer> userName);
 }
