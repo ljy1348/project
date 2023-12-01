@@ -2,29 +2,50 @@
 
 import React, { useState } from "react";
 
-import IQboard from "../../../types/Center/IQboard";
 import { useNavigate } from "react-router-dom";
-import QuestionBoardService from "../../../services/center/QuestionBoardService";
+import CustomerService from "../../../services/customer/CustomerService";
+import { RootState } from "../../../store/store";
+import { useSelector } from "react-redux";
+import { useEffect } from 'react';
+import ICustomer from "../../../types/customer/ICustomer";
 
 
 function AddboardList() {
+
+  const navi = useNavigate();
+
+  // 유저 정보 가져오기 함수
+  const { user: currentUser } = useSelector((state: RootState) => state.auth);
+
   const initialQuestion = {
     titleId: null,
     title: "",
     content: "",
-    memberId: "11",
-    insertTime: "11",
     answerYn: "N",
+    memberId: currentUser?.memberId,
+    insertTime: "",
+    parentBid: 0,
     answer: "",
-    paraentBid: 0,
+    memberName: ""
   };
 
 
-  const [question, setQuestion] = useState<IQboard>(initialQuestion);
+
+  const [question, setQuestion] = useState<ICustomer>(initialQuestion);
 
 
-  // todo: input 태그에 수동 바인딩
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    if (!currentUser) navi("/login");
+  }, [currentUser])
+
+  // 제목 저장
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setQuestion({ ...question, [name]: value });
+  };
+
+  // 내용 저장
+  const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     setQuestion({ ...question, [name]: value });
   };
@@ -38,11 +59,11 @@ function AddboardList() {
       insertTime: question.insertTime,
       answerYn: question.answerYn,
       answer: question.answer,
-      paraentBid: question.paraentBid,
+      parentBid: question.parentBid,
+      titleId: null,
+      memberName: null,
     };
-
-
-    QuestionBoardService.create(data) // 저장 요청
+    CustomerService.create(data) // 저장 요청
 
       .then((response: any) => {
         console.log(response.data);
@@ -52,7 +73,7 @@ function AddboardList() {
       });
   };
 
-  const navi = useNavigate();
+  
 
   const Onclinkev = () => {
     saveQuestion();
@@ -84,35 +105,22 @@ function AddboardList() {
               <label className="add-answer-title-gap">제목</label>
               <input
                 type="text"
-                className="form-control"
+                className="userQustionTitleInput"
                 id="title"
                 name="title"
                 value={question.title}
-                onChange={handleInputChange}
+                onChange={handleTitleChange}
                 placeholder="문의 제목을 입력하세요"
               />
             </div>
-            {/* <div className="k_id">
-              <label className="add-answer-id-gap">회원 ID</label>
-              <input
-                type="text"
-                className="form-control"
-                id="memberId"
-                name="memberId"
-                value={question.memberId}
-                onChange={handleInputChange}
-                placeholder="회원 ID를 입력하세요"
-              />
-            </div> */}
           </div>
           <div className="form-group">
             <label className="add-answer-content-gap">내용</label>
-            <input
-              className="form-control"
-              id="content"
+            <textarea
+              className="userQuestionContentInput"
               name="content"
               value={question.content}
-              onChange={handleInputChange}
+              onChange={handleContentChange}
               placeholder="문의 내용을 입력하세요"
               style={{ height: "200px" }}
             />

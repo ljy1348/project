@@ -31,8 +31,8 @@ h3 , h5{
 li > .cname {
     display: block;
     color: #222;
-    font-size: 15px;
-    width: 30%;
+    font-size: 14px;
+    width: 70%;
     float: left;
     margin-top: 5px;
     margin-left: 10px;
@@ -41,7 +41,7 @@ li > .cname {
 li > .abbr {
     display: block;
     color: #747474;
-    font-size: 14px;
+    font-size: 15px;
     font-family: 'latofont', sans-serif;
     float: right;
     margin-right: 10px;
@@ -67,8 +67,9 @@ li > .abbr {
     padding: 0;
 }
 
+/* airport 리스트 넓이 */
 .select_airport {
-    width: 720px;
+    width: 512px;
 }
 
 .list_nation > ul > li {
@@ -81,9 +82,10 @@ li > .abbr {
     font-size: 15px;
 }
 
+/* 국제선 리스트 오른쪽 */
 .international_listbox > .city_list > li {
     width: calc(100% - px);
-    height: 40px;
+    height: 50px;
     background: #f3f3f3;
     margin: 5px 1px;
     cursor: pointer;
