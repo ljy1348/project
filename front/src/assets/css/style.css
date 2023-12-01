@@ -2915,10 +2915,68 @@ input {
 
 
 
+/* HOME 공지사항 추가 - 지우 시작 */
+
+.homeNoticeTitle {
+  text-align: center;
+}
+
+.homeNoticeTitle > a {
+  text-decoration-line: none;
+  font-weight: bold;
+  font-size: 35px;
+  font-family: "Inter", sans-serif;
+  color:#004489;
+}
+/* HOME 공지사항 추가 - 지우 시작 끝 */
 
 
 
 /* 진욱 공지사항 페이지 */
+
+/* 추가 - 지우 시작 */
+.userNoticeDiv1 {
+  margin: 0 auto;
+  margin-left: 420px;
+  margin-bottom: 80px;
+}
+
+.userNoticeSelectBox {
+  width: 120px;
+  height: 40px;
+  border-radius: 10px;
+  margin-right: 2px;
+  background-color: rgba(235, 233, 233, 0.24);
+}
+
+.userNoticeSelectBox:hover {
+  border-radius: 10px;
+  background-color: rgba(163, 159, 159, 0.24);
+}
+
+.userNoticeTextInput {
+  width: 300px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.userNoticeSearchBtn {
+  border-radius: 10px;
+  background-color: rgba(235, 233, 233, 0.24);
+  border-radius: 10px;
+  width: 120px;
+  height: 40px;
+}
+
+.userNoticeSearchBtn:hover {
+  border-radius: 10px;
+  background-color: rgba(163, 159, 159, 0.24);
+}
+
+/* 추가 - 지우 끝 */
+
+
+
 /* 제목 & 내용 선택버튼 */
 .title-content-select {
   height: 45px;
@@ -3017,7 +3075,181 @@ input {
   margin-left: 5px;
 }
 
-/* 1:1 문의 */
+
+
+/* 진욱 1:1 문의 */
+
+/* 1대1 목록 추가 - 지우 시작 */
+
+/* 검색창 div */
+.userQuestionDiv1 {
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 80px;
+}
+
+/* 제목 검색창 */
+.userQuestionInput {
+  width: 300px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+/* 검색 버튼 */
+.userQuestionSearchBtn {
+  width: 80px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: rgba(235, 233, 233, 0.24);
+}
+
+/* 검색 버튼 효과 */
+.userQuestionSearchBtn:hover {
+  border-radius: 10px;
+  background-color: rgba(163, 159, 159, 0.24);
+}
+
+/* 삭제 버튼 */
+.userQuestionDeleteBtn {
+  width: 100px;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: rgba(235, 233, 233, 0.24);
+}
+
+/* 삭제 버튼 효과 */
+.userQuestionDeleteBtn:hover {
+  border-radius: 10px;
+  background-color: rgba(163, 159, 159, 0.24);
+}
+
+/* 테이블 - 타이틀 */
+.userQuestionTd1 {
+  width: 600px;
+}
+
+/* 타이틀 - a태그 */
+.userQuestionTd1 > a {
+  text-decoration-line: none;
+}
+
+
+/* 1대1 목록 추가 - 지우 끝 */
+
+
+
+
+/* 1대1 상세 추가 - 지우 시작 */
+
+.userQuestionContentContainer{
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.userQuestionTitle {
+  width: 1050px;
+  height: 50px;
+  margin: 0 auto;
+  font-size: 35px;
+  font-weight: bold;
+  padding-top: 5px;
+}
+
+.userQuestionDiv2 {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.userQuestionDiv3 {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  width: 100%;
+  float: left;
+}
+
+.userQuestionP1 {
+  font-size: 20px;
+  font-weight: bold; 
+  float: left;
+}
+
+.userQuestionTime {
+  float: right;
+}
+
+.userQuestionContent {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 50px;
+}
+
+.userQuestionAnswer{
+  font-size: 16px;
+}
+
+.adminQuestionDiv2 {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.adminQuestionDiv3 {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  width: 100%;
+  float: left;
+}
+
+.adminQuestionP1 {
+  font-size: 20px;
+  font-weight: bold; 
+  float: left;
+}
+
+.adminAnswerName {
+  float: right;
+}
+
+.adminAnswer {
+  font-size: 16px;
+}
+
+.adminTextInput {
+  width: 100%;
+  height: 500px;
+  font-size: 20px;
+}
+
+.adminQuestionAnswer {
+  font-size: 20px;
+  font-weight: bold; 
+}
+
+.adminNoAnswer {
+  font-size: 20px;
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+/* 1대1 상세 추가 - 지우 끝 */
+
+
+
+/* 1대1 질문 추가 - 지우 시작 */
+.userQustionTitleInput {
+  width: 590px;
+  border-radius: 10px;
+  height: 40px;
+}
+
+.userQuestionContentInput {
+  width: 590px;
+  border-radius: 10px;
+}
+
+/* 1대1 질문 추가 - 지우 끝 */
+
+
 .gray_box {
   margin-top: 50px;
   padding: 40px;
@@ -3080,6 +3312,11 @@ input {
   flex: 1;
   line-height: 1.6; 
 }
+
+
+
+/* 어드민 공지사항 지우  시작 */
+
 #editor2 {
   font-size: 18px;
   margin-left: 235px;
@@ -3166,6 +3403,7 @@ input {
   margin-top: 50px;
   margin-left: 43%;
 }
+/* 어드민 공지사항 지우 끝 */
 
 
 /*****************체크인*****************/
@@ -3337,7 +3575,7 @@ input {
 
 
 
-/* 관리자 공지사항 수정 / 삭제 페이지 */
+/* 관리자 공지사항 수정 / 삭제 시작 */
 
 .adminNoticeFix1 {
   width: 650px;
@@ -3353,5 +3591,6 @@ input {
 
 .line-sorting > td > a {
   text-decoration-line: none;
-
 }
+
+/* 관리자 공지사항 수정 / 삭제 끝 */

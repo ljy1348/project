@@ -1,5 +1,6 @@
 package com.example.back.service.customer;
 
+import com.example.back.model.dto.customer.CustomerDto;
 import com.example.back.model.entity.Customer.Customer;
 
 import com.example.back.repository.customer.CustomerRepository;
@@ -29,17 +30,24 @@ public class CustomerService {
     @Autowired
     CustomerRepository customerRepository;
 
-    // 전체 조회
-    public Page<Customer> findAll(Pageable pageable) {
-        Page<Customer> page
-                = customerRepository.findAll(pageable);
+//    ID 별 전체 조회
+    public Page<CustomerDto> getCustomerAll(String memberId, Pageable pageable) {
+        Page<CustomerDto> page
+                = customerRepository.getCustomerAll(memberId, pageable);
 
         return page;
     }
 
-    public Page<Customer> findAllByTitleContaining(String title, Pageable pageable) {
-        Page<Customer> page
-                = customerRepository.findAllByTitleContaining(title, pageable);
+//    관리자 전체 조회
+    public Page<CustomerDto> findAllBy(Pageable pageable) {
+        Page<CustomerDto> page = customerRepository.findAllByOrderByTitleIdDesc(pageable);
+
+        return page;
+    }
+
+//    ID 기준 제목 검색
+    public Page<CustomerDto> findAllByTitleIdAndMemberId(int titleId, String memberId, Pageable pageable) {
+        Page<CustomerDto> page = customerRepository.findAllByTitleIdAndMemberId(titleId, memberId, pageable);
 
         return page;
     }
