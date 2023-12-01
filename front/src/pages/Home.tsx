@@ -4,9 +4,10 @@ import initScripts from "../assets/js/scripts";
 import initCustom from "../assets/js/custom-home";
 import { Overlay } from "react-bootstrap";
 
-import Airport from "../components/airport/Airport";
+// import Airport from "../components/airport/Airport";
 import Notice from "./notice/Notice";
 import { Link } from "react-router-dom";
+import HomeAirport from "./homeAirport/HomeAirport";
 
 /* eslint-disable */
 function Home() {
@@ -328,7 +329,7 @@ function Home() {
                                 ...props.style,
                               }}
                             >
-                              <Airport
+                              <HomeAirport
                                 setShow={setShow}
                                 set공항={setDepartureAirport}
                               />
@@ -367,7 +368,7 @@ function Home() {
                                 ...props.style,
                               }}
                             >
-                              <Airport
+                              <HomeAirport
                                 setShow={setShow2}
                                 set공항={setArrivalAirport}
                               />
