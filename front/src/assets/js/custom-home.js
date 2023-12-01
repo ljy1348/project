@@ -4,16 +4,13 @@ import AOS from "aos";
 /* eslint-disable */
 export default function initCustom() {
   // 여기
-
-//   aos(MIT) == wow(상용, GNU)
-// npm 설치
-
+  // aos(MIT) == wow(상용, GNU)
+  // npm 설치
   AOS.init({
     duration: 800,
     easing: "slide",
     once: true,
   });
-
 
   // sangmin
   $(document).ready(function () {
@@ -27,7 +24,7 @@ export default function initCustom() {
       $("#birth-day").append('<option value="' + i + '">' + i + "</option>");
     }
   });
-
+  출처: //interestingjinjin.tistory.com/7 [흥미진진한 개발:티스토리]
 
   // sangmin
 
@@ -255,7 +252,6 @@ export default function initCustom() {
     };
     owlPlugin();
 
-
     // var counter = function () {
     //   $(".count-numbers").waypoint(
     //     function (direction) {
@@ -287,60 +283,7 @@ export default function initCustom() {
     //   $('input[name="daterange"]').daterangepicker();
     // }
 
-    if ($('input[name="daterange"]').length) {
-      $('input[name="daterange"]').daterangepicker({
-        // singleDatePicker: true,
-        locale: {
-			format: "YYYY-MM-DD",
-			separator: " - ",
-			applyLabel: "Apply",
-			cancelLabel: "Cancel",
-			fromLabel: "From",
-			toLabel: "To",
-			customRangeLabel: "Custom",
-			weekLabel: "W",
-			daysOfWeek: [
-				"Su",
-				"Mo",
-				"Tu",
-				"We",
-				"Th",
-				"Fr",
-				"Sa"
-			],
-			monthNames: [
-				"January",
-				"February",
-				"March",
-				"April",
-				"May",
-				"June",
-				"July",
-				"August",
-				"September",
-				"October",
-				"November",
-				"December"
-			],
-			firstDay: 1
-		},
-		// startDate: "2023-11-16",
-		// endDate: "2023-11-22",
-        // function(start, end, label) {
-        // //   console.log(
-        // //     "New date range selected: " +
-        // //       start.format("YYYY-MM-DD") +
-        // //       " to " +
-        // //       end.format("YYYY-MM-DD") +
-        // //       " (predefined range: " +
-        // //       label +
-        // //       ")"
-        // //   );
-        // },
 
-        // singleDatePicker: true, // 달력 1개 사용
-      });
-    }
     
 
 	
@@ -348,5 +291,4 @@ export default function initCustom() {
 	// 	$('input[name="daterange"]').daterangepicker();
 	// }
 })
-
 }
