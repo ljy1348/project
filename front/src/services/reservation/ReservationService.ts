@@ -26,12 +26,12 @@ const get = (airlineReservationNumber: any) => {
   return http.get<ISearchReservation>(`/tour/search-reservation/seeReservation/${airlineReservationNumber}`);
 };
 
-<<<<<<< Updated upstream
+
 // 유빈 
 const getChseat = (airlineReservationNumber: any) => {
   return http.get<IReservation>(`/tour/boardingpass/${airlineReservationNumber}`);
 }
-=======
+
 // 상세 조회
 const get2 = (airlineReservationNumber: any) => {
 
@@ -39,7 +39,7 @@ const get2 = (airlineReservationNumber: any) => {
 
   return http.get<ISearchReservation>(`/tour/search-reservation/checkInReservation/${airlineReservationNumber}`);
 };
->>>>>>> Stashed changes
+
 
 
 // 상민
