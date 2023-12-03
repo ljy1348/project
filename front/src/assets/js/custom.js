@@ -256,32 +256,32 @@ export default function initCustom() {
     owlPlugin();
 
 
-    // var counter = function () {
-    //   $(".count-numbers").waypoint(
-    //     function (direction) {
-    //       if (
-    //         direction === "down" &&
-    //         !$(this.element).hasClass("ut-animated")
-    //       ) {
-    //         var comma_separator_number_step =
-    //           $.animateNumber.numberStepFactories.separator(",");
-    //         $(".counter > span").each(function () {
-    //           var $this = $(this),
-    //             num = $this.data("number");
-    //           $this.animateNumber(
-    //             {
-    //               number: num,
-    //               numberStep: comma_separator_number_step,
-    //             },
-    //             7000
-    //           );
-    //         });
-    //       }
-    //     },
-    //     { offset: "95%" }
-    //   );
-    // };
-    // counter();
+    var counter = function () {
+      $(".count-numbers").waypoint(
+        function (direction) {
+          if (
+            direction === "down" &&
+            !$(this.element).hasClass("ut-animated")
+          ) {
+            var comma_separator_number_step =
+              $.animateNumber.numberStepFactories.separator(",");
+            $(".counter > span").each(function () {
+              var $this = $(this),
+                num = $this.data("number");
+              $this.animateNumber(
+                {
+                  number: num,
+                  numberStep: comma_separator_number_step,
+                },
+                7000
+              );
+            });
+          }
+        },
+        { offset: "95%" }
+      );
+    };
+    counter();
 
     // if ($('input[name="daterange"]').length) {
     //   $('input[name="daterange"]').daterangepicker();

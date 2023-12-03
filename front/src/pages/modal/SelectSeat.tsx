@@ -6,7 +6,6 @@ import { Modal } from "react-bootstrap";
 const SelectSeat = (props: any) => {
 
   const { totalpeople } = props;
-  console.log('Total People:', totalpeople);
   const initialSeats: number[][] = [
     [1, 1, 1, 0, 1, 1, 1],
     [1, 1, 1, 0, 1, 1, 1],
@@ -44,15 +43,26 @@ const SelectSeat = (props: any) => {
     const remainingSeats = totalpeople - selectedSeatCount;
   
     // 이미 선택된 경우 또는 남은 좌석이 없는 경우 클릭 무시
-    if (value === 3 || remainingSeats <= 0) {
+    if (value === 2) {
+      setSeats((prevSeats) => {
+        const updatedSeats = [...prevSeats];
+        updatedSeats[x][y] = 1;
+        return updatedSeats;
+      });
+    } 
+     else if (value === 3 || remainingSeats <= 0) {
       alert("총정원수 보다 많은 좌석은 예약이 불가능 합니다.")
       return;
     }
+
+   
+    
 
     if (value === 1) {
       setSeats((prevSeats) => {
         const updatedSeats = [...prevSeats];
         updatedSeats[x][y] = 2;
+        console.log("a1");
         return updatedSeats;
       });
 
@@ -97,7 +107,7 @@ const SelectSeat = (props: any) => {
 
   const handleReservationComplete = () => {
     // 예약 완료 버튼을 클릭했을 때 호출되는 함수
-    setSelectedSeats([]); // 선택 목록 초기화
+    // setSelectedSeats([]); // 선택 목록 초기화
 
     let reqSeats = new Array();
 
@@ -112,7 +122,6 @@ const SelectSeat = (props: any) => {
         console.log(reqSeats);
         props.onSeatsSelected(reqSeats);
         console.log('SelectSeat에서 선택된 좌석:', reqSeats);
-
         return updatedSeats;
       });
     });
@@ -121,10 +130,10 @@ const SelectSeat = (props: any) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/tour/checkin/sheat/1544")
+      .get("http://localhost:8000/api/tour/checkin/sheat/"+props.operationId)
       .then((response) => {
         const data = response.data;
-        console.log(response);
+        // console.log(response);
         data.map((val: any, idx: number) => {
           const str: string = val.seatNumber;
 
@@ -139,7 +148,7 @@ const SelectSeat = (props: any) => {
         });
       })
       .catch((e) => {console.log(e)});
-  }, [props,totalpeople,props.modalShow]);
+  }, [props,totalpeople,props.modalShow, props.operationId]);
 
   return (
     <Modal

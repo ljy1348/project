@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import BoardingPassService from "../../services/boardingPass/BoardingPassService";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
@@ -8,10 +8,14 @@ import OperationService from "../../services/operation/OperationService";
 import IReservation from "../../types/reservation/IReservation";
 import ReservationService from "../../services/reservation/ReservationService";
 import IBoardingPass from "../../types/boardingPass/IBoardingPass";
+import BaggagePaymentModal from "../modal/BaggagePaymentModal";
 
 function Boardingpass() {
   const { operID ,searchAirlinereservationnumber, bagCount1, adcount, chcount } =
     useParams();
+
+    const location = useLocation();
+    const [paymentModalShow, setPaymentModalShow] = useState(false);
 
   // 객체 초기화(상세조회 : 기본키 있음)
   const initialOperation = {
@@ -74,7 +78,7 @@ function Boardingpass() {
     ReservationService.getChseat(airlinereservationnumber)
       .then((response: any) => {
         setCheckReserve(response.data);
-        console.log(response.data);
+        console.log(response);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -85,7 +89,7 @@ function Boardingpass() {
     BoardingPassService.getAll(airlinereservationnumber)
       .then((response: any) => {
         setCheckSeat(response.data);
-        console.log(response.data);
+        console.log(response);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -166,14 +170,14 @@ function Boardingpass() {
                         성인:{adcount} 소아 :{chcount}
                       </td>
                       <td scope="col">
-                        {checkSeat.map((seat, index) => (
+                        {checkSeat && checkSeat.map((seat, index) => (
                           <span key={index}>
                             {seat.seatNumber}
                             {index < checkSeat.length - 1 && ", "}
                           </span>
                         ))}
                       </td>
-                      <td scope="col">{checkSeat[0].seatType}</td>
+                      <td scope="col">{checkSeat[0]?.seatType?checkSeat[0].seatType:""}</td>
                     </tr>
                     {/* 좌석 정보 */}
 
@@ -199,7 +203,7 @@ function Boardingpass() {
               </dt>
               <div>
                 <br />
-                <button type="button" className="btn btn-primary">
+                <button type="button" className="btn btn-primary" onClick={()=>{setPaymentModalShow(true)}}>
                   결제
                 </button>
               </div>
@@ -207,6 +211,14 @@ function Boardingpass() {
           </div>
         </div>
       </div>
+      <BaggagePaymentModal
+            show={paymentModalShow}
+            onHide={() => {setPaymentModalShow(false);
+            }}
+            nonMemberModalShow={setPaymentModalShow}
+            bagNumber={location.state.bagNumber}
+            price={Number(bagCount1) * 100000}
+          />
     </>
   );
 }

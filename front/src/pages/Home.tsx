@@ -549,9 +549,9 @@ function Home() {
             </div>
           </div>
 
-          <div className="owl-carousel owl-3-slider">
+          <div className="owl-carousel owl-3-slider" >
             {/* 1 */}
-            <div className="item">
+            <div className="item" style={{height:"592.125px"}}>
               <a
                 className="media-thumb"
                 href="images/hero-slider-1.jpg"

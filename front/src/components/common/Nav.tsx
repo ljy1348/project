@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RootState, useAppDispatch } from "../../store/store";
 import { logout } from "../../store/slices/auth";
 
@@ -14,6 +14,8 @@ function Nav() {
   const logOut = useCallback(() => { 
     dispatch(logout());
    },[dispatch]);
+
+   const navi = useNavigate();
   
 
   return (
@@ -87,7 +89,7 @@ function Nav() {
                 }
                 {currentUser&&<>
                     <li>
-                  <Link to="#"onClick={logOut}>로그아웃</Link>
+                  <Link to="/"onClick={()=>{logOut();}}>로그아웃</Link>
                 </li>
                 { currentUser.memberAuth ==="ROLE_USER" ?
                 <li>

@@ -3,12 +3,14 @@ package com.example.back.controller.auth;
 import com.example.back.model.dto.payment.PaymentAdminDto;
 import com.example.back.model.entity.auth.ERole;
 import com.example.back.model.entity.auth.Member;
+import com.example.back.model.entity.baggage.Baggage;
 import com.example.back.model.entity.checkin.Checkin;
 import com.example.back.model.entity.notice.Notice;
 import com.example.back.model.entity.payment.Payment;
 import com.example.back.model.entity.reserve.OperationInfo;
 import com.example.back.security.services.UserDetailsImpl;
 import com.example.back.service.auth.UserService;
+import com.example.back.service.baggage.BaggageService;
 import com.example.back.service.checkin.CheckinService;
 import com.example.back.service.notice.NoticeService;
 import com.example.back.service.payment.PaymentService;
@@ -60,6 +62,9 @@ public class AdminController {
 
     @Autowired
     CheckinService checkinService;
+
+    @Autowired
+    BaggageService baggageService;
 
 
 //    회원 관리
@@ -262,5 +267,21 @@ public class AdminController {
         }
 
 
+    }
+
+    // 수하물
+    @GetMapping("/bag")
+    public ResponseEntity<?> bagGetAll(Pageable pageable) {
+        try {
+            Page<Baggage> page = baggageService.findByAll(pageable);
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("content", page.getContent());
+            map.put("totalPages", page.getTotalPages());
+
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
