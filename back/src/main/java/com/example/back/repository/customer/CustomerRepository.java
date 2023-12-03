@@ -70,5 +70,44 @@ public interface CustomerRepository extends JpaRepository <Customer, Integer> {
             "ORDER BY CST.TITLE_ID DESC ", nativeQuery = true)
     Page<CustomerDto> findAllByOrderByTitleIdDesc(Pageable pageable);
 
-    Page<CustomerDto> findAllByTitleIdAndMemberId(int titleId, String memberId, Pageable pageable);
+
+    @Query(value = "SELECT CST.TITLE_ID as titleId " +
+            "     , CST.TITLE as title " +
+            "     , CST.CONTENT as content " +
+            "     , CST.ANSWER_YN as answerYn " +
+            "     , CST.PARENT_BID as parentBid " +
+            "     , CST.ANSWER as answer " +
+            "     , CST.MEMBER_ID as memberId " +
+            "     , CST.INSERT_TIME as insertTime " +
+            "     , MEM.MEMBER_NAME as memberName " +
+            "FROM TB_CUSTOMER_SERVICE CST, TB_MEMBERS_INFO MEM " +
+            "WHERE CST.MEMBER_ID = MEM.MEMBER_ID " +
+            "AND CST.DELETE_YN = 'N' " +
+            "AND CST.MEMBER_ID = :memberId AND CST.TITLE LIKE '%' || :title || '%' " +
+            "ORDER BY CST.TITLE_ID DESC ", countQuery = "SELECT COUNT(*) " +
+            "FROM TB_CUSTOMER_SERVICE CST, TB_MEMBERS_INFO MEM " +
+            "WHERE CST.MEMBER_ID = MEM.MEMBER_ID " +
+            "AND CST.DELETE_YN = 'N' " +
+            "AND CST.MEMBER_ID = :memberId AND CST.TITLE LIKE '%' || :title || '%' " +
+            "ORDER BY CST.TITLE_ID DESC ", nativeQuery = true)
+    Page<CustomerDto> findTitleLike(@Param("memberId") String memberId,@Param("title") String title,  Pageable pageable);
+
+    @Query(value = "SELECT CST.TITLE_ID as titleId" +
+            "     , CST.TITLE as title " +
+            "     , CST.CONTENT as content " +
+            "     , CST.ANSWER_YN as answerYn " +
+            "     , CST.ANSWER as answer " +
+            "     , CST.MEMBER_ID as memberId " +
+            "     , CST.PARENT_BID as parentBid " +
+            "     , CST.INSERT_TIME as insertTime " +
+            "     , MEM.MEMBER_NAME as memberName " +
+            "FROM TB_CUSTOMER_SERVICE CST, TB_MEMBERS_INFO MEM " +
+            "WHERE CST.MEMBER_ID = MEM.MEMBER_ID " +
+            "AND TITLE LIKE '%' || :title || '%' " +
+            "ORDER BY CST.TITLE_ID DESC ", countQuery = "SELECT COUNT(*) " +
+            "FROM TB_CUSTOMER_SERVICE CST, TB_MEMBERS_INFO MEM " +
+            "WHERE CST.MEMBER_ID = MEM.MEMBER_ID " +
+            "AND TITLE LIKE '%' || :title || '%' " +
+            "ORDER BY CST.TITLE_ID DESC ", nativeQuery = true)
+    Page<CustomerDto> findAllTitleAll(@Param("title") String title, Pageable pageable);
 }

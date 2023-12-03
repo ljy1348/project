@@ -2,8 +2,6 @@ package com.example.back.controller.customer;
 
 import com.example.back.model.dto.customer.CustomerDto;
 import com.example.back.model.entity.Customer.Customer;
-import com.example.back.model.entity.notice.Notice;
-import com.example.back.model.entity.reserve.Reservation;
 import com.example.back.service.customer.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -63,8 +60,6 @@ public class CustomerController {
 
             }
 
-
-
             Map<String , Object> response = new HashMap<>();
             response.put("question", customerPage.getContent());
             response.put("currentPage", customerPage.getNumber()); // 현재페이지번호
@@ -84,20 +79,28 @@ public class CustomerController {
         }
     }
 
+
+
 //    ID 기준 제목 검색
 @GetMapping("/question-board")
 public ResponseEntity<Object> getSearchReservation(
-        @RequestParam(defaultValue = "0") int titleId,
+        @RequestParam(defaultValue = "") String title,
         @RequestParam(defaultValue = "") String memberId,
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "10") int size
 ){
     try {
         Pageable pageable = PageRequest.of(page, size);
-
-
-        Page<CustomerDto> customerPage
-                = customerService.findAllByTitleIdAndMemberId(titleId, memberId, pageable);
+        Page<CustomerDto> customerPage;
+        
+        if (memberId.equals("admin")) {
+//            관리자 전체 검색
+            customerPage = customerService.findAllTitleAll(title, pageable);
+        } else {
+//            회원 ID 기준 검색
+            customerPage
+                    = customerService.findTitleLike(title, memberId, pageable);
+        }
 
 
         Map<String , Object> response = new HashMap<>();

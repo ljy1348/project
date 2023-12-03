@@ -8,6 +8,7 @@ import OperationService from "../../services/operation/OperationService";
 import IReservation from "../../types/reservation/IReservation";
 import ReservationService from "../../services/reservation/ReservationService";
 import IBoardingPass from "../../types/boardingPass/IBoardingPass";
+import BoardingPassService from "../../services/boardingPass/BoardingPassService";
 
 function Boardingpass() {
   const { operID ,searchAirlinereservationnumber, bagCount1, adcount, chcount } =

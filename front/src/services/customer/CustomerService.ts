@@ -10,8 +10,13 @@ const getAll = (memberId:string, page:number, size:number) => {
 };
 
 // 검색
-const getSearch = (memberId: string,title:string, page:number, size:number) => {
-  return http.get<Array<ICustomer>>(`/tour/question-board?titleId=${title}&memberId=${memberId}&page=${page}&size=${size}`);
+const getSearch = (memberId: string, title:string, page:number, size:number) => {
+  return http.get<Array<ICustomer>>(`/tour/question-board?title=${title}&memberId=${memberId}&page=${page}&size=${size}`);
+};
+
+// 검색
+const getSearchAdmin = (title:string, page:number, size:number) => {
+  return http.get<Array<ICustomer>>(`/tour/question-board?title=${title}&page=${page}&size=${size}`);
 };
 
 // 상세 조회
@@ -32,6 +37,7 @@ const remove = (titleId:any) => {
 const CustomerService = {
   getAll,
   getSearch,
+  getSearchAdmin,
   get,
   create,
   remove,
