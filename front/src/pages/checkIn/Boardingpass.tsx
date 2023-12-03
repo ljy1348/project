@@ -6,10 +6,9 @@ import initCustom from "../../assets/js/custom";
 import IOperationinfo from "../../types/operationInfo/IOperationinfo";
 import OperationService from "../../services/operation/OperationService";
 import IReservation from "../../types/reservation/IReservation";
-import ICheckin from "../../types/checkin/ICheckin";
-import CheckinService from "../../services/checkin/CheckinService";
 import ReservationService from "../../services/reservation/ReservationService";
 import IBoardingPass from "../../types/boardingPass/IBoardingPass";
+import BoardingPassService from "../../services/boardingPass/BoardingPassService";
 
 function Boardingpass() {
   const { searchAirlinereservationnumber, bagCount1, adcount, chcount } =
