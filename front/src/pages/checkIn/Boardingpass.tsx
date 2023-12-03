@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-// import BoardingPassService from "../../services/boardingPass/BoardingPassService";
+import BoardingPassService from "../../services/boardingPass/BoardingPassService";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import IOperationinfo from "../../types/operationInfo/IOperationinfo";
@@ -11,11 +11,12 @@ import IBoardingPass from "../../types/boardingPass/IBoardingPass";
 import BoardingPassService from "../../services/boardingPass/BoardingPassService";
 
 function Boardingpass() {
-  const { searchAirlinereservationnumber, bagCount1, adcount, chcount } =
+  const { operID ,searchAirlinereservationnumber, bagCount1, adcount, chcount } =
     useParams();
 
   // 객체 초기화(상세조회 : 기본키 있음)
   const initialOperation = {
+
     operationId: null,
     airline: "",
     flightName: "",
@@ -55,13 +56,11 @@ function Boardingpass() {
   const [operation, setOperation] = useState<IOperationinfo>(initialOperation);
   const [checkReserve, setCheckReserve] =
     useState<IReservation>(initialCheckReserve);
-  const [checkSeat, setCheckSeat] = useState<Array<IBoardingPass>>([
-    initialCheckSeat,
-  ]);
+  const [checkSeat, setCheckSeat] = useState<Array<IBoardingPass>>([initialCheckSeat]);
 
   // todo: 함수 정의
   // 상세조회 함수
-  const getOperation = (operationId: string) => {
+  const getOperation = (operationId: any) => {
     OperationService.get(operationId)
       .then((response: any) => {
         setOperation(response.data);
@@ -73,7 +72,7 @@ function Boardingpass() {
   };
 
   const getCheckReserve = (airlinereservationnumber: any) => {
-    ReservationService.get(airlinereservationnumber)
+    ReservationService.getChseat(airlinereservationnumber)
       .then((response: any) => {
         setCheckReserve(response.data);
         console.log(response.data);
@@ -95,7 +94,7 @@ function Boardingpass() {
   };
 
   useEffect(() => {
-    getOperation(operation.operationId);
+    getOperation(operID);
     getCheckReserve(searchAirlinereservationnumber);
     getCheckSeat(searchAirlinereservationnumber);
     initScripts();
@@ -168,26 +167,14 @@ function Boardingpass() {
                         성인:{adcount} 소아 :{chcount}
                       </td>
                       <td scope="col">
-                      {Array(Number(adcount))
-                        .fill(0)
-                        .map((_, index) => (
+                        {checkSeat.map((seat, index) => (
                           <span key={index}>
-                            성인{index + 1}:{checkSeat[index]?.seatNumber}
-                            {index < Number(adcount) - 1 && ""}
+                            {seat.seatNumber}
+                            {index < checkSeat.length - 1 && ", "}
                           </span>
                         ))}
-                      {Number(adcount) > 0 && Number(chcount) > 0 && ""}
-                      {Array(Number(chcount))
-                        .fill(0)
-                        .map((_, index) => (
-                          <span key={index}>
-                            소아{index + 1 }: 
-                            {checkSeat[Number(adcount) + index]?.seatNumber}
-                            {index < Number(chcount) - 1 && ""}
-                          </span>
-                        ))}
-                        </td>
-                      <td scope="col">{checkReserve.seatType}</td>
+                      </td>
+                      <td scope="col">{checkSeat[0].seatType}</td>
                     </tr>
                     {/* 좌석 정보 */}
 
@@ -209,12 +196,10 @@ function Boardingpass() {
             </dl>
             <dl className="line_row">
               <dt>
-                <span className="tit">
-                  결제까지 완료해주시기 바랍니다.
-                </span>
+                <span className="tit">결제까지 완료해주시기 바랍니다.</span>
               </dt>
               <div>
-              <br />
+                <br />
                 <button type="button" className="btn btn-primary">
                   결제
                 </button>

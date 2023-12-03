@@ -86,6 +86,22 @@ public class ReservationController {
         }
     }
 
+
+    //    수정 함수
+    @PutMapping("/reservation/{airlineReservaitonNumber}")
+    public ResponseEntity<Object> update(
+            @PathVariable int airlineReservaitonNumber,
+            @RequestBody Reservation reservation) {
+
+        try {
+            Reservation reservation2 = reservationService.save(reservation); // db 수정
+
+            return new ResponseEntity<>(reservation2, HttpStatus.OK);
+        } catch (Exception e) {
+//            DB 에러가 났을경우 : INTERNAL_SERVER_ERROR 프론트엔드로 전송
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     // 상세조회
     @GetMapping("/reservation/{airlineReservaitonNumber}")
     public ResponseEntity<Object> findById(@PathVariable int airlineReservaitonNumber) {
