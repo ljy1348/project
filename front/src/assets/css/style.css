@@ -1011,6 +1011,14 @@ h4,
   z-index: 1;
 }
 /* ..untree_co-section ubin */
+.untree_co-section_yb {
+  /* padding: 70px 0; */
+
+  margin-top: 100px;
+  margin-bottom: 170px;
+}
+
+/* ..untree_co-section ubin */
 .untree_co-section {
   /* padding: 70px 0; */
 
@@ -3579,6 +3587,7 @@ input {
 }
 .passengernameinfo {
   margin-right: 20px;
+  margin-top: 50px;
 }
 .passengerinfobutton {
   float: right;
@@ -3663,11 +3672,12 @@ input {
 /* 예약자 */
 .passengername {
   width: 436px;
+  font-size: 17px;
 }
 
 /* 예약자 공간 */
 .passengername-gap {
-  padding-top: 42px;
+  margin-top: 40px;
 }
 
 .bagcount-button {
@@ -3677,6 +3687,7 @@ input {
 /* 수화물 금액 */
 .bagprice {
   width: 436px;
+  font-size: 17px;
 }
 
 /* 쓰면 안됨 */
@@ -3705,6 +3716,48 @@ input {
   border-radius: 5px;
   margin-top: 8px;
 }
+
+
+/* boardingpass */
+.checkinlog {
+  font-size: 25px;
+  color: #2fdf87;
+  font-weight: 700;
+  text-decoration-line: none;
+  /* 로고 메뉴 텍스트 간격 */
+  margin-right: 200px;
+}
+/* .checkin_reserve_choose_subTitle-d-flex-justify-content-center-mt-3{
+  padding-left: 30px;
+} */
+.container_boardingpass{
+	margin-right: 50px;
+}
+
+/* .row-label{
+  margin-left: 50px;
+}
+ */
+
+
+ /* 체크인 */
+ .nimcheckin{
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: 'Merienda';
+ }
+
+ .checkinInfoh4{
+  font-family: 'IBM Plex Sans KR', sans-serif;
+font-family: 'Merienda';
+font-family: 'Noto Serif KR', serif;
+
+ }
+ .totalbagcount{
+  font-size: 17px;
+ }
+ .totalbagprice{
+  font-size: 17px;
+ }
 
 
 
@@ -3785,13 +3838,7 @@ input {
 
 
 
-/* boardingpass */
-.checkinlog {
-  font-size: 25px;
-  color: #2fdf87;
-  font-weight: 700;
-  text-decoration-line: none;
-  /* 로고 메뉴 텍스트 간격 */
-  margin-right: 200px;
-}
+
+
+
 

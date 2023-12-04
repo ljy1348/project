@@ -72,15 +72,15 @@ function Passport() {
     bagCount: 0,
     bagPrice: 0,
     airlineReservationNumber: Number(searchAirlinereservationnumber),
-    paymentYn:"N"
+    paymentYn: "N",
   };
 
   const initialCheckin = {
     // 여권번호
     checkId: null,
-    seatNumber : "",
+    seatNumber: "",
     airlineReservationNumber: Number(searchAirlinereservationnumber),
-    passportId : ""
+    passportId: "",
   };
 
   // 여권 객체
@@ -115,12 +115,11 @@ function Passport() {
     });
   };
 
-   // input 태그에 수동 바인딩
-   const handleInputChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+  // input 태그에 수동 바인딩
+  const handleInputChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target; // 화면 값
-    setBaggage({ ...baggage, [name]: value });  // 변수 저장
+    setBaggage({ ...baggage, [name]: value }); // 변수 저장
   };
-
 
   const getReservation = (airlineReservationNumber: string) => {
     ReservationService.get(airlineReservationNumber) // 벡엔드로 상세조회 요청
@@ -133,13 +132,16 @@ function Passport() {
       });
   };
 
-  const updateCheckYn = () => { 
+  const updateCheckYn = () => {
     const updatedReservation = {
       ...reservation,
       checkYn: "Y",
     };
-  
-    ReservationService.update(reservation.airlineReservationNumber, updatedReservation)
+
+    ReservationService.update(
+      reservation.airlineReservationNumber,
+      updatedReservation
+    )
       .then((response: any) => {
         console.log(response.data);
       })
@@ -173,7 +175,7 @@ function Passport() {
       bagCount: baggage.bagCount,
       bagPrice: baggage.bagCount * 100000,
       airlineReservationNumber: Number(searchAirlinereservationnumber),
-      paymentYn:"N"
+      paymentYn: "N",
     };
 
     console.log(data);
@@ -192,16 +194,17 @@ function Passport() {
     console.log(checkin);
     let arr = [];
     for (let i = 0; i < selectedSeatsInfo.length; i++) {
-
-      let initData:ICheckin = {
+      let initData: ICheckin = {
         checkId: null,
-        seatNumber : "",
+        seatNumber: "",
         airlineReservationNumber: 0,
-        passportId : "0123"
-      }
+        passportId: "0123",
+      };
       initData.seatNumber = selectedSeatsInfo[i];
       initData.passportId = passport[i].passportId;
-      initData.airlineReservationNumber = Number(searchAirlinereservationnumber);
+      initData.airlineReservationNumber = Number(
+        searchAirlinereservationnumber
+      );
       arr.push(initData);
     }
     CheckinService.create(arr)
@@ -215,12 +218,13 @@ function Passport() {
   };
   const navi = useNavigate();
   const handleSave = () => {
-  
     savePassport();
     saveCheckin();
     saveBaggage();
     updateCheckYn();
-    navi(`/boardingpass/${operID}/${searchAirlinereservationnumber}/${adcount}/${chcount}/${bagCount1}`)
+    navi(
+      `/boardingpass/${operID}/${searchAirlinereservationnumber}/${adcount}/${chcount}/${bagCount1}`
+    );
   };
 
   // todo: 수화물 저장할 변수
@@ -288,9 +292,6 @@ function Passport() {
       }));
     }
   };
- 
-
-  
 
   // 좌석 저장함수
   const handleSeatsSelected = (selectedSeats: any) => {
@@ -315,7 +316,7 @@ function Passport() {
       </div>
       <Accordion className="testtttttttt1" defaultActiveKey={["0"]} alwaysOpen>
         <Accordion.Item eventKey="0">
-          <Accordion.Header>여권정보 #1</Accordion.Header>
+          <Accordion.Header>여권정보</Accordion.Header>
           <Accordion.Body>
             {/* 여권 정보 입력    */}
             {passport &&
@@ -397,7 +398,6 @@ function Passport() {
                             />
                           </div>
                         </div>
-                     
                       </div>
                     </div>
                   </form>
@@ -416,12 +416,10 @@ function Passport() {
         </Accordion.Item>
         {/* 수화물 사전 구매  */}
         <Accordion.Item eventKey="2">
-          <Accordion.Header>수화물추가 (선택사항) #3</Accordion.Header>
+          <Accordion.Header>수화물추가 (선택사항)</Accordion.Header>
           <Accordion.Body>
             <div className="bagage">
-              <p>
-                기본 수화물 : 휴대수화물 1 (5kg) + 위탁수화물 1(20kg) 
-              </p>
+              <p>기본 수화물 : 휴대수화물 1 (5kg) + 위탁수화물 1(20kg)</p>
               <p>추가 수화물 1인당 2개씩 추가가능 </p>
 
               <table className="table">
@@ -436,7 +434,9 @@ function Passport() {
 
                 <tr>
                   <td className="passengername">
-                    {searchAirlinereservationnumber}
+                    <div className="passengername-gap">
+                      {searchAirlinereservationnumber}
+                    </div>
                   </td>
                   <td className="bagcount">
                     <div
@@ -472,17 +472,18 @@ function Passport() {
                     </div>
                   </td>
                   <td className="bagprice">
-
-                    {new Intl.NumberFormat("ko-KR").format(bagCount1 * 100000)}
+                  <div className="passengername-gap">
+                    {new Intl.NumberFormat("ko-KR").format(bagCount1 * 100000)} ₩
+                    </div>
                   </td>
                 </tr>
 
                 <tr>
                   <td></td>
-                  <td>
+                  <td className="totalbagcount">
                     <strong>총 수량</strong>
                   </td>
-                  <td>
+                  <td className="totalbagprice">
                     <strong>총 금액</strong>
                   </td>
                 </tr>
@@ -496,7 +497,7 @@ function Passport() {
                     <strong>
                       {new Intl.NumberFormat("ko-KR").format(
                         bagCount1 * 100000
-                      )}
+                      )} ₩
                     </strong>
                   </td>
                 </tr>
