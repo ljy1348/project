@@ -28,12 +28,11 @@ function Nav() {
             <ul
               className="js-clone-nav d-none d-lg-inline-block text-left site-menu"
             >
-              <Link to="/" className="logo">
+              <a href="/" className="logo">
                 <img src="/images/그린에어로고.png" className="main-logo-image" />
-                GreanAir
-              </Link>
+                GreenAir
+              </a>
               
-
               {/* 예약 메뉴 시작 */}
               <li>
                 <Link to="/reserve">예약</Link>
