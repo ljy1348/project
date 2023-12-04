@@ -130,21 +130,6 @@ h4,
   
 } */
 
-/* 검색버튼 */
-/* .form-search-control {
-  border: 1px solid rgb(206, 206, 206);
-  background-color: rgb(188, 220, 250);
-  border-radius: 5px;
-  font-size: 16px;
-  height: 60px;
-  width: 100px;
-  margin-top: 20px;
-  color: #000000;
-}
-
-.form-search-control:hover {
-  background-color: rgba(167, 209, 248, 0.548);
-} */
 
 /* 체크인이랑 홈이랑 form 곂침 */
 /* .form-control,
@@ -2774,7 +2759,6 @@ input {
   color: #5e5e5e;
 }
 
-
 /* 편도 / 왕복 버튼 */
 .trip-button {
   width: 75px;
@@ -2802,7 +2786,8 @@ input {
   border-radius: 5px;
   font-size: 16px;
   height: 50px;
-  width: 130px;
+  width: 350px;
+  margin-top: 18px;
   color: #000000;
   float: right;
 }
@@ -2812,6 +2797,11 @@ input {
   border: 1px solid rgb(146, 144, 144);
 }
 
+/* 항공권 조회 공간 */
+.search-control-gap {
+  margin-left: 10px;
+  margin-top: 10px;
+}
 
 /* 탑승객 보드 popover */
 .boader_passenger {

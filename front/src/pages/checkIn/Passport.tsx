@@ -71,8 +71,7 @@ function Passport() {
     bagNumber: null,
     bagCount: 0,
     bagPrice: 0,
-    airlineReservationNumber: Number(searchAirlinereservationnumber),
-    paymentYn:"N"
+    airlineReservationNumber: Number(searchAirlinereservationnumber)
   };
 
   const initialCheckin = {
@@ -174,8 +173,7 @@ function Passport() {
       bagNumber: null,
       bagCount: baggage.bagCount,
       bagPrice: baggage.bagCount * 100000,
-      airlineReservationNumber: Number(searchAirlinereservationnumber),
-      paymentYn:"N"
+      airlineReservationNumber: Number(searchAirlinereservationnumber)
     };
 
     console.log(data);
