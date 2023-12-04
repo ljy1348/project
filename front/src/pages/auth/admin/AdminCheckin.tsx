@@ -48,6 +48,12 @@ function AdminCheckin() {
       });
   };
 
+  const deleteCheckin = (reservaionNumber:number) => {
+    AdminService.deleteCheckin(reservaionNumber)
+    .then((response:any)=>{retrievePayment();})
+    .catch((e:Error)=>{console.log(e)})
+  }
+
   //   input 태그 수동바인딩
   const onChangeSearchKeyword = (e: any) => {
     setSearchText(e.target.value); // 화면값 -> 변수저장
@@ -112,6 +118,7 @@ function AdminCheckin() {
               <th scope="col">비행기 좌석</th>
               <th scope="col">예약 번호</th>
               <th scope="col">여권 번호</th>
+              <th scope="col">체크인 취소</th>
             </tr>
           </thead>
           <tbody className="tabText">
@@ -128,6 +135,7 @@ function AdminCheckin() {
                     {data.airlineReservationNumber}
                     </td>
                   <td>{data.passportId}</td>
+                  {data.deleteYn==="Y"?<td>{data.deleteYn}</td>:<td><a href='#'><span className='badge text-bg-danger' onClick={()=>{deleteCheckin(data.airlineReservationNumber)}}>취소</span></a></td>}
                 </tr>
               ))}
           </tbody>

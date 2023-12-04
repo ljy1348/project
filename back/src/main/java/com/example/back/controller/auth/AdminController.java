@@ -269,17 +269,39 @@ public class AdminController {
 
     }
 
+    @DeleteMapping("/checkin/{reservationNumber}")
+    public ResponseEntity<?> deleteCheckin(@PathVariable int reservationNumber) {
+        try {
+            baggageService.deleteByReserveNumber(reservationNumber);
+            checkinService.deleteByReserverNumber(reservationNumber);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     // 수하물
     @GetMapping("/bag")
-    public ResponseEntity<?> bagGetAll(Pageable pageable) {
+    public ResponseEntity<?> bagGetAll(@RequestParam(defaultValue = "") String searchText ,Pageable pageable) {
         try {
-            Page<Baggage> page = baggageService.findByAll(pageable);
+
+            Page<Baggage> page = baggageService.findByAll(searchText, pageable);
 
             Map<String, Object> map = new HashMap<>();
             map.put("content", page.getContent());
             map.put("totalPages", page.getTotalPages());
 
             return new ResponseEntity<>(map, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/bag/{reservationNumber}")
+    public ResponseEntity<?> deleteBag(@PathVariable int reservationNumber) {
+        try {
+            baggageService.deleteByReserveNumber(reservationNumber);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

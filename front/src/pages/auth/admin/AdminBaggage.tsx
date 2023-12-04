@@ -28,10 +28,8 @@ function AdminBaggage() {
 
   // 전체조회
   const retrieveBaggage = () => {
-    if (searchText==="") searchTitle="";
-    else searchTitle="reservaionNumber"
     if (currentUser?.memberId)
-    AdminService.getBagAll(page-1, pageSize) // 벡엔드 전체조회요청
+    AdminService.getBagAll(searchText,page-1, pageSize) // 벡엔드 전체조회요청
       .then((response: any) => {
         const {content, totalPages} = response.data;
         setBaggage(content);
@@ -43,6 +41,12 @@ function AdminBaggage() {
         console.log(e);
       });
   };
+
+  const deleteBag = (reservaionNumber:number) => {
+    AdminService.deleteBag(reservaionNumber)
+    .then((response:any)=>{retrieveBaggage();})
+    .catch((e:Error)=>{console.log(e)})
+  }
 
   //   input 태그 수동바인딩
   const onChangeSearchKeyword = (e: any) => {
@@ -108,6 +112,7 @@ function AdminBaggage() {
               <th scope="col">예약 번호</th>
               <th scope="col">결제 금액</th>
               <th scope="col">결제 여부</th>
+              <th scope="col">취소</th>
             </tr>
           </thead>
           <tbody className="tabText">
@@ -124,6 +129,7 @@ function AdminBaggage() {
                     {data.bagPrice}
                     </td>
                   <td>{data.paymentYn}</td>
+                  {data.deleteYn==="Y"?<td>{data.deleteYn}</td>:<td><a href='#'><span className='badge text-bg-danger' onClick={()=>{deleteBag(data.airlineReservationNumber)}}>취소</span></a></td>}
                 </tr>
               ))}
           </tbody>

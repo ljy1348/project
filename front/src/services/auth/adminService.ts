@@ -48,8 +48,16 @@ const getCheckAll = (searchTitle:string, searchText:string,page:number, size:num
    return http.get(`/admin/checkin?searchTitle=${searchTitle}&searchText=${searchText}&size=${size}&page=${page}`,{headers : authHeader()})
  }
 
- const getBagAll = (page:number, size:number) => {
-   return http.get(`/admin/bag?page=${page}&size=${size}`,{headers : authHeader()})
+ const deleteCheckin = (number:number) => {
+   return http.delete(`/admin/checkin/${number}`,{headers : authHeader()})
+ }
+
+ const getBagAll = (searchText:string,page:number, size:number) => {
+   return http.get(`/admin/bag?searchText=${searchText}&page=${page}&size=${size}`,{headers : authHeader()})
+ }
+
+ const deleteBag = (number:number) => {
+   return http.delete(`/admin/bag/${number}`,{headers : authHeader()})
  }
 
 const AdminService = {
@@ -64,7 +72,9 @@ const AdminService = {
     getPayAll,
     SearchPayAdmin,
     getCheckAll,
-    getBagAll
+    getBagAll,
+    deleteBag,
+    deleteCheckin
 }
 
 export default AdminService;

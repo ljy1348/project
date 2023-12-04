@@ -50,8 +50,14 @@ public class BaggageService {
         return baggageRepository.findByAirlineReservationNumber(reserveNumber);
     }
 
-    public Page<Baggage> findByAll(Pageable pageable) {
-        return baggageRepository.findAllByOrderByBagNumberDesc(pageable);
+    public Page<Baggage> findByAll(String searchText, Pageable pageable) {
+        if (searchText.equals(""))
+        return baggageRepository.selectAllByOrderByBagNumberDesc(pageable);
+        else return baggageRepository.findAllByAirlineReservationNumber(searchText,pageable);
+    }
+
+    public void deleteByReserveNumber(int reserveNumber) {
+        baggageRepository.deleteByReserveNumber(reserveNumber);
     }
 
 }

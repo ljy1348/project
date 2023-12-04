@@ -197,7 +197,7 @@ function Boardingpass() {
                 </div>
               </div>
             </dl>
-            <dl className="line_row">
+            {Number(bagCount1) * 100000 > 0 && <dl className="line_row">
               <dt>
                 <span className="tit">결제까지 완료해주시기 바랍니다.</span>
               </dt>
@@ -207,7 +207,7 @@ function Boardingpass() {
                   결제
                 </button>
               </div>
-            </dl>
+            </dl>}
           </div>
         </div>
       </div>
@@ -215,7 +215,7 @@ function Boardingpass() {
             show={paymentModalShow}
             onHide={() => {setPaymentModalShow(false);
             }}
-            nonMemberModalShow={setPaymentModalShow}
+            setPaymentModalShow={setPaymentModalShow}
             bagNumber={location.state.bagNumber}
             price={Number(bagCount1) * 100000}
           />
