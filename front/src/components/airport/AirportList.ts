@@ -204,7 +204,7 @@ const Americas = [
 {"cname":"보즈맨","abbr":"BZN"}
 ]
 const Europe = [
-    {"cname":"프랑크푸르트","abbr":"FRA"},
+{"cname":"프랑크푸르트","abbr":"FRA"},
 {"cname":"런던/히드로","abbr":"LHR"},
 {"cname":"파리/샤를 드 골","abbr":"CDG"},
 {"cname":"로마/다빈치","abbr":"FCO"},

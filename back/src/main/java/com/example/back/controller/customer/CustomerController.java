@@ -2,8 +2,6 @@ package com.example.back.controller.customer;
 
 import com.example.back.model.dto.customer.CustomerDto;
 import com.example.back.model.entity.Customer.Customer;
-import com.example.back.model.entity.notice.Notice;
-import com.example.back.model.entity.reserve.Reservation;
 import com.example.back.service.customer.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -63,7 +60,6 @@ public class CustomerController {
 
             }
 
-
             Map<String, Object> response = new HashMap<>();
             response.put("question", customerPage.getContent());
             response.put("currentPage", customerPage.getNumber()); // 현재페이지번호
@@ -83,9 +79,12 @@ public class CustomerController {
         }
     }
 
-    // title로 검색
+
+
+    //    ID 기준 제목 검색
     @GetMapping("/question-board")
-    public ResponseEntity<Object> searchQuestionBoard(
+    public ResponseEntity<Object> getSearchReservation(
+
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String memberId,
             @RequestParam(defaultValue = "0") int page,
@@ -94,6 +93,20 @@ public class CustomerController {
         try {
             Pageable pageable = PageRequest.of(page, size);
 
+            Page<CustomerDto> customerPage;
+            log.info("a : "+memberId+":"+title);
+            if (memberId.equals("admin")) {
+//            관리자 전체 검색
+            log.info("d");
+                customerPage = customerService.findAllTitleAll(title, pageable);
+            } else {
+            log.info("c");
+//            회원 ID 기준 검색
+                customerPage
+                        = customerService.findTitleLike(title, memberId, pageable);
+            }
+
+
             Page<CustomerDto> customerPage = customerService.findTitleLike(title, memberId, pageable);
 
             Map<String, Object> response = new HashMap<>();
@@ -101,56 +114,23 @@ public class CustomerController {
             response.put("currentPage", customerPage.getNumber()); // 현재페이지번호
             response.put("totalItems", customerPage.getTotalElements()); // 총건수(개수)
             response.put("totalPages", customerPage.getTotalPages()); // 총페이지수
+            
+//            전체 조회 + like 검색
 
-            if (!customerPage.isEmpty()) {
-                // 성공
+            if (customerPage.isEmpty() == false) {
+//                성공
                 return new ResponseEntity<>(response, HttpStatus.OK);
             } else {
-                // 데이터 없음
+//                데이터 없음
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
+
         } catch (Exception e) {
-            // 에러 발생 시
+            log.debug(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    //    ID 기준 제목 검색
-//    @GetMapping("/question-board")
-//    public ResponseEntity<Object> getSearchReservation(
-//            @RequestParam(defaultValue = "0") int titleId,
-//            @RequestParam(defaultValue = "") String memberId,
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "10") int size
-//    ) {
-//        try {
-//            Pageable pageable = PageRequest.of(page, size);
-//
-//
-//            Page<CustomerDto> customerPage
-//                    = customerService.findAllByTitleIdAndMemberId(titleId, memberId, pageable);
-//
-//
-//            Map<String, Object> response = new HashMap<>();
-//            response.put("question", customerPage.getContent());
-//            response.put("currentPage", customerPage.getNumber()); // 현재페이지번호
-//            response.put("totalItems", customerPage.getTotalElements()); // 총건수(개수)
-//            response.put("totalPages", customerPage.getTotalPages()); // 총페이지수
-////            전체 조회 + like 검색
-//
-//            if (customerPage.isEmpty() == false) {
-////                성공
-//                return new ResponseEntity<>(response, HttpStatus.OK);
-//            } else {
-////                데이터 없음
-//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//            }
-//
-//        } catch (Exception e) {
-//            log.debug(e.getMessage());
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
 
     // 상세조회
     @GetMapping("/question-board/see/{titleId}")

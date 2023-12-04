@@ -86,6 +86,13 @@ h4,
 }
 
 
+/* 부가서비스 폰트 굵기 */
+/* .text-center h2 {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "Noto Sans KR", sans-serif;
+} */
+
 
 
 /* 메뉴 active 효과 */
@@ -117,6 +124,23 @@ h4,
 }
 
 
+
+
+/* 체크인이랑 홈이랑 form 곂침 */
+/* .form-control,
+.custom-select {
+  border: 3px solid #e8eaec;
+  font-size: 14px;
+  height: 45px; 
+  margin-top: 30px;
+  color: #979797;
+}
+
+  .form-control:active, .form-control:focus, .custom-select:active, .custom-select:focus {
+    border-color: #1A374D;
+    -webkit-box-shadow: none;
+    box-shadow: none; 
+  } */
 
 
 .gutter-v1 {
@@ -207,6 +231,12 @@ h4,
 /* 메인 메뉴 */
 
 
+
+
+
+/* 공지사항 지우 시작 */
+
+
 /* 공지사항 뒤로가기(목록으로) 버튼 */
 .noticeBackBtn {
   background-color: #1A374D;
@@ -223,14 +253,14 @@ h4,
   margin-left: 550px;
 }
 
-/* 공지사항 상세보기 */
+/* 공지사항 상세조회 지우 끝 */
 
 .noticeTitle {
   text-align: center;
   font-size: 35px;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: bold;
-  padding-right: 70px;
+  padding-right: 20px;
   color: #004489;
   margin-top: 15px;
 }
@@ -273,6 +303,10 @@ h4,
   width: 90%;
   font-size: 14px;
 }
+
+/* 공지사항 상세조회 지우 끝 */
+
+/* 공지사항 지우 끝 */
 
 
 /* ============================================ */
@@ -967,6 +1001,14 @@ h4,
   z-index: 1;
 }
 /* ..untree_co-section ubin */
+.untree_co-section_yb {
+  /* padding: 70px 0; */
+
+  margin-top: 100px;
+  margin-bottom: 170px;
+}
+
+/* ..untree_co-section ubin */
 .untree_co-section {
   /* padding: 70px 0; */
 
@@ -1203,9 +1245,17 @@ h4,
   }
 }
 
-.feature-1-wrap {
+
+/* .feature-1-wrap {
   position: relative;
-}
+} */
+
+
+/* 부가서비스 */
+/* .feature-1 {
+  padding: 30px; */
+  /* 부가서비스 틀 색상 */
+  /* background: rgba(54, 117, 162, 0.164);
 
 
 
@@ -1261,6 +1311,7 @@ h4,
   }
 }
 
+
 .feature-3 {
   /* 고객센터 메뉴 색상 */
   background: rgba(141, 141, 141, 0.534) url(../images/picture3.png) no-repeat;
@@ -1270,6 +1321,11 @@ h4,
   min-height: calc(50% - 15px);
   margin-bottom: 30px !important;
   width: 1000px;
+}
+
+.feature-1 h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 @media (max-width: 991.98px) {
@@ -1906,7 +1962,6 @@ h4,
 .site-footer {
   font-size: 14px;
   color: #777;
-
   line-height: 1.6;
 }
 
@@ -1962,7 +2017,6 @@ h4,
 
 .form-control {
   width: 100%;
-  padding: 10px;
   margin-top: 8px;
 }
 
@@ -2809,7 +2863,9 @@ input {
   border-radius: 5px;
   font-size: 16px;
   height: 50px;
-  width: 130px;
+  width: 350px;
+  margin-top: 18px;
+
   color: #000000;
   float: right;
 }
@@ -2817,6 +2873,13 @@ input {
 .form-search-control:hover {
   background-color: rgba(193, 212, 231, 0.829);
   border: 1px solid rgb(146, 144, 144);
+}
+
+
+/* 항공권 조회 공간 */
+.search-control-gap {
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 
@@ -2895,6 +2958,13 @@ input {
   padding-left: 530px;
   width: 1060px;
 }
+
+
+/* 홈화면 공지사항 페이지 전체 */
+.home-notice-link {
+  margin-left: 20px;
+}
+
 
 /* 공지사항 이동 버튼 */
 .home-notice-link > a {
@@ -3057,16 +3127,45 @@ input {
 
 /* HOME 공지사항 추가 - 지우 시작 */
 
-.homeNoticeTitle {
-  text-align: center;
+.homeNoticeDiv {
+  width: 1300px;
+  margin: 0 auto;
 }
 
-.homeNoticeTitle > a {
+.homeNotice1 {
+  text-align: center;
+  font-size: 18px;
+}
+
+.homeNotice2 {
+  text-align: center;
+  font-size: 14px;
+}
+
+.homeNoticeTitle1 {
+  text-align: center;
+  margin-right: 20px;
+}
+
+.homeNoticeTitle1 > a {
   text-decoration-line: none;
-  font-weight: bold;
   font-size: 35px;
-  font-family: "Inter", sans-serif;
-  color:#004489;
+  font-weight: bold;
+}
+
+.homeNoticeTitle {
+  width: 300px;
+}
+
+.homeNoticeTitleA {
+  width: 300px;
+  text-decoration-line: none;
+  margin-left: 280px;
+  font-weight: bold;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
 }
 /* HOME 공지사항 추가 - 지우 시작 끝 */
 
@@ -3112,6 +3211,27 @@ input {
   border-radius: 10px;
   background-color: rgba(163, 159, 159, 0.24);
 }
+
+.jwNoticeTr {
+  border-top: 2px solid #000;
+  font-size: 20px;
+}
+
+.jwNoticeTitle {
+  width: 700px;
+}
+
+.jwNoticeA {
+  text-decoration-line: none;
+  font-weight: bold;
+  display: block;
+  width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 197px;
+}
+
 
 /* 추가 - 지우 끝 */
 
@@ -3270,9 +3390,27 @@ input {
 
 /* 타이틀 - a태그 */
 .userQuestionTd1 > a {
+  display: block;
   text-decoration-line: none;
+  width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space : nowrap;
+  line-height: 1.2;
+  text-align: center;
+  margin-left: 92px;
 }
 
+/* 1대1 문의 뒤로가기 버튼 */
+.userQuestionBackBtn {
+  background-color:#1A374D;
+  color: white;
+  margin-left: 100px;
+  margin-top: 50px;
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+}
 
 /* 1대1 목록 추가 - 지우 끝 */
 
@@ -3288,7 +3426,7 @@ input {
 
 .userQuestionTitle {
   width: 1050px;
-  height: 50px;
+  height: auto;
   margin: 0 auto;
   font-size: 35px;
   font-weight: bold;
@@ -3508,7 +3646,16 @@ input {
 
 #adminTd1 {
   width: 700px;
-  text-align: center;
+}
+
+.adminTdA {
+  text-decoration-line: none;
+  width: 300px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 196px;
 }
 
 #adminTd2 {
@@ -3586,6 +3733,7 @@ input {
 }
 .passengernameinfo {
   margin-right: 20px;
+  margin-top: 50px;
 }
 .passengerinfobutton {
   float: right;
@@ -3670,11 +3818,12 @@ input {
 /* 예약자 */
 .passengername {
   width: 436px;
+  font-size: 17px;
 }
 
 /* 예약자 공간 */
 .passengername-gap {
-  padding-top: 42px;
+  margin-top: 40px;
 }
 
 .bagcount-button {
@@ -3684,6 +3833,7 @@ input {
 /* 수화물 금액 */
 .bagprice {
   width: 436px;
+  font-size: 17px;
 }
 
 /* 쓰면 안됨 */
@@ -3712,6 +3862,48 @@ input {
   border-radius: 5px;
   margin-top: 8px;
 }
+
+
+/* boardingpass */
+.checkinlog {
+  font-size: 25px;
+  color: #2fdf87;
+  font-weight: 700;
+  text-decoration-line: none;
+  /* 로고 메뉴 텍스트 간격 */
+  margin-right: 200px;
+}
+/* .checkin_reserve_choose_subTitle-d-flex-justify-content-center-mt-3{
+  padding-left: 30px;
+} */
+.container_boardingpass{
+	margin-right: 50px;
+}
+
+/* .row-label{
+  margin-left: 50px;
+}
+ */
+
+
+ /* 체크인 */
+ .nimcheckin{
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: 'Merienda';
+ }
+
+ .checkinInfoh4{
+  font-family: 'IBM Plex Sans KR', sans-serif;
+font-family: 'Merienda';
+font-family: 'Noto Serif KR', serif;
+
+ }
+ .totalbagcount{
+  font-size: 17px;
+ }
+ .totalbagprice{
+  font-size: 17px;
+ }
 
 
 
@@ -3792,6 +3984,7 @@ input {
 
 
 
+
 /* boardingpass */
 .checkinlog {
   font-size: 25px;
@@ -3802,3 +3995,50 @@ input {
   margin-right: 200px;
 }
 
+
+
+
+
+/* 푸터 추가 지우 시작 */
+
+.jwFooterDiv3 {
+  margin-top: 200px;
+}
+
+.heading {
+  text-align: center;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+}
+
+.jwFooterDiv1 {
+  width: 2000px;
+  height: 200px;
+  background-color: #dbdbdb;
+}
+
+.jwFooterDiv2 {
+  width: 1300px;
+  margin: 0 auto;
+  height: 100%;
+  padding-right: 115px;
+  font-family: "Noto Sans KR", sans-serif;
+  padding-top: 30px;
+}
+
+.list-unstyled > li {
+  font-size: 14px;
+  color: black;
+  margin-right: 40px;
+  margin-left: 50px;
+}
+
+.jwFooterDiv4 {
+  width: 450px;
+  margin: 0 auto;
+  height: 100%;
+  padding-left: 70px;
+}
+
+
+/* 푸터 추가 지우 끝 */

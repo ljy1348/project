@@ -5,8 +5,6 @@ import INotice from "../../types/notice/INotice";
 import NoticeService from "../../services/notice/NoticeService";
 
 function Notice() {
-
-
   // 공지사항 객체
   const [notice, setNotice] = useState<Array<INotice>>([]);
 
@@ -21,7 +19,6 @@ function Notice() {
   const [count, setCount] = useState<number>(1);
   const [size, setSize] = useState<number>(10); // 1페이지당개수
 
-
   // 함수 정의
   // TODO: 1) 컴포넌트가 mounted 될때 한번만 실행됨 : useEffect(() => {실행문},[])
   // TODO: 2) 컴포넌트의 변수값이 변할때 실행됨 : useEffect(() => {실행문},[감시변수])
@@ -31,7 +28,6 @@ function Notice() {
 
   //   전체조회 함수
   const retrieveNotice = () => {
-
     NoticeService.getAllNotice(searchSelect, searchKeyword, page - 1, size) // 벡엔드 전체조회요청
       .then((response: any) => {
         const { notice, totalPages } = response.data;
@@ -51,8 +47,6 @@ function Notice() {
     // 여기
     <>
       {/* 추천 여행지, 공지사항 사이 공간 */}
-      <div className="row mb-3"></div>
-
       <div className="container" id="notice-bottom-gap">
       <div className="col-md-12 row">
         <table className="table">
@@ -82,6 +76,41 @@ function Notice() {
         {/* table end */}
       </div>
 
+        {/* <div className="col-md-12 row">
+          <table className="table">
+            <thead>
+              <tr className="homeNotice1">
+                <th scope="col">No</th>
+                <th scope="col" id="home-notice-title">
+                  제목
+                </th>
+                <th scope="col">날짜</th>
+                <th scope="col">작성자</th>
+              </tr>
+            </thead>
+            <tbody>
+              {notice &&
+                notice.map(
+                  (data, idx) =>
+                    idx < 5 && (
+                      <tr className="homeNotice2" key={data.noticeId}>
+                        <td id="homeNoticeNumber">{data.noticeId}</td>
+                        <td id="homeNoticeTitle">
+                          <a href={`/notice/${data.noticeId}`} className="homeNoticeTitleA">
+                            {data.noticeTitle}
+                          </a>
+                        </td>
+                        <td id="homeNoticeTime">{data.insertTime}</td>
+                        <td id="homeNoticeWriter">{data.memberName}</td>
+                      </tr>
+                    )
+                )}
+            </tbody>
+          </table> */}
+
+
+          {/* table end */}
+        </div>
       </div>
       {/* table end */}
     </>
