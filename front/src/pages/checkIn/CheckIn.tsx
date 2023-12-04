@@ -12,6 +12,9 @@ import CheckinService from "../../services/checkin/CheckinService";
 import IReservation from "../../types/reservation/IReservation";
 import ReservationService from "../../services/reservation/ReservationService";
 import ICheckDto from "../../types/checkin/ICheckgetDto";
+import BaggageService from "../../services/baggage/BaggageService";
+import IBaggage from "../../types/baggage/IBaggage";
+import BaggagePaymentModal from "../modal/BaggagePaymentModal";
 // import CheckIn from './CheckIn';
 
 function CheckIn() {
@@ -19,15 +22,19 @@ function CheckIn() {
   const initialReservation = {
     airlineReservationNumber: null,
     seatType: "",
-    checkYn: "N",
+    checkYn: "Y",
     startAirport:"",
-    finalAirport:""
+    finalAirport:"",
+    adultCount:"",
+    childeCount:""
   };
 
   const [checkDto, setCheckDto] = useState<Array<ICheckDto>>([]);
   console.log(checkDto);
 
   const [reservation, setReservation] = useState(initialReservation);
+  const [baggage, setBaggage] = useState<IBaggage>();
+  const [paymentModalShow, setPaymentModalShow] = useState(false);
 
   // 검색어 변수
   const [searchAirlinereservationnumber, setSearchAirlinereservationnumber] =
@@ -49,7 +56,6 @@ function CheckIn() {
     // 백엔드 매개변수 전송 : + 현재페이지(page), 1페이지당개수(pageSize)
     ReservationService.get2(airlineReservationNumber) // 벡엔드로 상세조회 요청
       .then((response: any) => {
-        alert(response.data);
         setReservation(response.data);
         console.log("aa : "+response.data);
       })
@@ -74,16 +80,31 @@ function CheckIn() {
       });
   };
 
+  const getBaggage = (searchAirlinereservationnumber:number) => { 
+    const data = {
+      bagNumber : null,
+      bagPrice : 0,
+      bagCount : 0,
+      airlineReservationNumber : 0,
+      paymentYn : "Y"
+    }
+
+    BaggageService.getReserveNumber(searchAirlinereservationnumber)
+    .then((response:any)=>{console.log(response); setBaggage(response.data);})
+    .catch((e:Error)=>{console.log(e); setBaggage(data)})
+   }
+
   // 조회 버튼 클릭 시 실행
   const onclickButton = () => {
     getReservation(searchAirlinereservationnumber);
     retrieveCheckDto();
+    getBaggage(searchAirlinereservationnumber);
   };
 
   const navi = useNavigate();
 
   const onclickpage = () => {
-    navi(`/passport/${searchAirlinereservationnumber}`);
+    navi(`/passport/${searchAirlinereservationnumber}`, { state: { checkDto: checkDto } });
   };
   return (
     <>
@@ -99,7 +120,7 @@ function CheckIn() {
                 {/* 조회 */}
                 <div className="row">
                   <div className="col-12">
-                    <form className="form-checkin">
+                    <form className="form-checkin" onSubmit={(event)=>{event.preventDefault(); onclickButton()}}>
                       <div className="row">
                         <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
                           <div className="reservation-number">예약번호</div>
@@ -140,8 +161,6 @@ function CheckIn() {
       <div className="untree_co-section_yb">
         <div className="container">
           {/* disable */}
-
-          <button onClick={()=>{console.log(reservation)}}>테스트</button>
           
           {reservation.airlineReservationNumber && (
             
@@ -194,9 +213,19 @@ function CheckIn() {
             </div>
           )}
 
-          <h4 className="checkinInfoh4" style={{ marginTop: "20px" }}>
-            체크인 안내
-          </h4>
+
+        <div className="mx-auto col-12">{baggage && (baggage?.bagPrice > 0 ? <><div className="mx-auto col-12">수하물 : {baggage.paymentYn === 'N' ? <button onClick={()=>{setPaymentModalShow(true)}}>결제</button>:"결제 완료"}</div></> : <></>)}</div>
+        <BaggagePaymentModal
+            show={paymentModalShow}
+            onHide={() => {setPaymentModalShow(false);
+            }}
+            nonMemberModalShow={setPaymentModalShow}
+            bagNumber={baggage ? baggage.bagNumber:0}
+            price={baggage ? baggage.bagPrice:0}
+          />
+        <br></br>
+          <h4>체크인 안내</h4>
+
           <div className="line_row_wrap">
             <dl className="line_row">
               <dt>

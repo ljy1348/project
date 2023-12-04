@@ -603,13 +603,14 @@ function ReserveChoose(props: any) {
 
         <div className="d-flex justify-content-end mt-5 mb-5 no-gutters">
           <div className="d-flex justify-content-end mt-5 no-gutters">
-            <button
+
+            {!currentUser && <button
               className="sangmin_reserve_btn mb-5"
               onClick={onclickpage}
               // disabled={!areAllOptionsSelected()} // 선택 여부에 따라 버튼 활성화/비활성화
             >
               비회원 결제
-            </button>
+            </button>}
           </div>
 
           <button

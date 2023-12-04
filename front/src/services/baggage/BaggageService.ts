@@ -19,6 +19,10 @@ const getBag = (bagId:string) => {
   return http.get<IBaggage>(`/tour/baggage/get/${bagId}`);
 }
 
+const getReserveNumber = (reserveNumber:number) => {
+  return http.get<IBaggage>(`/tour/baggage/reserveNumber/${reserveNumber}`);
+}
+
 const create = (data:IBaggage) => {
     return http.post<IBaggage>(`/tour/baggage`, data);
 }
@@ -27,7 +31,8 @@ const BaggageService = {
   getAll,
   get,
   create,
-  getBag
+  getBag,
+  getReserveNumber
 
 };
 

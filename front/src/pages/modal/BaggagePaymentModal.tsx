@@ -35,7 +35,7 @@ function BaggagePaymentModal(props: any) {
       
       if (props.price) {
         setPrice(props.price);
-        setOrderId(props.id)
+        setOrderId(props.bagNumber)
       }
     },[props])
   

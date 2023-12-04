@@ -131,10 +131,12 @@ public class CheckinService {
         } else if (searchTitle.equals("passportId")) {
             return checkinRepository.findAllByPassportId(Integer.parseInt(searchText), pageable);
         } else {
-            return checkinRepository.findAllBy(pageable);
+            return checkinRepository.selectAllDesc(pageable);
         }
     }
 
 
-
+    public void deleteByReserverNumber(int number) {
+        checkinRepository.deleteByReserveNumber(number);
+    }
 }

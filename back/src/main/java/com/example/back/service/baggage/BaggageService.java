@@ -3,6 +3,8 @@ package com.example.back.service.baggage;
 import com.example.back.model.entity.baggage.Baggage;
 import com.example.back.repository.baggage.BaggageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +43,21 @@ public class BaggageService {
 
     public Optional<Baggage> findById(int id) {
         return baggageRepository.findById(id);
+    }
+
+    public Optional<Baggage> findByReserveId(String reserveNumber) {
+
+        return baggageRepository.findByAirlineReservationNumber(reserveNumber);
+    }
+
+    public Page<Baggage> findByAll(String searchText, Pageable pageable) {
+        if (searchText.equals(""))
+        return baggageRepository.selectAllByOrderByBagNumberDesc(pageable);
+        else return baggageRepository.findAllByAirlineReservationNumber(searchText,pageable);
+    }
+
+    public void deleteByReserveNumber(int reserveNumber) {
+        baggageRepository.deleteByReserveNumber(reserveNumber);
     }
 
 }

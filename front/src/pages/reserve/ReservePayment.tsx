@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ICount from "../../types/reserve/ICount";
 import IRdata from "../../types/reserve/IRdata";
 import OperationInfo from "./../auth/admin/OperationInfo/OperationInfo";
@@ -280,7 +280,7 @@ function ReservePayment() {
   };
 
   // 저장 예약
-  const saveReservation = (
+  const saveReservation = async(
     userNumbersArray: any,
     operation: IOperationinfo
   ) => {
@@ -302,7 +302,7 @@ function ReservePayment() {
 
     const totalPrice = calculateTotalPrice(data.seatType, operation);
 
-    ReservationService.create(data).then((response: any) => {
+    const response:any = await ReservationService.create(data);
       console.log(response.data);
       // 가격 정보를 활용할 수 있도록 원하는 작업 수행
       console.log("가격:", totalPrice);
@@ -322,7 +322,6 @@ function ReservePayment() {
         // console.log(updatedReInfo);
         return updatedReInfo;
       });
-    });
   };
 
   let payInfo1;
@@ -480,6 +479,7 @@ function ReservePayment() {
   // ]);
 
   console.log(totalPrice);
+
 
   // 다른 부분에서 totalPrice를 참조해야 할 때
   // console.log(totalPrice);
