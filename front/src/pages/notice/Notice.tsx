@@ -108,9 +108,6 @@ function Notice() {
             </tbody>
           </table> */}
 
-
-          {/* table end */}
-        </div>
       </div>
       {/* table end */}
     </>

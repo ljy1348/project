@@ -107,7 +107,6 @@ public class CustomerController {
             }
 
 
-            Page<CustomerDto> customerPage = customerService.findTitleLike(title, memberId, pageable);
 
             Map<String, Object> response = new HashMap<>();
             response.put("question", customerPage.getContent());
