@@ -11,8 +11,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import BoardMain from '../admin/board/BoardMain';
 import '../../../assets/css/jy/style_jy.css';
 import AdminPayment from '../admin/AdminPayment';
-import AdminCheckin from '../admin/AdminCheckin';
-import AdminBaggage from '../admin/AdminBaggage';
 
 function AdminPage() {
 
@@ -28,8 +26,8 @@ function AdminPage() {
 
   const tabView = () => {
     if (selectTab==="항공") return <OperationInfoManager setSelectTab={setSelectTab} setDataId={setDataId}/>
-    else if (selectTab==="체크인") return <><AdminCheckin/></>
-    else if (selectTab==="수화물") return <><AdminBaggage/></>
+    else if (selectTab==="체크인") return <>체크인</>
+    else if (selectTab==="수화물") return <>수화물</>
     else if (selectTab==="회원") return <AdminMemberList setSelectTab={setSelectTab} setDataId={setDataId}/>
     else if (selectTab==="회원상세") return <AdminMember setSelectTab={setSelectTab} dataId={dataId}/>
     else if (selectTab==="항공기 추가") return <AddOperationInfo setSelectTab={setSelectTab}/>

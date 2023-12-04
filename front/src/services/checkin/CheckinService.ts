@@ -31,8 +31,6 @@ const create = (data:Array<ICheckin>) => {
 
 
 
-
-
 const CheckinService = {
   getAll,
   get,
