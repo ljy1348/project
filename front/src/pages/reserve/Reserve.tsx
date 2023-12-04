@@ -3,7 +3,7 @@ import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import MyareaModal from "../modal/MyareaModal";
 import ForiareaModal from "../modal/ForiareaModal";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Reserve(props: any) {
   // 출도착 설정
@@ -21,7 +21,17 @@ function Reserve(props: any) {
   // 출발날짜
   const daterange = useRef<HTMLInputElement>(null);
 
-
+  // 선택확인
+  const areAllOptionsSelected = () => {
+    return (
+      selectedAbbr &&
+      selectedFori &&
+      adultCount > 0 &&
+      childCount >= 0 &&
+      daterange.current?.value &&
+      seatClass
+    );
+  };
 
   // 모달 창
   const [modalShow, setModalShow] = useState(false);
@@ -30,9 +40,6 @@ function Reserve(props: any) {
   useEffect(() => {
     initScripts();
     initCustom();
-
-
-
   }, []);
 
   // 인원수 증가 감소 설정
@@ -102,6 +109,10 @@ function Reserve(props: any) {
 
     }
 
+    if (!areAllOptionsSelected()) {
+      alert('모든 요소를 입력해 주세요.');
+      return;
+    }
 
 
     navi(`/reserve-choose/${selectedAbbr}/${selectedFori}/${adultCount}/${childCount}/${seatClass}/${startDate}/${endDate}`)
@@ -387,8 +398,9 @@ function Reserve(props: any) {
 
           <div className="d-flex justify-content-end mt-5 no-gutters">
             <button
-              className="sangmin_reserve_btn"
+              className="sangmin_reserve_btn mb-5"
               onClick={onclickpage}
+              // disabled={!areAllOptionsSelected()} // 선택 여부에 따라 버튼 활성화/비활성화
             >
               항공권 조회
             </button>
@@ -404,6 +416,7 @@ function Reserve(props: any) {
             show={foriModalShow}
             onHide={() => foriSetModalShow(false)}
             onForiAbbrSelect={handleForiAbbrSelection}
+            
           />
 
  

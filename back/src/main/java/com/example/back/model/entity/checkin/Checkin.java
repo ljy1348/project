@@ -26,8 +26,8 @@ import javax.persistence.*;
 @Entity
 @Table(name="TB_CHECKIN")
 @SequenceGenerator(
-        name = "SQ_CHECKIN_GENERATOR"
-        , sequenceName = "SQ_CHECKIN"
+        name = "CHECKIN_SEQ_GENERATOR"
+        , sequenceName = "CHECKIN_SEQ"
         , initialValue = 1
         , allocationSize = 1
 )
@@ -44,11 +44,12 @@ import javax.persistence.*;
 public class Checkin extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE
-            , generator = "SQ_CHECKIN_GENERATOR"
+            , generator = "CHECKIN_SEQ_GENERATOR"
     )
-    private String checkId;
+    private Integer checkId;
+    private String seatNumber;
     private Integer airlineReservationNumber;
-    private String seatType;
     private String passportId;
-    private String memberYn;
 }
+
+

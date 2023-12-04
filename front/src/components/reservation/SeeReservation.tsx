@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import ReservationService from "../../services/reservation/ReservationService";
 import React, { useEffect, useState } from "react";
-import IReservation from "../../types/tour/IReservation";
+import ISearchReservation from "../../types/searchReservation/ISearchReservation";
 
 function SeeReservation() {
   // todo: 변수 정의
@@ -37,14 +37,12 @@ function SeeReservation() {
 
   // reservation 변수
   const [reservation, setReservation] =
-    useState<IReservation>(initialReservation);
+    useState<ISearchReservation>(initialReservation);
 
   const getReservation = (airlineReservationNumber: any) => {
     ReservationService.get(airlineReservationNumber) // 벡엔드로 상세조회 요청
       .then((response: any) => {
         setReservation(response.data);
-        console.log(reservation.airlineReservationNumber);
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);

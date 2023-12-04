@@ -20,6 +20,7 @@ function CuCenter() {
             <div className="col-lg-6 mx-auto text-center">
               <div className="intro-wrap">
                 <h1 className="mb-0">고객 센터</h1>
+                <p className="text-white">문의해주세요.</p>
               </div>
             </div>
           </div>

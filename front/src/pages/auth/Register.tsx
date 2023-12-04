@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useState } from "react";
 import "../../assets/css/login.css";
 // todo: 유효성 체크 lib
-import { Form, ErrorMessage, Field, Formik } from "formik";
+import { Form, ErrorMessage, Field, Formik, useFormikContext } from "formik";
 import * as Yup from "yup";
 import { useAppDispatch } from "../../store/store";
 import IUser from "../../types/auth/IMember";
@@ -35,7 +35,7 @@ function Register() {
     memberEmail: "",
     memberPhone: "",
     memberSex: "male",
-    memberAdd: "",
+    memberAdd: address,
     memberAuth: "ROLE_USER",
     memberDate: "",
     memberCountry: "kor",
@@ -50,7 +50,7 @@ function Register() {
     memberName: Yup.string()
       // 유효성 조건을 개발자 직접 작성하는 함수
       .test(
-        "len",
+        "len2",
         "이름은 2 ~ 20사이에 글자만 입력됩니다.",
         // 유효성 체크 조건
         (val) => {
@@ -63,7 +63,26 @@ function Register() {
           }
           return false;
         }
-      )
+      ).test(
+        "len",
+        "이름은 한글만 입력됩니다.",
+        (val)=>{
+        if (val) {
+          let check = true;
+          for (let i = 0; i < val.length; i++) {
+            if (val.charCodeAt(i) >= 44032 && val.charCodeAt(i) <= 55203) {
+            } else {
+              check = false;
+            }
+          }
+          if (!check) {
+            // alert("이름에는 한글만 들어갈 수 있습니다.")
+            return false;
+          } else {
+            return true;
+          }
+        }
+      })
       .required("필수 입력입니다."), // username 필수 입력
     memberId: Yup.string().test(
       "len",
@@ -79,7 +98,28 @@ function Register() {
         }
         return false;
       }
-    ).required("필수 입력입니다."), // email 필수 입력
+    )
+    .test(
+      "len",
+      "id는 영어 또는 숫자만 입력됩니다.",
+      (val)=>{
+      if (val) {
+        let check = true;
+        for (let i = 0; i < val.length; i++) {
+          if ((val.charCodeAt(i) >= 65 && val.charCodeAt(i) <= 90)||(val.charCodeAt(i) >= 97 && val.charCodeAt(i) <= 122)||(val.charCodeAt(i) >= 48 && val.charCodeAt(i) <= 57)) {
+          } else {
+            check = false;
+          }
+        }
+        if (!check) {
+          // alert("이름에는 한글만 들어갈 수 있습니다.")
+          return false;
+        } else {
+          return true;
+        }
+      }
+    })
+    .required("필수 입력입니다."), // email 필수 입력
     memberPw: Yup.string()
       // 개발자가 직접 유효성 체크 기능을 추가하는 방법
       .test(
@@ -103,8 +143,31 @@ function Register() {
       [Yup.ref("memberPw")],
       "패스워드가 일치하지 않습니다."
     ),
-    memberEmail: Yup.string().email("Invalid email address"),
-    memberPhone: Yup.number().test(
+    memberEmail: Yup.string().email("Invalid email address").required("필수 입력입니다."),
+    memberEname: Yup.string()
+    .test(
+      "len",
+      "id는 영어만 입력됩니다.",
+      (val)=>{
+      if (val) {
+        let check = true;
+        for (let i = 0; i < val.length; i++) {
+          if ((val.charCodeAt(i) >= 65 && val.charCodeAt(i) <= 90)||(val.charCodeAt(i) >= 97 && val.charCodeAt(i) <= 122)) {
+          } else {
+            check = false;
+          }
+        }
+        if (!check) {
+          // alert("이름에는 한글만 들어갈 수 있습니다.")
+          return false;
+        } else {
+          return true;
+        }
+      }
+    })
+    .required("필수 입력입니다."),
+    memberPhone: Yup.number().required("필수 입력입니다.")
+    .test(
       "phone",
       "휴대폰 번호는 10~13자리 입니다.",
       (val) => {
@@ -168,6 +231,7 @@ function Register() {
       });
   };
 
+  
 
   const onChangeDate = (data: any) => {
     setSelectedDate(data);
@@ -390,7 +454,7 @@ function Register() {
 
                           {/* 주소 */}
                           <div className="form-group">
-                            <div>
+                            {/* <div>
                               <input
                                 type="text"
                                 name="memberAdd"
@@ -402,7 +466,26 @@ function Register() {
                                 onClick={setPostCodeView}
                                 value={address}
                               />
-                            </div>
+                            </div> */}
+                            <Field
+                              type="text"
+                              name="memberAdd"
+                              className={
+                                "form-control form-control-user mb-3" +
+                                (address===""
+                                  ? " is-invalid"
+                                  : "")
+                              }
+                              id="exampleName"
+                              placeholder="address"
+                              onClick={setPostCodeView}
+                                value={address}
+                            />
+                            <ErrorMessage
+                              name="memberAdd"
+                              component="div"
+                              className="invalid-feedback"
+                            />
                             <Modal
                               show={addApiView}
                               onHide={() => setAddApiView(false)}

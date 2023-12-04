@@ -655,7 +655,7 @@ function Home() {
         </div>
       </div>
 
-      <h3 className="notice-title">공지사항</h3>
+      <h3 className="homeNoticeTitle"><a href={`/notice`}>공지사항</a></h3>
       <Notice />
 
     </div>

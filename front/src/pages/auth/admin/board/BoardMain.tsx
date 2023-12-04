@@ -1,43 +1,48 @@
-import React from 'react'
-import { Link, Outlet, Route, Routes } from 'react-router-dom'
-import AdminNotice from './AdminNotice'
-import AdminFaq from './AdminFaq'
-import AdminQuestion from './AdminQuestion'
-import AdminNoticeEdit from './AdminNoticeEdit'
+import React, { useEffect, useState } from 'react'
+import { Nav } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store/store';
+import { useNavigate } from 'react-router-dom';
+import AdminNotice from './AdminNotice';
+import AdminNoticeEdit from './AdminNoticeEdit';
 
 function BoardMain() {
-  return (
-    <div>
-        <table className='col-12 mx-auto text-center admin_board_main'>
-            <tr className='col-12'>
-                <td className='text-center col-2'><ul>
-                <Link to={"/admin/notice"}><li className='m-2'>
-                        공지사항
-                        </li></Link>
-                        <Link to={"/admin/faq"}>   <li className='m-2'>
-                    자주 찾는 질문
-                        </li></Link>
-                        <Link to={"/admin/question"}>   <li className='m-2'>
-                    1:1 문의
-                        </li></Link>
-                    
-                    </ul>
-                    </td>
-                <td className='col-10'>
-                    <Routes>
-                    <Route path='/notice' element={<AdminNotice></AdminNotice>}></Route>
-                    <Route path='/faq' element={<AdminFaq></AdminFaq>}></Route>
-                    <Route path='/question' element={<AdminQuestion></AdminQuestion>}></Route>
-                    <Route path='/notice-edit/:id' element={<AdminNoticeEdit/>}></Route>
-                    <Route path='/notice-add' element={<AdminNoticeEdit/>}></Route>
-                    </Routes>
+    const { user: currentUser } = useSelector((state:RootState)=> state.auth);
+  
+    const [selectTab, setSelectTab] = useState("");
+    const navi = useNavigate();
+  
+    useEffect(()=>{
+      if (currentUser?.memberAuth !="ROLE_ADMIN") navi("/");
+    },[])
+  
+    const tabView = () => {
+      if (selectTab==="공지사항 수정/삭제") return <AdminNotice />
+      else if (selectTab==="공지사항 작성") return <AdminNoticeEdit />
+    }
+  
+    return (
+      <div>
+         
+        <div className='container'>
+  
+        <Nav fill variant="tabs" defaultActiveKey="link-0">
+        <Nav.Item>
+  
+          <Nav.Link eventKey="link-0" onClick={()=>{setSelectTab("공지사항 수정/삭제")}}>공지사항 수정/삭제</Nav.Link>
+  
+        </Nav.Item>
+        <Nav.Item>
+  
+          <Nav.Link eventKey="link-1" onClick={()=>{setSelectTab("공지사항 작성")}}>공지사항 작성</Nav.Link>
+  
+        </Nav.Item>
+      </Nav>
+        {tabView()}
+        </div>
+      </div>
+    )
+  }
 
-                <Outlet/>
-                </td>
-                </tr>
-        </table>
-    </div>
-  )
-}
 
 export default BoardMain

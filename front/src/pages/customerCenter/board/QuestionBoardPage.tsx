@@ -2,49 +2,84 @@
 
 import React, { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
-import QuestionBoardService from "../../../services/center/QuestionBoardService";
+import { Link, useNavigate } from "react-router-dom";
 import IQboard from "../../../types/Center/IQboard";
+import CustomerService from "../../../services/customer/CustomerService";
+
+import { RootState } from "../../../store/store";
+import { useSelector } from "react-redux";
+import { Pagination } from "@mui/material";
 
 function QuestionBoardPage() {
-  // let navigate = useNavigate(titleId);
 
   const [question, setQuestion] = useState<Array<IQboard>>([]);
 
-  const [searchTitle, setSearchTitle] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+
+  const navi = useNavigate();
+
+  // 유저 정보 가져오기 함수
+  const { user: currentUser } = useSelector((state: RootState) => state.auth);
+
+  // todo: 공통 페이징 변수 4개
+  // todo: 공통 변수 : page(현재페이지번호), count(총페이지건수), pageSize(3,6,9 배열)
+  const [page, setPage] = useState<number>(1);
+  const [count, setCount] = useState<number>(1);
+  const [size, setSize] = useState<number>(10); // 1페이지당개수
 
   // 함수 정의
   //   화면이 뜰때 실행되는 이벤트 + 감시변수
   useEffect(() => {
     retrieveQuestion(); // 전체조회 실행
-  }, []);
+  }, [page]);
 
   // 전체조회
   const retrieveQuestion = () => {
-    // 벡엔드 매개변수 전송 : + 현재페이지(page), 1페이지당개수(pageSize)
-    QuestionBoardService.getAll(searchTitle) // 벡엔드 전체조회요청
+    if (currentUser?.memberId != undefined && currentUser?.memberId != null)
+    CustomerService.getAll(currentUser.memberId, page - 1, size)
       .then((response: any) => {
-        const { question } = response.data;
+        const { question, totalPages } = response.data;
         setQuestion(question);
-
-        // 로그 출력
+        setCount(totalPages);
         console.log("response", response.data);
       })
       .catch((e: Error) => {
         console.log(e);
       });
   };
+
+  // 검색
+  const searchTitleContaining = () => {
+    if (currentUser?.memberId != undefined && currentUser?.memberId != null)
+    CustomerService.getSearch(title, currentUser.memberId, page -1, size)
+    .then((response: any) => {
+      const { question, totalPages } = response.data;
+        setQuestion(question);
+        setCount(totalPages);
+      console.log("response", response.data);
+    })
+    .catch((e: Error) => {
+      console.log(e);
+    });
+  }
+
+  useEffect(() => {
+    if (!currentUser) navi("/login");
+  }, [currentUser])
+  
+
+  
   //  검색어 수동 바인딩 함수
   const onChangeSearchTitle = (e: any) => {
-    const searchTitle = e.target.value;
-    setSearchTitle(searchTitle);
+    const title = e.target.value;
+    setTitle(title);
   };
 
   const deleteQuestion = (titleId: number) => {
     // QuestionBoardService에서 실제로 삭제를 담당하는 메서드를 사용해야 합니다.
     // 아래는 예시로 작성한 코드입니다.
     // 실제로는 QuestionBoardService에서 제공하는 메서드를 사용해야 합니다.
-    QuestionBoardService.remove(titleId)
+    CustomerService.remove(titleId)
       .then((response: any) => {
         console.log(response.data);
         // 삭제 후 전체 목록을 다시 불러오기
@@ -55,30 +90,12 @@ function QuestionBoardPage() {
       });
   };
 
+  const handlePageChange = (event: any, value: number) => {
+    setPage(value);
+  };
+
   return (
     <div>
-      <div className="row mb-5 justify-content-center">
-        {/* w-50 : 크기 조정, mx-auto : 중앙정렬(margin: 0 auto), justify-content-center */}
-        <div className="col-12 w-50 input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search by ename"
-            value={searchTitle}
-            onChange={onChangeSearchTitle}
-          />
-          <div className="input-group-append">
-            <button
-              className="btn btn-outline-secondary"
-              type="button"
-              onClick={retrieveQuestion}
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-
       {/* 테마 */}
       <div className="hero hero-customer">
         <div className="container">
@@ -94,6 +111,27 @@ function QuestionBoardPage() {
       </div>
       {/* 테마 끝 */}
 
+      <div>
+        {/* w-50 : 크기 조정, mx-auto : 중앙정렬(margin: 0 auto), justify-content-center */}
+        <div className="userQuestionDiv1">
+          <input
+            type="text"
+            className="userQuestionInput"
+            placeholder="제목"
+            value={title}
+            onChange={onChangeSearchTitle}
+          />
+
+          <button
+            className="userQuestionSearchBtn"
+            type="button"
+            onClick={searchTitleContaining}
+          >
+            검색
+          </button>
+        </div>
+      </div>
+
       {/* 본문 시작 */}
       <div className="untree_co-section">
         <div className="container">
@@ -107,36 +145,27 @@ function QuestionBoardPage() {
               {/* table start(본문) */}
               <table className="table">
                 <thead>
-                  <tr className="answer-bold-line">
+                  <tr>
                     <th scope="col">No</th>
-                    <th scope="col">제목</th>
-                    <th scope="col">날짜</th>
-                    <th scope="col">[답변여부]</th>
+                    <th scope="col" className="userQuestionTd1">제목</th>
+                    <th scope="col">문의 일자</th>
+                    <th scope="col">답변 여부</th>
                     <th scope="col">삭제</th>
                   </tr>
                 </thead>
                 <tbody>
                   {question &&
                     question.map((data) => (
-                      // 키값 추가 않하면 react 에서 경고를 추가 : 키는 내부적으로 리액트가 rerending 할때 체크하는 값임
-                      <tr className="line-sorting" key={data.titleId}>
-                        <td id="notice-id-location">{data.titleId}</td>
-                        <td id="notice-title-location">
-                          <a
-                            href={`/question-board/${data.titleId}`}
-                            className="k_jull"
-                          >
-                            [문의내역] {data.title}
-                          </a>
+                      <tr key={data.titleId}>
+                        <td>{data.titleId}</td>
+                        <td className="userQuestionTd1">
+                          <a href={`/question-board/${data.titleId}`}>{data.title}</a>
                         </td>
-                        <td id="notice-insertTime-location">
-                          {data.insertTime}
-                        </td>
-                        <td id="notice-writer-location">{data.answerYn}</td>
+                        <td>{data.insertTime}</td>
+                        {data.answerYn === "N" && currentUser?.memberAuth === "ROLE_ADMIN" ? <td><a href={`/question-board/${data.titleId}`}><button className="userQuestionDeleteBtn">답변달기</button></a></td>:<td>{data.answerYn}</td>}
                         <td>
-                          {/* 삭제 버튼을 누르면 deleteQuestion 함수가 호출됩니다. */}
                           <button
-                            className="btn btn-outline-primary"
+                            className="userQuestionDeleteBtn"
                             onClick={() => deleteQuestion(data.titleId)}
                           >
                             삭제
@@ -146,6 +175,20 @@ function QuestionBoardPage() {
                     ))}
                 </tbody>
               </table>
+              {/* 페이지네이션 시작 */}
+        <div className="noticePageBtn">
+          <Pagination
+            className="my-3"
+            count={count}
+            page={page}
+            siblingCount={1}
+            boundaryCount={1}
+            variant="outlined"
+            shape="rounded"
+            onChange={handlePageChange}
+          />
+        </div>
+        {/* 페이지네이션 끝 */}
               {/* table end */}
             </div>
 

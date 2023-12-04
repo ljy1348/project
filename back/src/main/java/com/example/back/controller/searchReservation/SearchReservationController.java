@@ -1,8 +1,11 @@
 package com.example.back.controller.searchReservation;
 
 
-import com.example.back.model.dto.OprResDto;
-import com.example.back.model.entity.searchReservation.SearchReservation;
+import com.example.back.model.dto.searchReservation.OprResDto;
+import com.example.back.model.dto.reserve.ReservationDto;
+import com.example.back.model.dto.searchReservation.SearchNonMemberDto;
+import com.example.back.model.entity.reserve.Reservation;
+
 
 import com.example.back.service.searchReservation.SearchReservationService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,16 +38,18 @@ public class SearchReservationController {
     @Autowired
     SearchReservationService searchReservationService; // DI
 
-    //    전체 조회 + like 검색
-    @GetMapping("/search-reservation2")
-    public ResponseEntity<Object> getSearchReservation(
-            @RequestParam(defaultValue = "0") int airlineReservationNumber
 
+//    ID 검색
+    @GetMapping("/search-reservation/{memberId}")
+    public ResponseEntity<Object> getAll(
+            @PathVariable String memberId
     ){
         try {
 //            전체 조회 + like 검색
-            List<SearchReservation> list = searchReservationService.findAllByAirlineReservationNumber(airlineReservationNumber);
-                        if (list.isEmpty() == false) {
+            List<ReservationDto> list = searchReservationService.getAll(memberId);
+
+            if (list.isEmpty() == false) {
+
 //                성공
                 return new ResponseEntity<>(list, HttpStatus.OK);
             } else {
@@ -57,9 +62,8 @@ public class SearchReservationController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
     
-//    전체 조회 + like 검색
+//    예약번호 검색
     @GetMapping("/search-reservation")
     public ResponseEntity<Object> getSearchReservation(
             @RequestParam(defaultValue = "0") int airlineReservationNumber,
@@ -67,7 +71,7 @@ public class SearchReservationController {
     ){
         try {
 //            전체 조회 + like 검색
-            List<SearchReservation> list = searchReservationService.findAllByAirlineReservationNumberAndMemberId(airlineReservationNumber, memberId);
+            List<Reservation> list = searchReservationService.findAllByAirlineReservationNumberAndMemberId(airlineReservationNumber, memberId);
 
             if (list.isEmpty() == false) {
 //                성공
@@ -93,6 +97,41 @@ public class SearchReservationController {
     ) {
         try {
             Optional<OprResDto> optionalOprResDto = searchReservationService.searchReservation(airlineReservationNumber);
+
+            if(optionalOprResDto.isEmpty() == false) {
+                return new ResponseEntity<>(optionalOprResDto.get(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/search-reservation/payment/{airlineReservationNumber}")
+    public ResponseEntity<Object> jyGetAirlineReservationNumber(
+            @PathVariable int airlineReservationNumber
+    ) {
+        try {
+            Optional<OprResDto> optionalOprResDto = searchReservationService.jySearchReservation(airlineReservationNumber);
+
+            if(optionalOprResDto.isEmpty() == false) {
+                return new ResponseEntity<>(optionalOprResDto.get(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/search-reservation/non-member")
+    public ResponseEntity<Object> jySearchNonmember(
+            @RequestBody SearchNonMemberDto oprResDto
+    ) {
+        log.info("여기2");
+        try {
+            Optional<OprResDto> optionalOprResDto = searchReservationService.findNonmember(oprResDto);
 
             if(optionalOprResDto.isEmpty() == false) {
                 return new ResponseEntity<>(optionalOprResDto.get(), HttpStatus.OK);
