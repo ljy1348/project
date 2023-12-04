@@ -5,7 +5,7 @@ import { Accordion } from "react-bootstrap";
 import PassportService from "../../services/passport/PassportService";
 
 import { Button } from "@mui/material";
-import { Form, Link, useNavigate, useParams } from "react-router-dom";
+import { Form, Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { ClassNames } from "@emotion/react";
 // import About from './../About';
 import IPassport from "../../types/passport/IPassport";
@@ -46,7 +46,7 @@ function Passport() {
   // 예약좌석
   const [selectedSeatsInfo, setSelectedSeatsInfo] = useState([]);
   // console.log(selectedSeatsInfo)
-  const operID = reservation.operationId;
+  let operID = reservation.operationId;
   const adcount = reservation.adultCount;
   const chcount = reservation.childCount;
 
@@ -71,20 +71,20 @@ function Passport() {
     bagNumber: null,
     bagCount: 0,
     bagPrice: 0,
-    airlineReservationNumber: Number(searchAirlinereservationnumber)
-
+    airlineReservationNumber: Number(searchAirlinereservationnumber),
+    paymentYn:"N"
   };
 
   const initialCheckin = {
     // 여권번호
     checkId: null,
-    seatNumber: "",
+    seatNumber : "",
     airlineReservationNumber: Number(searchAirlinereservationnumber),
-    passportId: "",
+    passportId : ""
   };
 
   // 여권 객체
-  const [passport, setPassport] = useState<IPassport[]>([initialPassport]);
+  const [passport, setPassport] = useState<IPassport[]>([]);
   const [baggage, setBaggage] = useState<IBaggage>(initialBaggage);
   const [checkin, setCheckin] = useState<ICheckin[]>([initialCheckin]);
 
@@ -117,42 +117,39 @@ function Passport() {
     });
   };
 
-  // input 태그에 수동 바인딩
-  const handleInputChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+   // input 태그에 수동 바인딩
+   const handleInputChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target; // 화면 값
-    setBaggage({ ...baggage, [name]: value }); // 변수 저장
+    setBaggage({ ...baggage, [name]: value });  // 변수 저장
   };
 
+
   const getReservation = (airlineReservationNumber: string) => {
-    ReservationService.get(airlineReservationNumber) // 벡엔드로 상세조회 요청
+    ReservationService.get2(airlineReservationNumber) // 벡엔드로 상세조회 요청
       .then((response: any) => {
         setReservation(response.data);
-        console.log(response.data);
+        console.log(response);
       })
       .catch((e: Error) => {
         console.log(e);
       });
   };
 
-  const updateCheckYn = () => {
+  const updateCheckYn = async() => { 
     const updatedReservation = {
       ...reservation,
       checkYn: "Y",
     };
-
-    ReservationService.update(
-      reservation.airlineReservationNumber,
-      updatedReservation
-    )
-      .then((response: any) => {
-        console.log(response.data);
-      })
-      .catch((e: Error) => {
-        console.log(e);
-      });
+  
+    try {
+      const response = await ReservationService.update(reservation.airlineReservationNumber, updatedReservation);
+      console.log(response.data);
+  } catch (e) {
+      console.error(e);
+  }
   };
   //  저장 함수
-  const savePassport = () => {
+  const savePassport = async() => {
     // 임시 객체
     var data = passport;
     // {
@@ -162,69 +159,73 @@ function Passport() {
     //   memberId: passport.memberId,
     // };
 
-    PassportService.create(data)
-      .then((response: any) => {
-        console.log(response.data);
-      })
-      .catch((e: Error) => {
-        console.log(e);
-      });
+    try {
+      var data = passport;
+      const response = await PassportService.create(data);
+      console.log(response.data);
+  } catch (e) {
+      console.error(e);
+  }
   };
 
-  const saveBaggage = () => {
+  let bagNumber = 0;
+
+  const saveBaggage = async() => {
     var data = {
       bagNumber: null,
       bagCount: baggage.bagCount,
       bagPrice: baggage.bagCount * 100000,
-      airlineReservationNumber: Number(searchAirlinereservationnumber)
+      airlineReservationNumber: Number(searchAirlinereservationnumber),
+      paymentYn:"N"
     };
 
     console.log(data);
 
-    BaggageService.create(data)
-      .then((response: any) => {
-        console.log(response.data);
-      })
-      .catch((e: Error) => {
-        console.log(e);
-      });
+    try {
+      const response = await BaggageService.create(data);
+      bagNumber = response.data.bagNumber;
+      // console.log(response.data);
+      // console.log("bagNumber : "+bagNumber)
+  } catch (e) {
+      console.error(e);
+  }
   };
 
-  const saveCheckin = () => {
+  const saveCheckin = async() => {
     // selectedSeatsInfo와 passport 배열이 동일한 길이를 가정합니다.
     console.log(checkin);
     let arr = [];
     for (let i = 0; i < selectedSeatsInfo.length; i++) {
-      let initData: ICheckin = {
+
+      let initData:ICheckin = {
         checkId: null,
-        seatNumber: "",
+        seatNumber : "",
         airlineReservationNumber: 0,
-        passportId: "0123",
-      };
+        passportId : "0123"
+      }
       initData.seatNumber = selectedSeatsInfo[i];
       initData.passportId = passport[i].passportId;
-      initData.airlineReservationNumber = Number(
-        searchAirlinereservationnumber
-      );
+      initData.airlineReservationNumber = Number(searchAirlinereservationnumber);
       arr.push(initData);
     }
-    CheckinService.create(arr)
-      .then((response: any) => {
-        console.log(response.data);
-        // 여기에서 필요한 네비게이션 처리를 추가하세요.
-      })
-      .catch((e: Error) => {
-        console.log(e);
-      });
+
+    try {
+      const response = await CheckinService.create(arr);
+      console.log(response.data);
+  } catch (e) {
+      console.error(e);
+  }
   };
   const navi = useNavigate();
-  const handleSave = () => {
-    savePassport();
-    saveCheckin();
-    saveBaggage();
-    updateCheckYn();
+  const handleSave = async () => {
+    
     if(totalpeople === selectedSeatsInfo.length){
-      navi(`/boardingpass/${operID}/${searchAirlinereservationnumber}/${adcount}/${chcount}/${bagCount1}`)
+      await  savePassport();
+      await saveCheckin();
+      await saveBaggage();
+      await updateCheckYn();
+      await console.log("a");
+      await navi(`/boardingpass/${operID}/${searchAirlinereservationnumber}/${adcount}/${chcount}/${bagCount1}`, {state : {bagNumber}})
     }else{
       alert("좌석을 지정해 주세요")
     }
@@ -235,7 +236,13 @@ function Passport() {
 
   const [array, setArray] = useState<Array<string>>(["a"]);
 
+  let location = useLocation();
+
   useEffect(() => {
+    if (location.state.checkDto) {
+      console.log(location.state.checkDto);
+    }
+
     // 화면이 생성될때 받아온 예약번호를 상세조회하는 조건문
     if (searchAirlinereservationnumber)
       getReservation(searchAirlinereservationnumber);
@@ -256,7 +263,14 @@ function Passport() {
       i < Number(reservation.adultCount) + Number(reservation.childCount);
       i++
     ) {
-      tempArray.push(initialPassport);
+      let data = {...initialPassport};
+      if (location.state.checkDto) {
+        data.userNumber = location.state.checkDto[i].userNumber;
+        console.log(location.state.checkDto[i].userNumber);
+      }
+      tempArray.push(data);
+      console.log(data);
+      console.log(i);
     }
 
     setPassport(tempArray);
@@ -295,6 +309,9 @@ function Passport() {
       }));
     }
   };
+ 
+
+  
 
   // 좌석 저장함수
   const handleSeatsSelected = (selectedSeats: any) => {
@@ -319,7 +336,7 @@ function Passport() {
       </div>
       <Accordion className="testtttttttt1" defaultActiveKey={["0"]} alwaysOpen>
         <Accordion.Item eventKey="0">
-          <Accordion.Header>여권정보</Accordion.Header>
+          <Accordion.Header>여권정보 #1</Accordion.Header>
           <Accordion.Body>
             {/* 여권 정보 입력    */}
             {passport &&
@@ -328,8 +345,31 @@ function Passport() {
                   <form className="form" id="passengerForm">
                     <div className="row mb-2">
                       {/* <div className="col-10"> */}
+                    
+
 
                       <div className="input-group">
+                      <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-3">
+                          <div className="was-validated">
+                            <h6>탑승자 이름</h6>
+                            <input
+                              name={`passportCounrty${idx}`}
+                              type="text"
+                              id={`passportCounrty${idx}`}
+                              className="form-control"
+                              value={location.state.checkDto?location.state.checkDto[idx].userName:""}
+                              placeholder="여권 발급 국가"
+                              onChange={(e) =>
+                                handleInputChange(e, idx, "passportCounrty")
+                              }
+                              disabled
+                              required
+                            />
+                          </div>
+                        </div>
+
+
+
                         <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-3">
                           <div className="was-validated">
                             <h6>여권 발급 국가</h6>
@@ -383,24 +423,7 @@ function Passport() {
                             />
                           </div>
                         </div>
-
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-3">
-                          <div className="was-validated">
-                            <h6>회원 ID</h6>
-                            <input
-                              name={`memberId${idx}`}
-                              type="text"
-                              id={`memberId${idx}`}
-                              className="form-control"
-                              value={val.memberId}
-                              onChange={(e) =>
-                                handleInputChange(e, idx, "memberId")
-                              }
-                              placeholder="회원 ID 입력"
-                              required
-                            />
-                          </div>
-                        </div>
+                     
                       </div>
                     </div>
                   </form>
@@ -419,10 +442,12 @@ function Passport() {
         </Accordion.Item>
         {/* 수화물 사전 구매  */}
         <Accordion.Item eventKey="2">
-          <Accordion.Header>수화물추가 (선택사항)</Accordion.Header>
+          <Accordion.Header>수화물추가 (선택사항) #3</Accordion.Header>
           <Accordion.Body>
             <div className="bagage">
-              <p>기본 수화물 : 휴대수화물 1 (5kg) + 위탁수화물 1(20kg)</p>
+              <p>
+                기본 수화물 : 휴대수화물 1 (5kg) + 위탁수화물 1(20kg) 
+              </p>
               <p>추가 수화물 1인당 2개씩 추가가능 </p>
 
               <table className="table">
@@ -437,9 +462,7 @@ function Passport() {
 
                 <tr>
                   <td className="passengername">
-                    <div className="passengername-gap">
-                      {searchAirlinereservationnumber}
-                    </div>
+                    {searchAirlinereservationnumber}
                   </td>
                   <td className="bagcount">
                     <div
@@ -475,18 +498,17 @@ function Passport() {
                     </div>
                   </td>
                   <td className="bagprice">
-                  <div className="passengername-gap">
-                    {new Intl.NumberFormat("ko-KR").format(bagCount1 * 100000)} ₩
-                    </div>
+
+                    {new Intl.NumberFormat("ko-KR").format(bagCount1 * 100000)}
                   </td>
                 </tr>
 
                 <tr>
                   <td></td>
-                  <td className="totalbagcount">
+                  <td>
                     <strong>총 수량</strong>
                   </td>
-                  <td className="totalbagprice">
+                  <td>
                     <strong>총 금액</strong>
                   </td>
                 </tr>
@@ -500,7 +522,7 @@ function Passport() {
                     <strong>
                       {new Intl.NumberFormat("ko-KR").format(
                         bagCount1 * 100000
-                      )} ₩
+                      )}
                     </strong>
                   </td>
                 </tr>
@@ -531,6 +553,8 @@ function Passport() {
         onSeatsSelected={handleSeatsSelected}
         totalpeople={totalpeople}
         modalShow={modalShow}
+        setModalShow={setModalShow}
+        operationId={operID}
       />
     </>
   );
