@@ -7,6 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
  * packageName : com.example.back.service.reserve
  * fileName : NonMemberInfoService
@@ -40,5 +43,13 @@ public class NonMemberInfoService {
         NonMemberInfo nonMemberInfo2 = nonMemberInfoRepository.save(nonMemberInfo);
 
         return nonMemberInfo2;
+    }
+
+    public Optional<NonMemberInfo> findById(int id) {
+        return nonMemberInfoRepository.findById(id);
+    }
+
+    public List<NonMemberInfo> findAllByUserNameIn(List<Integer> userName) {
+        return nonMemberInfoRepository.findAllByUserNumberIn(userName);
     }
 }

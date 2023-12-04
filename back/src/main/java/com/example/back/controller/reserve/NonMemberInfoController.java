@@ -1,6 +1,7 @@
 package com.example.back.controller.reserve;
 
 import com.example.back.model.entity.reserve.NonMemberInfo;
+import com.example.back.repository.reserve.NonMemberInfoRepository;
 import com.example.back.service.reserve.NonMemberInfoService;
 import com.example.back.service.reserve.OperationInfoService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**

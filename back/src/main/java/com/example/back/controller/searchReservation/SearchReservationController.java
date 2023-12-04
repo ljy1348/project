@@ -143,4 +143,21 @@ public class SearchReservationController {
         }
     }
 
+    @GetMapping("/search-reservation/checkInReservation/{airlineReservationNumber}")
+    public ResponseEntity<Object> smGetAirlineReservationNumber(
+            @PathVariable int airlineReservationNumber
+    ) {
+        try {
+            Optional<OprResDto> optionalOprResDto = searchReservationService.smSearchReservation(airlineReservationNumber);
+
+            if(optionalOprResDto.isEmpty() == false) {
+                return new ResponseEntity<>(optionalOprResDto.get(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

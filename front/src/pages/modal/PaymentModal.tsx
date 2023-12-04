@@ -33,6 +33,7 @@ function PaymentModal(props: any) {
     const { user: currentUser } = useSelector((state:RootState)=> state.auth);
     const [mile, setMile] = useState(0);
     const navi = useNavigate();
+    const [orderId, setOrderId] = useState("");
 
     useEffect(()=>{
       if (props.reInfo.length == 2) {
@@ -40,8 +41,12 @@ function PaymentModal(props: any) {
         setFinalReserveNum(props.reInfo[1].reservenum);
         setStartPay(props.reInfo[0].price);
         setFinalPay(props.reInfo[1].price);
-        setPrice(Number(props.reInfo[0].price)+Number(props.reInfo[1].price))
-        setOriginPrice(Number(props.reInfo[0].price)+Number(props.reInfo[1].price))
+        setPrice(Number(props.reInfo[0].price)+Number(props.reInfo[1].price));
+        setOriginPrice(Number(props.reInfo[0].price)+Number(props.reInfo[1].price));
+        setOrderId(props.reInfo[0].reservenum+"-"+props.reInfo[1].reservenum);
+      } else if (props.price) {
+        setPrice(props.price);
+        setOrderId(props.id)
       }
     },[props])
   
@@ -87,7 +92,7 @@ function PaymentModal(props: any) {
       })
       .catch((e:Error)=>{console.log(e)})
 
-    }, [props,price]) 
+    }, [props, price]) 
   
     useEffect(() => {
       const paymentMethodsWidget = paymentMethodsWidgetRef.current 
@@ -142,7 +147,7 @@ function PaymentModal(props: any) {
         onClick={async () => {
           console.log(price)
           if(price === 0) {
-            navi(`/payment/success?orderId=${startReserveNum}-${finalReserveNum}&paymentKey=${"mile"}&amount=${originPrice}`)
+            navi(`/payment/success?orderId=${orderId}&paymentKey=${"mile"}&amount=${originPrice}`)
             return 
           }
 
@@ -151,7 +156,7 @@ function PaymentModal(props: any) {
           const paymentWidget = paymentWidgetRef.current 
           try {
             await paymentWidget?.requestPayment({
-              orderId: `${startReserveNum}-${finalReserveNum}`,
+              orderId: `${orderId}`,
               orderName: "항공권 예약",
               customerName: "김토스",
               customerEmail: "customer123@gmail.com",

@@ -341,6 +341,7 @@ export default function initCustom() {
         // singleDatePicker: true, // 달력 1개 사용
       });
     }
+    
 
 	
 	// if($('input[name="daterange"]').length) {

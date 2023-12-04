@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+// import NoticeService from "../../services/NoticeService";
+// import INotice from "../../types/INotice";
 import INotice from "../../types/notice/INotice";
 import NoticeService from "../../services/notice/NoticeService";
-
 
 function Notice() {
 
@@ -54,24 +55,26 @@ function Notice() {
 
       <div className="container" id="notice-bottom-gap">
       <div className="col-md-12 row">
-        <table className="table" id="table-bottom-gap">
+        <table className="table">
           <thead>
             <tr className="top-line-bold">
               <th scope="col">No</th>
-              <th scope="col">제목</th>
+              <th scope="col" id="home-notice-title">제목</th>
               <th scope="col">날짜</th>
               <th scope="col">작성자</th>
             </tr>
           </thead>
           <tbody>
             {notice &&
-              notice.map((data) => (
+              notice.map((data, idx) => (
+                idx < 5 &&(
                 <tr className="line-sorting" key={data.noticeId}>
                   <td id="notice-id-location">{data.noticeId}</td>
                   <td id="notice-title-location"><a href={`/notice/${data.noticeId}`}>{data.noticeTitle}</a></td>
                   <td id="notice-insertTime-location">{data.insertTime}</td>
                   <td id="notice-writer-location">{data.memberName}</td>
                 </tr>
+                )
               ))}
           </tbody>
         </table>

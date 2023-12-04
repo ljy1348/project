@@ -63,105 +63,103 @@ function Airport({setShow, set공항}:{setShow:any, set공항:any}) {
             </ul>
           </div> */}
          
-          <div className="flights_list national">
-            <ul className="row">
-              <div className="list_nation">
-                <ul>
-                  <li
-                    className={
-                      "international_list " +
-                      (selectNational == "korea" ? "active" : "")
-                    }
-                    onClick={() => {
-                      onClickNationalList("korea");
-                    }}
-                  >
-                    한국
-                  </li>
-                  <li
-                    className={
-                      "international_list " +
-                      (selectNational == "NortheastAsia" ? "active" : "")
-                    }
-                    onClick={() => {
-                      onClickNationalList("NortheastAsia");
-                    }}
-                  >
-                    동북아시아
-                  </li>
-                  <li
-                    className={
-                      "international_list " +
-                      (selectNational == "SoutheastAsia" ? "active" : "")
-                    }
-                    onClick={() => {
-                      onClickNationalList("SoutheastAsia");
-                    }}
-                  >
-                    동남아시아/서남아시아
-                  </li>
-                  <li
-                    className={
-                      "international_list " +
-                      (selectNational == "Americas" ? "active" : "")
-                    }
-                    onClick={() => {
-                      onClickNationalList("Americas");
-                    }}
-                  >
-                    미주 (미국/캐나다/중남미)
-                  </li>
-                  <li
-                    className={
-                      "international_list " +
-                      (selectNational == "Europe" ? "active" : "")
-                    }
-                    onClick={() => {
-                      onClickNationalList("Europe");
-                    }}
-                  >
-                    유럽
-                  </li>
-                  <li
-                    className={
-                      "international_list " +
-                      (selectNational == "Oceanstate" ? "active" : "")
-                    }
-                    onClick={() => {
-                      onClickNationalList("Oceanstate");
-                    }}
-                  >
-                    대양주/괌/사이판/팔라우
-                  </li>
-                  <li
-                    className={
-                      "international_list " +
-                      (selectNational == "CentralAsia" ? "active" : "")
-                    }
-                    onClick={() => {
-                      onClickNationalList("CentralAsia");
-                    }}
-                  >
-                    몽골/중앙아시아
-                  </li>
+         <div className="flights_list national row no-gutters r">
+            <div className="list_nation col">
+              <ul>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "korea" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("korea");
+                  }}
+                >
+                  한국
+                </li>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "NortheastAsia" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("NortheastAsia");
+                  }}
+                >
+                  동북아시아
+                </li>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "SoutheastAsia" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("SoutheastAsia");
+                  }}
+                >
+                  동남아시아/서남아시아
+                </li>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "Americas" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("Americas");
+                  }}
+                >
+                  미주 (미국/캐나다/중남미)
+                </li>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "Europe" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("Europe");
+                  }}
+                >
+                  유럽
+                </li>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "Oceanstate" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("Oceanstate");
+                  }}
+                >
+                  대양주/괌/사이판/팔라우
+                </li>
+                <li
+                  className={
+                    "international_list " +
+                    (selectNational == "CentralAsia" ? "active" : "")
+                  }
+                  onClick={() => {
+                    onClickNationalList("CentralAsia");
+                  }}
+                >
+                  몽골/중앙아시아
+                </li>
+              </ul>
+              <div></div>
+            </div>
+            <div className="list_airport col">
+              <div className="international_listbox" ref={listBox}>
+                <ul className="city_list mx-auto">
+                  {airportList.map((val, idx) => {
+                    return (
+                      <li key={idx} onClick={() => selectedAirport(val.abbr)}>
+                        <span className="cname">{val.cname}</span>
+                        <span className="abbr">{val.abbr}</span>
+                      </li>
+                    );
+                  })}
                 </ul>
-                <div></div>
               </div>
-              <div className="list_airport col">
-                <div className="international_listbox" ref={listBox}>
-                  <ul className="city_list col-12 mx-auto">
-                    {airportList.map((val, idx) => {
-                      return (
-                        <li key={idx} onClick={() => selectedAirport(val.abbr)}>
-                          <span className="cname">{val.cname}</span>
-                          <span className="abbr">{val.abbr}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
-            </ul>
+            </div>
           </div>
         </div>
       </div>

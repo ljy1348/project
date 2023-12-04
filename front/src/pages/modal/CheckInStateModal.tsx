@@ -131,7 +131,6 @@ function CheckInStateModal(props: any) {
                   <td>
                     <Button
                       name="checkinbutton"
-                      // variant="primary"
                       onClick={handleCheckinButtonClick}
                     >
                       체크인

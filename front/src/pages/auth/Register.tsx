@@ -3,7 +3,7 @@ import "../../assets/css/login.css";
 // todo: 유효성 체크 lib
 import { Form, ErrorMessage, Field, Formik, useFormikContext } from "formik";
 import * as Yup from "yup";
-import { useAppDispatch } from "../../store/store";
+import { RootState, useAppDispatch } from "../../store/store";
 import IUser from "../../types/auth/IMember";
 import { register } from "../../store/slices/auth";
 import DatePicker from "react-datepicker";
@@ -12,8 +12,13 @@ import DaumPostcode from "react-daum-postcode";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
 import { Popover, OverlayTrigger, Button, Modal } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+
+  const { isLoggedIn } = useSelector((state: RootState)=> state.auth);
+
   // todo: 변수 정의
   // 회원생성 성공 여부 변수
   const [successful, setSuccessful] = useState<boolean>(false);
@@ -22,7 +27,11 @@ function Register() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [address, setAddress] = useState("");
   const [addApiView, setAddApiView] = useState(false);
-
+  const navi = useNavigate();
+  
+  if (isLoggedIn) {
+    navi(-1);
+  }
   // todo: 공유저장소 공유함수(register) 가져오기
   const dispatch = useAppDispatch();
 
@@ -429,11 +438,6 @@ function Register() {
                                 </option>
                                 <option value="female">여자</option>
                               </Field>
-                              <ErrorMessage
-                                name="memberName"
-                                component="div"
-                                className="invalid-feedback"
-                              />
                             </div>
                             <div className="col-sm-6">
                               <DatePicker

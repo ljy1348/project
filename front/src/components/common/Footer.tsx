@@ -1,11 +1,34 @@
-// components/common/Footer.tsx : rfce
-import React from "react";
+import { useEffect, useState } from "react";
 
 function Footer() {
+  const [showButton, setShowButton] = useState(false);
+
+  const scrollToTop = () => {
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+  useEffect(() => {
+    const handleShowButton = () => {
+      // 스크롤 길이
+      window.scrollY > 150 ? setShowButton(true) : setShowButton(false);
+    };
+
+    console.log(window.scrollY);
+    window.addEventListener("scroll", handleShowButton);
+    return () => {
+      window.removeEventListener("scroll", handleShowButton);
+    };
+  }, []);
+
   return (
     <>
-      {/* 여기 */}
-      {/* <!-- 꼬리말 시작 --> */}
+      {showButton && (
+        <div className="scroll-top-move">
+          <img src="/images/top-button.png" className="button-click-top-move" onClick={scrollToTop} />
+        </div>
+      )}
       <div className="site-footer">
         <div className="inner first">
           <div className="container">
@@ -122,8 +145,8 @@ function Footer() {
               <div className="col-md-8 mb-3 mb-md-0 mx-auto">
                 <p>
                   Copyright &copy;
-                  {new Date().getFullYear()}.
-                  All Rights Reserved. &mdash; Designed with love by{" "}
+                  {new Date().getFullYear()}. All Rights Reserved. &mdash;
+                  Designed with love by{" "}
                   <a href="https://untree.co" className="link-highlight">
                     Untree.co
                   </a>{" "}
@@ -139,12 +162,10 @@ function Footer() {
       </div>
       {/* <!-- 꼬리말 끝 --> */}
       {/* <div id="overlayer"></div>
-
       <div className="loader">
         <div className="spinner-border" role="status">
           <span className="sr-only">Loading...</span>
         </div>
-
       </div> */}
     </>
   );

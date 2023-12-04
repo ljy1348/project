@@ -47,6 +47,9 @@ function QuestionContent() {
     }
   }, [titleId]);
 
+  useEffect(() => {
+    if (!currentUser) navigate("/login");
+  }, [currentUser])
 
   const answerTextSave = () => {
 
