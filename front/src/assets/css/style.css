@@ -3050,16 +3050,44 @@ input {
 
 /* HOME 공지사항 추가 - 지우 시작 */
 
-.homeNoticeTitle {
+.homeNoticeDiv {
+  width: 1300px;
+  margin: 0 auto;
+}
+
+.homeNotice1 {
+  text-align: center;
+  font-size: 18px;
+}
+
+.homeNotice2 {
+  text-align: center;
+  font-size: 14px;
+}
+
+.homeNoticeTitle1 {
   text-align: center;
 }
 
-.homeNoticeTitle > a {
+.homeNoticeTitle1 > a {
   text-decoration-line: none;
-  font-weight: bold;
   font-size: 35px;
-  font-family: "Inter", sans-serif;
-  color:#004489;
+  font-weight: bold;
+}
+
+.homeNoticeTitle {
+  width: 300px;
+}
+
+.homeNoticeTitleA {
+  width: 300px;
+  text-decoration-line: none;
+  margin-left: 280px;
+  font-weight: bold;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
 }
 /* HOME 공지사항 추가 - 지우 시작 끝 */
 
@@ -3105,6 +3133,27 @@ input {
   border-radius: 10px;
   background-color: rgba(163, 159, 159, 0.24);
 }
+
+.jwNoticeTr {
+  border-top: 2px solid #000;
+  font-size: 20px;
+}
+
+.jwNoticeTitle {
+  width: 700px;
+}
+
+.jwNoticeA {
+  text-decoration-line: none;
+  font-weight: bold;
+  display: block;
+  width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 197px;
+}
+
 
 /* 추가 - 지우 끝 */
 
@@ -3263,7 +3312,16 @@ input {
 
 /* 타이틀 - a태그 */
 .userQuestionTd1 > a {
+  
+  display: block;
   text-decoration-line: none;
+  width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space : nowrap;
+  line-height: 1.2;
+  text-align: center;
+  margin-left: 92px;
 }
 
 
@@ -3281,7 +3339,7 @@ input {
 
 .userQuestionTitle {
   width: 1050px;
-  height: 50px;
+  height: auto;
   margin: 0 auto;
   font-size: 35px;
   font-weight: bold;
@@ -3501,7 +3559,16 @@ input {
 
 #adminTd1 {
   width: 700px;
-  text-align: center;
+}
+
+.adminTdA {
+  text-decoration-line: none;
+  width: 300px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 196px;
 }
 
 #adminTd2 {
