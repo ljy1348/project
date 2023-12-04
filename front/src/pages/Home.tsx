@@ -611,17 +611,12 @@ function Home() {
             </div>
           </div>
 
-          <div className="owl-carousel owl-3-slider" >
+          <div className="owl-carousel owl-3-slider">
             {/* 1 */}
-            <div className="item" style={{height:"592.125px"}}>
-
+            <div className="item" style={{height:"600px"}}>
               <a href={`/reserve-choose/ICN/SFO/1/0/이코노미/${departureDate}/${arrivalDate}`}
-
                 className="media-thumb"
               >
-                <div className="media-text">
-                  <h3>골든게이트 교</h3>
-                </div>
                 <img
                   src="images/hero-slider-1.jpg"
                   alt="Image"
@@ -642,9 +637,6 @@ function Home() {
               <a href={`/reserve-choose/ICN/PEK/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
-                <div className="media-text">
-                  <h3>베이징</h3>
-                </div>
                 <img
                   src="images/베이징.jpg"
                   alt="Image"
@@ -665,9 +657,6 @@ function Home() {
               <a href={`/reserve-choose/ICN/SPN/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
-                <div className="media-text">
-                  <h3>롤라우 비치</h3>
-                </div>
                 <img
                   src="images/사이판.jpg"
                   alt="Image"
@@ -688,9 +677,6 @@ function Home() {
               <a href={`/reserve-choose/ICN/LAX/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
-                <div className="media-text">
-                  <h3>할리우드</h3>
-                </div>
                 <img
                   src="images/할리우드.jpg"
                   alt="Image"
@@ -711,9 +697,6 @@ function Home() {
               <a href={`/reserve-choose/ICN/LHR/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
-                <div className="media-text">
-                  <h3>빅 벤</h3>
-                </div>
                 <img
                   src="images/hero-slider-5.jpg"
                   alt="Image"
@@ -734,9 +717,6 @@ function Home() {
               <a href={`/reserve-choose/ICN/KIX/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
-                <div className="media-text">
-                  <h3>오사카성</h3>
-                </div>
                 <img
                   src="images/오사카성.jpg"
                   alt="Image"
@@ -755,15 +735,22 @@ function Home() {
         </div>
       </div>
 
-
-      <div className="homeNoticeDiv">
-        <h3 className="homeNoticeTitle1"><a href={`/notice`}>공지사항</a></h3>
-
+      <div className="container">
+        <div className="col-md-12 row">
+          <h3 className="homeNoticeTitle"><a href={`/notice`}>공지사항</a></h3>
           <div className="home-notice-link">
             <Link to={"/notice"}>+</Link>
-            <Notice />
+          </div>
         </div>
       </div>
+
+      <Notice />
+      {/* <a
+        href="#"
+        className="back-to-top d-flex align-items-center justify-content-center"
+      >
+        <i className="bi bi-arrow-up-short button-click-top-move"></i>
+      </a> */}
     </div >
   );
 }
