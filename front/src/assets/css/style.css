@@ -236,6 +236,10 @@ h4,
 /* 메인 메뉴 */
 
 
+
+
+/* 공지사항 지우 시작 */
+
 /* 공지사항 뒤로가기(목록으로) 버튼 */
 .noticeBackBtn {
   background-color: #1A374D;
@@ -252,14 +256,14 @@ h4,
   margin-left: 550px;
 }
 
-/* 공지사항 상세보기 */
+/* 공지사항 상세조회 지우 끝 */
 
 .noticeTitle {
   text-align: center;
   font-size: 35px;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: bold;
-  padding-right: 70px;
+  padding-right: 20px;
   color: #004489;
   margin-top: 15px;
 }
@@ -302,6 +306,10 @@ h4,
   width: 90%;
   font-size: 14px;
 }
+
+/* 공지사항 상세조회 지우 끝 */
+
+/* 공지사항 지우 끝 */
 
 
 /* ============================================ */
@@ -1940,7 +1948,6 @@ h4,
 
 .form-control {
   width: 100%;
-  padding: 10px;
   margin-top: 8px;
 }
 
@@ -2879,6 +2886,11 @@ input {
   width: 1060px;
 }
 
+/* 홈화면 공지사항 페이지 전체 */
+.home-notice-link {
+  margin-left: 20px;
+}
+
 /* 공지사항 이동 버튼 */
 .home-notice-link > a {
   float: right;
@@ -3055,6 +3067,32 @@ input {
 
 
 /* HOME 공지사항 추가 - 지우 시작 */
+
+.homeNoticeDiv {
+  width: 1300px;
+  margin: 0 auto;
+}
+
+.homeNotice1 {
+  text-align: center;
+  font-size: 18px;
+}
+
+.homeNotice2 {
+  text-align: center;
+  font-size: 14px;
+}
+
+.homeNoticeTitle1 {
+  text-align: center;
+  margin-right: 20px;
+}
+
+.homeNoticeTitle1 > a {
+  text-decoration-line: none;
+  font-size: 35px;
+  font-weight: bold;
+}
 
 .homeNoticeTitle {
   text-align: center;
