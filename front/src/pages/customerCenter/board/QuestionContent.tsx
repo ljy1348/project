@@ -41,11 +41,16 @@ function QuestionContent() {
         console.log(e);
       });
   };
+
   useEffect(() => {
     if (titleId) {
       getQuestion(titleId);
     }
   }, [titleId]);
+
+  useEffect(() => {
+    if (!currentUser) navigate("/login");
+  }, [currentUser])
 
 
   const answerTextSave = () => {
