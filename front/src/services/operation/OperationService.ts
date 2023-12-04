@@ -37,14 +37,12 @@ const get = (operationId: any) => {
   return http.get<IOperationinfo>(`/tour/reserve/${operationId}`);
 };
 
-
-
-
-
-
 const OperationService = {
   getAll,
-  get
+  get,
+  //   create,
+  //   update,
+  //   remove,
 };
 
 export default OperationService;

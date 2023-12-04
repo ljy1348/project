@@ -67,7 +67,6 @@ function AddboardList() {
 
       .then((response: any) => {
         console.log(response.data);
-        navi(`/question-board`);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -78,6 +77,7 @@ function AddboardList() {
 
   const Onclinkev = () => {
     saveQuestion();
+    navi(`/question-board`);
   };
 
   return (

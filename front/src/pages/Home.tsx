@@ -753,15 +753,22 @@ function Home() {
         </div>
       </div>
 
-
-      <div className="homeNoticeDiv">
-        <h3 className="homeNoticeTitle1"><a href={`/notice`}>공지사항</a></h3>
-
+      <div className="container">
+        <div className="col-md-12 row">
+          <h3 className="homeNoticeTitle"><a href={`/notice`}>공지사항</a></h3>
           <div className="home-notice-link">
             <Link to={"/notice"}>+</Link>
-            <Notice />
+          </div>
         </div>
       </div>
+
+      <Notice />
+      {/* <a
+        href="#"
+        className="back-to-top d-flex align-items-center justify-content-center"
+      >
+        <i className="bi bi-arrow-up-short button-click-top-move"></i>
+      </a> */}
     </div >
   );
 }

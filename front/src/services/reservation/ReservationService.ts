@@ -1,6 +1,5 @@
 // ReservationService.ts : axios 공통 crud 함수
 
-import IReservation from "../../types/reservation/IReservation";
 import IReserve from "../../types/reserve/IReserve";
 import ISearchReservation from "../../types/searchReservation/ISearchReservation";
 import http from "../../utils/http-common";
@@ -27,21 +26,6 @@ const get = (airlineReservationNumber: any) => {
 };
 
 
-// 유빈 
-const getChseat = (airlineReservationNumber: any) => {
-  return http.get<IReservation>(`/tour/boardingpass/${airlineReservationNumber}`);
-}
-
-// 상세 조회
-const get2 = (airlineReservationNumber: any) => {
-
-  // return http.get<IReservation>(`/tour/search-reservation/payment/${airlineReservationNumber}`);
-
-  return http.get<ISearchReservation>(`/tour/search-reservation/checkInReservation/${airlineReservationNumber}`);
-};
-
-
-
 // 상민
 
 // 전체 조회 + like 검색(paging 기능 : page(현재페이지), size(1페이지당개수))
@@ -52,11 +36,6 @@ const getAllSeat = (seatType:string, page:number, size:number) => {
 // 저장함수
 const create = (data:IReserve) => {
   return http.post<IReserve>("/tour/reservation", data);
-};
-
-// 수정 함수
-const update = (airlineReservationNumber:any, data:IReserve) => {
-  return http.put<any>(`/tour/reservation/${airlineReservationNumber}`, data);
 };
 
 // 주영
@@ -72,14 +51,11 @@ const findNonMember = (data:any) => {
 const ReservationService = {
   getAll,
   gett,
-  getChseat,
   get,
   create,
   getAllSeat,
   deleteRoundTrip,
-  findNonMember,
-  update,
-  get2
+  findNonMember
 };
   
 export default ReservationService;

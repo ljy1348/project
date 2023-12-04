@@ -139,17 +139,11 @@ function ReservePayment() {
   // modalcontrol
   const [modalShow, setModalShow] = useState(false);
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
     let { name, value } = event.target;
-
-
-
     if (name === "radio+" + index) name = "userSex";
     setNonmemberinfo((prevNonmemberinfo) => {
       const updatedNonmemberinfo = [...prevNonmemberinfo];
@@ -159,7 +153,6 @@ function ReservePayment() {
       };
       return updatedNonmemberinfo;
     });
-
   };
 
   const handleBirthdateChange = (idx: number) => {
@@ -193,7 +186,7 @@ function ReservePayment() {
     const endYear = currentYear; // 18세까지 허용
 
     const yearOptions = [];
-    for (let year = endYear; year >= startYear; year--) {
+    for (let year = startYear; year <= endYear; year++) {
       yearOptions.push(
         <option key={year} value={year}>
           {year}
@@ -331,15 +324,6 @@ function ReservePayment() {
   const handlePayment = async () => {
     const userNumbersArray = await saveNonmemberinfo();
 
-    
-   for (let i = 0; i < nonmemberinfo.length; i++) {
-     
-     if (!emailRegex.test(nonmemberinfo[i].userEmail)) {
-     console.error('유효하지 않은 이메일 형식입니다.');
-     alert("이메일을 확인해 주세요")
-       return;
-      }
-    }
 
 
     if (userNumbersArray.length >= Number(adultCount)+Number(childCount)) {
@@ -790,7 +774,6 @@ function ReservePayment() {
                             </label>
                           </div>
                           {/* 전화번호 입력창 */}
-                          <div className="col-9">
                           <input
                             type="number"
                             id="userPhone"
@@ -801,7 +784,6 @@ function ReservePayment() {
                             placeholder="번호만 입력해 주세요"
                             name="userPhone"
                           />
-                          </div>
                         </div>
                         {/* 이메일 입력 */}
                         <div className="row g-3 align-items-center mb-3">
@@ -817,7 +799,7 @@ function ReservePayment() {
                           {/* 이메일 입력창 */}
                           <div className="col-9">
                             <input
-                              type="email"
+                              type="text"
                               id="userEmail"
                               required
                               className="form-control"
