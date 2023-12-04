@@ -120,7 +120,7 @@ function Login() {
   // isLoggedIn = true (로그인 상태변수(true/false))
   // 강제로 /home 이동
   if(isLoggedIn) {
-    navigate(-1); // 강제 페이지 이동
+    navigate("/"); // 강제 페이지 이동
   }
 
   // 로그인 버튼 클릭시 실행되는 함수 : submit(Formit)
