@@ -1893,7 +1893,6 @@ h4,
 .site-footer {
   font-size: 14px;
   color: #777;
-
   line-height: 1.6;
 }
 
@@ -3315,7 +3314,6 @@ input {
 
 /* 타이틀 - a태그 */
 .userQuestionTd1 > a {
-  
   display: block;
   text-decoration-line: none;
   width: 400px;
@@ -3327,6 +3325,16 @@ input {
   margin-left: 92px;
 }
 
+/* 1대1 문의 뒤로가기 버튼 */
+.userQuestionBackBtn {
+  background-color:#1A374D;
+  color: white;
+  margin-left: 100px;
+  margin-top: 50px;
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+}
 
 /* 1대1 목록 추가 - 지우 끝 */
 
@@ -3865,3 +3873,46 @@ input {
   margin-right: 200px;
 }
 
+/* 푸터 추가 지우 시작 */
+
+.jwFooterDiv3 {
+  margin-top: 200px;
+}
+
+.heading {
+  text-align: center;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+}
+
+.jwFooterDiv1 {
+  width: 2000px;
+  height: 200px;
+  background-color: #dbdbdb;
+}
+
+.jwFooterDiv2 {
+  width: 1300px;
+  margin: 0 auto;
+  height: 100%;
+  padding-right: 115px;
+  font-family: "Noto Sans KR", sans-serif;
+  padding-top: 30px;
+}
+
+.list-unstyled > li {
+  font-size: 14px;
+  color: black;
+  margin-right: 40px;
+  margin-left: 50px;
+}
+
+.jwFooterDiv4 {
+  width: 450px;
+  margin: 0 auto;
+  height: 100%;
+  padding-left: 70px;
+}
+
+
+/* 푸터 추가 지우 끝 */
