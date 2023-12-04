@@ -1,6 +1,7 @@
 package com.example.back.controller.checkin;
 
 
+import com.example.back.model.dto.checkin.CheckgetDto;
 import com.example.back.model.dto.checkin.CheckinDto;
 import com.example.back.model.entity.checkin.Checkin;
 
@@ -132,6 +133,28 @@ public class CheckinController {
         }
     }
 
+    @GetMapping("/checkin2/{airlineReservationNumber}")
+    public ResponseEntity<Object>  check(
+            @PathVariable int airlineReservationNumber
+    ){
+        try {
+            List<CheckgetDto> checkinOptional
+
+                    // Optional<checkindto> checkinOptional
+                    = checkinService.searchCheckin(airlineReservationNumber);
+
+            if (checkinOptional.isEmpty() == false) {
+//                성공
+                return new ResponseEntity<>(checkinOptional, HttpStatus.OK);
+            } else {
+//                데이터 없음
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        }catch (Exception e) {
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 }

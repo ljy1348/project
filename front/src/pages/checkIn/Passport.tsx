@@ -18,7 +18,7 @@ import ReservationService from "../../services/reservation/ReservationService";
 import SelectSeat from "../modal/SelectSeat";
 // import ICheckin from "../../types/checkin/ICheckin";
 import CheckinService from "../../services/checkin/CheckinService";
-import ICheckin from "../../types/checkin/IResOperation";
+import ICheckin from "../../types/checkin/ICheckin";
 
 function Passport() {
   // 모달 창
@@ -33,7 +33,7 @@ function Passport() {
     adultCount: 0,
     childCount: 0,
     mileUseYn: "N",
-    seatType: "이코노미",
+    seatType: "",
     memberYn: "N",
     memberId: "",
     userNumber: "",
@@ -79,7 +79,7 @@ function Passport() {
     checkId: null,
     seatNumber : "",
     airlineReservationNumber: Number(searchAirlinereservationnumber),
-    passportId : "0123"
+    passportId : ""
   };
 
   // 여권 객체
@@ -100,16 +100,18 @@ function Passport() {
   ) => {
     const { value } = event.target;
     console.log(fieldName, passportIndex, value);
-
+  
     setPassport((prevPassport) => {
       const updatedPassports = [...prevPassport];
+      const currentReservation = reservation || {}; // Ensure reservation is not null
+      const userNumberArray = currentReservation.userNumber?.split(",") || [];
+  
       updatedPassports[passportIndex] = {
         ...updatedPassports[passportIndex],
         [fieldName]: value,
-        // passportIndex에 해당하는 위치의 userNumber를 할당
-        userNumber:
-          parseInt(reservation.userNumber.split(",")[passportIndex]) || 0,
+        userNumber: parseInt(userNumberArray[passportIndex]) || 0,
       };
+  
       return updatedPassports;
     });
   };
@@ -125,6 +127,21 @@ function Passport() {
     ReservationService.get(airlineReservationNumber) // 벡엔드로 상세조회 요청
       .then((response: any) => {
         setReservation(response.data);
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
+
+  const updateCheckYn = () => { 
+    const updatedReservation = {
+      ...reservation,
+      checkYn: "Y",
+    };
+  
+    ReservationService.update(reservation.airlineReservationNumber, updatedReservation)
+      .then((response: any) => {
         console.log(response.data);
       })
       .catch((e: Error) => {
@@ -202,8 +219,13 @@ function Passport() {
     savePassport();
     saveCheckin();
     saveBaggage();
+    updateCheckYn();
 
-    navi(`/boardingpass/${operID}/${searchAirlinereservationnumber}/${adcount}/${chcount}/${bagCount1}`)
+    if(totalpeople === selectedSeatsInfo.length){
+      navi(`/boardingpass/${operID}/${searchAirlinereservationnumber}/${adcount}/${chcount}/${bagCount1}`)
+    }else{
+      alert("좌석을 지정해 주세요")
+    }
   };
 
   // todo: 수화물 저장할 변수
@@ -271,6 +293,9 @@ function Passport() {
       }));
     }
   };
+ 
+
+  
 
   // 좌석 저장함수
   const handleSeatsSelected = (selectedSeats: any) => {
@@ -391,7 +416,7 @@ function Passport() {
         {/* 좌석지정 */}
         <Accordion.Item eventKey="1">
           <Accordion.Header onClick={() => setModalShow(true)}>
-            좌석 선택 선택된 좌석: {selectedSeatsInfo.join(" ")}
+            좌석 선택 / 선택된 좌석: {selectedSeatsInfo.join(" ")}
           </Accordion.Header>
         </Accordion.Item>
         {/* 수화물 사전 구매  */}
@@ -400,8 +425,7 @@ function Passport() {
           <Accordion.Body>
             <div className="bagage">
               <p>
-                기본 수화물 : 휴대수화물 1 (5kg) + 위탁수화물 1(20kg) 추가없이는
-                위탁 1 + 휴대 1
+                기본 수화물 : 휴대수화물 1 (5kg) + 위탁수화물 1(20kg) 
               </p>
               <p>추가 수화물 1인당 2개씩 추가가능 </p>
 

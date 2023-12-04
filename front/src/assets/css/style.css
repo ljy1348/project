@@ -3006,22 +3006,6 @@ input {
   padding-bottom: 30px;
 }
 
-.test1 {
-  padding-top: 10px;
-  margin-left: 50px;
-}
-
-.test2 {
-  padding-top: 10px;
-  margin-left: 110px;
-}
-
-.btn1 {
-  width: 365px;
-  margin: 0 auto;
-  margin-top: 30px;
-}
-
 .searchReservationBtn {
   width: 200px;
   height: 40px;
@@ -3056,16 +3040,44 @@ input {
 
 /* HOME 공지사항 추가 - 지우 시작 */
 
-.homeNoticeTitle {
+.homeNoticeDiv {
+  width: 1300px;
+  margin: 0 auto;
+}
+
+.homeNotice1 {
+  text-align: center;
+  font-size: 18px;
+}
+
+.homeNotice2 {
+  text-align: center;
+  font-size: 14px;
+}
+
+.homeNoticeTitle1 {
   text-align: center;
 }
 
-.homeNoticeTitle > a {
+.homeNoticeTitle1 > a {
   text-decoration-line: none;
-  font-weight: bold;
   font-size: 35px;
-  font-family: "Inter", sans-serif;
-  color:#004489;
+  font-weight: bold;
+}
+
+.homeNoticeTitle {
+  width: 300px;
+}
+
+.homeNoticeTitleA {
+  width: 300px;
+  text-decoration-line: none;
+  margin-left: 280px;
+  font-weight: bold;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
 }
 /* HOME 공지사항 추가 - 지우 시작 끝 */
 
@@ -3111,6 +3123,27 @@ input {
   border-radius: 10px;
   background-color: rgba(163, 159, 159, 0.24);
 }
+
+.jwNoticeTr {
+  border-top: 2px solid #000;
+  font-size: 20px;
+}
+
+.jwNoticeTitle {
+  width: 700px;
+}
+
+.jwNoticeA {
+  text-decoration-line: none;
+  font-weight: bold;
+  display: block;
+  width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 197px;
+}
+
 
 /* 추가 - 지우 끝 */
 
@@ -3269,7 +3302,16 @@ input {
 
 /* 타이틀 - a태그 */
 .userQuestionTd1 > a {
+  
+  display: block;
   text-decoration-line: none;
+  width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space : nowrap;
+  line-height: 1.2;
+  text-align: center;
+  margin-left: 92px;
 }
 
 
@@ -3287,7 +3329,7 @@ input {
 
 .userQuestionTitle {
   width: 1050px;
-  height: 50px;
+  height: auto;
   margin: 0 auto;
   font-size: 35px;
   font-weight: bold;
@@ -3507,7 +3549,16 @@ input {
 
 #adminTd1 {
   width: 700px;
-  text-align: center;
+}
+
+.adminTdA {
+  text-decoration-line: none;
+  width: 300px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 196px;
 }
 
 #adminTd2 {
@@ -3705,10 +3756,11 @@ input {
 .reservation-number {
   background-color: rgb(255, 255, 255);
   text-align: center;
-  padding-top: 10px;
+  padding-top: 6px;
   height: 38px;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 5px;
+  margin-top: 8px;
 }
 
 
@@ -3733,4 +3785,70 @@ input {
 }
 
 /* 관리자 공지사항 수정 / 삭제 끝 */
+
+
+
+/* 예약 상세 조회 페이지 - 지우 시작 */
+
+.seeReservationForm {
+  width: 1000px;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.seeReservationNo1 {
+  width: 450px;
+  height: 50px;
+  float: left;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.seeReservationNo2 {
+  width: 450px;
+  height: 50px;
+  float: right;
+  margin-top: 10px;
+}
+
+.seeReservationNo3 {
+  float:right;
+}
+
+.seeReservationNo4 {
+  float: left;
+}
+
+.seeReservationNo5 {
+  width: 500px;
+  height: 50px;
+  margin-left: 280px;
+  margin-top: 50px;
+}
+
+.seeReservationInput {
+  height: 35px;
+  width: 300px;
+  border-radius: 10px;
+  padding-left: 10px;
+}
+
+
+/* 예약 상세 조회 페이지 - 지우 끝 */
+
+
+
+/* boardingpass */
+.checkinlog {
+  font-size: 25px;
+  color: #2fdf87;
+  font-weight: 700;
+  text-decoration-line: none;
+  /* 로고 메뉴 텍스트 간격 */
+  margin-right: 200px;
+}
 
