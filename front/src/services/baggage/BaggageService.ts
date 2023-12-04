@@ -15,10 +15,6 @@ const get = (bagYn:string) => {
   return http.get<IBaggage>(`/tour/passport/${bagYn}`);
 };
 
-const getBag = (bagId:string) => {
-  return http.get<IBaggage>(`/tour/baggage/get/${bagId}`);
-}
-
 const create = (data:IBaggage) => {
     return http.post<IBaggage>(`/tour/baggage`, data);
 }
@@ -26,8 +22,7 @@ const create = (data:IBaggage) => {
 const BaggageService = {
   getAll,
   get,
-  create,
-  getBag
+  create
 
 };
 

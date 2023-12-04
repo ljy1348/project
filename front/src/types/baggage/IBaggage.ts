@@ -7,7 +7,6 @@ export default interface IBaggage {
     bagPrice:  number,
     // 체크인 id
     airlineReservationNumber: number,
-    paymentYn: string
 }
     
     

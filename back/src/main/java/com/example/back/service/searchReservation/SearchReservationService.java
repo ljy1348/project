@@ -78,4 +78,10 @@ public class SearchReservationService {
     }
 
 
+    public Optional<OprResDto> smSearchReservation(int airlineReservationNumber) {
+        Optional<OprResDto> optionalOprResDto = searchReservationRepository.smSearchById(airlineReservationNumber);
+
+        return optionalOprResDto;
+    }
+
 }

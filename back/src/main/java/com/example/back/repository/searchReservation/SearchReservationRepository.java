@@ -148,4 +148,14 @@ public interface SearchReservationRepository extends JpaRepository<Reservation, 
                                           @Param("memberName") String memberName
                                           );
 
+    @Query(value = "SELECT RES.AIRLINE_RESERVATION_NUMBER as airlineReservationNumber " +
+            "     , RES.SEAT_TYPE as seatType " +
+            "     , RES.CHECK_YN as checkYn " +
+            "     , OPR.START_AIRPORT as startAirport " +
+            "     , OPR.FINAL_AIRPORT as finalAirport " +
+            "FROM TB_RESERVATION RES, OPERATION_INFO OPR " +
+            "WHERE RES.OPERATION_ID = OPR.OPERATION_ID " +
+            "AND RES.AIRLINE_RESERVATION_NUMBER LIKE '%' || :airlineReservationNumber || '%'", nativeQuery = true)
+    Optional<OprResDto> smSearchById(@Param("airlineReservationNumber") int airlineReservationNumber);
+
 }

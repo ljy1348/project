@@ -44,9 +44,6 @@ const SearchPayAdmin = (payId:number, page:number, size:number) => {
    return http.get(`/admin/payment/${payId}?page=${page}&size=${size}`, {headers : authHeader()})
 }
 
-const getCheckAll = (searchTitle:string, searchText:string,page:number, size:number) => {
-   return http.get(`/admin/checkin?searchTitle=${searchTitle}&searchText=${searchText}&size=${size}&page=${page}`,{headers : authHeader()})
- }
 
 const AdminService = {
     getMemberAll,
@@ -58,8 +55,7 @@ const AdminService = {
     deleteOperationInfo,
     getNociceAll,
     getPayAll,
-    SearchPayAdmin,
-    getCheckAll
+    SearchPayAdmin
 }
 
 export default AdminService;

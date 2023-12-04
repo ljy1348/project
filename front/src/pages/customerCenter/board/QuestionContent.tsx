@@ -41,6 +41,7 @@ function QuestionContent() {
         console.log(e);
       });
   };
+
   useEffect(() => {
     if (titleId) {
       getQuestion(titleId);
@@ -50,6 +51,7 @@ function QuestionContent() {
   useEffect(() => {
     if (!currentUser) navigate("/login");
   }, [currentUser])
+
 
   const answerTextSave = () => {
 
@@ -71,6 +73,10 @@ function QuestionContent() {
   const adminTextSave = (e:any) => {
     setQuestion({...question, answer:e.target.value})
     console.log(e.target.value);
+  }
+
+  const backBtn = () => {
+    navigate("/question-board");
   }
 
   return (
@@ -113,6 +119,7 @@ function QuestionContent() {
                 <div className="adminQuestionDiv2"><div className="adminQuestionDiv3"><p className="adminQuestionP1">[답변]</p><p className="adminAnswerName">&nbsp;답변자 : 관리자&nbsp;</p></div> <br/><br/><p className="adminAnswer" dangerouslySetInnerHTML={{ __html:question.answer.replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;")}}></p></div>}
               </div>
             </div>
+            <button className="userQuestionBackBtn" onClick={backBtn}>목록으로</button>
           </div>
         </div>
       

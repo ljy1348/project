@@ -75,7 +75,7 @@ public interface CheckinRepository extends JpaRepository<Checkin, String> {
             "        DENSE_RANK() OVER (ORDER BY nmn.user_number) as dr " +
             "    FROM  " +
             "        tb_reservation res " +
-            "        JOIN tb_checkin chk ON res.airline_reservation_number = chk.airline_reservation_number " +
+            "        LEFT JOIN tb_checkin chk ON res.airline_reservation_number = chk.airline_reservation_number " +
             "        JOIN ( " +
             "            WITH id_values AS ( " +
             "                SELECT REGEXP_SUBSTR(( " +
@@ -101,4 +101,6 @@ public interface CheckinRepository extends JpaRepository<Checkin, String> {
     Page<Checkin> findAllByAirlineReservationNumber(int airlineReservationNumber, Pageable pageable);
     Page<Checkin> findAllByPassportId(int passportId, Pageable pageable);
     Page<Checkin> findAllBy(Pageable pageable);
+
+    List<Checkin> findAllByAirlineReservationNumber(int airlineReservationNumber);
 }

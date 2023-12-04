@@ -18,15 +18,10 @@ function CheckIn() {
   // 상세조회 객체 초기화
   const initialReservation = {
     airlineReservationNumber: null,
-    adultCount: 0,
-    childCount: 0,
-    mileUseYn: "N",
     seatType: "",
-    memberYn: "N",
-    memberId: "",
-    userNumber: "",
-    operationId: 0,
     checkYn: "N",
+    startAirport:"",
+    finalAirport:""
   };
 
   const [checkDto, setCheckDto] = useState<Array<ICheckDto>>([]);
@@ -52,10 +47,11 @@ function CheckIn() {
   // 상세조회 함수
   const getReservation = (airlineReservationNumber: number) => {
     // 백엔드 매개변수 전송 : + 현재페이지(page), 1페이지당개수(pageSize)
-    ReservationService.get(airlineReservationNumber) // 벡엔드로 상세조회 요청
+    ReservationService.get2(airlineReservationNumber) // 벡엔드로 상세조회 요청
       .then((response: any) => {
+        alert(response.data);
         setReservation(response.data);
-        console.log(response.data);
+        console.log("aa : "+response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -145,15 +141,20 @@ function CheckIn() {
         <div className="container">
           {/* disable */}
 
+          <button onClick={()=>{console.log(reservation)}}>테스트</button>
+          
           {reservation.airlineReservationNumber && (
-            <div>
-              {/* 예약이 존재할 때만 보여질 내용 */}
-              <div className="sangmin_choose_airport d-flex justify-content-center mt-5 mb-5">
-                <span>서울</span>
-                <span> &gt; </span>
-                <span>부산</span>
-              </div>
-              <div className="sangmin_choose_airport d-flex justify-content-center mt-5 mb-5"></div>
+            
+  <div>
+    {/* 예약이 존재할 때만 보여질 내용 */}
+    <div className="sangmin_choose_airport d-flex justify-content-center mt-5 mb-5">
+      <span>{reservation.startAirport}</span>
+      <span> &gt; </span>
+      <span>{reservation.finalAirport}</span>
+    </div>
+    <div className="sangmin_choose_airport d-flex justify-content-center mt-5 mb-5">
+    </div>
+
 
               <div className="row mb-3">
                 <div className="col-3">승객이름</div>
@@ -162,16 +163,26 @@ function CheckIn() {
                 <div className="col-3">체크인 상태</div>
               </div>
 
-              <div className="row mb-5">
-                {checkDto.map((item, index) => (
-                  <React.Fragment key={index}>
-                    <div className="col-3">{item.userName || ""}</div>
-                    <div className="col-3">{reservation.seatType}</div>
-                    <div className="col-3">{item.seatNumber || ""}</div>
-                    <div className="col-3">{reservation.checkYn}</div>
-                  </React.Fragment>
-                ))}
-              </div>
+
+
+
+    <div className="row mb-5">
+
+  {checkDto ? (
+    checkDto.map((item, index) => (
+      <React.Fragment key={index}>
+        <div className="col-3">{item.userName || ""}</div>
+        <div className="col-3">{reservation.seatType}</div>
+        <div className="col-3">{item.seatNumber || ""}</div>
+        <div className="col-3">{reservation.checkYn}</div>
+      </React.Fragment>
+    ))
+  ) : (
+    <div>No data available</div>
+  )}
+</div>
+
+
 
               {reservation.checkYn === "N" && (
                 <div className="d-flex justify-content-end mt-5 mb-5 no-gutters">

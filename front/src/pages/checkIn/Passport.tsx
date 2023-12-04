@@ -71,8 +71,8 @@ function Passport() {
     bagNumber: null,
     bagCount: 0,
     bagPrice: 0,
-    airlineReservationNumber: Number(searchAirlinereservationnumber),
-    paymentYn: "N",
+    airlineReservationNumber: Number(searchAirlinereservationnumber)
+
   };
 
   const initialCheckin = {
@@ -101,16 +101,18 @@ function Passport() {
   ) => {
     const { value } = event.target;
     console.log(fieldName, passportIndex, value);
-
+  
     setPassport((prevPassport) => {
       const updatedPassports = [...prevPassport];
+      const currentReservation = reservation || {}; // Ensure reservation is not null
+      const userNumberArray = currentReservation.userNumber?.split(",") || [];
+  
       updatedPassports[passportIndex] = {
         ...updatedPassports[passportIndex],
         [fieldName]: value,
-        // passportIndex에 해당하는 위치의 userNumber를 할당
-        userNumber:
-          parseInt(reservation.userNumber.split(",")[passportIndex]) || 0,
+        userNumber: parseInt(userNumberArray[passportIndex]) || 0,
       };
+  
       return updatedPassports;
     });
   };
@@ -174,8 +176,7 @@ function Passport() {
       bagNumber: null,
       bagCount: baggage.bagCount,
       bagPrice: baggage.bagCount * 100000,
-      airlineReservationNumber: Number(searchAirlinereservationnumber),
-      paymentYn: "N",
+      airlineReservationNumber: Number(searchAirlinereservationnumber)
     };
 
     console.log(data);
@@ -222,9 +223,11 @@ function Passport() {
     saveCheckin();
     saveBaggage();
     updateCheckYn();
-    navi(
-      `/boardingpass/${operID}/${searchAirlinereservationnumber}/${adcount}/${chcount}/${bagCount1}`
-    );
+    if(totalpeople === selectedSeatsInfo.length){
+      navi(`/boardingpass/${operID}/${searchAirlinereservationnumber}/${adcount}/${chcount}/${bagCount1}`)
+    }else{
+      alert("좌석을 지정해 주세요")
+    }
   };
 
   // todo: 수화물 저장할 변수

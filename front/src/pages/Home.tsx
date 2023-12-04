@@ -8,6 +8,7 @@ import { Overlay } from "react-bootstrap";
 import Notice from "./notice/Notice";
 import { Link } from "react-router-dom";
 import HomeAirport from "./homeAirport/HomeAirport";
+import { Value } from "sass";
 
 /* eslint-disable */
 function Home() {
@@ -119,8 +120,14 @@ function Home() {
   };
 
   const clickNone2 = (event: any) => {
-    event.stopPropagation();
-    setShow2(!show2), setShow(false), setShow3(false), setShow4(false);
+    if (departureAirport == "출발공항") {
+      alert("출발지를 입력해주세요.");
+      return;
+    }
+    else {
+      event.stopPropagation();
+      setShow2(!show2), setShow(false), setShow3(false), setShow4(false);
+    }
   };
 
   const clickNone3 = (event: any) => {
@@ -129,14 +136,52 @@ function Home() {
   };
 
   const clickNone4 = (event: any) => {
-    event.stopPropagation();
-    setShow3(!show3), setShow(false), setShow2(false), setShow4(false);
+    if (departureAirport == "출발공항") {
+      alert("출발지를 입력해주세요.");
+      return;
+    } else if (arrivalAirport == "도착공항") {
+      alert("도착지를 입력해주세요.");
+      return;
+    } else {
+      event.stopPropagation();
+      setShow3(!show3), setShow(false), setShow2(false), setShow4(false);
+    }
   };
 
   const clickNone5 = (event: any) => {
-    event.stopPropagation();
-    setShow4(!show4), setShow(false), setShow2(false), setShow3(false);
+    if (departureAirport == "출발공항") {
+      alert("출발지를 입력해주세요.");
+      return;
+    } else if (arrivalAirport == "도착공항") {
+      alert("도착지를 입력해주세요.");
+      return;
+    } else if (adultCount == 0 && infantCount == 0) {
+      alert("탑승인을 입력해주세요.");
+      return;
+    } else {
+      event.stopPropagation();
+      setShow4(!show4), setShow(false), setShow2(false), setShow3(false);
+    }
   };
+
+  const airlineClickSearch = () => {
+    if (departureAirport == "출발공항") {
+      alert("출발지를 입력해주세요.");
+      return;
+    } else if (arrivalAirport == "도착공항") {
+      alert("도착지를 입력해주세요.");
+      return;
+    } else if (adultCount == 0 && infantCount == 0) {
+      alert("탑승인을 입력해주세요.");
+      return;
+    } else if (seatClass == "좌석등급") {
+      alert("좌석등급을 입력해주세요.");
+      return;
+    } else {
+      // 모든 조건이 충족되면 페이지 이동
+      window.location.href = `/reserve-choose/${departureAirport}/${arrivalAirport}/${adultCount}/${infantCount}/${seatClass}/${departureDate}/${arrivalDate}`;
+    }
+  }
 
   const divClick = () => {
     setShow(false);
@@ -146,11 +191,19 @@ function Home() {
   };
 
   const AirportChange = () => {
-    const departue = departureAirport;
-    const arrival = arrivalAirport;
-
-    setDepartureAirport(arrival);
-    setArrivalAirport(departue);
+    if (departureAirport == "출발공항") {
+      alert("출발지를 입력해주세요.");
+      return;
+    } else if (arrivalAirport == "도착공항") {
+      alert("도착지를 입력해주세요.");
+      return;
+    }
+    else {
+      const departue = departureAirport;
+      const arrival = arrivalAirport;
+      setDepartureAirport(arrival);
+      setArrivalAirport(departue);
+    }
   };
 
   return (
@@ -162,11 +215,11 @@ function Home() {
           <div className="row align-items-center">
             {/* 서브 메뉴 */}
             <div className="col-md-12">
-                <div>
-                  <form className="form" id="submenu">
-                    GreenAir 항공권 예매
-                  </form>
-                </div>
+              <div>
+                <form className="form" id="submenu">
+                  GreenAir 항공권 예매
+                </form>
+              </div>
             </div>
             {/* 예약바 너비 조절 */}
 
@@ -180,9 +233,9 @@ function Home() {
                       id="home-big-reservation-form"
                     >
                       {/* 예약바 높이 조절 */}
-                      <div className="row mb-4">
+                      <div className="row mb-2">
                         {/* <div className="radio-search-gap"> */}
-                        <div className="nhhLabelTag col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-1">
+                        {/* <div className="nhhLabelTag col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-1">
                           <input
                             type="radio"
                             className="btn-check"
@@ -218,11 +271,10 @@ function Home() {
                           <label className="trip-button" htmlFor="oneWay">
                             편도
                           </label>
-                        </div>
+                        </div> */}
 
                         {/* 검색 */}
-
-                        <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
+                        {/* <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
                           <Link
                             to={`/reserve-choose/${departureAirport}/${arrivalAirport}/${adultCount}/${infantCount}/${seatClass}/${departureDate}/${arrivalDate}`}
                           >
@@ -232,10 +284,10 @@ function Home() {
                               value={"항공권 조회"}
                             ></input>
                           </Link>
-                        </div>
+                        </div> */}
                         {/* </div> */}
-                        {/* 출발지 */}
 
+                        {/* 출발지 */}
                         <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
                           <input
                             type="text"
@@ -283,7 +335,7 @@ function Home() {
                             className="form-control form-control-nhh"
                             ref={target3}
                             onClick={(e) => clickNone4(e)}
-                            value={`어른:${adultCount}, 소아:${infantCount}`}
+                            value={`어른 : ${adultCount} 소아 : ${infantCount}`}
                           ></input>
                         </div>
 
@@ -296,6 +348,16 @@ function Home() {
                             onClick={(e) => clickNone5(e)}
                             value={seatClass}
                           ></input>
+                        </div>
+
+                        {/* 항공권 조회 버튼 */}
+                        <div className="search-control-gap">
+                          <input
+                            type="button"
+                            className="form-search-control"
+                            value={"항공권 조회"}
+                            onClick={() => airlineClickSearch()}
+                            ></input>
                         </div>
 
                         <Overlay
@@ -538,10 +600,10 @@ function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div >
 
       {/* 여행추천지 */}
-      <div className="untree_co-section">
+      <div className="untree_co-section" >
         <div className="container">
           <div className="row travel-recommendations-text justify-content-center mb-5">
             <div className="col-lg-7">
@@ -552,10 +614,8 @@ function Home() {
           <div className="owl-carousel owl-3-slider">
             {/* 1 */}
             <div className="item">
-              <a
+              <a href={`/reserve-choose/ICN/SFO/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
-                href="images/hero-slider-1.jpg"
-                data-fancybox="gallery"
               >
                 <div className="media-text">
                   <h3>골든게이트 교</h3>
@@ -577,16 +637,14 @@ function Home() {
 
             {/* 2 */}
             <div className="item">
-              <a
+              <a href={`/reserve-choose/ICN/PEK/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
-                href="images/hero-slider-2.jpg"
-                data-fancybox="gallery"
               >
                 <div className="media-text">
-                  <h3>에펠 탑</h3>
+                  <h3>베이징</h3>
                 </div>
                 <img
-                  src="images/hero-slider-2.jpg"
+                  src="images/베이징.jpg"
                   alt="Image"
                   className="img-fluid"
                 />
@@ -594,18 +652,16 @@ function Home() {
               <div className="media-1">
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span className="location-font-size">프랑스</span>
+                  <span className="location-font-size">중국</span>
                 </span>
-                <div className="attraction">에펠 탑</div>
+                <div className="attraction">베이징</div>
               </div>
             </div>
 
             {/* 3 */}
             <div className="item">
-              <a
+              <a href={`/reserve-choose/ICN/SPN/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
-                href="images/hero-slider-3.jpg"
-                data-fancybox="gallery"
               >
                 <div className="media-text">
                   <h3>롤라우 비치</h3>
@@ -627,10 +683,8 @@ function Home() {
 
             {/* 4 */}
             <div className="item">
-              <a
+              <a href={`/reserve-choose/ICN/LAX/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
-                href="images/할리우드.jpg"
-                data-fancybox="gallery"
               >
                 <div className="media-text">
                   <h3>할리우드</h3>
@@ -652,10 +706,8 @@ function Home() {
 
             {/* 5 */}
             <div className="item">
-              <a
+              <a href={`/reserve-choose/ICN/LHR/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
-                href="images/hero-slider-5.jpg"
-                data-fancybox="gallery"
               >
                 <div className="media-text">
                   <h3>빅 벤</h3>
@@ -677,10 +729,8 @@ function Home() {
 
             {/* 6 */}
             <div className="item">
-              <a
+              <a href={`/reserve-choose/ICN/KIX/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
-                href="images/오사카성.jpg"
-                data-fancybox="gallery"
               >
                 <div className="media-text">
                   <h3>오사카성</h3>
@@ -703,23 +753,16 @@ function Home() {
         </div>
       </div>
 
-      <div className="container">
-        <div className="col-md-12 row">
-        <h3 className="homeNoticeTitle"><a href={`/notice`}>공지사항</a></h3>
+
+      <div className="homeNoticeDiv">
+        <h3 className="homeNoticeTitle1"><a href={`/notice`}>공지사항</a></h3>
+
           <div className="home-notice-link">
             <Link to={"/notice"}>+</Link>
-          </div>
+            <Notice />
         </div>
       </div>
-
-      <Notice />
-      {/* <a
-        href="#"
-        className="back-to-top d-flex align-items-center justify-content-center"
-      >
-        <i className="bi bi-arrow-up-short button-click-top-move"></i>
-      </a> */}
-    </div>
+    </div >
   );
 }
 
