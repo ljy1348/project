@@ -9,7 +9,7 @@ import AdminNoticeEdit from './AdminNoticeEdit';
 function BoardMain() {
     const { user: currentUser } = useSelector((state:RootState)=> state.auth);
   
-    const [selectTab, setSelectTab] = useState("");
+    const [selectTab, setSelectTab] = useState("공지사항 수정/삭제");
     const navi = useNavigate();
   
     useEffect(()=>{
