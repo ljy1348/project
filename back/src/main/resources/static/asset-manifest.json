@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.756e155d.css",
+    "main.js": "/static/js/main.7df324cd.js",
+    "static/js/787.de83771c.chunk.js": "/static/js/787.de83771c.chunk.js",
+    "static/media/customer_center.jpg": "/static/media/customer_center.2121a7da47e82564478e.jpg",
+    "static/media/구름.jpg": "/static/media/구름.474b95f2037401fead39.jpg",
+    "static/media/class.png": "/static/media/class.e208c3f19afaad8307a5.png",
+    "static/media/passenger2.png": "/static/media/passenger2.33e7df0963941edbeb70.png",
+    "index.html": "/index.html",
+    "main.756e155d.css.map": "/static/css/main.756e155d.css.map",
+    "main.7df324cd.js.map": "/static/js/main.7df324cd.js.map",
+    "787.de83771c.chunk.js.map": "/static/js/787.de83771c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.756e155d.css",
+    "static/js/main.7df324cd.js"
+  ]
+}

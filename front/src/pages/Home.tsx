@@ -234,58 +234,7 @@ function Home() {
                     >
                       {/* 예약바 높이 조절 */}
                       <div className="row mb-2">
-                        {/* <div className="radio-search-gap"> */}
-                        {/* <div className="nhhLabelTag col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-1">
-                          <input
-                            type="radio"
-                            className="btn-check"
-                            name="btnradio"
-                            id="goBack"
-                            autoComplete="off"
-                            onClick={() => {
-                              setPicker(false);
-                              console.log(picker);
-                              setChecked(true);
-                            }}
-                            checked={isChecked}
-                          />
-                          <label className="trip-button" htmlFor="goBack">
-                            왕복
-                          </label>
-                        </div>
 
-                        <div className="nhhLabelTag col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-7">
-                          <input
-                            type="radio"
-                            className="btn-check"
-                            name="btnradio"
-                            id="oneWay"
-                            autoComplete="off"
-                            onClick={() => {
-                              setPicker(true);
-                              console.log(picker);
-                              setChecked(false);
-                            }}
-                            checked={!isChecked}
-                          />
-                          <label className="trip-button" htmlFor="oneWay">
-                            편도
-                          </label>
-                        </div> */}
-
-                        {/* 검색 */}
-                        {/* <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-                          <Link
-                            to={`/reserve-choose/${departureAirport}/${arrivalAirport}/${adultCount}/${infantCount}/${seatClass}/${departureDate}/${arrivalDate}`}
-                          >
-                            <input
-                              type="button"
-                              className="form-search-control"
-                              value={"항공권 조회"}
-                            ></input>
-                          </Link>
-                        </div> */}
-                        {/* </div> */}
 
                         {/* 출발지 */}
                         <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
@@ -613,7 +562,7 @@ function Home() {
 
           <div className="owl-carousel owl-3-slider">
             {/* 1 */}
-            <div className="item">
+            <div className="item" style={{height:"600px"}}>
               <a href={`/reserve-choose/ICN/SFO/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >

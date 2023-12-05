@@ -3695,6 +3695,35 @@ input {
 
 /*****************체크인*****************/
 
+.checkin_choose_btn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #1A374D;
+  border-radius: 0.6em;
+  color: #1A374D;
+  cursor: pointer;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  margin-left: 20px;
+
+  width: 200px;
+  &:hover {
+    box-shadow: 0 0 40px 40px #1A374D inset;
+    /* color: white; */
+    color: #fff;
+  }
+}
+
+
 /* 모달 */
 .modal-title {
   color: white;
@@ -4046,4 +4075,22 @@ font-family: 'Noto Serif KR', serif;
 /* 주영 */
 .reserve-choose-selected-day {
   background-color: rgb(148, 156, 163);
+}
+
+/* 1:1 문의 바로가기 문구 진욱*/
+.shortcuts-often-question1 {
+  margin-top: 20px;
+  margin-left: 450px;
+  font-size: 15px;
+}
+
+/* 1:1 문의 바로가기 버튼 진욱*/
+.shortcuts-often-question-btn1 {
+  width: 170px;
+  height: 28px;
+  font-size: 12px;
+  border: 1px solid rgb(197, 197, 197);
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  margin-left: 5px;
 }

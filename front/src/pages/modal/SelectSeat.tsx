@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../assets/css/sm/select.css";
 import axios from "axios";
 import { Modal } from "react-bootstrap";
+import CheckinService from "../../services/checkin/CheckinService";
 
 const SelectSeat = (props: any) => {
   const { totalpeople } = props;
@@ -50,9 +51,18 @@ const SelectSeat = (props: any) => {
       });
     } 
      else if (value === 3 || remainingSeats <= 0) {
-      alert("총정원수 보다 많은 좌석은 예약이 불가능 합니다.")
+      alert("등록된 인원 수보다 많은 좌석 수를 선택하셨습니다.")
       return;
     }
+    
+    //  // 좌석이 이미 선택되었는지 확인
+    //  const isSeatSelected = selectedSeats.some(
+    //   (seat) => seat.x === x && seat.y === y
+    // );
+    // if (isSeatSelected) {
+    //   alert("이미 선택된 좌석입니다.");
+    //   return;
+    // }
 
    
     
@@ -61,7 +71,7 @@ const SelectSeat = (props: any) => {
       setSeats((prevSeats) => {
         const updatedSeats = [...prevSeats];
         updatedSeats[x][y] = 2;
-        console.log("a1");
+        // console.log("a1");
         return updatedSeats;
       });
 
@@ -86,11 +96,11 @@ const SelectSeat = (props: any) => {
     return (
       
       <div>
-      <div className="createSeatsNum">012 ←→ 345</div>
+      <div className="createSeatsNum">012  &nbsp;  456</div>
         {seats.map((xSeats, x) => (
           <div key={x} className="line" style={{ marginBottom: "5px" }}>
             {x !== 4 && x !== 9 && (
-              <div className="seat-label">{String.fromCharCode(65 + (x > 4 ? x - 1 : x))}</div>
+              <div className="seat-label">{String.fromCharCode(65 + (x > 4 ? x : x))}</div>
             )}
             {xSeats.map((ySeat, y) => (
               <div
@@ -137,8 +147,7 @@ const SelectSeat = (props: any) => {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/tour/checkin/sheat/"+props.operationId)
+    CheckinService.getSeat(props.operationId)
       .then((response) => {
         const data = response.data;
         // console.log(response);
@@ -150,9 +159,6 @@ const SelectSeat = (props: any) => {
 
           setSeats((prevSeats) => {
             const updatedSeats = [...prevSeats];
-            if(x-65 > 9) x = x-2
-            else if (x - 65 > 3) x = x - 1
-            if(y > 3) y = y-1
             updatedSeats[x - 65][y] = 3;
             return updatedSeats;
           });

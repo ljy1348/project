@@ -46,37 +46,7 @@ function Notice() {
   return (
     // 여기
     <>
-      {/* 추천 여행지, 공지사항 사이 공간 */}
-      <div className="container" id="notice-bottom-gap">
-      <div className="col-md-12 row">
-        <table className="table">
-          <thead>
-            <tr className="top-line-bold">
-              <th scope="col">No</th>
-              <th scope="col" id="home-notice-title">제목</th>
-              <th scope="col">날짜</th>
-              <th scope="col">작성자</th>
-            </tr>
-          </thead>
-          <tbody>
-            {notice &&
-              notice.map((data, idx) => (
-                idx < 5 &&(
-                <tr className="line-sorting" key={data.noticeId}>
-                  <td id="notice-id-location">{data.noticeId}</td>
-                  <td id="notice-title-location"><a href={`/notice/${data.noticeId}`}>{data.noticeTitle}</a></td>
-                  <td id="notice-insertTime-location">{data.insertTime}</td>
-                  <td id="notice-writer-location">{data.memberName}</td>
-                </tr>
-                )
-              ))}
-          </tbody>
-        </table>
-        
-        {/* table end */}
-      </div>
-
-        {/* <div className="col-md-12 row">
+        <div className="col-md-12 row">
           <table className="table">
             <thead>
               <tr className="homeNotice1">
@@ -106,7 +76,7 @@ function Notice() {
                     )
                 )}
             </tbody>
-          </table> */}
+          </table>
 
       </div>
       {/* table end */}

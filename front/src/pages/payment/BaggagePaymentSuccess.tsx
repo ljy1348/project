@@ -6,6 +6,8 @@ import { RootState } from '../../store/store';
 import IPayment from '../../types/payment/IPayment';
 import BaggageService from '../../services/baggage/BaggageService';
 import IBaggage from '../../types/baggage/IBaggage';
+import initCustom from '../../assets/js/custom';
+import initScripts from '../../assets/js/scripts';
 
 function BaggagePaymentSuccess() {
     const { user: currentUser } = useSelector((state:RootState)=> state.auth);
@@ -19,6 +21,9 @@ function BaggagePaymentSuccess() {
     const [baggage, setBaggage] = useState<IBaggage>()
   
     useEffect(()=>{
+      initCustom();
+      initScripts();
+
         if (orderId)
         BaggageService.getBag(orderId)
         .then((response:any)=>{
@@ -53,12 +58,6 @@ function BaggagePaymentSuccess() {
           </div>
         </div>
         <div>
-      {/* <div id="overlayer">
-            <div className="loader">
-              <div className="spinner-border" role="status" />
-                <span className="sr-only">Loading...</span>
-              </div>
-            </div> */}
   
             </div>
         </div>
