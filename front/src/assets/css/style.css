@@ -4012,7 +4012,7 @@ font-family: 'Noto Serif KR', serif;
 }
 
 .jwFooterDiv1 {
-  width: 2000px;
+  /* width: 2000px; */
   height: 200px;
   background-color: #dbdbdb;
 }
