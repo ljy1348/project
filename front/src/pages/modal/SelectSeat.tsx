@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../assets/css/sm/select.css";
 import axios from "axios";
 import { Modal } from "react-bootstrap";
+import CheckinService from "../../services/checkin/CheckinService";
 
 const SelectSeat = (props: any) => {
   const { totalpeople } = props;
@@ -137,8 +138,7 @@ const SelectSeat = (props: any) => {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/tour/checkin/sheat/"+props.operationId)
+    CheckinService.getSeat(props.operationId)
       .then((response) => {
         const data = response.data;
         // console.log(response);
