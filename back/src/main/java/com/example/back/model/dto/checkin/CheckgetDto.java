@@ -29,4 +29,6 @@ public class CheckgetDto {
     String seatNumber;
     Integer userNumber;
     String userName;
+    String adultCount;
+    String childCount;
 }

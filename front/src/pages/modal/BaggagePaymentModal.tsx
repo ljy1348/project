@@ -15,7 +15,7 @@ const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm"
 const customerKey = "Rkhxv1jRmshLqgQjm3gY4" 
 
 
-function PaymentModal(props: any) {
+function BaggagePaymentModal(props: any) {
 
   
 
@@ -24,10 +24,6 @@ function PaymentModal(props: any) {
       PaymentWidgetInstance["renderPaymentMethods"]
     > | null>(null) 
     
-    const [startReserveNum, setStartReserveNum] = useState("");
-    const [startPay, setStartPay] = useState("");
-    const [finalReserveNum, setFinalReserveNum] = useState("")
-    const [finalPay, setFinalPay] = useState("");
     const [price, setPrice] = useState(0) ;
     const [originPrice, setOriginPrice] = useState(0);
     const { user: currentUser } = useSelector((state:RootState)=> state.auth);
@@ -36,17 +32,10 @@ function PaymentModal(props: any) {
     const [orderId, setOrderId] = useState("");
 
     useEffect(()=>{
-      if (props.reInfo.length == 2) {
-        setStartReserveNum(props.reInfo[0].reservenum);
-        setFinalReserveNum(props.reInfo[1].reservenum);
-        setStartPay(props.reInfo[0].price);
-        setFinalPay(props.reInfo[1].price);
-        setPrice(Number(props.reInfo[0].price)+Number(props.reInfo[1].price));
-        setOriginPrice(Number(props.reInfo[0].price)+Number(props.reInfo[1].price));
-        setOrderId(props.reInfo[0].reservenum+"-"+props.reInfo[1].reservenum);
-      } else if (props.price) {
+      
+      if (props.price) {
         setPrice(props.price);
-        setOrderId(props.id)
+        setOrderId(props.bagNumber)
       }
     },[props])
   
@@ -122,19 +111,8 @@ function PaymentModal(props: any) {
       <div>
       <h1 >주문서</h1>
       <span >{`${price}원`}</span><br/>
-      <span >{`${mile}마일리지`}</span>
         
       <div >
-        { (mile > price) &&
-        <label>
-          <input
-            type="checkbox"
-            onChange={(event) => {
-              setPrice(event.target.checked ? 0 : originPrice) 
-            }}
-          />
-          마일리지 - 구매하기
-        </label>}
       </div>
       {price > 0 &&
       <>
@@ -145,24 +123,14 @@ function PaymentModal(props: any) {
       }
       <button
         onClick={async () => {
-          console.log(price)
-          if(price === 0) {
-            navi(`/payment/success?orderId=${orderId}&paymentKey=${"mile"}&amount=${originPrice}`)
-            return 
-          }
-
-          
 
           const paymentWidget = paymentWidgetRef.current 
           try {
             await paymentWidget?.requestPayment({
               orderId: `${orderId}`,
-              orderName: "항공권 예약",
-              customerName: "김토스",
-              customerEmail: "customer123@gmail.com",
-              customerMobilePhone: "01012341234",
-              successUrl: `${window.location.origin}/payment/success`,
-              failUrl: `${window.location.origin}/payment/fail`,
+              orderName: "수화물 결제",
+              successUrl: `${window.location.origin}/baggage/payment/success`,
+              failUrl: `${window.location.origin}/baggage/payment/fail`,
             }) 
           } catch (error) {
             // 에러 처리하기
@@ -181,4 +149,4 @@ function PaymentModal(props: any) {
   );
 }
 
-export default PaymentModal;
+export default BaggagePaymentModal;

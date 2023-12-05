@@ -46,6 +46,7 @@ public class CustomerService {
     }
 
 //    ID 기준 제목 검색
+
     public Page<CustomerDto> findTitleLike(String title, String memberId, Pageable pageable) {
         Page<CustomerDto> page = customerRepository.findTitleLike(title, memberId, pageable);
 

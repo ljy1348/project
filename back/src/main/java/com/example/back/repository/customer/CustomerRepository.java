@@ -70,6 +70,7 @@ public interface CustomerRepository extends JpaRepository <Customer, Integer> {
             "ORDER BY CST.TITLE_ID DESC ", nativeQuery = true)
     Page<CustomerDto> findAllByOrderByTitleIdDesc(Pageable pageable);
 
+    Page<CustomerDto> findAllByTitleIdAndMemberId(int titleId, String memberId, Pageable pageable);
 
     @Query(value = "SELECT CST.TITLE_ID as titleId " +
             "     , CST.TITLE as title " +

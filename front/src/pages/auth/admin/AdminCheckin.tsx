@@ -1,74 +1,62 @@
+import { Pagination } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
-import IPayment from '../../../types/payment/IPayment';
-import PaymentService from '../../../services/payment/paymentService';
-import { Pagination } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { RootState } from '../../../store/store';
+import PaymentService from '../../../services/payment/paymentService';
+import CheckinService from '../../../services/checkin/CheckinService';
+import AdminService from '../../../services/auth/adminService';
 
-function UserPaymentList() {
+function AdminCheckin() {
 // 변수 정의
   // reservation 배열 변수
-  const [payment, setPayment] = useState<Array<any>>([]);
+  const [checkin, setCheckin] = useState<Array<any>>([]);
 
   // 유저 정보 가져오기 함수
   const { user: currentUser } = useSelector((state:RootState)=> state.auth);
 
-  // 검색어(input) 변수
-  const [airlinePaymentNumber, setAirlinePaymentNumber] = useState<any>("");
   
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(3);
   const [totalPages, setTotalPages] = useState(1);
   const pageSizes = [3,6,9]
+  let searchTitle = "";
+  const [searchText, setSearchText] = useState("");
 
   useEffect(()=>{
     retrievePayment()
   },[page,pageSize])
 
+  const searchCheckin = () => {
+   }
+
   // 전체조회
   const retrievePayment = () => {
+    if (searchText==="") searchTitle="";
+    else searchTitle="reservaionNumber"
     if (currentUser?.memberId)
-    PaymentService.getPayMember(currentUser.memberId, page-1, pageSize) // 벡엔드 전체조회요청
+    AdminService.getCheckAll(searchTitle,searchText,page-1, pageSize) // 벡엔드 전체조회요청
       .then((response: any) => {
         const {content, totalPages} = response.data;
-        setPayment(content);
+        setCheckin(content);
         setTotalPages(totalPages);
-        console.log("response", response.data);
+        // setPage(1);
+        console.log("response", response);
       })
       .catch((e: Error) => {
         console.log(e);
       });
   };
 
-  const searchPayment = () => { 
-    if (currentUser?.memberId)
-    PaymentService.SearchPayMember(currentUser.memberId, airlinePaymentNumber, page-1, pageSize)
-    .then((response: any) => {
-      const {content, totalPages} = response.data;
-      setPayment(content);
-      setTotalPages(totalPages);
-      setPage(1);
-      console.log("response", response.data);
-    })
-    .catch((e: Error) => {
-      console.log(e);
-    });
-   }
-
-  const deletePay = (payId:number) => { 
-    PaymentService.deletePay(payId)
-    .then((response: any) => {
-      retrievePayment()
-    })
-    .catch((e: Error) => {
-      console.log(e);
-    });
-   }
+  const deleteCheckin = (reservaionNumber:number) => {
+    AdminService.deleteCheckin(reservaionNumber)
+    .then((response:any)=>{retrievePayment();})
+    .catch((e:Error)=>{console.log(e)})
+  }
 
   //   input 태그 수동바인딩
   const onChangeSearchKeyword = (e: any) => {
-    setAirlinePaymentNumber(e.target.value); // 화면값 -> 변수저장
+    setSearchText(e.target.value); // 화면값 -> 변수저장
   };
 
   return (
@@ -82,20 +70,20 @@ function UserPaymentList() {
                 <input
                   type="text"
                   className="searchNumber"
-                  placeholder="예약 번호"
-                  value={airlinePaymentNumber}
+                  placeholder="예약번호"
+                  value={searchText}
                   onChange={onChangeSearchKeyword}
                 />
               </div>
             </div>
 
-            <div className="searchButton">
-              <div>
+            <div className="searchButton ">
+              <div className='ms-5'>
                 <input
                   type="button"
                   className="btn btn-primary btn-block"
                   value="조회하기"
-                  onClick={searchPayment}
+                  onClick={()=>{retrievePayment(); setPage(1)}}
                 />
               </div>
         </div>
@@ -126,37 +114,28 @@ function UserPaymentList() {
         <table className="table">
           <thead>
             <tr className="tableText">
-              <th scope="col">결제 번호</th>
-              <th scope="col">출발 예약 번호</th>
-              <th scope="col">출발 체크인</th>
-              <th scope="col">도착 예약 번호</th>
-              <th scope="col">도착 체크인</th>
-              <th scope="col">마일리지 사용 여부</th>
-              <th scope="col">결제 금액</th>
-              <th scope="col">예약 취소</th>
+              <th scope="col">체크인 번호</th>
+              <th scope="col">비행기 좌석</th>
+              <th scope="col">예약 번호</th>
+              <th scope="col">여권 번호</th>
+              <th scope="col">체크인 취소</th>
             </tr>
           </thead>
           <tbody className="tabText">
-            {payment &&
-              payment.map((data) => (
-                <tr key={data.payId}>
-                  <td>{data.payId}</td>
+            {checkin &&
+              checkin.map((data) => (
+                <tr key={data.checkId}>
+                  <td>{data.checkId}</td>
                   <td>
-                  <Link to={"/search-reservation/seeReservation/"+data.startReservationNumber}>
-                    {data.startReservationNumber}
-                  </Link>
+                         {data.seatNumber}
                     </td>
-                  <td>{data.startCheckYn}</td>
                   
                   <td>
-                  <Link to={"/search-reservation/seeReservation/"+data.finalReservationNumber}>
-                    {data.finalReservationNumber}
-                  </Link>
+                
+                    {data.airlineReservationNumber}
                     </td>
-                  <td>{data.finalCheckYn}</td>
-                  <td>{data.milePrice}</td>
-                  <td>{data.productPrice}</td>
-                  <td><a href='#'><span className='badge text-bg-danger' onClick={()=>{deletePay(data.payId)}}>취소</span></a></td>
+                  <td>{data.passportId}</td>
+                  {data.deleteYn==="Y"?<td>{data.deleteYn}</td>:<td><a href='#'><span className='badge text-bg-danger' onClick={()=>{deleteCheckin(data.airlineReservationNumber)}}>취소</span></a></td>}
                 </tr>
               ))}
           </tbody>
@@ -167,4 +146,4 @@ function UserPaymentList() {
   );
 }
 
-export default UserPaymentList
+export default AdminCheckin

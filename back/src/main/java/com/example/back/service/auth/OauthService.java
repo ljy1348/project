@@ -68,7 +68,7 @@ public class OauthService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code"); //카카오 공식문서 기준 authorization_code 로 고정
         params.add("client_id", KAKAO_CLIENT_ID); // 카카오 Dev 앱 REST API 키
-        params.add("redirect_uri", "http://localhost:3000/login/auth/kakao"); // 카카오 Dev redirect uri
+        params.add("redirect_uri", "http://59.28.90.58/login/auth/kakao"); // 카카오 Dev redirect uri
         params.add("code", code); // 프론트에서 인가 코드 요청시 받은 인가 코드값
 
         // 헤더와 바디 합치기 위해 Http Entity 객체 생성

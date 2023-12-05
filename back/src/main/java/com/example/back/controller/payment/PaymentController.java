@@ -1,5 +1,6 @@
 package com.example.back.controller.payment;
 
+import com.example.back.model.dto.payment.PaymentMemberDto;
 import com.example.back.model.entity.auth.Member;
 import com.example.back.model.entity.payment.Payment;
 import com.example.back.model.entity.reserve.NonMemberInfo;
@@ -140,7 +141,7 @@ public class PaymentController {
     public ResponseEntity<?> getMemberId(@PathVariable String memberId, Pageable pageable) {
         try {
 
-        Page<Payment> payments = paymentService.selectAllByMemberId(memberId, pageable);
+        Page<PaymentMemberDto> payments = paymentService.selectAllByMemberId(memberId, pageable);
 
             Map<String, Object> map = new HashMap<>();
             map.put("content", payments.getContent());
@@ -174,7 +175,7 @@ public class PaymentController {
     public ResponseEntity<?> selectAllMemberIdAndPayId (@PathVariable String memberId, @PathVariable int payId, Pageable pageable) {
         try {
 
-            Page<Payment> payments = paymentService.selectAllByMemberIdAndPayId(memberId, payId, pageable);
+            Page<PaymentMemberDto> payments = paymentService.selectAllByMemberIdAndPayId(memberId, payId, pageable);
 
             Map<String, Object> map = new HashMap<>();
             map.put("content", payments.getContent());
@@ -182,6 +183,7 @@ public class PaymentController {
             return new ResponseEntity<>(map, HttpStatus.OK);
 
         } catch (Exception e) {
+            log.info(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -617,9 +617,6 @@ function Home() {
               <a href={`/reserve-choose/ICN/SFO/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
-                <div className="media-text">
-                  <h3>골든게이트 교</h3>
-                </div>
                 <img
                   src="images/hero-slider-1.jpg"
                   alt="Image"
@@ -640,9 +637,6 @@ function Home() {
               <a href={`/reserve-choose/ICN/PEK/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
-                <div className="media-text">
-                  <h3>베이징</h3>
-                </div>
                 <img
                   src="images/베이징.jpg"
                   alt="Image"
@@ -652,9 +646,9 @@ function Home() {
               <div className="media-1">
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span className="location-font-size">중국</span>
+                  <span className="location-font-size">중국, 베이징</span>
                 </span>
-                <div className="attraction">베이징</div>
+                <div className="attraction">천단 공원</div>
               </div>
             </div>
 
@@ -663,9 +657,6 @@ function Home() {
               <a href={`/reserve-choose/ICN/SPN/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
-                <div className="media-text">
-                  <h3>롤라우 비치</h3>
-                </div>
                 <img
                   src="images/사이판.jpg"
                   alt="Image"
@@ -686,9 +677,6 @@ function Home() {
               <a href={`/reserve-choose/ICN/LAX/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
-                <div className="media-text">
-                  <h3>할리우드</h3>
-                </div>
                 <img
                   src="images/할리우드.jpg"
                   alt="Image"
@@ -698,7 +686,7 @@ function Home() {
               <div className="media-1">
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span className="location-font-size">로스앤젤레스</span>
+                  <span className="location-font-size">미국, 로스앤젤레스</span>
                 </span>
                 <div className="attraction">할리우드</div>
               </div>
@@ -709,9 +697,6 @@ function Home() {
               <a href={`/reserve-choose/ICN/LHR/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
-                <div className="media-text">
-                  <h3>빅 벤</h3>
-                </div>
                 <img
                   src="images/hero-slider-5.jpg"
                   alt="Image"
@@ -721,7 +706,7 @@ function Home() {
               <div className="media-1">
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span className="location-font-size">런던</span>
+                  <span className="location-font-size">영국, 런던</span>
                 </span>
                 <div className="attraction">빅 벤</div>
               </div>
@@ -732,9 +717,6 @@ function Home() {
               <a href={`/reserve-choose/ICN/KIX/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
-                <div className="media-text">
-                  <h3>오사카성</h3>
-                </div>
                 <img
                   src="images/오사카성.jpg"
                   alt="Image"
@@ -744,7 +726,7 @@ function Home() {
               <div className="media-1">
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span className="location-font-size">일본</span>
+                  <span className="location-font-size">일본, 오사카</span>
                 </span>
                 <div className="attraction">오사카성</div>
               </div>
@@ -752,7 +734,6 @@ function Home() {
           </div>
         </div>
       </div>
-
 
       <div className="homeNoticeDiv">
         <h3 className="homeNoticeTitle1"><a href={`/notice`}>공지사항</a></h3>
@@ -762,6 +743,12 @@ function Home() {
             <Notice />
         </div>
       </div>
+      {/* <a
+        href="#"
+        className="back-to-top d-flex align-items-center justify-content-center"
+      >
+        <i className="bi bi-arrow-up-short button-click-top-move"></i>
+      </a> */}
     </div >
   );
 }

@@ -55,7 +55,7 @@ function QuestionContent() {
 
   const answerTextSave = () => {
 
-    const data = question;
+    const data = question
     data.answerYn="Y";
     data.memberName = "관리자";
 

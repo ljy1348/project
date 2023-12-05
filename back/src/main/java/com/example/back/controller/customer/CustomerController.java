@@ -80,9 +80,11 @@ public class CustomerController {
     }
 
 
+
     //    ID 기준 제목 검색
     @GetMapping("/question-board")
     public ResponseEntity<Object> getSearchReservation(
+
             @RequestParam(defaultValue = "") String title,
             @RequestParam(defaultValue = "") String memberId,
             @RequestParam(defaultValue = "0") int page,
@@ -90,6 +92,7 @@ public class CustomerController {
     ) {
         try {
             Pageable pageable = PageRequest.of(page, size);
+
             Page<CustomerDto> customerPage;
             log.info("a : "+memberId+":"+title);
             if (memberId.equals("admin")) {
@@ -104,11 +107,13 @@ public class CustomerController {
             }
 
 
+
             Map<String, Object> response = new HashMap<>();
             response.put("question", customerPage.getContent());
             response.put("currentPage", customerPage.getNumber()); // 현재페이지번호
             response.put("totalItems", customerPage.getTotalElements()); // 총건수(개수)
             response.put("totalPages", customerPage.getTotalPages()); // 총페이지수
+            
 //            전체 조회 + like 검색
 
             if (customerPage.isEmpty() == false) {
@@ -124,6 +129,7 @@ public class CustomerController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     // 상세조회
     @GetMapping("/question-board/see/{titleId}")

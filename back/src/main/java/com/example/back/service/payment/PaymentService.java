@@ -1,6 +1,7 @@
 package com.example.back.service.payment;
 
 import com.example.back.model.dto.payment.PaymentAdminDto;
+import com.example.back.model.dto.payment.PaymentMemberDto;
 import com.example.back.model.dto.payment.TossPaymentDto;
 import com.example.back.model.entity.auth.Member;
 import com.example.back.model.entity.payment.Payment;
@@ -8,6 +9,8 @@ import com.example.back.model.entity.reserve.Reservation;
 import com.example.back.repository.payment.PaymentRepository;
 import com.example.back.repository.reserve.ReservationRepository;
 import com.example.back.service.auth.UserService;
+import com.example.back.service.baggage.BaggageService;
+import com.example.back.service.checkin.CheckinService;
 import com.example.back.service.reserve.ReservationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +38,12 @@ public class PaymentService {
     @Autowired
     UserService userService;
 
+    @Autowired
+    CheckinService checkinService;
+
+    @Autowired
+    BaggageService baggageService;
+
     public Payment create(Payment payment) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -59,7 +68,7 @@ public class PaymentService {
         return paymentRepository.save(payment);
     }
 
-    public Page<Payment> selectAllByMemberId(String memberId, Pageable pageable) {
+    public Page<PaymentMemberDto> selectAllByMemberId(String memberId, Pageable pageable) {
         return paymentRepository.selectAllByMemberId(memberId, pageable);
     }
 
@@ -75,6 +84,13 @@ public class PaymentService {
                 Payment payment = optional.get();
                 String startNumber = payment.getStartReservationNumber();
                 String finalNumber = payment.getFinalReservationNumber();
+
+                checkinService.deleteByReserverNumber(Integer.parseInt(startNumber));
+                checkinService.deleteByReserverNumber(Integer.parseInt(finalNumber));
+
+                baggageService.deleteByReserveNumber(Integer.parseInt(startNumber));
+                baggageService.deleteByReserveNumber(Integer.parseInt(finalNumber));
+
                 log.info("항공정보 : "+startNumber + " - "+finalNumber);
                 Optional<Reservation> reservation = reservationService.findById(Integer.parseInt(startNumber));
                 if (reservation.get().getMemberYn().equals("Y")) {
@@ -109,7 +125,7 @@ public class PaymentService {
 
     }
 
-    public Page<Payment> selectAllByMemberIdAndPayId(String memberId, int payId, Pageable pageable) {
+    public Page<PaymentMemberDto> selectAllByMemberIdAndPayId(String memberId, int payId, Pageable pageable) {
         return paymentRepository.selectAllByMemberIdAndPayId(memberId, payId, pageable);
     }
 

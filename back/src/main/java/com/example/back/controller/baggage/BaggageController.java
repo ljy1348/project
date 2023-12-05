@@ -54,7 +54,6 @@ public class BaggageController {
     //    저장 함수
     @PostMapping("/baggage")
     public ResponseEntity<Object> create(@RequestBody Baggage baggage) {
-            log.info("aaaaaaaaaaaaaaa : "+baggage.getAirlineReservationNumber());
         try {
             Baggage baggage2 = baggageService.save(baggage); // db 저장
 
@@ -77,6 +76,24 @@ public class BaggageController {
         }
 
         } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+    }
+
+    @GetMapping("/baggage/reserveNumber/{reserveNumber}")
+    public ResponseEntity<?> findByReserveNumber(@PathVariable String reserveNumber) {
+        log.info("수화물 점검 : "+reserveNumber);
+        try {
+            Optional<Baggage> optional = baggageService.findByReserveId(reserveNumber);
+            if (optional.isPresent()) {
+                return new ResponseEntity<>(optional.get(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+        } catch (Exception e) {
+            log.info(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
         }

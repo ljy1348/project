@@ -10,6 +10,7 @@ const getAll = (memberId:string, page:number, size:number) => {
 };
 
 // 검색
+
 const getSearch = (title:string,memberId: string, page:number, size:number) => {
   return http.get<Array<ICustomer>>(`/tour/question-board?title=${title}&memberId=${memberId}&page=${page}&size=${size}`);
 };

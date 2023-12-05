@@ -4,9 +4,8 @@ import axios from "axios";
 import { Modal } from "react-bootstrap";
 
 const SelectSeat = (props: any) => {
-
   const { totalpeople } = props;
-  console.log('Total People:', totalpeople);
+
   const initialSeats: number[][] = [
     [1, 1, 1, 0, 1, 1, 1],
     [1, 1, 1, 0, 1, 1, 1],
@@ -37,22 +36,32 @@ const SelectSeat = (props: any) => {
   >([]);
 
   const handleSeatClick = (x: number, y: number, value: number) => {
-    
     const selectedSeatCount = selectedSeats.length;
 
     // 클릭이 가능한 남은 좌석 수
     const remainingSeats = totalpeople - selectedSeatCount;
-  
+
     // 이미 선택된 경우 또는 남은 좌석이 없는 경우 클릭 무시
-    if (value === 3 || remainingSeats <= 0) {
+    if (value === 2) {
+      setSeats((prevSeats) => {
+        const updatedSeats = [...prevSeats];
+        updatedSeats[x][y] = 1;
+        return updatedSeats;
+      });
+    } 
+     else if (value === 3 || remainingSeats <= 0) {
       alert("총정원수 보다 많은 좌석은 예약이 불가능 합니다.")
       return;
     }
+
+   
+    
 
     if (value === 1) {
       setSeats((prevSeats) => {
         const updatedSeats = [...prevSeats];
         updatedSeats[x][y] = 2;
+        console.log("a1");
         return updatedSeats;
       });
 
@@ -74,30 +83,39 @@ const SelectSeat = (props: any) => {
   };
 
   const createSeats = () => {
-    return seats.map((xSeats, x) => (
-      <div key={x} className="line" style={{ marginBottom: "5px" }}>
-        {xSeats.map((ySeat, y) => (
-          <div
-            key={`${x}-${y}`}
-            className={`seat ${
-              ySeat === 0
-                ? "load"
-                : ySeat === 1
-                ? "enable"
-                : ySeat === 2
-                ? "disable"
-                : "soldout"
-            }`}
-            onClick={() => handleSeatClick(x, y, ySeat)}
-          ></div>
+    return (
+      
+      <div>
+      <div className="createSeatsNum">012 ←→ 345</div>
+        {seats.map((xSeats, x) => (
+          <div key={x} className="line" style={{ marginBottom: "5px" }}>
+            {x !== 4 && x !== 9 && (
+              <div className="seat-label">{String.fromCharCode(65 + (x > 4 ? x - 1 : x))}</div>
+            )}
+            {xSeats.map((ySeat, y) => (
+              <div
+                key={`${x}-${y}`}
+                className={`seat ${
+                  ySeat === 0
+                    ? "load"
+                    : ySeat === 1
+                    ? "enable"
+                    : ySeat === 2
+                    ? "disable"
+                    : "soldout"
+                }`}
+                onClick={() => handleSeatClick(x, y, ySeat)}
+              ></div>
+            ))}
+          </div>
         ))}
       </div>
-    ));
+    );
   };
 
   const handleReservationComplete = () => {
     // 예약 완료 버튼을 클릭했을 때 호출되는 함수
-    setSelectedSeats([]); // 선택 목록 초기화
+    // setSelectedSeats([]); // 선택 목록 초기화
 
     let reqSeats = new Array();
 
@@ -111,35 +129,38 @@ const SelectSeat = (props: any) => {
         reqSeats.push(String.fromCharCode(65 + seat.x) + seat.y);
         console.log(reqSeats);
         props.onSeatsSelected(reqSeats);
-        console.log('SelectSeat에서 선택된 좌석:', reqSeats);
-
         return updatedSeats;
       });
     });
-    
+    props.setModalShow(false);
+    props.onHide();
   };
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/tour/checkin/sheat/1544")
+      .get("http://localhost:8000/api/tour/checkin/sheat/"+props.operationId)
       .then((response) => {
         const data = response.data;
-        console.log(response);
+        // console.log(response);
         data.map((val: any, idx: number) => {
           const str: string = val.seatNumber;
-
+          
           let x = Number(str.charCodeAt(0));
           let y = Number(str.charAt(1));
 
           setSeats((prevSeats) => {
             const updatedSeats = [...prevSeats];
+            if(x-65 > 9) x = x-2
+            else if (x - 65 > 3) x = x - 1
+            if(y > 3) y = y-1
             updatedSeats[x - 65][y] = 3;
             return updatedSeats;
           });
         });
       })
       .catch((e) => {console.log(e)});
-  }, [props,totalpeople,props.modalShow]);
+  }, [props,totalpeople,props.modalShow, props.operationId]);
+
 
   return (
     <Modal
@@ -157,14 +178,14 @@ const SelectSeat = (props: any) => {
       </Modal.Header>
 
       <Modal.Body>
-      <div id="app">
-        <div id="selected_seats">
-          선택한 좌석번호:{" "}
-          {selectedSeats.map((seat) => `(${seat.x}, ${seat.y})`)}
+        <div id="app">
+          <div id="seats">{createSeats()}</div>
+          <div className="checkinse">
+            <button className="seatButton" onClick={handleReservationComplete}>
+              예약완료
+            </button>
+          </div>{" "}
         </div>
-        <div id="seats">{createSeats()}</div>
-        <button onClick={handleReservationComplete}>예약완료</button>
-      </div>
       </Modal.Body>
     </Modal>
   );
