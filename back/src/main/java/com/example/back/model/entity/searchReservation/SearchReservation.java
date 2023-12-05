@@ -89,5 +89,10 @@ public class SearchReservation extends BaseTimeEntity {
 //    운항 번호
     @Column
     private Integer operationId;
+
+    @Column
+    private String startDate;
+    @Column
+    private String finalDate;
 }
 

@@ -6,6 +6,10 @@ import PaymentService from '../../../services/payment/paymentService';
 import { Pagination } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AdminService from '../../../services/auth/adminService';
+import ReservationService from '../../../services/reservation/ReservationService';
+import MyareaModal from '../../modal/MyareaModal';
+import SearchNonMember from '../../modal/SearchNonMember';
+import ISearchReservation from '../../../types/searchReservation/ISearchReservation';
 
 function AdminPayment() {
 // 변수 정의
@@ -17,6 +21,8 @@ function AdminPayment() {
 
   // 검색어(input) 변수
   const [airlinePaymentNumber, setAirlinePaymentNumber] = useState<any>("");
+  const [nonMemberModalShow, setNonMemberModalShow] = useState(false);
+  const [reservation, setReservation] = useState<ISearchReservation>();
   
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(3);
@@ -74,18 +80,34 @@ function AdminPayment() {
     setAirlinePaymentNumber(e.target.value); // 화면값 -> 변수저장
   };
 
+  const handleNonMember = (startAirport:any, finalAirport:any, memberName:any, airlineReservationNumber:any) => { 
+
+    const data = {
+      startAirport : startAirport,
+      finalAirport : finalAirport,
+      memberName : memberName,
+      airlineReservationNumber : airlineReservationNumber
+    }
+
+    console.log(data);
+
+    ReservationService.findNonMember(data)
+    .then((response:any)=>{console.log(response); setReservation(response.data); setNonMemberModalShow(true)})
+    .catch((e:Error)=>{console.log(e)})
+  }
+
   return (
     <>
       <div className="searchRow">
         <div className="col-md-8 offset-2">
               <div className="col-12 input-group mb-3">
               <div>
-                <p className="input-group-text">결제 번호</p>
+                <p className="input-group-text">예약 번호</p>
               </div>
                 <input
                   type="text"
                   className="searchNumber"
-                  placeholder="결제 번호"
+                  placeholder="예약 번호"
                   value={airlinePaymentNumber}
                   onChange={onChangeSearchKeyword}
                 />
@@ -135,6 +157,7 @@ function AdminPayment() {
               <th scope="col">마일리지 사용 여부</th>
               <th scope="col">결제 금액</th>
               <th scope="col">아이디</th>
+              <th scope="col">예약자</th>
               <th scope="col">예약 취소</th>
               <th scope="col">취소 여부</th>
               
@@ -146,20 +169,21 @@ function AdminPayment() {
                 <tr key={data.payId}>
                   <td>{data.payId}</td>
                   <td>
-                  <Link to={"/search-reservation/seeReservation/"+data.startReservationNumber}>
+                  <Link to="#" onClick={()=>{handleNonMember(data.startAirport, data.finalAirport, data.userName, data.startReservationNumber)}}>
                     {data.startReservationNumber}
                   </Link>
                     </td>
                   
                   <td>
                     
-                  <Link to={"/search-reservation/seeReservation/"+data.finalReservationNumber}>
+                  <Link to="#" onClick={()=>{handleNonMember(data.finalAirport, data.startAirport, data.userName, data.finalReservationNumber)}}>
                     {data.finalReservationNumber}
                   </Link>
                     </td>
                   <td>{data.milePrice}</td>
                   <td>{data.productPrice}</td>
                   <td>{data.memberId}</td>
+                  <td>{data.userName}</td>
                   <td>{data.deleteYn === "N" && <a href='#'><span className='badge text-bg-danger' onClick={()=>{deletePay(data.payId)}}>취소</span></a>}</td>
                   <td>{data.deleteYn}</td>
 
@@ -167,6 +191,13 @@ function AdminPayment() {
               ))}
           </tbody>
         </table>
+                <SearchNonMember
+            show={nonMemberModalShow}
+            onHide={() => {setNonMemberModalShow(false);
+            }}
+            nonMemberModalShow={setNonMemberModalShow}
+            reservation={reservation}
+          />
       {/* table end */}
       {/* select + table 끝 */}
     </>

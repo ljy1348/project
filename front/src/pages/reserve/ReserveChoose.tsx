@@ -341,9 +341,17 @@ function ReserveChoose(props: any) {
     }
   };
 
+  const selectedRenderDateCell = (id:string, date:Date) =>{
+    console.log(id);
+    if (id==="startDate") setStartDate(date.toISOString().split("T")[0]);
+    else setEndDate(date.toISOString().split("T")[0]);
+  }
+
   const renderDateCell = (date: Date, dayIndex: number) => (
-    <td key={dayIndex}>
-      <div>{date.toISOString().split("T")[0]}</div>
+    
+    <td key={dayIndex} onClick={(e:any)=>{selectedRenderDateCell(e.target.parentNode.id, date); e.stopPropagation()}} className={dayIndex==3?"reserve-choose-selected-day":""}>
+
+      <div onClick={(e:any)=>{selectedRenderDateCell(e.target.parentNode.parentNode.id, date); e.stopPropagation()}} >{date.toISOString().split("T")[0]}</div>
       {days[(startDayIndex + dayIndex - 3 + 7) % 7]}
     </td>
   );
@@ -559,8 +567,8 @@ function ReserveChoose(props: any) {
         {/* 반복문 */}
         <div className="sangmin_choose_airport_pee_date mt-5">
           <div className="sangmin_bottom_solid">
-            <table className="sangmin_choose_datepicker text-center">
-              <tr>{renderDateRow(startDateObj, 7)}</tr>
+            <table className="sangmin_choose_datepicker text-center" id="tableId">
+              <tr id="startDate">{renderDateRow(startDateObj, 7)}</tr>
             </table>
             {/* <p className="sangmin_choose_airport_data">11.27 (월)</p>
 
@@ -655,7 +663,10 @@ function ReserveChoose(props: any) {
         <div className="sangmin_choose_airport_pee_date mt-5">
           <div className="sangmin_bottom_solid">
             <table className="sangmin_choose_datepicker text-center">
-              <tr>{renderDateRow(endDateObj, 7)}</tr>
+              <tr id="endDate">
+              {renderDateRow(endDateObj, 7)}
+
+              </tr>
             </table>
             {/* <p className="sangmin_choose_airport_data">11.27 (월)</p>
 

@@ -92,6 +92,8 @@ function ReservePayment() {
     userNumber: "",
     operationId: 0,
     checkYn: "N",
+    startDate:"",
+    finalDate:""
   };
 
   // operationinfo 객체 정의
@@ -282,7 +284,9 @@ function ReservePayment() {
   // 저장 예약
   const saveReservation = async(
     userNumbersArray: any,
-    operation: IOperationinfo
+    operation: IOperationinfo,
+    startDate:any,
+    finalDate:any
   ) => {
     // 임시 부서 객체
 
@@ -295,7 +299,9 @@ function ReservePayment() {
       memberId: reservation.memberId,
       userNumber: userNumbersArray.join(","), // 배열을 쉼표로 구분된 문자열로 변환
       operationId: operation.operationId, // 여정에 해당하는 operationId 사용
-      checkYn: reservation.checkYn
+      checkYn: reservation.checkYn,
+      startDate:startDate,
+      finalDate:finalDate
     };
 
     if (currentUser?.memberId) {data.memberId=currentUser.memberId; data.memberYn="Y";}
@@ -340,11 +346,14 @@ function ReservePayment() {
       }
     }
 
+    let startDate = startDateObj.toISOString().split("T")[0];
+    let endDate = endDateObj.toISOString().split("T")[0];
+    
 
     if (userNumbersArray.length >= Number(adultCount2)+Number(childCount2)) {
-      await saveReservation(userNumbersArray, operationinfo);
+      await saveReservation(userNumbersArray, operationinfo,startDate2,day);
       // 여정 2에 대한 예약 저장
-      await saveReservation(userNumbersArray, operationinfo2);
+      await saveReservation(userNumbersArray, operationinfo2,endDate2,day2);
 
       setModalShow(true);
     } else {
