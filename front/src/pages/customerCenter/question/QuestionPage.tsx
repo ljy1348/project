@@ -32,6 +32,7 @@ function QuestionPage() {
 
       {/* 질문 List */}
       <Accordion className="often-question-list-gap">
+  
         
         <Accordion.Item eventKey="0">
           <Accordion.Header>

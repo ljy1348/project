@@ -54,18 +54,18 @@ const NortheastAsia = [
 ]
 
 const SoutheastAsia = [
-    {cname:"다낭", abbr:""},
-    {cname:"마닐라", abbr:""},
-    {cname:"방콕", abbr:""},
-    {cname:"세부", abbr:""},
-    {cname:"싱가포르", abbr:""},
-    {cname:"자카르타", abbr:""},
-    {cname:"클락/앙헬레스", abbr:""},
-    {cname:"프놈펜", abbr:""},
-    {cname:"하노이", abbr:""},
-    {cname:"호찌민", abbr:""},
-    {cname:"치앙마이", abbr:""},
-    {cname:"델리", abbr:""},
+    {cname:"다낭", abbr:"DAD"},
+    {cname:"마닐라", abbr:"MNL"},
+    {cname:"방콕", abbr:"BKK"},
+    {cname:"세부", abbr:"CEB"},
+    {cname:"싱가포르", abbr:"SIN"},
+    {cname:"자카르타", abbr:"CGK"},
+    {cname:"클락/앙헬레스", abbr:"CRK"},
+    {cname:"프놈펜", abbr:"PNH"},
+    {cname:"하노이", abbr:"HAN"},
+    {cname:"호찌민", abbr:"SGN"},
+    {cname:"치앙마이", abbr:"CNX"},
+    {cname:"델리", abbr:"DEL"},
 ]
 const Americas = [
     {"cname":"로스앤젤레스","abbr":"LAX"},
@@ -204,7 +204,7 @@ const Americas = [
 {"cname":"보즈맨","abbr":"BZN"}
 ]
 const Europe = [
-    {"cname":"프랑크푸르트","abbr":"FRA"},
+{"cname":"프랑크푸르트","abbr":"FRA"},
 {"cname":"런던/히드로","abbr":"LHR"},
 {"cname":"파리/샤를 드 골","abbr":"CDG"},
 {"cname":"로마/다빈치","abbr":"FCO"},

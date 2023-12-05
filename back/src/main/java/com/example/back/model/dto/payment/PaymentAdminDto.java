@@ -25,4 +25,8 @@ public interface PaymentAdminDto {
     public String getFinalReservationNumber();
     public String getMemberId();
     public String getDeleteYn();
+
+    public String getUserName();
+    public String getStartAirport();
+    public String getFinalAirport();
 }

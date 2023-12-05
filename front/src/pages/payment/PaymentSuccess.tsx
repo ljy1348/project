@@ -22,8 +22,8 @@ function PaymentSuccess() {
   const [payment, setPayment] = useState<IPayment>();
 
   useEffect(()=>{
-    initCustom();
-    initScripts();
+    // initCustom();
+    // initScripts();
     let reserveNum;
     if (orderId)
     reserveNum = orderId.split("-");

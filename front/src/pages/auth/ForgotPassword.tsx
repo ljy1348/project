@@ -100,13 +100,12 @@ function ForgotPassword() {
         </div>
       </div>
       <div className="row justify-content-center">
-        <div className="col-xl-10 col-lg-12 col-md-9">
-          <div className="card mt-5">
-            <div className="card-body p-0">
+        <div className="col-xl-10 col-lg-12 col-md-9 ">
+          <div className="card mt-5 col-6 mx-auto">
+            <div className="card-body p-0 ">
               {/* <!-- Nested Row within Card Body --> */}
               <div className="row">
-                <div className="col-lg-6 d-none d-lg-block bg-password-image"></div>
-                <div className="col-lg-6">
+                <div className="col-lg-12">
                   <div className="p-5">
                     <div className="text-center">
                       <h1 className="h4 mb-2">아이디와 이메일을 입력해 주세요</h1>

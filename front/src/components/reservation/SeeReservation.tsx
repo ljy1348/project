@@ -2,6 +2,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import ReservationService from "../../services/reservation/ReservationService";
 import React, { useEffect, useState } from "react";
 import ISearchReservation from "../../types/searchReservation/ISearchReservation";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 function SeeReservation() {
   // todo: 변수 정의
@@ -10,6 +12,9 @@ function SeeReservation() {
 
   // 강제 페이지 이동 변수
   let navigate = useNavigate();
+
+  // 유저 정보 가져오기 함수
+  const { user: currentUser } = useSelector((state: RootState) => state.auth);
 
   // 객체 초기화
   const initialReservation = {
@@ -53,186 +58,225 @@ function SeeReservation() {
     if (airlineReservationNumber) getReservation(airlineReservationNumber);
   }, [airlineReservationNumber]);
 
+  useEffect(() => {
+    if (!currentUser) navigate("/login");
+  }, [currentUser])
+
   const backToSearchReservation = () => {
     navigate("/search-reservation");
   };
 
   return (
     <>
-    
-      <form className="form">
+      <form className="seeReservationForm">
         <div className="blankBox3">&nbsp;</div>
         <div className="row mb-2">
-          <h6 className="test1">예약 번호</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.airlineReservationNumber}
-            />
-          </div>
-
-          <h6 className="test2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;성인</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.adultCount}
-            />
-          </div>
-
-          <h6 className="test1">소아&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.childCount}
-            />
-          </div>
-
-          <h6 className="test2">마일리지 사용</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.mileUseYn}
-            />
-          </div>
-
-          <h6 className="test1">회원 ID&nbsp;&nbsp;&nbsp;</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.memberId}
-            />
-          </div>
-
-          <h6 className="test2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;항공사</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.airline}
-            />
-          </div>
-
-          <h6 className="test1">&nbsp;항공편명</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.flightName}
-            />
-          </div>
-
-          <h6 className="test2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;출발 공항</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.startAirport}
-            />
-          </div>
-
-          <h6 className="test1">도착 공항</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.finalAirport}
-            />
-          </div>
-
-          <h6 className="test2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;출발 시간</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.startTime}
-            />
-          </div>
-
-          <h6 className="test1">도착 시간</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.finalTime}
-            />
-          </div>
-
-          <h6 className="test2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;출발 일자</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.startDate}
-            />
-          </div>
-
-          <h6 className="test1">도착 일자</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.finalDate}
-            />
-          </div>
-
-          <h6 className="test2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;국내 - 국제</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.domesticInternational}
-            />
-          </div>
-
-          <h6 className="test1">&nbsp;예약자명</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.memberName}
-            />
-          </div>
-
-          <h6 className="test2">&nbsp;&nbsp;&nbsp;&nbsp;체크인 여부</h6>
-          <div className="col-sm-12 col-md-6 mb-3 mb-lg-2 col-lg-4">
-            <input
-              name=""
-              type="type"
-              className="form-control"
-              value={reservation.checkYn}
-            />
-          </div>
-
-          <div className="btn1">
-            <div className="col-sm-10">
+          <div className="seeReservationNo1">
+            <h6 className="seeReservationNo4">예약 번호</h6>
+            <div className="seeReservationNo3">
               <input
-                type="button"
-                className="btn btn-primary btn-block"
-                value="뒤로 가기"
-                onClick={backToSearchReservation}
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.airlineReservationNumber}
               />
             </div>
           </div>
+
+          <div className="seeReservationNo2">
+            <h6 className="seeReservationNo4">성인</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.adultCount}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo1">
+            <h6 className="seeReservationNo4">소아</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.childCount}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo2">
+            <h6 className="seeReservationNo4">마일리지 사용</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.mileUseYn}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo1">
+            <h6 className="seeReservationNo4">회원 ID</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.memberId}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo2">
+            <h6 className="seeReservationNo4">항공사</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.airline}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo1">
+            <h6 className="seeReservationNo4">항공편명</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.flightName}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo2">
+            <h6 className="seeReservationNo4">출발 공항</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.startAirport}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo1">
+            <h6 className="seeReservationNo4">도착 공항</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.finalAirport}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo2">
+            <h6 className="seeReservationNo4">출발 시간</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.startTime}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo1">
+            <h6 className="seeReservationNo4">도착 시간</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.finalTime}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo2">
+            <h6 className="seeReservationNo4">출발 일자</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.startDate.split(' ')[0]}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo1">
+            <h6 className="seeReservationNo4">도착 일자</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.finalDate.split(' ')[0]}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo2">
+            <h6 className="seeReservationNo4">국내 - 국제</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.domesticInternational}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo1">
+            <h6 className="seeReservationNo4">예약자명</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.memberName}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo2">
+            <h6 className="seeReservationNo4">체크인 여부</h6>
+            <div className="seeReservationNo3">
+              <input
+                name=""
+                type="type"
+                className="seeReservationInput"
+                value={reservation.checkYn}
+              />
+            </div>
+          </div>
+
+          <div className="seeReservationNo5">
+            <div>
+              <div className="col-sm-10">
+                <input
+                  type="button"
+                  className="btn btn-primary btn-block"
+                  value="뒤로 가기"
+                  onClick={backToSearchReservation}
+                />
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </form>
 

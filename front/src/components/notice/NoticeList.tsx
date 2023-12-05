@@ -98,14 +98,11 @@ function NoticeList() {
       {/* 테마 제목 끝 */}
 
       {/* 내용 */}
-
-      <div className="row mb-3"></div>
-
-      <div className="container" id="notice-bottom-gap">
-        <div className="col-md-12 row">
-          <table className="table" id="table-bottom-gap">
+      <div className="container">
+        <div>
+          <table className="table">
             <thead>
-              <tr className="top-line-bold">
+              <tr className="jwNoticeTr">
                 <th scope="col">No</th>
                 <th scope="col">제목</th>
                 <th scope="col">날짜</th>
@@ -115,15 +112,15 @@ function NoticeList() {
             <tbody>
               {notice &&
                 notice.map((data) => (
-                  <tr className="line-sorting" key={data.noticeId}>
-                    <td id="notice-id-location">{data.noticeId}</td>
-                    <td id="notice-title-location">
-                      <a href={`/notice/${data.noticeId}`}>
+                  <tr key={data.noticeId}>
+                    <td className="jwNoticeNumber">{data.noticeId}</td>
+                    <td className="jwNoticeTitle">
+                      <a href={`/notice/${data.noticeId}`} className="jwNoticeA">
                         {data.noticeTitle}
                       </a>
                     </td>
-                    <td id="notice-insertTime-location">{data.insertTime}</td>
-                    <td id="notice-writer-location">{data.memberName}</td>
+                    <td className="jwNoticeTime">{data.insertTime.split(' ')[0]}</td>
+                    <td className="jwNoticeWriter">{data.memberName}</td>
                   </tr>
                 ))}
             </tbody>

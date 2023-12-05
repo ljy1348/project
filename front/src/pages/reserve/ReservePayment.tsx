@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ICount from "../../types/reserve/ICount";
 import IRdata from "../../types/reserve/IRdata";
 import OperationInfo from "./../auth/admin/OperationInfo/OperationInfo";
@@ -92,6 +92,8 @@ function ReservePayment() {
     userNumber: "",
     operationId: 0,
     checkYn: "N",
+    startDate:"",
+    finalDate:""
   };
 
   // operationinfo 객체 정의
@@ -139,11 +141,17 @@ function ReservePayment() {
   // modalcontrol
   const [modalShow, setModalShow] = useState(false);
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
     let { name, value } = event.target;
+
+
+
     if (name === "radio+" + index) name = "userSex";
     setNonmemberinfo((prevNonmemberinfo) => {
       const updatedNonmemberinfo = [...prevNonmemberinfo];
@@ -153,6 +161,7 @@ function ReservePayment() {
       };
       return updatedNonmemberinfo;
     });
+
   };
 
   const handleBirthdateChange = (idx: number) => {
@@ -186,7 +195,7 @@ function ReservePayment() {
     const endYear = currentYear; // 18세까지 허용
 
     const yearOptions = [];
-    for (let year = startYear; year <= endYear; year++) {
+    for (let year = endYear; year >= startYear; year--) {
       yearOptions.push(
         <option key={year} value={year}>
           {year}
@@ -273,9 +282,11 @@ function ReservePayment() {
   };
 
   // 저장 예약
-  const saveReservation = (
+  const saveReservation = async(
     userNumbersArray: any,
-    operation: IOperationinfo
+    operation: IOperationinfo,
+    startDate:any,
+    finalDate:any
   ) => {
     // 임시 부서 객체
 
@@ -288,14 +299,16 @@ function ReservePayment() {
       memberId: reservation.memberId,
       userNumber: userNumbersArray.join(","), // 배열을 쉼표로 구분된 문자열로 변환
       operationId: operation.operationId, // 여정에 해당하는 operationId 사용
-      checkYn: reservation.checkYn
+      checkYn: reservation.checkYn,
+      startDate:startDate,
+      finalDate:finalDate
     };
 
     if (currentUser?.memberId) {data.memberId=currentUser.memberId; data.memberYn="Y";}
 
     const totalPrice = calculateTotalPrice(data.seatType, operation);
 
-    ReservationService.create(data).then((response: any) => {
+    const response:any = await ReservationService.create(data);
       console.log(response.data);
       // 가격 정보를 활용할 수 있도록 원하는 작업 수행
       console.log("가격:", totalPrice);
@@ -315,7 +328,6 @@ function ReservePayment() {
         // console.log(updatedReInfo);
         return updatedReInfo;
       });
-    });
   };
 
   let payInfo1;
@@ -324,12 +336,24 @@ function ReservePayment() {
   const handlePayment = async () => {
     const userNumbersArray = await saveNonmemberinfo();
 
+    
+   for (let i = 0; i < nonmemberinfo.length; i++) {
+     
+     if (!emailRegex.test(nonmemberinfo[i].userEmail)) {
+     console.error('유효하지 않은 이메일 형식입니다.');
+     alert("이메일을 확인해 주세요")
+       return;
+      }
+    }
 
+    let startDate = startDateObj.toISOString().split("T")[0];
+    let endDate = endDateObj.toISOString().split("T")[0];
+    
 
     if (userNumbersArray.length >= Number(adultCount)+Number(childCount)) {
-      await saveReservation(userNumbersArray, operationinfo);
+      await saveReservation(userNumbersArray, operationinfo,startDate2,day);
       // 여정 2에 대한 예약 저장
-      await saveReservation(userNumbersArray, operationinfo2);
+      await saveReservation(userNumbersArray, operationinfo2,endDate2,day2);
 
       setModalShow(true);
     } else {
@@ -464,6 +488,7 @@ function ReservePayment() {
   // ]);
 
   console.log(totalPrice);
+
 
   // 다른 부분에서 totalPrice를 참조해야 할 때
   // console.log(totalPrice);
@@ -774,6 +799,7 @@ function ReservePayment() {
                             </label>
                           </div>
                           {/* 전화번호 입력창 */}
+                          <div className="col-9">
                           <input
                             type="number"
                             id="userPhone"
@@ -784,6 +810,7 @@ function ReservePayment() {
                             placeholder="번호만 입력해 주세요"
                             name="userPhone"
                           />
+                          </div>
                         </div>
                         {/* 이메일 입력 */}
                         <div className="row g-3 align-items-center mb-3">
@@ -799,7 +826,7 @@ function ReservePayment() {
                           {/* 이메일 입력창 */}
                           <div className="col-9">
                             <input
-                              type="text"
+                              type="email"
                               id="userEmail"
                               required
                               className="form-control"

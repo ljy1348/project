@@ -41,16 +41,21 @@ function QuestionContent() {
         console.log(e);
       });
   };
+
   useEffect(() => {
     if (titleId) {
       getQuestion(titleId);
     }
   }, [titleId]);
 
+  useEffect(() => {
+    if (!currentUser) navigate("/login");
+  }, [currentUser])
+
 
   const answerTextSave = () => {
 
-    const data = question;
+    const data = question
     data.answerYn="Y";
     data.memberName = "관리자";
 
@@ -68,6 +73,10 @@ function QuestionContent() {
   const adminTextSave = (e:any) => {
     setQuestion({...question, answer:e.target.value})
     console.log(e.target.value);
+  }
+
+  const backBtn = () => {
+    navigate("/question-board");
   }
 
   return (
@@ -94,7 +103,7 @@ function QuestionContent() {
                   <h2 className="userQuestionTitle">{question.title}</h2>
                 </div>
                 <hr />
-                <div className="userQuestionDiv2"><div className="userQuestionDiv3"><p className="userQuestionP1">[질문]</p><p className="userQuestionTime">{question.insertTime}</p></div> <br/><br/><p className="userQuestionContent" dangerouslySetInnerHTML={{ __html:question.content.replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;")}}></p></div>
+                <div className="userQuestionDiv2"><div className="userQuestionDiv3"><p className="userQuestionP1">[질문]</p><p className="userQuestionTime">{question.insertTime.split(' ')[0]}</p></div> <br/><br/><p className="userQuestionContent" dangerouslySetInnerHTML={{ __html:question.content.replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;")}}></p></div>
                 <hr />
                 {currentUser?.memberAuth === "ROLE_ADMIN" && question.answerYn==="N" ?
                 <div className="adminQuestionDiv2">
@@ -110,6 +119,7 @@ function QuestionContent() {
                 <div className="adminQuestionDiv2"><div className="adminQuestionDiv3"><p className="adminQuestionP1">[답변]</p><p className="adminAnswerName">&nbsp;답변자 : 관리자&nbsp;</p></div> <br/><br/><p className="adminAnswer" dangerouslySetInnerHTML={{ __html:question.answer.replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;")}}></p></div>}
               </div>
             </div>
+            <button className="userQuestionBackBtn" onClick={backBtn}>목록으로</button>
           </div>
         </div>
       

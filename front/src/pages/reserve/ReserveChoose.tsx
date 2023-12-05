@@ -8,8 +8,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Pagination } from "@mui/material";
 import IOperationinfo from "../../types/operationInfo/IOperationinfo";
 import OperationService from "../../services/operation/OperationService";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 function ReserveChoose(props: any) {
+  const { user: currentUser } = useSelector((state:RootState)=> state.auth);
+
   // todo: 공통 페이징 변수 4개
   // todo: 공통 변수 : page(현재페이지번호), count(총페이지건수), pageSize(3,6,9 배열)
   const [page, setPage] = useState<number>(1);
@@ -120,7 +124,15 @@ function ReserveChoose(props: any) {
   useEffect(() => {
     retrieveOperationinfo();
     retrieveOperationinfo2();
-  }, [selectedAbbr2,selectedFori2, startDate2, startDayName, endDate2, page, page2]);
+  }, [
+    selectedAbbr2,
+    selectedFori2,
+    startDate2,
+    startDayName,
+    endDate2,
+    page,
+    page2,
+  ]);
 
   // 가는 날
   const retrieveOperationinfo = () => {
@@ -240,16 +252,58 @@ function ReserveChoose(props: any) {
   };
 
   const navi = useNavigate();
-  const onclickpage = () => { 
+  const onclickpage = () => {
     if (fisrtId !== 0 && secoundId !== 0) {
       // fisrtId와 secoundId가 모두 0이 아닌 경우에 실행할 코드
-      navi(`/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount}/${childCount}/${seatClass}`)
+      navi(
+        `/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount}/${childCount}/${seatClass}`
+      );
     } else {
       // 아니면 0인 경우에 실행할 코드
-      alert("여정을 선택해주세요")
-
+      alert("여정을 선택해주세요");
     }
-   }
+  };
+
+  const onclickpage2 = () => {
+    if(!currentUser){
+      navi("/login")
+    }
+    else if (fisrtId !== 0 && secoundId !== 0) {
+      // fisrtId와 secoundId가 모두 0이 아닌 경우에 실행할 코드
+      navi(
+        `/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount}/${childCount}/${seatClass}`
+      );
+    } else {
+      // 아니면 0인 경우에 실행할 코드
+      alert("여정을 선택해주세요");
+    }
+  };
+
+  const selectedRenderDateCell = (id:string, date:Date) =>{
+    console.log(id);
+    if (id==="startDate") setStartDate(date.toISOString().split("T")[0]);
+    else setEndDate(date.toISOString().split("T")[0]);
+  }
+
+  const renderDateCell = (date: Date, dayIndex: number) => (
+    
+    <td key={dayIndex} onClick={(e:any)=>{selectedRenderDateCell(e.target.parentNode.id, date); e.stopPropagation()}} className={dayIndex==3?"reserve-choose-selected-day":""}>
+
+      <div onClick={(e:any)=>{selectedRenderDateCell(e.target.parentNode.parentNode.id, date); e.stopPropagation()}} >{date.toISOString().split("T")[0]}</div>
+      {days[(startDayIndex + dayIndex - 3 + 7) % 7]}
+    </td>
+  );
+
+  // 날짜를 중앙에서부터 좌우로 표현하기 위한 함수
+  const renderDateRow = (centerDate: Date, daysToShow: number) => {
+    const halfDays = Math.floor(daysToShow / 2);
+
+    return Array.from({ length: daysToShow }).map((_, index) => {
+      const currentDate = new Date(centerDate);
+      currentDate.setDate(centerDate.getDate() + index - halfDays);
+      return renderDateCell(currentDate, index);
+    });
+  };
   return (
     <>
       <div className="hero hero-inner">
@@ -371,37 +425,8 @@ function ReserveChoose(props: any) {
         {/* 반복문 */}
         <div className="sangmin_choose_airport_pee_date mt-5">
           <div className="sangmin_bottom_solid">
-            <table className="sangmin_choose_datepicker text-center">
-              <tr>
-                <td>
-                  <div>{startDate2}</div>
-                  {days[(startDayIndex - 3 + 7) % 7]}
-                </td>
-                <td>
-                  <div>{startDate2}</div>
-                  {days[(startDayIndex - 2 + 7) % 7]}
-                </td>
-                <td>
-                  <div>{startDate2}</div>
-                  {days[(startDayIndex - 1 + 7) % 7]}
-                </td>
-                <td>
-                  <div>{startDate2}</div>
-                  {days[startDayIndex]}
-                </td>
-                <td>
-                  <div>{startDate2}</div>
-                  {days[(startDayIndex + 1) % 7]}
-                </td>
-                <td>
-                  <div>{startDate2}</div>
-                  {days[(startDayIndex + 2) % 7]}
-                </td>
-                <td>
-                  <div>{startDate2}</div>
-                  {days[(startDayIndex + 3) % 7]}
-                </td>
-              </tr>
+            <table className="sangmin_choose_datepicker text-center" id="tableId">
+              <tr id="startDate">{renderDateRow(startDateObj, 7)}</tr>
             </table>
             {/* <p className="sangmin_choose_airport_data">11.27 (월)</p>
 
@@ -452,8 +477,8 @@ function ReserveChoose(props: any) {
                   <div>기종: {data.flightName}</div>
                 </td>
                 <td>{data.price.toLocaleString()} 원</td>
-                <td>{(Number(data.price)*3).toLocaleString()} 원</td>
-                <td>{(Number(data.price)*9).toLocaleString()} 원</td>
+                <td>{(Number(data.price) * 3).toLocaleString()} 원</td>
+                <td>{(Number(data.price) * 9).toLocaleString()} 원</td>
               </tr>
             ))}
           <Pagination
@@ -496,35 +521,9 @@ function ReserveChoose(props: any) {
         <div className="sangmin_choose_airport_pee_date mt-5">
           <div className="sangmin_bottom_solid">
             <table className="sangmin_choose_datepicker text-center">
-              <tr>
-                <td>
-                  <div>{endDate2}</div>
-                  {days[(endDayIndex - 3 + 7) % 7]}
-                </td>
-                <td>
-                  <div>{endDate2}</div>
-                  {days[(endDayIndex - 2 + 7) % 7]}
-                </td>
-                <td>
-                  <div>{endDate2}</div>
-                  {days[(endDayIndex - 1 + 7) % 7]}
-                </td>
-                <td>
-                  <div>{endDate2}</div>
-                  {days[endDayIndex]}
-                </td>
-                <td>
-                  <div>{endDate2}</div>
-                  {days[(endDayIndex + 1) % 7]}
-                </td>
-                <td>
-                  <div>{endDate2}</div>
-                  {days[(endDayIndex + 2) % 7]}
-                </td>
-                <td>
-                  <div>{endDate2}</div>
-                  {days[(endDayIndex + 3) % 7]}
-                </td>
+              <tr id="endDate">
+              {renderDateRow(endDateObj, 7)}
+
               </tr>
             </table>
             {/* <p className="sangmin_choose_airport_data">11.27 (월)</p>
@@ -578,8 +577,8 @@ function ReserveChoose(props: any) {
                 </td>
 
                 <td>{data.price.toLocaleString()} 원</td>
-                <td>{(Number(data.price)*3).toLocaleString()} 원</td>
-                <td>{(Number(data.price)*9).toLocaleString()} 원</td>
+                <td>{(Number(data.price) * 3).toLocaleString()} 원</td>
+                <td>{(Number(data.price) * 9).toLocaleString()} 원</td>
               </tr>
             ))}
           <Pagination
@@ -611,20 +610,24 @@ function ReserveChoose(props: any) {
         </div>
 
         <div className="d-flex justify-content-end mt-5 mb-5 no-gutters">
-        <div className="d-flex justify-content-end mt-5 no-gutters">
-            <button
+          <div className="d-flex justify-content-end mt-5 no-gutters">
+
+            {!currentUser && <button
               className="sangmin_reserve_btn mb-5"
               onClick={onclickpage}
               // disabled={!areAllOptionsSelected()} // 선택 여부에 따라 버튼 활성화/비활성화
             >
-              항공권 조회
-            </button>
+              비회원 결제
+            </button>}
           </div>
 
-          
-          <Link className="sangmin_choose_btn" to={`/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount}/${childCount}/${seatClass}`}>
+          <button
+            className="sangmin_choose_btn"
+            onClick={onclickpage2}
+            // to={`/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount}/${childCount}/${seatClass}`}
+          >
             회원 결제
-          </Link>
+          </button>
         </div>
       </div>
       {/* 모달 불러오기 */}

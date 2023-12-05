@@ -15,17 +15,16 @@ package com.example.back.model.dto.checkin;
  */
 public interface CheckinDto {
     String getCheckId();
-    String getSeatNumber();
 
     Integer getAirlineReservationNumber();
     String getAdultCount();
     String getChildCount();
     String getCheckYn();
-
     Integer getOperationId();
     String getStartAirport();
     String getFinalAirport();
 
+    String getSeatNumber();
 
 
 

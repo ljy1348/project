@@ -38,16 +38,15 @@ import ReserveChoose from "./pages/reserve/ReserveChoose";
 import ReservePayment from "./pages/reserve/ReservePayment";
 import PaymentSuccess from "./pages/payment/PaymentSuccess";
 import PaymentFail from "./pages/payment/PaymentFail";
-import Home2 from "./pages/Home2";
 
 import QuestionContent from "./pages/customerCenter/board/QuestionContent";
 
-import SelectSeat from "./pages/modal/SelectSeat";
 import AdminNotice from "./pages/auth/admin/board/AdminNotice";
 import ReservationListPage from "./pages/SearchReservation/ReservationListPage";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import AdminNoticeFixPage from "./pages/auth/admin/board/AdminNoticeFixPage";
 import Boardingpass from "./pages/checkIn/Boardingpass";
+import BaggagePaymentSuccess from "./pages/payment/BaggagePaymentSuccess";
 // todo: 리액트 import
 
 function App() {
@@ -118,7 +117,9 @@ function App() {
         {/* 결제 */}
 
         <Route path="/payment/success" element={<PaymentSuccess />} />
-        <Route path="/aa/fail" element={<PaymentFail />} />
+        <Route path="/payment/fail" element={<PaymentFail />} />
+        <Route path="/baggage/payment/success" element={<BaggagePaymentSuccess />} />
+
 
         <Route path="/reserve" element={<Reserve />} />
         <Route
@@ -130,8 +131,8 @@ function App() {
           element={<ReservePayment />}
         />
 
-        <Route path="/test" element={<SelectSeat />} />
       </Routes>
+
       {/* 꼬리말 */}
       <Footer />
     </div>
