@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../assets/css/sm/select.css";
 import axios from "axios";
 import { Modal } from "react-bootstrap";
+import CheckinService from "../../services/checkin/CheckinService";
 
 const SelectSeat = (props: any) => {
   const { totalpeople } = props;
@@ -54,14 +55,14 @@ const SelectSeat = (props: any) => {
       return;
     }
     
-     // 좌석이 이미 선택되었는지 확인
-     const isSeatSelected = selectedSeats.some(
-      (seat) => seat.x === x && seat.y === y
-    );
-    if (isSeatSelected) {
-      alert("이미 선택된 좌석입니다.");
-      return;
-    }
+    //  // 좌석이 이미 선택되었는지 확인
+    //  const isSeatSelected = selectedSeats.some(
+    //   (seat) => seat.x === x && seat.y === y
+    // );
+    // if (isSeatSelected) {
+    //   alert("이미 선택된 좌석입니다.");
+    //   return;
+    // }
 
    
     
@@ -95,7 +96,7 @@ const SelectSeat = (props: any) => {
     return (
       
       <div>
-      <div className="createSeatsNum">012  &nbsp;  345</div>
+      <div className="createSeatsNum">012  &nbsp;  456</div>
         {seats.map((xSeats, x) => (
           <div key={x} className="line" style={{ marginBottom: "5px" }}>
             {x !== 4 && x !== 9 && (
@@ -146,8 +147,7 @@ const SelectSeat = (props: any) => {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/tour/checkin/sheat/"+props.operationId)
+    CheckinService.getSeat(props.operationId)
       .then((response) => {
         const data = response.data;
         // console.log(response);
@@ -159,9 +159,6 @@ const SelectSeat = (props: any) => {
 
           setSeats((prevSeats) => {
             const updatedSeats = [...prevSeats];
-            if(x-65 > 9) x = x-2
-            else if (x - 65 > 3) x = x - 1
-            if(y > 3) y = y-1
             updatedSeats[x - 65][y] = 3;
             return updatedSeats;
           });

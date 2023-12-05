@@ -30,11 +30,16 @@ const create = (data:Array<ICheckin>) => {
   return http.post<Array<ICheckin>>("/tour/checkin", data);
 };
 
+const getSeat = (id:number) => {
+  return http.get("http://localhost:8000/api/tour/checkin/sheat/"+id);
+};
+
 const CheckinService = {
   dtogetAll,
   getAll,
   get,
-  create
+  create,
+  getSeat
 
 };
 

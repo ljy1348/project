@@ -20,9 +20,7 @@ function QuestionPage() {
             <div className="col-lg-6 mx-auto text-center">
               <div className="intro-wrap">
                 <h1 className="mb-0">자주 찾는 질문</h1>
-                <p className="text-white">
-                 무엇을 도와드릴까요?
-                </p>
+                <p className="text-white">무엇을 도와드릴까요?</p>
               </div>
             </div>
           </div>
@@ -32,8 +30,6 @@ function QuestionPage() {
 
       {/* 질문 List */}
       <Accordion className="often-question-list-gap">
-  
-        
         <Accordion.Item eventKey="0">
           <Accordion.Header>
             항공권 구매 후 탑승날짜 또는 노선 변경이 가능한가요?
@@ -159,7 +155,7 @@ function QuestionPage() {
             <br />
             *일본발 모바일 탑승권 발급 가능 노선
             <br />
-            - 나리타 (NRT) - 시즈오카 (FSZ) - 나고야(NGO) -오사카(KIX) 
+            - 나리타 (NRT) - 시즈오카 (FSZ) - 나고야(NGO) -오사카(KIX)
             <br />
             - 마쯔야마(MYJ) -오이타(OIT) -히로시마(HIJ) -후쿠오카(FUK)
             <br />
@@ -193,22 +189,78 @@ function QuestionPage() {
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="7">
-          <Accordion.Header>DB 확인 후</Accordion.Header>
-          <Accordion.Body>{/* 여기 */}</Accordion.Body>
+          <Accordion.Header>
+            마일리지를 가족과 합산할수 있나요?
+          </Accordion.Header>
+          <Accordion.Body>
+            마일리지 항공권 사용 시 부족한 마일리지 만큼 가족합산하여 이용하실
+            수 있습니다.
+            <br />
+            등록 가능한 가족범위 내 총 8인까지 등록 가능하며, 마일리지
+            가족합산제도 신청서와 6개월이내 발급된 가족증빙서류를 아래의
+            방법으로 제출해주시기 바랍니다.
+            <br />
+            ※ 등록 범위 : 가족대표회원의 배우자, 자녀, 부모, 친/외조부모,
+            친/외손자녀, 형제, 자매, 사위, 며느리, 배우자의 부모
+            <br />※ 가족관계 증빙서류 가족관계증명서 또는 주민등록등본 :
+            6개월이내 발급 서류
+          </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="8">
-          <Accordion.Header>DB 확인 후</Accordion.Header>
-          <Accordion.Body>{/* 여기 */}</Accordion.Body>
+          <Accordion.Header>
+            저 대신 다른 사람이 제 예약으로 갈 수는 없나요?
+          </Accordion.Header>
+          <Accordion.Body>
+            예약된 승객(탑승자)의 이름은 변경할 수 없습니다.
+            <br />
+            항공권은 탑승자 실명 예약으로, 탑승자의 이름 변경 시 기존의 예약을
+            취소하신 후 실제 탑승 승객의 이름으로 다시 예약 하셔야 합니다.
+          </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="9">
-          <Accordion.Header>DB 확인 후</Accordion.Header>
-          <Accordion.Body>{/* 여기 */}</Accordion.Body>
+          <Accordion.Header>공항 키오스크 셀프 체크인</Accordion.Header>
+          <Accordion.Body>
+            공항 무인탑승수속기기(Kiosk)에서 직접 좌석을 지정하고 탑승권을
+            받으세요!
+            <br />
+            부치실 짐이 있는 경우에는 수하물 전용 카운터에서 간편하고 빠르게
+            위탁하실 수 있습니다.
+            <br />
+            <br />- 국내선 : 출발 30분 전까지 [김포(GMP), 제주(CJU),
+            광주(KWJ),여수(RSU), 청주(CJJ), 대구(TAE)]
+            <br />
+            - 국제선 : 출발 60분 전까지 [인천(ICN), 김포(GMP), 도쿄나리타(NRT),
+            런던히드로(LHR), 프랑크푸르트(FRA), 오사카간사이(KIX),
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;후쿠오카(FUK),삿포로치토세(CTS),
+            도쿄하네다(HND)]
+          </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="10">
-          <Accordion.Header>DB 확인 후</Accordion.Header>
-          <Accordion.Body>{/* 여기 */}</Accordion.Body>
+          <Accordion.Header>
+            항공권과 여권상 영문 이름 띄어쓰기가 다른데 괜찮을까요?
+          </Accordion.Header>
+          <Accordion.Body>
+            영문 철자가 동일하다면 띄어쓰기가 다른 경우 수정하지 않아도 됩니다.
+            <br />
+            항공권의 영문명은 여권과 같은 철자로 성/이름만 구분 합니다.
+            <br />
+            띄어쓰기의 유무는 탑승 수속에 문제가 되지 않습니다.
+            <br />
+            단, 영문 철자는 반드시 여권과 일치해야 하므로 입력 시 주의
+            부탁드립니다.
+          </Accordion.Body>
         </Accordion.Item>
       </Accordion>
+
+      <div className="shortcuts-often-question1">
+        찾는 질문이 없으시다면? 1:1 문의를 남겨주세요.
+        <a href={"/question-board"}>
+          <button className="shortcuts-often-question-btn1">
+            1:1 문의 바로가기 ▷
+          </button>
+        </a>
+      </div>
     </div>
   );
 }

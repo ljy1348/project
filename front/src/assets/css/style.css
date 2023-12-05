@@ -4076,3 +4076,21 @@ font-family: 'Noto Serif KR', serif;
 .reserve-choose-selected-day {
   background-color: rgb(148, 156, 163);
 }
+
+/* 1:1 문의 바로가기 문구 진욱*/
+.shortcuts-often-question1 {
+  margin-top: 20px;
+  margin-left: 450px;
+  font-size: 15px;
+}
+
+/* 1:1 문의 바로가기 버튼 진욱*/
+.shortcuts-often-question-btn1 {
+  width: 170px;
+  height: 28px;
+  font-size: 12px;
+  border: 1px solid rgb(197, 197, 197);
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  margin-left: 5px;
+}

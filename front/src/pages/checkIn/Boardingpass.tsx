@@ -135,7 +135,7 @@ function Boardingpass() {
                 <h4 className="nimcheckin">&nbsp; 고객님의 체크인이 확정되었습니다!</h4>
 
               <div className="container_boardingpass">
-                <h3 className="checkin_reserve_choose_subTitle d-flex justify-content-center mt-3">
+                <h3 className="checkin_reserve_choose_subTitle d-flex justify-content-center mt-3 ms-4">
                  
                   항공 여정
                 </h3>
@@ -191,7 +191,7 @@ function Boardingpass() {
                 </div>
               </div>
             </div>
-            <dl className="line_row">
+            {Number(bagCount1) > 0&& <dl className="line_row">
               <dt>
                 <span className="tit">결제까지 완료해주시기 바랍니다.</span>
               </dt>
@@ -201,7 +201,7 @@ function Boardingpass() {
                   결제
                 </button>
               </div>
-            </dl>
+            </dl>}
           </div>
         </div>
       </div>
