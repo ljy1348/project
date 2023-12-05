@@ -3160,7 +3160,7 @@ input {
 .homeNoticeTitleA {
   width: 300px;
   text-decoration-line: none;
-  margin-left: 280px;
+  margin-left: 310px;
   font-weight: bold;
   display: block;
   overflow: hidden;
@@ -4041,7 +4041,7 @@ font-family: 'Noto Serif KR', serif;
 }
 
 .jwFooterDiv1 {
-  width: 2000px;
+  /* width: 2000px; */
   height: 200px;
   background-color: #dbdbdb;
 }
@@ -4071,3 +4071,8 @@ font-family: 'Noto Serif KR', serif;
 
 
 /* 푸터 추가 지우 끝 */
+
+/* 주영 */
+.reserve-choose-selected-day {
+  background-color: rgb(148, 156, 163);
+}

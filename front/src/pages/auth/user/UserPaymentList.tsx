@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 function UserPaymentList() {
 // 변수 정의
   // reservation 배열 변수
-  const [payment, setPayment] = useState<Array<IPayment>>([]);
+  const [payment, setPayment] = useState<Array<any>>([]);
 
   // 유저 정보 가져오기 함수
   const { user: currentUser } = useSelector((state:RootState)=> state.auth);
@@ -77,12 +77,12 @@ function UserPaymentList() {
         <div className="col-md-8 offset-2">
               <div className="col-12 input-group mb-3">
               <div>
-                <p className="input-group-text">결제 번호</p>
+                <p className="input-group-text">예약 번호</p>
               </div>
                 <input
                   type="text"
                   className="searchNumber"
-                  placeholder="결제 번호"
+                  placeholder="예약 번호"
                   value={airlinePaymentNumber}
                   onChange={onChangeSearchKeyword}
                 />
@@ -128,7 +128,9 @@ function UserPaymentList() {
             <tr className="tableText">
               <th scope="col">결제 번호</th>
               <th scope="col">출발 예약 번호</th>
+              <th scope="col">출발 체크인</th>
               <th scope="col">도착 예약 번호</th>
+              <th scope="col">도착 체크인</th>
               <th scope="col">마일리지 사용 여부</th>
               <th scope="col">결제 금액</th>
               <th scope="col">예약 취소</th>
@@ -144,12 +146,14 @@ function UserPaymentList() {
                     {data.startReservationNumber}
                   </Link>
                     </td>
+                  <td>{data.startCheckYn}</td>
                   
                   <td>
                   <Link to={"/search-reservation/seeReservation/"+data.finalReservationNumber}>
                     {data.finalReservationNumber}
                   </Link>
                     </td>
+                  <td>{data.finalCheckYn}</td>
                   <td>{data.milePrice}</td>
                   <td>{data.productPrice}</td>
                   <td><a href='#'><span className='badge text-bg-danger' onClick={()=>{deletePay(data.payId)}}>취소</span></a></td>

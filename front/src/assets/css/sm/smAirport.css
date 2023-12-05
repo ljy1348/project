@@ -2,9 +2,6 @@ ul {
     list-style: none;
 }
 
-h3 , h5{
-    margin-left: 40px;
-}
 
 .domestic > .city_list > li {
     cursor:pointer;

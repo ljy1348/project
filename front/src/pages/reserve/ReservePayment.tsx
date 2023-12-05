@@ -22,9 +22,9 @@ function ReservePayment() {
     endDate2,
     startDayName,
     endDayName,
-    adultCount,
-    childCount,
-    seatClass,
+    adultCount2,
+    childCount2,
+    seatClass2,
   } = useParams();
   // 사용 X?
   // const [icount, setICount] = useState<ICount>();
@@ -83,15 +83,17 @@ function ReservePayment() {
   // 저장 : 예약 객체 초기화
   const initialReservation = {
     airlineReservationNumber: null,
-    adultCount: adultCount,
-    childCount: childCount,
+    adultCount: adultCount2,
+    childCount: childCount2,
     mileUseYn: "N",
-    seatType: seatClass,
+    seatType: seatClass2,
     memberYn: "N",
     memberId: "",
     userNumber: "",
     operationId: 0,
     checkYn: "N",
+    startDate:"",
+    finalDate:""
   };
 
   // operationinfo 객체 정의
@@ -282,20 +284,24 @@ function ReservePayment() {
   // 저장 예약
   const saveReservation = async(
     userNumbersArray: any,
-    operation: IOperationinfo
+    operation: IOperationinfo,
+    startDate:any,
+    finalDate:any
   ) => {
     // 임시 부서 객체
 
     const data = {
-      adultCount: adultCount ?? 0,
-      childCount: childCount ?? 0,
+      adultCount: adultCount2 ?? 0,
+      childCount: childCount2 ?? 0,
       mileUseYn: reservation.mileUseYn,
-      seatType: seatClass ?? "이코노미",
+      seatType: seatClass2 ?? "이코노미",
       memberYn: reservation.memberYn,
       memberId: reservation.memberId,
       userNumber: userNumbersArray.join(","), // 배열을 쉼표로 구분된 문자열로 변환
       operationId: operation.operationId, // 여정에 해당하는 operationId 사용
-      checkYn: reservation.checkYn
+      checkYn: reservation.checkYn,
+      startDate:startDate,
+      finalDate:finalDate
     };
 
     if (currentUser?.memberId) {data.memberId=currentUser.memberId; data.memberYn="Y";}
@@ -340,11 +346,14 @@ function ReservePayment() {
       }
     }
 
+    let startDate = startDateObj.toISOString().split("T")[0];
+    let endDate = endDateObj.toISOString().split("T")[0];
+    
 
-    if (userNumbersArray.length >= Number(adultCount)+Number(childCount)) {
-      await saveReservation(userNumbersArray, operationinfo);
+    if (userNumbersArray.length >= Number(adultCount2)+Number(childCount2)) {
+      await saveReservation(userNumbersArray, operationinfo,startDate2,day);
       // 여정 2에 대한 예약 저장
-      await saveReservation(userNumbersArray, operationinfo2);
+      await saveReservation(userNumbersArray, operationinfo2,endDate2,day2);
 
       setModalShow(true);
     } else {
@@ -372,12 +381,12 @@ function ReservePayment() {
   // 어른 아이 인원수에 따라 저장창 생성
   useEffect(() => {
     let arr: ICount[] = [];
-    for (let i = 0; i < Number(adultCount); i++) {
+    for (let i = 0; i < Number(adultCount2); i++) {
       const data = { adult: true, name: "" };
       arr = [...arr, data];
     }
 
-    for (let i = 0; i < Number(childCount); i++) {
+    for (let i = 0; i < Number(childCount2); i++) {
       const data = { adult: false, name: "" };
       arr = [...arr, data];
     }
@@ -459,8 +468,8 @@ function ReservePayment() {
 
     const price = calculatePrice(
       Number(OperationInfo.price),
-      Number(adultCount),
-      Number(childCount),
+      Number(adultCount2),
+      Number(childCount2),
       multiplier
     );
     return price;

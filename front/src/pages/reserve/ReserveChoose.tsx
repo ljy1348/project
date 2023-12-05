@@ -10,9 +10,18 @@ import IOperationinfo from "../../types/operationInfo/IOperationinfo";
 import OperationService from "../../services/operation/OperationService";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { Button, Overlay } from "react-bootstrap";
 
+
+/* eslint-disable */
 function ReserveChoose(props: any) {
-  const { user: currentUser } = useSelector((state:RootState)=> state.auth);
+  const { user: currentUser } = useSelector((state: RootState) => state.auth);
+
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
+
+  const [show3, setShow3] = useState(false);
+  const target3 = useRef(null);
 
   // todo: 공통 페이징 변수 4개
   // todo: 공통 변수 : page(현재페이지번호), count(총페이지건수), pageSize(3,6,9 배열)
@@ -47,6 +56,15 @@ function ReserveChoose(props: any) {
   // 출발 날짜
   const [startDate2, setStartDate] = useState(startDate);
   const [endDate2, setEndDate] = useState(endDate);
+
+  // 인원
+  const [adultCount2, setAdultCount] = useState(adultCount);
+  const [childCount2, setChildCount] = useState(childCount);
+
+
+  const [seatClass2, setSeatClass] = useState(seatClass);
+
+
 
   // 요일을 나타내는 배열
   const days = ["일", "월", "화", "수", "목", "금", "토"];
@@ -224,6 +242,51 @@ function ReserveChoose(props: any) {
     console.log("a");
   }, [daterange.current?.value]);
 
+  const clickNone4 = (event: any) => {
+    event.stopPropagation();
+    setShow3(!show3);
+  };
+
+  const clickNone5 = (event: any) => {
+    event.stopPropagation();
+    setShow(!show);
+  };
+
+
+  const handleIncrement = (category: any) => {
+    switch (category) {
+      case "adult":
+        setAdultCount((adultCount2) => String((Number(adultCount2) || 0) + 1));
+        break;
+      case "infant":
+        setChildCount((childCount2) => String((Number(childCount2) || 0) + 1));
+
+        break;
+      default:
+        break;
+    }
+  };
+  const handleDecrement = (category: any) => {
+    switch (category) {
+      case "adult":
+        setAdultCount((adultCount2) =>
+          String(
+            (Number(adultCount2) || 0) > 0 ? (Number(adultCount2) || 0) - 1 : 0
+          )
+        );
+
+        break;
+      case "infant":
+        setChildCount((childCount2) =>
+          String(
+            (Number(childCount2) || 0) > 0 ? (Number(childCount2) || 0) - 1 : 0
+          )
+        );
+        break;
+      default:
+        break;
+    }
+  };
   // const myMo
   //  todo: Pagination 수동 바인딩(공통)
   //  페이지 번호를 누르면 => page 변수에 값 저장
@@ -256,7 +319,7 @@ function ReserveChoose(props: any) {
     if (fisrtId !== 0 && secoundId !== 0) {
       // fisrtId와 secoundId가 모두 0이 아닌 경우에 실행할 코드
       navi(
-        `/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount}/${childCount}/${seatClass}`
+        `/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount2}/${childCount2}/${seatClass2}`
       );
     } else {
       // 아니면 0인 경우에 실행할 코드
@@ -265,13 +328,12 @@ function ReserveChoose(props: any) {
   };
 
   const onclickpage2 = () => {
-    if(!currentUser){
-      navi("/login")
-    }
-    else if (fisrtId !== 0 && secoundId !== 0) {
+    if (!currentUser) {
+      navi("/login");
+    } else if (fisrtId !== 0 && secoundId !== 0) {
       // fisrtId와 secoundId가 모두 0이 아닌 경우에 실행할 코드
       navi(
-        `/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount}/${childCount}/${seatClass}`
+        `/reserve-payment/${fisrtId}/${secoundId}/${startDate2}/${endDate2}/${startDayName}/${endDayName}/${adultCount2}/${childCount2}/${seatClass2}`
       );
     } else {
       // 아니면 0인 경우에 실행할 코드
@@ -279,9 +341,17 @@ function ReserveChoose(props: any) {
     }
   };
 
+  const selectedRenderDateCell = (id:string, date:Date) =>{
+    console.log(id);
+    if (id==="startDate") setStartDate(date.toISOString().split("T")[0]);
+    else setEndDate(date.toISOString().split("T")[0]);
+  }
+
   const renderDateCell = (date: Date, dayIndex: number) => (
-    <td key={dayIndex}>
-      <div>{date.toISOString().split("T")[0]}</div>
+    
+    <td key={dayIndex} onClick={(e:any)=>{selectedRenderDateCell(e.target.parentNode.id, date); e.stopPropagation()}} className={dayIndex==3?"reserve-choose-selected-day":""}>
+
+      <div onClick={(e:any)=>{selectedRenderDateCell(e.target.parentNode.parentNode.id, date); e.stopPropagation()}} >{date.toISOString().split("T")[0]}</div>
       {days[(startDayIndex + dayIndex - 3 + 7) % 7]}
     </td>
   );
@@ -353,8 +423,10 @@ function ReserveChoose(props: any) {
               type="text"
               title="탑승인원"
               className="sangmin_choose_top_passanger_count"
-              value={`성인: ${adultCount} 유아: ${childCount}`}
-              placeholder={`성인: ${adultCount} 유아: ${childCount}`}
+              ref={target3}
+              value={`성인: ${adultCount2} 유아: ${childCount2}`}
+              placeholder={`성인: ${adultCount2} 유아: ${childCount2}`}
+              onClick={(e) => clickNone4(e)}
             />
           </div>
           {/* 좌석등급 */}
@@ -362,11 +434,89 @@ function ReserveChoose(props: any) {
             <input
               type="text"
               title="좌석등급"
+              ref={target}
+
               className="sangmin_choose_top_class"
-              value={seatClass}
-              placeholder={seatClass}
+              value={seatClass2}
+              placeholder={seatClass2}
+              onClick={(e) => clickNone5(e)}
+
             />
           </div>
+
+          {/* 인원 */}
+          <Overlay target={target3.current} show={show3} placement="bottom">
+            {({
+              placement: _placement,
+              arrowProps: _arrowProps,
+              show: _show,
+              popper: _popper,
+              hasDoneInitialMeasure: _hasDoneInitialMeasure,
+              ...props
+            }) => (
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+                className="boader_passenger"
+                {...props}
+                style={{
+                  position: "absolute",
+                  // backgroundColor: "white",
+                  width: "200px",
+                  // 길이 지정
+                  margin: "20px 0px 0px 0px",
+                  padding: "20px 0px 10px 40px",
+                  color: "black",
+                  borderRadius: 3,
+                  ...props.style,
+                }}
+              >
+                <div>
+                  <div className="style-personel">
+                    <button
+                      className="style-personel-button"
+                      onClick={() => handleDecrement("adult")}
+                    >
+                      -
+                    </button>
+                    <span> 성인: {adultCount2} </span>
+                    <button
+                      className="style-personel-button"
+                      onClick={() => handleIncrement("adult")}
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <div className="style-personel">
+                    <button
+                      className="style-personel-button"
+                      onClick={() => handleDecrement("infant")}
+                    >
+                      -
+                    </button>
+                    <span> 소아: {childCount2} </span>
+                    <button
+                      className="style-personel-button"
+                      onClick={() => handleIncrement("infant")}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button
+                    className="person-choice"
+                    onClick={(e) => {
+                      setShow3(false);
+                    }}
+                  >
+                    선택
+                  </button>
+                </div>
+              </div>
+            )}
+          </Overlay>
+
         </div>
       </div>
 
@@ -417,8 +567,8 @@ function ReserveChoose(props: any) {
         {/* 반복문 */}
         <div className="sangmin_choose_airport_pee_date mt-5">
           <div className="sangmin_bottom_solid">
-            <table className="sangmin_choose_datepicker text-center">
-              <tr>{renderDateRow(startDateObj, 7)}</tr>
+            <table className="sangmin_choose_datepicker text-center" id="tableId">
+              <tr id="startDate">{renderDateRow(startDateObj, 7)}</tr>
             </table>
             {/* <p className="sangmin_choose_airport_data">11.27 (월)</p>
 
@@ -513,7 +663,7 @@ function ReserveChoose(props: any) {
         <div className="sangmin_choose_airport_pee_date mt-5">
           <div className="sangmin_bottom_solid">
             <table className="sangmin_choose_datepicker text-center">
-              <tr>
+              <tr id="endDate">
               {renderDateRow(endDateObj, 7)}
 
               </tr>
@@ -603,14 +753,15 @@ function ReserveChoose(props: any) {
 
         <div className="d-flex justify-content-end mt-5 mb-5 no-gutters">
           <div className="d-flex justify-content-end mt-5 no-gutters">
-
-            {!currentUser && <button
-              className="sangmin_reserve_btn mb-5"
-              onClick={onclickpage}
-              // disabled={!areAllOptionsSelected()} // 선택 여부에 따라 버튼 활성화/비활성화
-            >
-              비회원 결제
-            </button>}
+            {!currentUser && (
+              <button
+                className="sangmin_reserve_btn mb-5"
+                onClick={onclickpage}
+                // disabled={!areAllOptionsSelected()} // 선택 여부에 따라 버튼 활성화/비활성화
+              >
+                비회원 결제
+              </button>
+            )}
           </div>
 
           <button
@@ -622,6 +773,8 @@ function ReserveChoose(props: any) {
           </button>
         </div>
       </div>
+   
+
       {/* 모달 불러오기 */}
       <MyareaModal
         show={modalShow}
@@ -634,6 +787,75 @@ function ReserveChoose(props: any) {
         onHide={() => foriSetModalShow(false)}
         onForiAbbrSelect={handleForiAbbrSelection}
       />
+
+            {/* 좌석등급 */}
+            <Overlay
+                          target={target.current}
+                          show={show}
+                          placement="bottom"
+                        >
+                          {({
+                            placement: _placement,
+                            arrowProps: _arrowProps,
+                            show: _show,
+                            popper: _popper,
+                            hasDoneInitialMeasure: _hasDoneInitialMeasure,
+                            ...props
+                          }) => (
+                            <div
+                              onClick={(e) => {
+                                e.stopPropagation();
+                              }}
+                              className="boader_passenger"
+                              {...props}
+                              style={{
+                                position: "absolute",
+                                // backgroundColor: "white",
+                                width: "250px",
+                                // 길이 지정
+                                margin: "20px 0px 0px 0px",
+                                padding: "30px 0px 30px 50px",
+                                color: "black",
+                                borderRadius: 3,
+                                ...props.style,
+                              }}
+                            >
+                              {/* 여기 */}
+                              <div className="d-grid gap-3">
+                                <button
+                                  className="seat-rating"
+                                  type="button"
+                                  onClick={() => {
+                                    setSeatClass("이코노미");
+                                    setShow(false);
+                                  }}
+                                >
+                                  이코노미
+                                </button>
+                                <button
+                                  className="seat-rating"
+                                  type="button"
+                                  onClick={() => {
+                                    setSeatClass("비지니스");
+                                    setShow(false);
+                                  }}
+                                >
+                                  비지니스
+                                </button>
+                                <button
+                                  className="seat-rating"
+                                  type="button"
+                                  onClick={() => {
+                                    setSeatClass("퍼스트");
+                                    setShow(false);
+                                  }}
+                                >
+                                  퍼스트
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </Overlay>
     </>
   );
 }

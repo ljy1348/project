@@ -141,6 +141,7 @@ const SelectSeat = (props: any) => {
         return updatedSeats;
       });
     });
+    props.setModalShow(false);
     props.onHide();
   };
 

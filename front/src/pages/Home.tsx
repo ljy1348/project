@@ -234,58 +234,7 @@ function Home() {
                     >
                       {/* 예약바 높이 조절 */}
                       <div className="row mb-2">
-                        {/* <div className="radio-search-gap"> */}
-                        {/* <div className="nhhLabelTag col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-1">
-                          <input
-                            type="radio"
-                            className="btn-check"
-                            name="btnradio"
-                            id="goBack"
-                            autoComplete="off"
-                            onClick={() => {
-                              setPicker(false);
-                              console.log(picker);
-                              setChecked(true);
-                            }}
-                            checked={isChecked}
-                          />
-                          <label className="trip-button" htmlFor="goBack">
-                            왕복
-                          </label>
-                        </div>
 
-                        <div className="nhhLabelTag col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-7">
-                          <input
-                            type="radio"
-                            className="btn-check"
-                            name="btnradio"
-                            id="oneWay"
-                            autoComplete="off"
-                            onClick={() => {
-                              setPicker(true);
-                              console.log(picker);
-                              setChecked(false);
-                            }}
-                            checked={!isChecked}
-                          />
-                          <label className="trip-button" htmlFor="oneWay">
-                            편도
-                          </label>
-                        </div> */}
-
-                        {/* 검색 */}
-                        {/* <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">
-                          <Link
-                            to={`/reserve-choose/${departureAirport}/${arrivalAirport}/${adultCount}/${infantCount}/${seatClass}/${departureDate}/${arrivalDate}`}
-                          >
-                            <input
-                              type="button"
-                              className="form-search-control"
-                              value={"항공권 조회"}
-                            ></input>
-                          </Link>
-                        </div> */}
-                        {/* </div> */}
 
                         {/* 출발지 */}
                         <div className="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-2">
@@ -613,7 +562,7 @@ function Home() {
 
           <div className="owl-carousel owl-3-slider">
             {/* 1 */}
-            <div className="item" style={{height:"600px"}}>
+            <div className="item">
               <a href={`/reserve-choose/ICN/SFO/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
@@ -646,9 +595,9 @@ function Home() {
               <div className="media-1">
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span className="location-font-size">중국</span>
+                  <span className="location-font-size">중국, 베이징</span>
                 </span>
-                <div className="attraction">베이징</div>
+                <div className="attraction">천단 공원</div>
               </div>
             </div>
 
@@ -686,7 +635,7 @@ function Home() {
               <div className="media-1">
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span className="location-font-size">로스앤젤레스</span>
+                  <span className="location-font-size">미국, 로스앤젤레스</span>
                 </span>
                 <div className="attraction">할리우드</div>
               </div>
@@ -706,7 +655,7 @@ function Home() {
               <div className="media-1">
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span className="location-font-size">런던</span>
+                  <span className="location-font-size">영국, 런던</span>
                 </span>
                 <div className="attraction">빅 벤</div>
               </div>
@@ -726,7 +675,7 @@ function Home() {
               <div className="media-1">
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span className="location-font-size">일본</span>
+                  <span className="location-font-size">일본, 오사카</span>
                 </span>
                 <div className="attraction">오사카성</div>
               </div>
@@ -735,16 +684,14 @@ function Home() {
         </div>
       </div>
 
-      <div className="container">
-        <div className="col-md-12 row">
-          <h3 className="homeNoticeTitle"><a href={`/notice`}>공지사항</a></h3>
+      <div className="homeNoticeDiv">
+        <h3 className="homeNoticeTitle1"><a href={`/notice`}>공지사항</a></h3>
+
           <div className="home-notice-link">
             <Link to={"/notice"}>+</Link>
-          </div>
+            <Notice />
         </div>
       </div>
-
-      <Notice />
       {/* <a
         href="#"
         className="back-to-top d-flex align-items-center justify-content-center"
