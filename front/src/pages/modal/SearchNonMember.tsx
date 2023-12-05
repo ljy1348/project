@@ -97,30 +97,6 @@ function SearchNonMember(props:any) {
               </div>
     
               <div className="seeReservationNo2 mx-auto">
-                <h6 className="seeReservationNo4">마일리지 사용</h6>
-                <div className="seeReservationNo3">
-                  <input
-                    name=""
-                    type="type"
-                    className="seeReservationInput"
-                    value={reservation.mileUseYn}
-                  />
-                </div>
-              </div>
-    
-              <div className="seeReservationNo1 mx-auto">
-                <h6 className="seeReservationNo4">회원 ID</h6>
-                <div className="seeReservationNo3">
-                  <input
-                    name=""
-                    type="type"
-                    className="seeReservationInput"
-                    value={reservation.memberId}
-                  />
-                </div>
-              </div>
-    
-              <div className="seeReservationNo2 mx-auto">
                 <h6 className="seeReservationNo4">항공사</h6>
                 <div className="seeReservationNo3">
                   <input
@@ -188,30 +164,6 @@ function SearchNonMember(props:any) {
                     type="type"
                     className="seeReservationInput"
                     value={reservation.finalTime}
-                  />
-                </div>
-              </div>
-    
-              <div className="seeReservationNo2 mx-auto">
-                <h6 className="seeReservationNo4">출발 일자</h6>
-                <div className="seeReservationNo3">
-                  <input
-                    name=""
-                    type="type"
-                    className="seeReservationInput"
-                    value={reservation.startDate}
-                  />
-                </div>
-              </div>
-    
-              <div className="seeReservationNo1 mx-auto">
-                <h6 className="seeReservationNo4">도착 일자</h6>
-                <div className="seeReservationNo3">
-                  <input
-                    name=""
-                    type="type"
-                    className="seeReservationInput"
-                    value={reservation.finalDate}
                   />
                 </div>
               </div>

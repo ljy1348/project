@@ -1,6 +1,7 @@
 package com.example.back.service.payment;
 
 import com.example.back.model.dto.payment.PaymentAdminDto;
+import com.example.back.model.dto.payment.PaymentMemberDto;
 import com.example.back.model.dto.payment.TossPaymentDto;
 import com.example.back.model.entity.auth.Member;
 import com.example.back.model.entity.payment.Payment;
@@ -67,7 +68,7 @@ public class PaymentService {
         return paymentRepository.save(payment);
     }
 
-    public Page<Payment> selectAllByMemberId(String memberId, Pageable pageable) {
+    public Page<PaymentMemberDto> selectAllByMemberId(String memberId, Pageable pageable) {
         return paymentRepository.selectAllByMemberId(memberId, pageable);
     }
 
@@ -124,7 +125,7 @@ public class PaymentService {
 
     }
 
-    public Page<Payment> selectAllByMemberIdAndPayId(String memberId, int payId, Pageable pageable) {
+    public Page<PaymentMemberDto> selectAllByMemberIdAndPayId(String memberId, int payId, Pageable pageable) {
         return paymentRepository.selectAllByMemberIdAndPayId(memberId, payId, pageable);
     }
 

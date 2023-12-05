@@ -239,8 +239,8 @@ function Passport() {
   let location = useLocation();
 
   useEffect(() => {
-    if (location.state.checkDto) {
-      console.log(location.state.checkDto);
+    if (location.state == null) {
+      navi(-1);
     }
 
     // 화면이 생성될때 받아온 예약번호를 상세조회하는 조건문
@@ -357,7 +357,7 @@ function Passport() {
                               type="text"
                               id={`passportCounrty${idx}`}
                               className="form-control"
-                              value={location.state.checkDto?location.state.checkDto[idx].userName:""}
+                              value={location.state.checkDto[idx].userName?location.state.checkDto[idx].userName:""}
                               placeholder="여권 발급 국가"
                               onChange={(e) =>
                                 handleInputChange(e, idx, "passportCounrty")
