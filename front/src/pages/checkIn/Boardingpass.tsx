@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import BoardingPassService from "../../services/boardingPass/BoardingPassService";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
@@ -10,6 +10,7 @@ import ICheckin from "../../types/checkin/ICheckin";
 import CheckinService from "../../services/checkin/CheckinService";
 import ReservationService from "../../services/reservation/ReservationService";
 import IBoardingPass from "../../types/boardingPass/IBoardingPass";
+import BaggagePaymentModal from "../modal/BaggagePaymentModal";
 
 function Boardingpass() {
   const {
@@ -64,6 +65,9 @@ function Boardingpass() {
   const [checkSeat, setCheckSeat] = useState<Array<IBoardingPass>>([
     initialCheckSeat,
   ]);
+  const location = useLocation();
+  const bagNumber = location.state.bagNumber;
+  const [paymentModalShow, setPaymentModalShow] = useState(false);
 
   // todo: 함수 정의
   // 상세조회 함수
@@ -197,7 +201,7 @@ function Boardingpass() {
               </dt>
               <div>
                 <br />
-                <button type="button" className="btn btn-primary">
+                <button type="button" className="btn btn-primary" onClick={()=>{setPaymentModalShow(true)}}>
                   결제
                 </button>
               </div>
@@ -205,6 +209,14 @@ function Boardingpass() {
           </div>
         </div>
       </div>
+      <BaggagePaymentModal
+            show={paymentModalShow}
+            onHide={() => {setPaymentModalShow(false);
+            }}
+            nonMemberModalShow={setPaymentModalShow}
+            bagNumber={bagNumber ? bagNumber:0}
+            price={Number(bagCount1) * 100000}
+          />
     </>
   );
 }

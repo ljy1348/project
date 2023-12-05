@@ -108,7 +108,7 @@ function PasswordChage() {
                           <div className="form-group">
                             현재 비밀번호
                             <Field
-                              type="text"
+                              type="password"
                               name="memberPw"
                               className={
                                 "form-control form-control-user mb-3" +
@@ -128,7 +128,7 @@ function PasswordChage() {
                           <div className="form-group">
                             새 비밀번호
                             <Field
-                              type="text"
+                              type="password"
                               name="changePw"
                               className={
                                 "form-control form-control-user mb-3" +
@@ -148,7 +148,7 @@ function PasswordChage() {
                           <div className="form-group">
                           새 비밀번호 확인
                             <Field
-                              type="text"
+                              type="password"
                               name="repassword"
                               className={
                                 "form-control form-control-user mb-3" +

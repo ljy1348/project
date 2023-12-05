@@ -324,8 +324,8 @@ export default function initCustom() {
 			],
 			firstDay: 1
 		},
-		// startDate: "2023-11-16",
-		// endDate: "2023-11-22",
+		startDate: new Date((new Date).getTime()+(24*60*60*1000)).toISOString().split("T")[0],
+		endDate: new Date((new Date).getTime()+(24*60*60*1000)).toISOString().split("T")[0],
         // function(start, end, label) {
         // //   console.log(
         // //     "New date range selected: " +

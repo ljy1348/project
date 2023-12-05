@@ -27,7 +27,7 @@ function Footer() {
       {showButton && (
         <div className="scroll-top-move">
           <img
-            src="images/top-button.png"
+            src="/images/top-button.png"
             className="button-click-top-move"
             onClick={scrollToTop}
           />
