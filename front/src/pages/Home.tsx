@@ -613,7 +613,7 @@ function Home() {
 
           <div className="owl-carousel owl-3-slider">
             {/* 1 */}
-            <div className="item" style={{height:"600px"}}>
+            <div className="item">
               <a href={`/reserve-choose/ICN/SFO/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
@@ -646,9 +646,9 @@ function Home() {
               <div className="media-1">
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span className="location-font-size">중국</span>
+                  <span className="location-font-size">중국, 베이징</span>
                 </span>
-                <div className="attraction">베이징</div>
+                <div className="attraction">천단 공원</div>
               </div>
             </div>
 
@@ -686,7 +686,7 @@ function Home() {
               <div className="media-1">
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span className="location-font-size">로스앤젤레스</span>
+                  <span className="location-font-size">미국, 로스앤젤레스</span>
                 </span>
                 <div className="attraction">할리우드</div>
               </div>
@@ -706,7 +706,7 @@ function Home() {
               <div className="media-1">
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span className="location-font-size">런던</span>
+                  <span className="location-font-size">영국, 런던</span>
                 </span>
                 <div className="attraction">빅 벤</div>
               </div>
@@ -726,7 +726,7 @@ function Home() {
               <div className="media-1">
                 <span className="d-flex align-items-center loc mb-2">
                   <span className="icon-room mr-3"></span>
-                  <span className="location-font-size">일본</span>
+                  <span className="location-font-size">일본, 오사카</span>
                 </span>
                 <div className="attraction">오사카성</div>
               </div>
