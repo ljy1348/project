@@ -210,7 +210,7 @@ function SeeReservation() {
                 name=""
                 type="type"
                 className="seeReservationInput"
-                value={reservation.startDate.split(' ')[0]}
+                value={reservation.startDate}
               />
             </div>
           </div>
@@ -222,7 +222,7 @@ function SeeReservation() {
                 name=""
                 type="type"
                 className="seeReservationInput"
-                value={reservation.finalDate.split(' ')[0]}
+                value={reservation.finalDate}
               />
             </div>
           </div>

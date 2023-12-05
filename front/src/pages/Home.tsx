@@ -562,7 +562,7 @@ function Home() {
 
           <div className="owl-carousel owl-3-slider">
             {/* 1 */}
-            <div className="item">
+            <div className="item" style={{height:"600px"}}>
               <a href={`/reserve-choose/ICN/SFO/1/0/이코노미/${departureDate}/${arrivalDate}`}
                 className="media-thumb"
               >
