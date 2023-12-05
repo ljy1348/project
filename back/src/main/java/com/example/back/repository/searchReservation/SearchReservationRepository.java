@@ -77,8 +77,8 @@ public interface SearchReservationRepository extends JpaRepository<Reservation, 
             "     , OPR.FINAL_AIRPORT as finalAirport " +
             "     , OPR.START_TIME as startTime " +
             "     , OPR.FINAL_TIME as finalTime " +
-            "     , OPR.START_DATE as startDate " +
-            "     , OPR.FINAL_DATE as finalDate " +
+            "     , RES.START_DATE as startDate " +
+            "     , RES.FINAL_DATE as finalDate " +
             "     , OPR.DOMESTIC_INTERNATIONAL as domesticInternational " +
             "     , OPR.PRICE as price " +
             "     , MEM.MEMBER_NAME as memberName " +
@@ -108,8 +108,8 @@ public interface SearchReservationRepository extends JpaRepository<Reservation, 
             "     , OPR.FINAL_AIRPORT as finalAirport " +
             "     , OPR.START_TIME as startTime " +
             "     , OPR.FINAL_TIME as finalTime " +
-            "     , OPR.START_DATE as startDate " +
-            "     , OPR.FINAL_DATE as finalDate " +
+            "     , RES.START_DATE as startDate " +
+            "     , RES.FINAL_DATE as finalDate " +
             "     , OPR.DOMESTIC_INTERNATIONAL as domesticInternational " +
             "     , OPR.PRICE as price " +
             "FROM TB_RESERVATION RES, OPERATION_INFO OPR " +
@@ -134,8 +134,8 @@ public interface SearchReservationRepository extends JpaRepository<Reservation, 
             "     , OPR.FINAL_AIRPORT as finalAirport " +
             "     , OPR.START_TIME as startTime " +
             "     , OPR.FINAL_TIME as finalTime " +
-            "     , OPR.START_DATE as startDate " +
-            "     , OPR.FINAL_DATE as finalDate " +
+            "     , RES.START_DATE as startDate " +
+            "     , RES.FINAL_DATE as finalDate " +
             "     , OPR.DOMESTIC_INTERNATIONAL as domesticInternational " +
             "     , OPR.PRICE as price" +
             "     , non.user_name as memberName " +

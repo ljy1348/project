@@ -180,8 +180,6 @@ function Login() {
     ReservationService.findNonMember(formValue)
     .then((response:any)=>{console.log(response); setReservation(response.data); setNonMemberModalShow(true)})
     .catch((e:Error)=>{console.log(e)})
-
-
   }
 
    const onChangeDate = (data:Date) => { setSelectedDate(data) }

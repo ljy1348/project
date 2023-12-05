@@ -256,6 +256,7 @@ function Register() {
   };
 
   useEffect(() => {
+    if (isLoggedIn) navi(-1);
     initScripts();
     initCustom();
   }, []);
@@ -475,10 +476,7 @@ function Register() {
                               type="text"
                               name="memberAdd"
                               className={
-                                "form-control form-control-user mb-3" +
-                                (address===""
-                                  ? " is-invalid"
-                                  : "")
+                                "form-control form-control-user mb-3"
                               }
                               id="exampleName"
                               placeholder="address"
