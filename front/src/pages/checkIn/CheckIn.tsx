@@ -176,7 +176,7 @@ function CheckIn() {
 
 
               <div className="row mb-3">
-                <div className="col-3">승객이름</div>
+                <div className="col-3">승객명</div>
                 <div className="col-3">클래스</div>
                 <div className="col-3">좌석번호</div>
                 <div className="col-3">체크인 상태</div>
@@ -205,7 +205,7 @@ function CheckIn() {
 
               {reservation.checkYn === "N" && (
                 <div className="d-flex justify-content-end mt-5 mb-5 no-gutters">
-                  <button className="sangmin_choose_btn" onClick={onclickpage}>
+                  <button className="checkin_choose_btn" onClick={onclickpage}>
                     체크인
                   </button>
                 </div>

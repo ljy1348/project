@@ -83,6 +83,10 @@
 
 }
 .createSeatsNum{
-	padding-left: 150px;
+	padding-left: 30px;
+	padding-top: 20px;
 	padding-bottom: 10px;
+	letter-spacing: 30px;
+	margin: 10px;
+
 }
