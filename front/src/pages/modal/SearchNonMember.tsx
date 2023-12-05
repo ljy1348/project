@@ -169,6 +169,30 @@ function SearchNonMember(props:any) {
               </div>
     
               <div className="seeReservationNo2 mx-auto">
+                <h6 className="seeReservationNo4">출발 일자</h6>
+                <div className="seeReservationNo3">
+                  <input
+                    name=""
+                    type="type"
+                    className="seeReservationInput"
+                    value={reservation.startDate}
+                  />
+                </div>
+              </div>
+    
+              <div className="seeReservationNo1 mx-auto">
+                <h6 className="seeReservationNo4">도착 일자</h6>
+                <div className="seeReservationNo3">
+                  <input
+                    name=""
+                    type="type"
+                    className="seeReservationInput"
+                    value={reservation.finalDate}
+                  />
+                </div>
+              </div>
+    
+              <div className="seeReservationNo2 mx-auto">
                 <h6 className="seeReservationNo4">국내 - 국제</h6>
                 <div className="seeReservationNo3">
                   <input
