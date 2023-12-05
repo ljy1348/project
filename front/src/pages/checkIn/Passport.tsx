@@ -336,7 +336,7 @@ function Passport() {
       </div>
       <Accordion className="testtttttttt1" defaultActiveKey={["0"]} alwaysOpen>
         <Accordion.Item eventKey="0">
-          <Accordion.Header>여권정보 #1</Accordion.Header>
+          <Accordion.Header>여권정보</Accordion.Header>
           <Accordion.Body>
             {/* 여권 정보 입력    */}
             {passport &&
@@ -442,7 +442,7 @@ function Passport() {
         </Accordion.Item>
         {/* 수화물 사전 구매  */}
         <Accordion.Item eventKey="2">
-          <Accordion.Header>수화물추가 (선택사항) #3</Accordion.Header>
+          <Accordion.Header>수화물추가 (선택사항) </Accordion.Header>
           <Accordion.Body>
             <div className="bagage">
               <p>
@@ -462,7 +462,9 @@ function Passport() {
 
                 <tr>
                   <td className="passengername">
-                    {searchAirlinereservationnumber}
+                    <div className="passengername-gap">
+                      {searchAirlinereservationnumber}
+                    </div>
                   </td>
                   <td className="bagcount">
                     <div
@@ -498,17 +500,18 @@ function Passport() {
                     </div>
                   </td>
                   <td className="bagprice">
-
-                    {new Intl.NumberFormat("ko-KR").format(bagCount1 * 100000)}
+                  <div className="passengername-gap">
+                    {new Intl.NumberFormat("ko-KR").format(bagCount1 * 100000)} ₩
+                    </div>
                   </td>
                 </tr>
 
                 <tr>
                   <td></td>
-                  <td>
+                  <td className="totalbagcount">
                     <strong>총 수량</strong>
                   </td>
-                  <td>
+                  <td className="totalbagprice">
                     <strong>총 금액</strong>
                   </td>
                 </tr>
@@ -522,7 +525,7 @@ function Passport() {
                     <strong>
                       {new Intl.NumberFormat("ko-KR").format(
                         bagCount1 * 100000
-                      )}
+                      )} ₩
                     </strong>
                   </td>
                 </tr>
@@ -531,7 +534,6 @@ function Passport() {
               </table>
 
               <div className="toboardingpass">
-                {/* <Link to={"/boardingpass/"}> */}
                 <button
                   type="button"
                   className="btn btn-outline-dark"
@@ -539,7 +541,6 @@ function Passport() {
                 >
                   완료
                 </button>
-                {/* </Link> */}
               </div>
             </div>
           </Accordion.Body>
@@ -553,8 +554,6 @@ function Passport() {
         onSeatsSelected={handleSeatsSelected}
         totalpeople={totalpeople}
         modalShow={modalShow}
-        setModalShow={setModalShow}
-        operationId={operID}
       />
     </>
   );
