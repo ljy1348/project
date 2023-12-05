@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import initScripts from "../../assets/js/scripts";
 import initCustom from "../../assets/js/custom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ICount from "../../types/reserve/ICount";
 import IRdata from "../../types/reserve/IRdata";
 import OperationInfo from "./../auth/admin/OperationInfo/OperationInfo";
@@ -22,9 +22,9 @@ function ReservePayment() {
     endDate2,
     startDayName,
     endDayName,
-    adultCount,
-    childCount,
-    seatClass,
+    adultCount2,
+    childCount2,
+    seatClass2,
   } = useParams();
   // 사용 X?
   // const [icount, setICount] = useState<ICount>();
@@ -83,10 +83,10 @@ function ReservePayment() {
   // 저장 : 예약 객체 초기화
   const initialReservation = {
     airlineReservationNumber: null,
-    adultCount: adultCount,
-    childCount: childCount,
+    adultCount: adultCount2,
+    childCount: childCount2,
     mileUseYn: "N",
-    seatType: seatClass,
+    seatType: seatClass2,
     memberYn: "N",
     memberId: "",
     userNumber: "",
@@ -280,17 +280,17 @@ function ReservePayment() {
   };
 
   // 저장 예약
-  const saveReservation = (
+  const saveReservation = async(
     userNumbersArray: any,
     operation: IOperationinfo
   ) => {
     // 임시 부서 객체
 
     const data = {
-      adultCount: adultCount ?? 0,
-      childCount: childCount ?? 0,
+      adultCount: adultCount2 ?? 0,
+      childCount: childCount2 ?? 0,
       mileUseYn: reservation.mileUseYn,
-      seatType: seatClass ?? "이코노미",
+      seatType: seatClass2 ?? "이코노미",
       memberYn: reservation.memberYn,
       memberId: reservation.memberId,
       userNumber: userNumbersArray.join(","), // 배열을 쉼표로 구분된 문자열로 변환
@@ -302,7 +302,7 @@ function ReservePayment() {
 
     const totalPrice = calculateTotalPrice(data.seatType, operation);
 
-    ReservationService.create(data).then((response: any) => {
+    const response:any = await ReservationService.create(data);
       console.log(response.data);
       // 가격 정보를 활용할 수 있도록 원하는 작업 수행
       console.log("가격:", totalPrice);
@@ -322,7 +322,6 @@ function ReservePayment() {
         // console.log(updatedReInfo);
         return updatedReInfo;
       });
-    });
   };
 
   let payInfo1;
@@ -342,7 +341,7 @@ function ReservePayment() {
     }
 
 
-    if (userNumbersArray.length >= Number(adultCount)+Number(childCount)) {
+    if (userNumbersArray.length >= Number(adultCount2)+Number(childCount2)) {
       await saveReservation(userNumbersArray, operationinfo);
       // 여정 2에 대한 예약 저장
       await saveReservation(userNumbersArray, operationinfo2);
@@ -373,12 +372,12 @@ function ReservePayment() {
   // 어른 아이 인원수에 따라 저장창 생성
   useEffect(() => {
     let arr: ICount[] = [];
-    for (let i = 0; i < Number(adultCount); i++) {
+    for (let i = 0; i < Number(adultCount2); i++) {
       const data = { adult: true, name: "" };
       arr = [...arr, data];
     }
 
-    for (let i = 0; i < Number(childCount); i++) {
+    for (let i = 0; i < Number(childCount2); i++) {
       const data = { adult: false, name: "" };
       arr = [...arr, data];
     }
@@ -460,8 +459,8 @@ function ReservePayment() {
 
     const price = calculatePrice(
       Number(OperationInfo.price),
-      Number(adultCount),
-      Number(childCount),
+      Number(adultCount2),
+      Number(childCount2),
       multiplier
     );
     return price;
@@ -480,6 +479,7 @@ function ReservePayment() {
   // ]);
 
   console.log(totalPrice);
+
 
   // 다른 부분에서 totalPrice를 참조해야 할 때
   // console.log(totalPrice);

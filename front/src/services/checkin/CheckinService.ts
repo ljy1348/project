@@ -30,8 +30,6 @@ const create = (data:Array<ICheckin>) => {
   return http.post<Array<ICheckin>>("/tour/checkin", data);
 };
 
-
-
 const CheckinService = {
   dtogetAll,
   getAll,

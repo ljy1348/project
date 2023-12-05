@@ -26,10 +26,20 @@ const get = (airlineReservationNumber: any) => {
   return http.get<ISearchReservation>(`/tour/search-reservation/seeReservation/${airlineReservationNumber}`);
 };
 
+
 // 유빈 
 const getChseat = (airlineReservationNumber: any) => {
   return http.get<IReservation>(`/tour/boardingpass/${airlineReservationNumber}`);
 }
+
+// 상세 조회
+const get2 = (airlineReservationNumber: any) => {
+
+  // return http.get<IReservation>(`/tour/search-reservation/payment/${airlineReservationNumber}`);
+
+  return http.get<ISearchReservation>(`/tour/search-reservation/checkInReservation/${airlineReservationNumber}`);
+};
+
 
 
 // 상민
@@ -68,7 +78,8 @@ const ReservationService = {
   getAllSeat,
   deleteRoundTrip,
   findNonMember,
-  update
+  update,
+  get2
 };
   
 export default ReservationService;

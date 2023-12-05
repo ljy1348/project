@@ -38,11 +38,9 @@ import ReserveChoose from "./pages/reserve/ReserveChoose";
 import ReservePayment from "./pages/reserve/ReservePayment";
 import PaymentSuccess from "./pages/payment/PaymentSuccess";
 import PaymentFail from "./pages/payment/PaymentFail";
-import Home2 from "./pages/Home2";
 
 import QuestionContent from "./pages/customerCenter/board/QuestionContent";
 
-import SelectSeat from "./pages/modal/SelectSeat";
 import AdminNotice from "./pages/auth/admin/board/AdminNotice";
 import ReservationListPage from "./pages/SearchReservation/ReservationListPage";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -129,7 +127,7 @@ function App() {
           element={<ReserveChoose />}
         />
         <Route
-          path="/reserve-payment/:firstId/:secoundId/:startDate2/:endDate2/:startDayName/:endDayName/:adultCount/:childCount/:seatClass"
+          path="/reserve-payment/:firstId/:secoundId/:startDate2/:endDate2/:startDayName/:endDayName/:adultCount2/:childCount2/:seatClass2"
           element={<ReservePayment />}
         />
 

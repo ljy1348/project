@@ -46,8 +46,16 @@ public class CustomerService {
     }
 
 //    ID 기준 제목 검색
-    public Page<CustomerDto> findAllByTitleIdAndMemberId(int titleId, String memberId, Pageable pageable) {
-        Page<CustomerDto> page = customerRepository.findAllByTitleIdAndMemberId(titleId, memberId, pageable);
+
+    public Page<CustomerDto> findTitleLike(String title, String memberId, Pageable pageable) {
+        Page<CustomerDto> page = customerRepository.findTitleLike(title, memberId, pageable);
+
+        return page;
+    }
+
+//    관리자 전체 검색
+    public Page<CustomerDto> findAllTitleAll(String title, Pageable pageable) {
+        Page<CustomerDto> page = customerRepository.findAllTitleAll(title, pageable);
 
         return page;
     }

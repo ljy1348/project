@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import IUser from "../../types/auth/IMember";
 import authService from "../../services/auth/authService";
 import IAuth from "../../types/auth/IAuth";
+import { useNavigate } from "react-router-dom";
 // todo: 공유저장소 정의하는 파일 : 공유함수, 공유변수
 
 // 로컬스토리지에서 user 라는 키이름으로 값 가져오기 : 결과 (문자열) -> 객체로 변환

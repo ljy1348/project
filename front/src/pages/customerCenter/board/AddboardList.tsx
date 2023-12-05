@@ -67,6 +67,7 @@ function AddboardList() {
 
       .then((response: any) => {
         console.log(response.data);
+        navi(`/question-board`);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -77,7 +78,6 @@ function AddboardList() {
 
   const Onclinkev = () => {
     saveQuestion();
-    navi(`/question-board`);
   };
 
   return (
@@ -138,28 +138,27 @@ function AddboardList() {
           </button>
         </div>
 
-        <div className="gray_box1">
-          <h3>작성 시 유의사항</h3>
-          <ul className="list_type2">
-            <li>
-              코로나19 및 비운항으로 인한 항공권 환불 문의는 구매하신 발권처로
-              문의하여 주시기 바랍니다.
-            </li>
-            <li>
-              고객님의 소중한 말씀은 공휴일을 제외한 평일 근무시간에 담당자에게
-              전달되며 주말 및 공휴일에 문의하신 내용은 정상 근무일에 처리되기
-              때문에 답변이 다소 지연될 수 있음을 양해해 주시기 바랍니다.
-            </li>
-            <li>
-              욕설, 폭언, 성희롱 근거 없는 음해, 타인의 인격 모욕, 명예를
-              회손하는 표현이 포함되거나 당사와 무관한 사안으로 고객의 말씀을
-              남겨주실 경우 예고없이 임의로 답변 제외될 수 있음을 안내드립니다.
-            </li>
-            <li>
-              계좌정보, 카드정보, 연락처 등 중요한 개인정보는 당사가 별도 요청한
-              경우를 제외하고는 내용상에 기재하지 않도록 요청드립니다.
-            </li>
-          </ul>
+        <div className="container">
+          <div className="answer-careful-notes">
+            <p className="answer-text-middle">개인정보 수집/이용 유의사항</p>
+            <ul className="answer-carful-list">
+              <li>1. 개인정보의 수집/이용 목적: 1:1문의 고객응대</li>
+              <li>
+                2. 수집하는 개인정보의 항목
+                <br />
+                &nbsp;&nbsp; 1) 필수항목 : 이름, 전화번호, 이메일, 문의내용
+                <br />
+                &nbsp;&nbsp; 2) 문의유형 별 추가항목
+                <br />
+                &nbsp;&nbsp;&nbsp;- 항공권 영문 정정 : 예약번호, 탑승자명, 변경할 영문성명
+                <br />
+                &nbsp;&nbsp;&nbsp;- 수하물 파손 : 출발지, 도착지, 탑승일
+              </li>
+              <li>3. 개인정보의 보유 및 이용 기간 : 관련 법령에 따름
+                 동의를 거부할 수 있으며, 거부하실 경우 1:1 문의가 불가합니다.
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </>

@@ -7,9 +7,12 @@ import com.example.back.model.dto.checkin.CheckinDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -91,14 +94,26 @@ public interface CheckinRepository extends JpaRepository<Checkin, String> {
             "            SELECT * " +
             "            FROM tb_non_members_info " +
             "            WHERE user_number IN (SELECT id FROM id_values) " +
-            "        ) nmn ON res.user_number LIKE '%' || nmn.user_number || '%' " +
+            "        ) nmn ON res.user_number LIKE '%' || nmn.user_number || '%' and res.member_id = :memberId" +
             ")  " +
             "WHERE rn = dr "
             , nativeQuery = true)
-    List<CheckgetDto> check(@Param("airlineReservationNumber")int airlineReservationNumber);
+    List<CheckgetDto> check(@Param("airlineReservationNumber")int airlineReservationNumber, String memberId);
 
     Page<Checkin> findAllByCheckId(int checkId, Pageable pageable);
     Page<Checkin> findAllByAirlineReservationNumber(int airlineReservationNumber, Pageable pageable);
     Page<Checkin> findAllByPassportId(int passportId, Pageable pageable);
-    Page<Checkin> findAllBy(Pageable pageable);
+    Page<Checkin> findAllByOrderByInsertTime(Pageable pageable);
+
+    @Query(value = "select * from tb_checkin order by insert_time desc", nativeQuery = true)
+    Page<Checkin> selectAllDesc(Pageable pageable);
+
+    List<Checkin> findAllByAirlineReservationNumber(int airlineReservationNumber);
+
+
+
+    @Transactional
+    @Modifying
+    @Query(value = "update tb_checkin set delete_yn='Y' where airline_reservation_number = :reserveNumber", nativeQuery = true)
+    void deleteByReserveNumber(@Param("reserveNumber") int reserveNumber);
 }

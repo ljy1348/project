@@ -252,7 +252,7 @@ function Login() {
           </button>
           <hr />
           <a
-            href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.REACT_APP_GOOGLE_REST_API_KEY}&redirect_uri=${"http://localhost:3000/login/auth/google"}&response_type=code&scope=email`}
+            href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.REACT_APP_GOOGLE_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_GOOGLE_REDIRECT_URI}&response_type=code&scope=email`}
             className="btn btn-google btn-user w-100 mb-2"
           >
             <i className="fab fa-google fa-fw"></i>&nbsp;Login
@@ -462,8 +462,8 @@ function Login() {
                 <SearchNonMember
             show={nonMemberModalShow}
             onHide={() => {setNonMemberModalShow(false);
-          
             }}
+            nonMemberModalShow={setNonMemberModalShow}
             reservation={reservation}
           />
             </div>

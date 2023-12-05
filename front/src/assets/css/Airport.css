@@ -121,12 +121,9 @@ li > .abbr {
 }
 
 
-
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
 /* 희현 추가 시작 */
-
-
-
 /* ***************************************************** */
 /* ***************************************************** */
 /* ***************************************************** */
@@ -163,10 +160,9 @@ li > .abbr {
     overflow-y: auto;
     width: 220px;
     height: 230px;
-    background: #f3f3f3;
     text-align: start;
     float: left;
-    border: 1px solid black;
+    border: 1px solid rgb(135, 135, 135);
 }
 
 .home_list_nation > ul {
@@ -187,6 +183,7 @@ li > .abbr {
     background-color: hsl(0, 0%, 94%);
     height: 40px;
     font-size: 15px;
+    border: 1px solid rgb(220, 220, 220);
 }
 
 /* 국제선 리스트 오른쪽 */
@@ -197,6 +194,7 @@ li > .abbr {
     margin: 5px 1px;
     cursor: pointer;
     padding-top: 10px;
+    border: 1px solid rgb(220, 220, 220);
 }
 
 /* ***************************************************** */
@@ -206,7 +204,7 @@ li > .abbr {
 .home_international_listbox {
     width: 250px;
     height: 230px;
-    border: 1px solid black;
+    border: 1px solid rgb(135, 135, 135);
     overflow: hidden;
     overflow-y: auto;
     float: right;
@@ -233,9 +231,11 @@ li > .abbr {
 .homeTotalDiv {
     width: 505px;
     height: 250px;
-    border: 1px solid rgb(29, 29, 29);
+    border: 1px solid rgb(135, 135, 135);
     padding-top: 7px;
     background-color: #e4e4e462;
+    margin-left: 10px;
+    margin-bottom: 18px;
 }
 
 

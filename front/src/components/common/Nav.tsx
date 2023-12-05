@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RootState, useAppDispatch } from "../../store/store";
 import { logout } from "../../store/slices/auth";
 
@@ -14,6 +14,8 @@ function Nav() {
   const logOut = useCallback(() => { 
     dispatch(logout());
    },[dispatch]);
+
+   const navi = useNavigate();
   
 
   return (
@@ -26,12 +28,11 @@ function Nav() {
             <ul
               className="js-clone-nav d-none d-lg-inline-block text-left site-menu"
             >
-              <Link to="/" className="logo">
+              <a href="/" className="logo">
                 <img src="/images/그린에어로고.png" className="main-logo-image" />
-                GreanAir
-              </Link>
+                GreenAir
+              </a>
               
-
               {/* 예약 메뉴 시작 */}
               <li>
                 <Link to="/reserve">예약</Link>
@@ -87,7 +88,7 @@ function Nav() {
                 }
                 {currentUser&&<>
                     <li>
-                  <Link to="#"onClick={logOut}>로그아웃</Link>
+                  <Link to="/"onClick={()=>{logOut();}}>로그아웃</Link>
                 </li>
                 { currentUser.memberAuth ==="ROLE_USER" ?
                 <li>

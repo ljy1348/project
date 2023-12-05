@@ -24,4 +24,13 @@ public class SinglePageAppController {
     public String redirect() {
         return "forward:/index.html";
     }
+
+    @RequestMapping(value = "/reserve-choose/**", method = RequestMethod.GET)
+    public String redirect2() {
+        return "forward:/index.html";
+    }
+
+
+
 }
+

@@ -24,6 +24,8 @@ public interface CheckinDto {
     String getStartAirport();
     String getFinalAirport();
 
+    String getSeatNumber();
+
 
 
 }

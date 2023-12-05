@@ -97,7 +97,7 @@ return (
           {notice &&
             notice.map((data) => (
               <tr key={data.noticeId}>
-                <td id="adminTd1">{data.noticeTitle}</td>
+                <td id="adminTd1"><a className="adminTdA">{data.noticeTitle}</a></td>
                 <td id="adminTd2">{data.memberName}</td>
                 <td id="adminTd3">{data.insertTime}</td>
                 <td id="adminTd4">

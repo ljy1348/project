@@ -105,13 +105,7 @@ function UserInfo() {
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="link-2" className='user-info-nav' onClick={()=>setSelectedTab("reservation")}>예약 내역</Nav.Link>
-      </Nav.Item>
-      
-      <Nav.Item>
-        <Nav.Link eventKey="link-3" className='user-info-nav' onClick={()=>setSelectedTab("payment")}>
-          결제 내역
-        </Nav.Link>
+        <Nav.Link eventKey="link-2" className='user-info-nav' onClick={()=>setSelectedTab("payment")}>예약 내역</Nav.Link>
       </Nav.Item>
     </Nav>
     {viewTab()}

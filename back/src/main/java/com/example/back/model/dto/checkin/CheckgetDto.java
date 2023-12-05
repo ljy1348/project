@@ -1,5 +1,10 @@
 package com.example.back.model.dto.checkin;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  * packageName : com.example.back.model.dto.checkin
  * fileName : CheckgetDto
@@ -13,11 +18,17 @@ package com.example.back.model.dto.checkin;
  * —————————————————————————————
  * 2023-12-01         GGG          최초 생성
  */
-public interface CheckgetDto {
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+public class CheckgetDto {
 
 
-    Integer getAirlineReservationNumber();
-    String getSeatNumber();
-    Integer getUserNumber();
-    String getUserName();
+    Integer airlineReservationNumber;
+    String seatNumber;
+    Integer userNumber;
+    String userName;
+    String adultCount;
+    String childCount;
 }
