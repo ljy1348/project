@@ -72,7 +72,7 @@ function Notice() {
                             {data.noticeTitle}
                           </a>
                         </td>
-                        <td id="homeNoticeTime">{data.insertTime}</td>
+                        <td id="homeNoticeTime">{data.insertTime.split(' ')[0]}</td>
                         <td id="homeNoticeWriter">{data.memberName}</td>
                       </tr>
                     )

@@ -119,7 +119,7 @@ function NoticeList() {
                         {data.noticeTitle}
                       </a>
                     </td>
-                    <td className="jwNoticeTime">{data.insertTime}</td>
+                    <td className="jwNoticeTime">{data.insertTime.split(' ')[0]}</td>
                     <td className="jwNoticeWriter">{data.memberName}</td>
                   </tr>
                 ))}
