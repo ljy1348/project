@@ -4042,3 +4042,8 @@ font-family: 'Noto Serif KR', serif;
 
 
 /* 푸터 추가 지우 끝 */
+
+/* 주영 */
+.reserve-choose-selected-day {
+  background-color: rgb(148, 156, 163);
+}

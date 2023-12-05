@@ -287,9 +287,9 @@ function ReserveChoose(props: any) {
 
   const renderDateCell = (date: Date, dayIndex: number) => (
     
-    <td key={dayIndex} onClick={(e:any)=>{selectedRenderDateCell(e.target.parentNode.id, date); e.stopPropagation()}}>
+    <td key={dayIndex} onClick={(e:any)=>{selectedRenderDateCell(e.target.parentNode.id, date); e.stopPropagation()}} className={dayIndex==3?"reserve-choose-selected-day":""}>
 
-      <div onClick={(e:any)=>{selectedRenderDateCell(e.target.parentNode.parentNode.id, date); e.stopPropagation()}}>{date.toISOString().split("T")[0]}</div>
+      <div onClick={(e:any)=>{selectedRenderDateCell(e.target.parentNode.parentNode.id, date); e.stopPropagation()}} >{date.toISOString().split("T")[0]}</div>
       {days[(startDayIndex + dayIndex - 3 + 7) % 7]}
     </td>
   );
