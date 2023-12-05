@@ -54,7 +54,7 @@ function Notice() {
             <h1 className="noticeTitle">{notice.noticeTitle}</h1>
             <div className="noticeDiv">
             <div className="notice-info">
-              <p className="noticeInsertTime">작성일: {notice.insertTime}</p>
+              <p className="noticeInsertTime">작성일: {notice.insertTime.split(' ')[0]}</p>
               <p className="noticeMemberName">작성자: {notice.memberName}</p>
             </div>
             <div className="noticeContent1">

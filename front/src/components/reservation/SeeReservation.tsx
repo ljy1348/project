@@ -2,6 +2,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import ReservationService from "../../services/reservation/ReservationService";
 import React, { useEffect, useState } from "react";
 import ISearchReservation from "../../types/searchReservation/ISearchReservation";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 function SeeReservation() {
   // todo: 변수 정의
@@ -10,6 +12,9 @@ function SeeReservation() {
 
   // 강제 페이지 이동 변수
   let navigate = useNavigate();
+
+  // 유저 정보 가져오기 함수
+  const { user: currentUser } = useSelector((state: RootState) => state.auth);
 
   // 객체 초기화
   const initialReservation = {
@@ -52,6 +57,10 @@ function SeeReservation() {
   useEffect(() => {
     if (airlineReservationNumber) getReservation(airlineReservationNumber);
   }, [airlineReservationNumber]);
+
+  useEffect(() => {
+    if (!currentUser) navigate("/login");
+  }, [currentUser])
 
   const backToSearchReservation = () => {
     navigate("/search-reservation");
@@ -201,7 +210,7 @@ function SeeReservation() {
                 name=""
                 type="type"
                 className="seeReservationInput"
-                value={reservation.startDate}
+                value={reservation.startDate.split(' ')[0]}
               />
             </div>
           </div>
@@ -213,7 +222,7 @@ function SeeReservation() {
                 name=""
                 type="type"
                 className="seeReservationInput"
-                value={reservation.finalDate}
+                value={reservation.finalDate.split(' ')[0]}
               />
             </div>
           </div>
