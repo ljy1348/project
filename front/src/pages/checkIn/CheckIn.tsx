@@ -38,7 +38,7 @@ function CheckIn() {
 
   // 검색어 변수
   const [searchAirlinereservationnumber, setSearchAirlinereservationnumber] =
-    useState<number>(0);
+    useState("");
 
   // 객체초기화 이니셜 기본키
   //  모달이동
@@ -67,7 +67,7 @@ function CheckIn() {
   // todo: 검색어 조회 함수
   const retrieveCheckDto = () => {
     // 백엔드 매개변수 전송 : + 현재페이지(page), 1페이지당개수(pageSize)
-    CheckinService.dtogetAll(searchAirlinereservationnumber)
+    CheckinService.dtogetAll(Number(searchAirlinereservationnumber))
       .then((response: any) => {
         setCheckDto(response.data);
         // 로그 출력
@@ -96,9 +96,9 @@ function CheckIn() {
 
   // 조회 버튼 클릭 시 실행
   const onclickButton = () => {
-    getReservation(searchAirlinereservationnumber);
+    getReservation(Number(searchAirlinereservationnumber));
     retrieveCheckDto();
-    getBaggage(searchAirlinereservationnumber);
+    getBaggage(Number(searchAirlinereservationnumber));
   };
 
   const navi = useNavigate();
