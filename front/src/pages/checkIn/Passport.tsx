@@ -162,8 +162,10 @@ function Passport() {
     try {
       var data = passport;
       const response = await PassportService.create(data);
+      
       console.log(response.data);
   } catch (e) {
+    
       console.error(e);
   }
   };
@@ -218,7 +220,15 @@ function Passport() {
   };
   const navi = useNavigate();
   const handleSave = async () => {
-    
+    let isPassposrt = false;
+    for (let i = 0; i < passport.length; i++) {
+      if (passport[i].passportCounrty === "" || passport[i].passportCounrty == undefined) isPassposrt = true;
+      if (passport[i].passportDate === "" || passport[i].passportCounrty == undefined) isPassposrt = true;
+      if (passport[i].passportId === "" || passport[i].passportCounrty == undefined) isPassposrt = true;
+    }
+
+    if (isPassposrt) {alert("모든 정보를 입력해 주세요"); return}
+
     if(totalpeople === selectedSeatsInfo.length){
       await  savePassport();
       await saveCheckin();
@@ -554,6 +564,8 @@ function Passport() {
         onSeatsSelected={handleSeatsSelected}
         totalpeople={totalpeople}
         modalShow={modalShow}
+        setModalShow={setModalShow}
+        operationId={operID}
       />
     </>
   );

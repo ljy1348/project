@@ -160,6 +160,8 @@ public interface SearchReservationRepository extends JpaRepository<Reservation, 
             "     , RES.OPERATION_ID as operationId " +
             "     , OPR.START_AIRPORT as startAirport " +
             "     , OPR.FINAL_AIRPORT as finalAirport " +
+            "     , RES.START_DATE as startDate " +
+            "     , RES.FINAL_DATE as finalDate " +
             "FROM TB_RESERVATION RES, OPERATION_INFO OPR " +
             "WHERE RES.OPERATION_ID = OPR.OPERATION_ID " +
             "AND RES.AIRLINE_RESERVATION_NUMBER LIKE '%' || :airlineReservationNumber || '%'", nativeQuery = true)
