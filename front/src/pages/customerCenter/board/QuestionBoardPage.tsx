@@ -161,7 +161,7 @@ function QuestionBoardPage() {
                         <td className="userQuestionTd1">
                           <a href={`/question-board/${data.titleId}`}>{data.title}</a>
                         </td>
-                        <td>{data.insertTime}</td>
+                        <td>{data.insertTime.split(' ')[0]}</td>
                         {data.answerYn === "N" && currentUser?.memberAuth === "ROLE_ADMIN" ? <td><a href={`/question-board/${data.titleId}`}><button className="userQuestionDeleteBtn">답변달기</button></a></td>:<td>{data.answerYn}</td>}
                         <td>
                           <button
