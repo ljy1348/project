@@ -74,7 +74,7 @@ function UserPaymentList() {
   return (
     <>
       <div className="searchRow">
-        <div className="col-md-8 offset-2">
+        <div className="col-md-8 adminSearch">
               <div className="col-12 input-group mb-3">
               <div>
                 <p className="input-group-text">예약 번호</p>
@@ -82,14 +82,14 @@ function UserPaymentList() {
                 <input
                   type="text"
                   className="searchNumber"
-                  placeholder="예약 번호"
+                  placeholder="예약번호"
                   value={airlinePaymentNumber}
                   onChange={onChangeSearchKeyword}
                 />
               </div>
             </div>
 
-            <div className="searchButton">
+            <div className="col-2 mx-auto">
               <div>
                 <input
                   type="button"

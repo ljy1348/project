@@ -6,3 +6,18 @@
 .admin_board_main tr td {
     vertical-align: top;
 }
+
+.adminSearchSelect {
+    height: 39px !important;
+    margin-top: 7px;
+}
+
+.adminSearchBtn {
+    margin-top: 7px;
+    width: 100px;
+    height: 39px !important;
+}
+
+.adminSearch {
+    margin-left: 250px !important;
+}
