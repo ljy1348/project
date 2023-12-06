@@ -73,7 +73,7 @@ function AdminMemberList({setSelectTab, setDataId}:{setSelectTab:any, setDataId:
       <div className="row mb-5 justify-content-center">
         {/* w-50 : 크기 조정, mx-auto : 중앙정렬(margin: 0 auto), justify-content-center */}
         <div className="col-8 w-50 input-group mb-3 mt-5">
-          <select value={select} onChange={onChangeSelect}>
+          <select value={select} onChange={onChangeSelect} className="input-group-text me-1 adminSearchSelect">
             <option value="id">ID</option>
             <option value="name">이름</option>
             <option value="ename">E.이름</option>
@@ -88,7 +88,7 @@ function AdminMemberList({setSelectTab, setDataId}:{setSelectTab:any, setDataId:
           />
           <div className="input-group-append">
             <button
-              className="btn btn-outline-secondary"
+              className="searchReservationBtn adminSearchBtn"
               type="button"
               onClick={retrieveDept}
             >

@@ -73,7 +73,7 @@ function OperationInfoManager({setSelectTab, setDataId}:{setSelectTab:any, setDa
       <div className="row mb-5 justify-content-center">
         {/* w-50 : 크기 조정, mx-auto : 중앙정렬(margin: 0 auto), justify-content-center */}
         <div className="col-8 w-50 input-group mb-3 mt-5">
-          <select value={select} onChange={onChangeSelect} className='me-3'>
+          <select value={select} onChange={onChangeSelect} className='input-group-text me-1 adminSearchSelect'>
             <option value="operationId">ID</option>
             <option value="startAirport">출발공항</option>
             <option value="finalAirport">도착공항</option>
@@ -89,15 +89,15 @@ function OperationInfoManager({setSelectTab, setDataId}:{setSelectTab:any, setDa
           />
           <div className="input-group-append">
             <button
-              className="btn btn-outline-secondary"
+              className="searchReservationBtn adminSearchBtn"
               type="button"
               onClick={()=> {retrieveDept(); setPage(1)}}
             >
-              Search
+              조회하기
             </button>
             <div>
             
-            <button className="btn btn-outline-secondary ms-3" onClick={()=>{setSelectTab("항공기 추가")}}>추가</button>
+            <button className="btn btn-primary ms-3 adminSearchBtn" onClick={()=>{setSelectTab("항공기 추가")}}>추가</button>
             </div>
           </div>
         </div>
