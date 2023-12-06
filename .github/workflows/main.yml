@@ -1,10 +1,9 @@
 name: Build and Deploy
 
 on:
-  pull_request:
+  push:
     branches:
       - main
-      - developer
 
 jobs:
   build-and-deploy:
@@ -33,7 +32,7 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '18' # 필요한 Node.js 버전
-        
+      
     - name: Build React Project
       run: |
         cd front
@@ -41,3 +40,31 @@ jobs:
         npm run build
       env:
         CI: false
+
+    # AWS EC2 서버로 파일 전송
+    - name: Copy files to EC2
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.PEM }}
+        port: 22
+        source: "back/build/libs/*.war, front/build"
+        target: "/home/ubuntu/project"
+
+    # 원격 서버에서 배포 스크립트 실행
+    - name: Execute deployment script
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.PEM }}
+        port: 22
+        script: |
+          sudo /home/ubuntu/apache-tomcat-9.0.83/bin/shutdown.sh
+          rm -r /home/ubuntu/apache-tomcat-9.0.83/webapps/ROOT.war
+          rm -r /home/ubuntu/apache-tomcat-9.0.83/webapps/ROOT
+          mv /home/ubuntu/project/back/web/build/libs/web-0.0.1-SNAPSHOT.war /home/ubuntu/apache-tomcat-9.0.83/webapps/ROOT.war
+          sudo systemctl restart nginx
+          sudo /home/ubuntu/apache-tomcat-9.0.83/bin/startup.sh
+          
