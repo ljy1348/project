@@ -62,9 +62,9 @@ jobs:
         port: 22
         script: |
           sudo /home/ubuntu/apache-tomcat-9.0.83/bin/shutdown.sh
-          rm -r /home/ubuntu/apache-tomcat-9.0.83/webapps/ROOT.war
-          rm -r /home/ubuntu/apache-tomcat-9.0.83/webapps/ROOT
-          mv /home/ubuntu/project/back/web/build/libs/web-0.0.1-SNAPSHOT.war /home/ubuntu/apache-tomcat-9.0.83/webapps/ROOT.war
+          sudo rm -r /home/ubuntu/apache-tomcat-9.0.83/webapps/ROOT.war
+          sudo rm -r /home/ubuntu/apache-tomcat-9.0.83/webapps/ROOT
+          sudo mv /home/ubuntu/project/back/build/libs/web-0.0.1-SNAPSHOT.war /home/ubuntu/apache-tomcat-9.0.83/webapps/ROOT.war
           sudo systemctl restart nginx
           sudo /home/ubuntu/apache-tomcat-9.0.83/bin/startup.sh
           
