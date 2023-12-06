@@ -59,7 +59,7 @@ function UserPaymentList() {
   const deletePay = (payId:number) => { 
     PaymentService.deletePay(payId)
     .then((response: any) => {
-      retrievePayment()
+      window.location.replace("/user-info")
     })
     .catch((e: Error) => {
       console.log(e);

@@ -214,7 +214,7 @@ function CheckIn() {
           )}
 
 
-        <div className="mx-auto col-12">{baggage && (baggage?.bagPrice > 0 ? <><div className="mx-auto col-12">수하물 : {baggage.paymentYn === 'N' ? <button onClick={()=>{setPaymentModalShow(true)}}>결제</button>:"결제 완료"}</div></> : <></>)}</div>
+        <div className="mx-auto col-12">{baggage && (baggage?.bagPrice > 0 ? <><div className="mx-auto col-12">수화물 : {baggage.paymentYn === 'N' ? <button onClick={()=>{setPaymentModalShow(true)}}>결제</button>:"결제 완료"}</div></> : <></>)}</div>
         <BaggagePaymentModal
             show={paymentModalShow}
             onHide={() => {setPaymentModalShow(false);
