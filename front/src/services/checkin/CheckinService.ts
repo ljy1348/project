@@ -31,7 +31,7 @@ const create = (data:Array<ICheckin>) => {
 };
 
 const getSeat = (id:number) => {
-  return http.get("http://localhost:8000/api/tour/checkin/sheat/"+id);
+  return http.get("/tour/checkin/sheat/"+id);
 };
 
 const CheckinService = {

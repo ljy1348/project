@@ -324,29 +324,12 @@ export default function initCustom() {
 			],
 			firstDay: 1
 		},
-		// startDate: "2023-11-16",
-		// endDate: "2023-11-22",
-        // function(start, end, label) {
-        // //   console.log(
-        // //     "New date range selected: " +
-        // //       start.format("YYYY-MM-DD") +
-        // //       " to " +
-        // //       end.format("YYYY-MM-DD") +
-        // //       " (predefined range: " +
-        // //       label +
-        // //       ")"
-        // //   );
-        // },
-
-        // singleDatePicker: true, // 달력 1개 사용
+		startDate: new Date((new Date).getTime()+(24*60*60*1000)).toISOString().split("T")[0],
+		endDate: new Date((new Date).getTime()+(24*60*60*1000)).toISOString().split("T")[0],
+     
       });
     }
-    
-
-	
-	// if($('input[name="daterange"]').length) {
-	// 	$('input[name="daterange"]').daterangepicker();
-	// }
+   
 })
 
 }

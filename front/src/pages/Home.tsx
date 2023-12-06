@@ -26,10 +26,10 @@ function Home() {
   const [arrivalAirport, setArrivalAirport] = useState("도착공항"); // 도착공항
 
   const [departureDate, setDepartureDate] = useState(
-    new Date().toISOString().split("T")[0]
+    new Date((new Date).getTime()+(24*60*60*1000)).toISOString().split("T")[0]
   );
   const [arrivalDate, setArrivalDate] = useState(
-    new Date().toISOString().split("T")[0]
+    new Date((new Date).getTime()+(24*60*60*1000)).toISOString().split("T")[0]
   );
 
   const [seatClass, setSeatClass] = useState("좌석등급");
