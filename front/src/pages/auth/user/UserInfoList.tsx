@@ -262,7 +262,7 @@ function UserInfoList({user, setMessage}:{user:IUser, setMessage:any}) {
                             type="submit"
                             className="btn btn-primary btn-user w-100 mb-3"
                           >
-                            Register Account
+                            정보 수정
                           </button>
                           </Form>)
         }

@@ -99,7 +99,7 @@ function AdminPayment() {
   return (
     <>
       <div className="searchRow">
-        <div className="col-md-8 offset-2">
+        <div className="col-md-8 mx-auto adminSearch">
               <div className="col-12 input-group mb-3">
               <div>
                 <p className="input-group-text">예약 번호</p>
@@ -114,7 +114,7 @@ function AdminPayment() {
               </div>
             </div>
 
-            <div className="searchButton">
+            <div className="col-2 mx-auto">
               <div>
                 <input
                   type="button"

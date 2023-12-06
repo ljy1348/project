@@ -62,7 +62,7 @@ function AdminCheckin() {
   return (
     <>
       <div className="searchRow">
-        <div className="col-md-8 offset-2">
+        <div className="col-md-8 adminSearch">
               <div className="col-12 input-group mb-3">
               <div>
                 <p className="input-group-text">예약 번호</p>
@@ -77,8 +77,9 @@ function AdminCheckin() {
               </div>
             </div>
 
-            <div className="searchButton ">
-              <div className='ms-5'>
+
+            <div className="col-2 mx-auto">
+              <div>
                 <input
                   type="button"
                   className="btn btn-primary btn-block"
