@@ -28,10 +28,6 @@ function Register() {
   const [address, setAddress] = useState("");
   const [addApiView, setAddApiView] = useState(false);
   const navi = useNavigate();
-  
-  if (isLoggedIn) {
-    navi(-1);
-  }
   // todo: 공유저장소 공유함수(register) 가져오기
   const dispatch = useAppDispatch();
 
