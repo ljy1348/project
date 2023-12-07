@@ -34,7 +34,7 @@ jobs:
         node-version: '18' # 필요한 Node.js 버전
 
     - name: Update .env file
-      run: echo REACT_APP_HOST_DOMAIN=${{ secret.PROJECT_DOMAIN }} >> front/.env
+      run: echo REACT_APP_HOST_DOMAIN=${{ secrets.PROJECT_DOMAIN }} >> front/.env
       
     - name: Build React Project
       run: |
