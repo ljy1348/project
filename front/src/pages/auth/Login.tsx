@@ -24,21 +24,26 @@ import ISearchReservation from "../../types/searchReservation/ISearchReservation
 // 2) 유효성 체크 lib 사용 : Yup & Formik 
 function Login() {
 
-  useEffect(()=>{
-    initScripts();
-    initCustom();
-  },[])
-
-
-
   // todo: 변수 정의
   // 강제 페이지 이동 함수
   let navigate = useNavigate();
 
+  const { isLoggedIn } = useSelector((state: RootState)=> state.auth);
+
+  useEffect(()=>{
+    initScripts();
+    initCustom();
+    if (isLoggedIn) navigate(-1);
+  },[])
+
+
+
+  
+
   // todo: 공유저장소 변수(state.변수명) 가져오기
   // todo: 사용법 : useSelector((state)=> state.변수명)
   // 로그인 정보 상태변수(true/false)
-  const { isLoggedIn } = useSelector((state: RootState)=> state.auth);
+
   const [tag, setTag] = useState("login");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [departureAirPort, setDepartureAirPort] = useState("");
@@ -117,11 +122,6 @@ function Login() {
     memberName: Yup.string().required("필수 입력입니다.")
   });
 
-  // isLoggedIn = true (로그인 상태변수(true/false))
-  // 강제로 /home 이동
-  if(isLoggedIn) {
-    navigate(-1); // 강제 페이지 이동
-  }
 
   // 로그인 버튼 클릭시 실행되는 함수 : submit(Formit)
   // Formit lib 에서 자동으로 email, password 값을 넘겨줌
