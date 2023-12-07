@@ -38,41 +38,21 @@ function AddOperationInfo({setSelectTab}:{setSelectTab:any}) {
             setOperationInfo({...operationInfo, finalDate:(new Date(value))})
             return
         }
-        // console.log(name+" : "+value)
-        // if (operationInfo)
         setOperationInfo({...operationInfo, [name]:value});
     }
 
 
     const onSubmit = () => {
-      console.log(operationInfo);
+
       if (operationInfo)
       AdminService.createOperationInfo(operationInfo)
-      .then((response:any)=>{console.log(response);
+      .then((response:any)=>{
         setSelectTab("항공");
       })
       .catch((error:Error)=>{console.log(error)})
     }
 
     useEffect (()=>{
-    //   if (dataId) {
-        
-    //     AuthService.getUserInfo(dataId)
-    //     .then(
-    //         (response:any)=>{
-    //             console.log(response);
-    //     setGetUser(response.data);
-    //     if (response.data.memberDate){
-    //         // const date = new Date(response.data.memberDate);
-    //         setSelectedDate(response.data.memberDate);
-    //       }
-    //     })
-    //     .catch((e:Error)=>{
-    //         console.log(e);
-    //     })
-
-
-    //   }
     },[])
 
   return (

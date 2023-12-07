@@ -45,12 +45,10 @@ function Passport() {
   const [totalpeople, setTotalPeople] = useState<number>(0);
   // 예약좌석
   const [selectedSeatsInfo, setSelectedSeatsInfo] = useState([]);
-  // console.log(selectedSeatsInfo)
   let operID = reservation.operationId;
   const adcount = reservation.adultCount;
   const chcount = reservation.childCount;
 
-  console.log("총인원수", reservation.userNumber);
 
   // todo : 여권정보
   //  객체 초기화
@@ -100,7 +98,6 @@ function Passport() {
     fieldName: keyof IPassport
   ) => {
     const { value } = event.target;
-    console.log(fieldName, passportIndex, value);
   
     setPassport((prevPassport) => {
       const updatedPassports = [...prevPassport];
@@ -128,7 +125,6 @@ function Passport() {
     ReservationService.get2(airlineReservationNumber) // 벡엔드로 상세조회 요청
       .then((response: any) => {
         setReservation(response.data);
-        console.log(response);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -143,7 +139,6 @@ function Passport() {
   
     try {
       const response = await ReservationService.update(reservation.airlineReservationNumber, updatedReservation);
-      console.log(response.data);
   } catch (e) {
       console.error(e);
   }
@@ -163,7 +158,6 @@ function Passport() {
       var data = passport;
       const response = await PassportService.create(data);
       
-      console.log(response.data);
   } catch (e) {
     
       console.error(e);
@@ -181,13 +175,10 @@ function Passport() {
       paymentYn:"N"
     };
 
-    console.log(data);
 
     try {
       const response = await BaggageService.create(data);
       bagNumber = response.data.bagNumber;
-      // console.log(response.data);
-      // console.log("bagNumber : "+bagNumber)
   } catch (e) {
       console.error(e);
   }
@@ -195,7 +186,6 @@ function Passport() {
 
   const saveCheckin = async() => {
     // selectedSeatsInfo와 passport 배열이 동일한 길이를 가정합니다.
-    console.log(checkin);
     let arr = [];
     for (let i = 0; i < selectedSeatsInfo.length; i++) {
 
@@ -213,7 +203,6 @@ function Passport() {
 
     try {
       const response = await CheckinService.create(arr);
-      console.log(response.data);
   } catch (e) {
       console.error(e);
   }
@@ -234,7 +223,6 @@ function Passport() {
       await saveCheckin();
       await saveBaggage();
       await updateCheckYn();
-      await console.log("a");
       await navi(`/boardingpass/${operID}/${searchAirlinereservationnumber}/${adcount}/${chcount}/${bagCount1}`, {state : {bagNumber}})
     }else{
       alert("좌석을 지정해 주세요")
@@ -276,11 +264,8 @@ function Passport() {
       let data = {...initialPassport};
       if (location.state.checkDto) {
         data.userNumber = location.state.checkDto[i].userNumber;
-        console.log(location.state.checkDto[i].userNumber);
       }
       tempArray.push(data);
-      console.log(data);
-      console.log(i);
     }
 
     setPassport(tempArray);
@@ -326,7 +311,6 @@ function Passport() {
   // 좌석 저장함수
   const handleSeatsSelected = (selectedSeats: any) => {
     setSelectedSeatsInfo(selectedSeats);
-    console.log("Passport에서 선택된 좌석:", selectedSeats);
   };
 
   return (

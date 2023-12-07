@@ -30,7 +30,6 @@ function CheckIn() {
   };
 
   const [checkDto, setCheckDto] = useState<Array<ICheckDto>>([]);
-  console.log(checkDto);
 
   const [reservation, setReservation] = useState(initialReservation);
   const [baggage, setBaggage] = useState<IBaggage>();
@@ -48,7 +47,6 @@ function CheckIn() {
   // todo : 함수 정의
   const onChangeSearchAirlinereservationnumber = (e: any) => {
     setSearchAirlinereservationnumber(e.target.value);
-    console.log();
   };
 
   // 상세조회 함수
@@ -57,7 +55,6 @@ function CheckIn() {
     ReservationService.get2(airlineReservationNumber) // 벡엔드로 상세조회 요청
       .then((response: any) => {
         setReservation(response.data);
-        console.log("aa : "+response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -71,8 +68,6 @@ function CheckIn() {
       .then((response: any) => {
         setCheckDto(response.data);
         // 로그 출력
-        console.log("response", response.data);
-        console.log("setCheckDto", setCheckDto);
       })
       .catch((error: Error) => {
         console.error("Error retrieving check DTO information:", error.message);
@@ -90,7 +85,7 @@ function CheckIn() {
     }
 
     BaggageService.getReserveNumber(searchAirlinereservationnumber)
-    .then((response:any)=>{console.log(response); setBaggage(response.data);})
+    .then((response:any)=>{ setBaggage(response.data);})
     .catch((e:Error)=>{console.log(e); setBaggage(data)})
    }
 

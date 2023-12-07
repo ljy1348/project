@@ -29,10 +29,8 @@ function PaymentSuccess() {
     reserveNum = orderId.split("-");
   if (reserveNum) {
     ReservationService.get(Number(reserveNum[0]))
-    .then((response)=>{console.log(response)})
     .catch((e:Error)=>{console.log(e)})
     ReservationService.get(Number(reserveNum[1]))
-    .then((response)=>{console.log(response)})
     .catch((e:Error)=>{console.log(e)})
   }
 
@@ -49,13 +47,12 @@ function PaymentSuccess() {
 
       PaymentService.paymentMile(orderId, paymentKey, amount)
       .then((response:any)=>{
-        console.log(response);
         setPayment(response.data);
       })
       .catch((e:Error)=>{console.log(e)})
     } else {
       PaymentService.paymentMember(orderId, paymentKey, amount)
-    .then((response:any)=>{console.log(response);
+    .then((response:any)=>{
       setPayment(response.data);
     })
     .catch((e:Error)=>{console.log(e)})

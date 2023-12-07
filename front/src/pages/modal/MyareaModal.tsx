@@ -31,7 +31,6 @@ function MyareaModal(props: any) {
   const selectedAirport = (data:string) => {
     setAirport((airport) => ({ ...airport, abbr: data }));
     props.onAbbrSelect(data);
-    console.log(data);
   };
   return (
     <Modal

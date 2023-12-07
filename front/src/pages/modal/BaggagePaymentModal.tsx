@@ -76,7 +76,7 @@ function BaggagePaymentModal(props: any) {
       if (currentUser)
       if (currentUser.memberId)
       AuthService.getUserInfo(currentUser.memberId)
-      .then((response)=>{console.log(response)
+      .then((response)=>{
       setMile(response.data.memberMile)
       })
       .catch((e:Error)=>{console.log(e)})
@@ -116,7 +116,6 @@ function BaggagePaymentModal(props: any) {
       </div>
       {price > 0 &&
       <>
-      {console.log(price)}
       <div id="payment-widget" />
       <div id="agreement" />
       </>

@@ -87,7 +87,7 @@ function PaymentModal(props: any) {
       if (currentUser)
       if (currentUser.memberId)
       AuthService.getUserInfo(currentUser.memberId)
-      .then((response)=>{console.log(response)
+      .then((response)=>{
       setMile(response.data.memberMile)
       })
       .catch((e:Error)=>{console.log(e)})
@@ -138,14 +138,12 @@ function PaymentModal(props: any) {
       </div>
       {price > 0 &&
       <>
-      {console.log(price)}
       <div id="payment-widget" />
       <div id="agreement" />
       </>
       }
       <button
         onClick={async () => {
-          console.log(price)
           if(price === 0) {
             navi(`/payment/success?orderId=${orderId}&paymentKey=${"mile"}&amount=${originPrice}`)
             return 

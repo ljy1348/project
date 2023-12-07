@@ -41,7 +41,6 @@ function QuestionBoardPage() {
         const { question, totalPages } = response.data;
         setQuestion(question);
         setCount(totalPages);
-        console.log("response", response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -56,7 +55,6 @@ function QuestionBoardPage() {
       const { question, totalPages } = response.data;
         setQuestion(question);
         setCount(totalPages);
-      console.log("response", response.data);
     })
     .catch((e: Error) => {
       console.log(e);
@@ -81,7 +79,6 @@ function QuestionBoardPage() {
     // 실제로는 QuestionBoardService에서 제공하는 메서드를 사용해야 합니다.
     CustomerService.remove(titleId)
       .then((response: any) => {
-        console.log(response.data);
         // 삭제 후 전체 목록을 다시 불러오기
         retrieveQuestion();
       })

@@ -35,7 +35,6 @@ function Notice() {
         setCount(totalPages);
 
         // 로그 출력
-        console.log("response", response.data.notice);
       })
       .catch((e: Error) => {
         // 벡엔드 실패시 실행됨

@@ -223,7 +223,6 @@ function Register() {
       changePw:""
     };
 
-    console.log(data);
 
     // 성공여부 변수 초기화
     setSuccessful(false);

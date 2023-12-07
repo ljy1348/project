@@ -31,7 +31,6 @@ const retrieveNotice = () => {
     const { notice, totalPages } = response.data;
     setNotice(notice);
     setCount(totalPages);
-    console.log("response", response.data);
   })
   .catch((e: Error)=>{
     // 벡엔드 실패시 실행됨

@@ -55,7 +55,6 @@ function AdminNoticeEdit() {
     WriteNoticeService.create(data)
       .then((response: any) => {
         setSubmitted(true);
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);

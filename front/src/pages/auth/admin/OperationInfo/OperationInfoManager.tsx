@@ -30,7 +30,7 @@ function OperationInfoManager({setSelectTab, setDataId}:{setSelectTab:any, setDa
   const retrieveDept = () => {
     // 벡엔드 매개변수 전송 : + 현재페이지(page), 1페이지당개수(pageSize)
     AdminService.getOperationAll(search, select, page-1, pageSize)
-    .then((response:any)=>{console.log(response)
+    .then((response:any)=>{
         const {data, totalPages} = response.data;
     setDept(data);
     setCount(totalPages);

@@ -71,7 +71,6 @@ const SelectSeat = (props: any) => {
       setSeats((prevSeats) => {
         const updatedSeats = [...prevSeats];
         updatedSeats[x][y] = 2;
-        // console.log("a1");
         return updatedSeats;
       });
 
@@ -137,7 +136,6 @@ const SelectSeat = (props: any) => {
         const updatedSeats = [...prevSeats];
         updatedSeats[seat.x][seat.y] = 3;
         reqSeats.push(String.fromCharCode(65 + seat.x) + seat.y);
-        console.log(reqSeats);
         props.onSeatsSelected(reqSeats);
         return updatedSeats;
       });
@@ -150,7 +148,6 @@ const SelectSeat = (props: any) => {
     CheckinService.getSeat(props.operationId)
       .then((response) => {
         const data = response.data;
-        // console.log(response);
         data.map((val: any, idx: number) => {
           const str: string = val.seatNumber;
           
