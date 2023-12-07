@@ -15,7 +15,6 @@ function AdminMember({setSelectTab, dataId}:{setSelectTab:any, dataId:string}) {
         const {name, value} = e.target;
         if (name==="memberDate") setSelectedDate(value);
 
-        console.log(name)
         if (getUser)
         setGetUser({...getUser, [name]:value});
     }
@@ -27,10 +26,9 @@ function AdminMember({setSelectTab, dataId}:{setSelectTab:any, dataId:string}) {
     }
 
     const onSubmit = () => {
-      console.log(getUser);
       if (getUser)
       AdminService.editUser(getUser)
-      .then((response:any)=>{console.log(response);
+      .then((response:any)=>{
         setSelectTab("회원");
       })
       .catch((error:Error)=>{console.log(error)})
@@ -42,7 +40,6 @@ function AdminMember({setSelectTab, dataId}:{setSelectTab:any, dataId:string}) {
         AuthService.getUserInfo(dataId)
         .then(
             (response:any)=>{
-                console.log(response);
         setGetUser(response.data);
         if (response.data.memberDate){
             // const date = new Date(response.data.memberDate);
@@ -61,7 +58,6 @@ function AdminMember({setSelectTab, dataId}:{setSelectTab:any, dataId:string}) {
       // alert(dataId)
       AdminService.deleteMember(dataId)
       .then((response:any)=>{
-        console.log(response)
         setSelectTab("회원")
       })
       .catch((e:Error)=>{console.log(e)})

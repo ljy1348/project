@@ -36,7 +36,6 @@ function AdminNoticeFix() {
       NoticeService.get(noticeId)         // 벡엔드로 상세조회 요청
         .then((response: any) => {
           setNotice(response.data);
-          console.log(response.data);
         })
         .catch((e: Error) => {
           console.log(e);
@@ -65,7 +64,6 @@ function AdminNoticeFix() {
     const updateNotice = () => {
       NoticeService.update(notice.noticeId, notice) // 벡엔드로 수정요청
         .then((response: any) => {
-          console.log(response.data);
           navigate("/admin")
           alert("정상적으로 수정되었습니다.");
         })
@@ -78,7 +76,6 @@ function AdminNoticeFix() {
     const deleteNotice = () => {
       NoticeService.remove(notice.noticeId) // 벡엔드로 삭제요청
         .then((response: any) => {
-          console.log(response.data);
           alert("정상적으로 삭제되었습니다.");
           // 페이지 이동
           navigate("/admin");

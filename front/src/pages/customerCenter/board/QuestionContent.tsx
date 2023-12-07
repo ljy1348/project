@@ -62,7 +62,6 @@ function QuestionContent() {
     CustomerService.create(data)
     .then((response:any) => {
       setQuestion(question);
-      console.log("response", response.data);
       navigate(-1);
     })
     .catch((e: Error) => {
@@ -72,7 +71,6 @@ function QuestionContent() {
 
   const adminTextSave = (e:any) => {
     setQuestion({...question, answer:e.target.value})
-    console.log(e.target.value);
   }
 
   const backBtn = () => {

@@ -176,9 +176,8 @@ function Login() {
    const handleNonMember = (formValue: any) => { 
     formValue.finalAirport = arrivalAirPort
     formValue.startAirport = departureAirPort
-    console.log("a")
     ReservationService.findNonMember(formValue)
-    .then((response:any)=>{console.log(response); setReservation(response.data); setNonMemberModalShow(true)})
+    .then((response:any)=>{ setReservation(response.data); setNonMemberModalShow(true)})
     .catch((e:Error)=>{console.log(e)})
   }
 

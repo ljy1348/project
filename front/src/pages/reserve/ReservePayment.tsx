@@ -239,7 +239,6 @@ function ReservePayment() {
     OperationService.get(operationId) // 벡엔드로 상세조회 요청
       .then((response: any) => {
         setOperationinfo(response.data);
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -250,7 +249,6 @@ function ReservePayment() {
     OperationService.get(operationId) // 벡엔드로 상세조회 요청
       .then((response: any) => {
         setOperationinfo2(response.data);
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -309,9 +307,6 @@ function ReservePayment() {
     const totalPrice = calculateTotalPrice(data.seatType, operation);
 
     const response:any = await ReservationService.create(data);
-      console.log(response.data);
-      // 가격 정보를 활용할 수 있도록 원하는 작업 수행
-      console.log("가격:", totalPrice);
 
       // ReservationService.create가 성공한 경우에만 실행
       // response.data에서 필요한 정보를 추출하여 reInfo 업데이트
@@ -320,12 +315,7 @@ function ReservePayment() {
       setReInfo((prevReInfo) => {
         const updatedReInfo = [...prevReInfo, {reservenum: response.data.airlineReservationNumber, // 수정 필요
         price: totalPrice.toString()}];
-        // updatedReInfo[0] = {
-        //   ...updatedReInfo[0],
-        //   reservenum: response.data.airlineReservationNumber, // 수정 필요
-        //   price: totalPrice.toString(),
-        // };
-        // console.log(updatedReInfo);
+   
         return updatedReInfo;
       });
   };
@@ -411,10 +401,8 @@ function ReservePayment() {
       nextDay.setDate(nextDay.getDate() + 1);
 
       setDay(nextDay.toLocaleDateString()); // Update the state with the next day
-      console.log("날짜 증가" + nextDay.toLocaleDateString());
     } else {
       setDay(startDate2);
-      console.log(startDate2);
     }
   };
 
@@ -435,10 +423,8 @@ function ReservePayment() {
       nextDay.setDate(nextDay.getDate() + 1);
 
       setDay2(nextDay.toLocaleDateString()); // Update the state with the next day
-      console.log("날짜 증가" + nextDay.toLocaleDateString());
     } else {
       setDay2(endDate2);
-      console.log(endDate2);
     }
   };
 
@@ -474,24 +460,11 @@ function ReservePayment() {
     );
     return price;
   };
-  console.log(reInfo)
-  // useEffect(() => {
-  //   const price = calculateTotalPrice(seatClass || "이코노미");
-  //   setTotalPrice(price);
-  //   // console.log(price);
-  // }, [
-  //   seatClass,
-  //   adultCount,
-  //   childCount,
-  //   operationinfo.price,
-  //   operationinfo2.price,
-  // ]);
 
-  console.log(totalPrice);
+
 
 
   // 다른 부분에서 totalPrice를 참조해야 할 때
-  // console.log(totalPrice);
   return (
     <>
       {/* 공통 */}
@@ -861,7 +834,6 @@ function ReservePayment() {
             show={modalShow}
             onHide={() => {setModalShow(false);
             ReservationService.deleteRoundTrip(reInfo[0].reservenum, reInfo[1].reservenum)
-            .then((response)=>{console.log(response)})
             .catch((e)=>{console.log(e)}
             )
             setReInfo([])

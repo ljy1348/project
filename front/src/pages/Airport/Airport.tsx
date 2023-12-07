@@ -32,7 +32,6 @@ function Airport({setAirport}:{setAirport:any}) {
 
   const selectedAirport = (data: string) => {
     setAirport(data);
-    console.log(data);
   };
 
   return (

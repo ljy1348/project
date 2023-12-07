@@ -34,7 +34,6 @@ function NoticeList() {
         setNotice(notice);
         setCount(totalPages);
         // 로그 출력
-        console.log("response", response.data);
       })
       .catch((e: Error) => {
         console.log(e);

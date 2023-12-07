@@ -21,7 +21,6 @@ function Oauth() {
 
         const code = new URL(window.location.href).searchParams.get("code");
         
-        console.log(code);
         if (currentUser) {
           // alert(currentUser.memberName);
           if (currentUser.memberName === null || currentUser.memberName === undefined || currentUser.memberName === "") navigate("/user-info");

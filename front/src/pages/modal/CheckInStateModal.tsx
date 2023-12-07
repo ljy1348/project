@@ -47,7 +47,6 @@ function CheckInStateModal(props: any) {
     useState<number>(0);
 
   useEffect(() => {
-    // console.log(props);
     // 전체 조회 실행
     retrieveCheckin(props.searchAirlinereservationnumber); 
   }, [props]);
@@ -81,7 +80,6 @@ function CheckInStateModal(props: any) {
         // setSearchAirlinereservationnumber(response.data);
         setCheckStt(response.data);
         // 로그
-        console.log("response", response);
       })
       .catch((e: Error) => {
         // todo: 실패 처리
