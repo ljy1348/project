@@ -1,1 +1,71 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # 백엔드 빌드
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x back/gradlew
+    
+    - name: Build Spring Boot Project
+      run: |
+        cd back
+        ./gradlew build
+
+    # 프론트엔드 빌드
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18' # 필요한 Node.js 버전
+
+    - name: Update .env file
+      run: echo REACT_APP_HOST_DOMAIN=${{ secrets.PROJECT_DOMAIN }} >> front/.env
+      
+    - name: Build React Project
+      run: |
+        cd front
+        npm install
+        npm run build
+      env:
+        CI: false
+
+    # AWS EC2 서버로 파일 전송
+    - name: Copy files to EC2
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.PEM }}
+        port: 22
+        source: "back/build/libs/*.war, front/build"
+        target: "/home/ubuntu/project"
+
+    # 원격 서버에서 배포 스크립트 실행
+    - name: Execute deployment script
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.PEM }}
+        port: 22
+        script: |
+          sudo /home/ubuntu/apache-tomcat-9.0.83/bin/shutdown.sh
+          sudo rm -r /home/ubuntu/apache-tomcat-9.0.83/webapps/ROOT.war
+          sudo rm -r /home/ubuntu/apache-tomcat-9.0.83/webapps/ROOT
+          sudo mv /home/ubuntu/project/back/build/libs/back-0.0.1-SNAPSHOT.war /home/ubuntu/apache-tomcat-9.0.83/webapps/ROOT.war
+          sudo systemctl restart nginx
+          sudo /home/ubuntu/apache-tomcat-9.0.83/bin/startup.sh
 
