@@ -1,11 +1,20 @@
-﻿import React, { useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import "../../assets/css/login.css";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { Button } from '@mui/material';
 import AuthService from "../../services/auth/authService";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 function ForgotPassword() {
+  const { isLoggedIn } = useSelector((state: RootState)=> state.auth);
+  const navi = useNavigate();
+
+  useEffect(()=>{
+    if(isLoggedIn) navi(-1);
+  })
 
   const initFormik = {
     memberId:"",
