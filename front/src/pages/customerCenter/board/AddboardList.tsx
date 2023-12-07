@@ -66,7 +66,6 @@ function AddboardList() {
     CustomerService.create(data) // 저장 요청
 
       .then((response: any) => {
-        console.log(response.data);
         navi(`/question-board`);
       })
       .catch((e: Error) => {

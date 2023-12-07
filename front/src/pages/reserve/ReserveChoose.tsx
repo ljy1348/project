@@ -48,7 +48,6 @@ function ReserveChoose(props: any) {
   );
 
   const daterange = useRef<HTMLInputElement>(null);
-  console.log("operationinfo", operationinfo);
   // 출도착 공항 설정
   const [selectedAbbr2, setSelectedAbbr] = useState<string>(selectedAbbr || "");
   const [selectedFori2, setSelectedFori] = useState<string>(selectedFori || "");
@@ -81,8 +80,6 @@ function ReserveChoose(props: any) {
   const endDayName = days[endDayIndex];
 
   // 콘솔에 출력 (또는 다른 방식으로 사용)
-  console.log("시작 날짜의 요일: " + startDayName);
-  console.log("종료 날짜의 요일: " + endDayName);
 
   // modalcontrol
   const [modalShow, setModalShow] = useState(false);
@@ -155,10 +152,6 @@ function ReserveChoose(props: any) {
   // 가는 날
   const retrieveOperationinfo = () => {
     const startDateParam = startDate2 || "defaultStartDate";
-    console.log("selectedAbbr2", selectedAbbr2);
-    console.log("selectedFori2", selectedFori2);
-    console.log("startDateParam", startDateParam);
-    console.log("startDayName", startDayName);
     OperationService.getAll(
       selectedFori2,
       selectedAbbr2,
@@ -173,10 +166,7 @@ function ReserveChoose(props: any) {
         setOperationinfo(operation);
         setCount(totalPages);
         // 로그 출력
-        console.log("response", response.data);
-        console.log("true 실행");
         setRender(true);
-        console.log(render, "래넏랜더");
       })
       .catch((e: Error) => {
         console.log(e);
@@ -186,10 +176,6 @@ function ReserveChoose(props: any) {
   // 오는 날
   const retrieveOperationinfo2 = () => {
     const endDateParam = endDate2 || "defaultEndDate";
-    console.log("selectedAbbr2", selectedAbbr2);
-    console.log("selectedFori2", selectedFori2);
-    console.log("endDateParam", endDateParam);
-    console.log("startDayName", startDayName);
     OperationService.getAll(
       selectedAbbr2,
       selectedFori2,
@@ -204,7 +190,6 @@ function ReserveChoose(props: any) {
         setOperationinfo2(operation);
         setCount2(totalPages);
         // 로그 출력
-        console.log("response2", response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -239,7 +224,6 @@ function ReserveChoose(props: any) {
   };
 
   useEffect(() => {
-    console.log("a");
   }, [daterange.current?.value]);
 
   const clickNone4 = (event: any) => {
@@ -305,13 +289,11 @@ function ReserveChoose(props: any) {
   const handleSelectFlight = (operationId: number) => {
     setFirstId(operationId);
     setSelectedRow(operationId);
-    console.log("firstID" + fisrtId + "SecoundID" + secoundId);
   };
 
   const handleSelectFlight2 = (operationId: number) => {
     setSecoundId(operationId);
     setSelectedRow2(operationId);
-    console.log("firstID" + fisrtId + "SecoundID" + secoundId);
   };
 
   const navi = useNavigate();
@@ -342,7 +324,6 @@ function ReserveChoose(props: any) {
   };
 
   const selectedRenderDateCell = (id:string, date:Date) =>{
-    console.log(id);
     if (id==="startDate") setStartDate(date.toISOString().split("T")[0]);
     else setEndDate(date.toISOString().split("T")[0]);
   }

@@ -34,7 +34,6 @@ function ForiareaModal(props: any) {
   const selectedAirport = (data: string) => {
     setAirport((airport) => ({ ...airport, abbr: data }));
     props.onForiAbbrSelect(data);
-    console.log(data);
   };
   return (
     <Modal

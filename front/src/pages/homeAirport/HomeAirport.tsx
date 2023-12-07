@@ -33,7 +33,6 @@ function HomeAirport({ setShow, set공항 }: { setShow: any; set공항: any }) {
   const selectedAirport = (data: string) => {
     setShow(false);
     set공항(data);
-    console.log(data);
   };
 
   return (

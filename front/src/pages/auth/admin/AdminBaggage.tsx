@@ -34,8 +34,6 @@ function AdminBaggage() {
         const {content, totalPages} = response.data;
         setBaggage(content);
         setTotalPages(totalPages);
-        // setPage(1);
-        console.log("response", response);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -101,7 +99,7 @@ function AdminBaggage() {
           boundaryCount={1}
           variant="outlined"
           shape="rounded"
-          onChange={(e:any, value:number)=>{setPage(value); console.log(value)}}
+          onChange={(e:any, value:number)=>{setPage(value)}}
         />
         </div>
       {/* table start(본문) */}

@@ -27,7 +27,7 @@ function OperationInfo({setSelectTab, dataId}:{setSelectTab:any, dataId:any}) {
 
     const onDelete = () => { 
       AdminService.deleteOperationInfo(dataId)
-      .then((response)=>{console.log(response)
+      .then((response)=>{
         setSelectTab("항공");
       })
       .catch((e:Error)=>{console.log(e)})
@@ -45,17 +45,15 @@ function OperationInfo({setSelectTab, dataId}:{setSelectTab:any, dataId:any}) {
             setOperationInfo({...operationInfo, finalDate:(new Date(value))})
             return
         }
-        // console.log(name+" : "+value)
-        // if (operationInfo)
+
         setOperationInfo({...operationInfo, [name]:value});
     }
 
 
     const onSubmit = () => {
-      console.log(operationInfo);
       if (operationInfo)
       AdminService.createOperationInfo(operationInfo)
-      .then((response:any)=>{console.log(response);
+      .then((response:any)=>{
         setSelectTab("항공");
       })
       .catch((error:Error)=>{console.log(error)})
@@ -64,7 +62,7 @@ function OperationInfo({setSelectTab, dataId}:{setSelectTab:any, dataId:any}) {
     useEffect (()=>{
         if (dataId) {
             AdminService.getOperationInfo(dataId)
-            .then((response:any)=>{console.log(response);
+            .then((response:any)=>{
             setOperationInfo(response.data);
             setStartDate(response.data.startDate.split("T")[0])
             setFinalDate(response.data.finalDate.split("T")[0])

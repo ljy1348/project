@@ -75,7 +75,6 @@ function Boardingpass() {
     OperationService.get(operationId)
       .then((response: any) => {
         setOperation(response.data);
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -86,7 +85,6 @@ function Boardingpass() {
     ReservationService.getChseat(airlinereservationnumber)
       .then((response: any) => {
         setCheckReserve(response.data);
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -97,7 +95,6 @@ function Boardingpass() {
     BoardingPassService.getAll(airlinereservationnumber)
       .then((response: any) => {
         setCheckSeat(response.data);
-        console.log(response.data);
       })
       .catch((e: Error) => {
         console.log(e);

@@ -40,7 +40,6 @@ function ReservationList() {
         .then((response: any) => {
           setReservation(response.data);
           // 로그 출력
-          console.log("response", response.data);
         })
         .catch((e: Error) => {
           console.log(e);
@@ -62,7 +61,6 @@ function ReservationList() {
         .then((response: any) => {
           setReservation(response.data);
           // 로그 출력
-          console.log("response", response.data);
         })
         .catch((e: Error) => {
           console.log(e);

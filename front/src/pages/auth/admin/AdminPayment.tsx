@@ -41,7 +41,6 @@ function AdminPayment() {
         const {content, totalPages} = response.data;
         setPayment(content);
         setTotalPages(totalPages);
-        console.log("response", response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -56,7 +55,6 @@ function AdminPayment() {
       setPayment(content);
       setTotalPages(totalPages);
       setPage(1);
-      console.log("response", response.data);
     })
     .catch((e: Error) => {
       console.log(e);
@@ -73,7 +71,6 @@ function AdminPayment() {
     });
    }
 
-   console.log(Number('a'));
 
   //   input 태그 수동바인딩
   const onChangeSearchKeyword = (e: any) => {
@@ -89,10 +86,9 @@ function AdminPayment() {
       airlineReservationNumber : airlineReservationNumber
     }
 
-    console.log(data);
 
     ReservationService.findNonMember(data)
-    .then((response:any)=>{console.log(response); setReservation(response.data); setNonMemberModalShow(true)})
+    .then((response:any)=>{ setReservation(response.data); setNonMemberModalShow(true)})
     .catch((e:Error)=>{console.log(e)})
   }
 
@@ -144,7 +140,7 @@ function AdminPayment() {
           boundaryCount={1}
           variant="outlined"
           shape="rounded"
-          onChange={(e:any, value:number)=>{setPage(value); console.log(value)}}
+          onChange={(e:any, value:number)=>{setPage(value);}}
         />
         </div>
       {/* table start(본문) */}
